@@ -36,15 +36,15 @@
 <body>
 
 
-<nav class="navbar navbar-expand-md navbar-dark fixed-top" style="background-color: #fff;">
-	<div class="container p-3">
+<nav class="navbar navbar-expand-md navbar-dark" style="background-color: #fff;">
+	<div class="container">
 		<div class="row">
-			<div class="col-md-4">
+			<div class="col-md-4 p-3">
 				<a href="https://link#fake.com.br/">
-					<img src="assets/img/disu.png" class="w-100">
+					<img src="assets/img/disu.png" class="w-75">
 				</a>
 			</div>
-			<div class="col-md-8">
+			<div class="col-md-8 mt-4">
 				<h1 class="h2">Colabore com o Projeto Floema</h1>
 			</div>
 		</div>
