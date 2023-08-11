@@ -1,0 +1,93 @@
+body
+{
+/*    padding-top: 8.5rem; */
+}
+h1.highlight{
+    font-family: 'TIActuBeta-Heavy_web', Helvetica, Arial, sans-serif;
+}
+input{
+    font-family: 'SwiftNeueLTW01', Georgia, serif;
+}
+.text-block
+{
+    /*font-family: 'SwiftNeueLTW01', Georgia, serif;*/
+    font-family: 'Newsreader', serif;
+    font-weight: 400;
+    font-size: 21px;
+    line-height: normal;
+}
+.text-block2
+{
+    font-family: 'Newsreader', serif;
+    font-weight: 400;
+    font-size: 21px;
+    line-height: normal;
+}
+/*.text-block:before {
+    border-style: solid;
+    border-top-width: 22px;
+    content: ' ';
+    display: block;
+    float: left;
+    margin: 5px 15px 0 0;
+    width: 60px;
+}*/
+.text-default
+{
+    font-family: 'TIActuBeta-ExBold_web', Tahoma, sans-serif;
+    font-weight: 400;
+    font-size: 21px;
+    line-height: normal;
+}
+.button-options
+{
+    /*font-family: 'SwiftNeueLTW01', Georgia, serif;*/
+    font-family: 'TIActuBeta-ExBold_web', Tahoma, sans-serif;
+    font-size: 19px;
+    line-height: normal;
+    /*flex: 1;*/
+    width: 33%;
+    height: 60px;
+    margin: 3px;
+    border-radius: 0px;
+}
+.payment-button-options
+{
+    /*font-family: 'SwiftNeueLTW01', Georgia, serif;*/
+    font-family: 'TIActuBeta-ExBold_web', Tahoma, sans-serif;
+    font-size: 17px;
+    line-height: normal;
+}
+.button-confirm-payment
+{
+    font-family: 'TIActuBeta-ExBold_web', Tahoma, sans-serif;
+    font-size: 20px
+}
+
+.footer-link, .footer-link a
+{
+    color: #000;
+
+    font-weight: normal;
+    font-size: 14px;
+    font-style: normal;
+    letter-spacing: 0.1em;
+    line-height: 15px;
+    text-transform: capitalize;
+    text-decoration: none;
+}
+#div-errors-price
+{
+    border: 1px solid #ff0000;
+    padding: 4px;
+    margin-top: 10px;
+    color: #ff0000;
+    font-size: 14px;
+    text-align: center;
+}
+.custom-amount-option-text
+{
+    font-size: 14px;
+    text-align: center!important;
+    overflow: visible!important;
+}
