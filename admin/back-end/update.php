@@ -271,45 +271,6 @@ if (isset($_POST['btnUpdLogo'])) {
     }
 }
 
-if (isset($_POST['btnUpdHeader'])) {
-    //Inclui o arquivo 'config.php'
-    include('../../config.php');
-
-    // Verifique se o formulário foi enviado
-    if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-
-        //Tabela onde sera feita a alteracao
-        $tabela = 'tb_checkout';
-
-        //Id da tabela
-        $id = '1';
-
-        //Informacoes coletadas pelo metodo POST
-        $titulo = $_POST['titulo'];
-        $conteudo = $_POST['conteudo'];
-
-        // Atualize o item no banco de dados
-        $sql = "UPDATE $tabela SET titulo = :titulo, conteudo = :conteudo WHERE id = :id";
-        $stmt = $conn->prepare($sql);
-        $stmt->bindParam(':titulo', $titulo);
-        $stmt->bindParam(':conteudo', $conteudo);
-        $stmt->bindParam(':id', $id);
-
-        try {
-            $stmt->execute();
-
-            // Exibir a modal após salvar as informações
-            $_SESSION['show_modal'] = "<script>$('#staticBackdrop').modal('toggle');</script>";
-            $_SESSION['msg'] = 'As informações do cabeçalho foram atualizadas com sucesso!';
-
-            //Voltar para a pagina do formulario
-            header('Location: ' . INCLUDE_PATH_ADMIN . 'sobre');
-        } catch (PDOException $e) {
-            echo "Erro na atualização: " . $e->getMessage();
-        }
-    }
-}
-
 if (isset($_POST['btnUpdFooter'])) {
     //Inclui o arquivo 'config.php'
     include('../../config.php');
@@ -324,18 +285,55 @@ if (isset($_POST['btnUpdFooter'])) {
         $id = '1';
 
         //Informacoes coletadas pelo metodo POST
-        $razao_social = $_POST['razao_social'];
         $privacidade = $_POST['privacidade'];
         $faq = $_POST['faq'];
-        $contato = $_POST['contato'];
+
+        if (!isset($_POST["dFacebook"])) {
+            $facebook = $_POST['facebook'];
+        }
+        if (!isset($_POST["dInstagram"])) {
+            $instagram = $_POST['instagram'];
+        }
+        if (!isset($_POST["dLinkedin"])) {
+            $linkedin = $_POST['linkedin'];
+        }
+        if (!isset($_POST["dYoutube"])) {
+            $youtube = $_POST['youtube'];
+        }
+        if (!isset($_POST["dWebsite"])) {
+            $website = $_POST['website'];
+        }
+
+        $cep = $_POST['cep'];
+        $rua = $_POST['rua'];
+        if (!isset($_POST["dNumero"])) {
+            $numero = $_POST['numero'];
+        }
+        $bairro = $_POST['bairro'];
+        $cidade = $_POST['cidade'];
+        $estado = $_POST['estado'];
+
+        $telefone = $_POST['telefone'];
+        $email = $_POST['email'];
 
         // Atualize o item no banco de dados
-        $sql = "UPDATE $tabela SET razao_social = :razao_social, privacidade = :privacidade, faq = :faq, contato = :contato WHERE id = :id";
+        $sql = "UPDATE $tabela SET privacidade = :privacidade, faq = :faq, facebook = :facebook, instagram = :instagram, linkedin = :linkedin, youtube = :youtube, website = :website, cep = :cep, rua = :rua, numero = :numero, bairro = :bairro, cidade = :cidade, estado = :estado, telefone = :telefone, email = :email WHERE id = :id";
         $stmt = $conn->prepare($sql);
-        $stmt->bindParam(':razao_social', $razao_social);
         $stmt->bindParam(':privacidade', $privacidade);
         $stmt->bindParam(':faq', $faq);
-        $stmt->bindParam(':contato', $contato);
+        $stmt->bindParam(':facebook', $facebook);
+        $stmt->bindParam(':instagram', $instagram);
+        $stmt->bindParam(':linkedin', $linkedin);
+        $stmt->bindParam(':youtube', $youtube);
+        $stmt->bindParam(':website', $website);
+        $stmt->bindParam(':cep', $cep);
+        $stmt->bindParam(':rua', $rua);
+        $stmt->bindParam(':numero', $numero);
+        $stmt->bindParam(':bairro', $bairro);
+        $stmt->bindParam(':cidade', $cidade);
+        $stmt->bindParam(':estado', $estado);
+        $stmt->bindParam(':telefone', $telefone);
+        $stmt->bindParam(':email', $email);
         $stmt->bindParam(':id', $id);
 
         try {

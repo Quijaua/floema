@@ -48,12 +48,21 @@
         $logo = $resultado['logo'];
         $title = $resultado['title'];
         $descricao = $resultado['descricao'];
-        $titulo = $resultado['titulo'];
-        $conteudo = $resultado['conteudo'];
-        $razao_social = $resultado['razao_social'];
         $privacidade = $resultado['privacidade'];
         $faq = $resultado['faq'];
-        $contato = $resultado['contato'];
+        $facebook = $resultado['facebook'];
+        $instagram = $resultado['instagram'];
+        $linkedin = $resultado['linkedin'];
+        $youtube = $resultado['youtube'];
+        $website = $resultado['website'];
+        $cep = $resultado['cep'];
+        $rua = $resultado['rua'];
+        $numero = $resultado['numero'];
+        $bairro = $resultado['bairro'];
+        $cidade = $resultado['cidade'];
+        $estado = $resultado['estado'];
+        $telefone = $resultado['telefone'];
+        $email = $resultado['email'];
     } else {
         // ID não encontrado ou não existente
         echo "ID não encontrado.";
@@ -62,7 +71,7 @@
 <html lang="pt">
 <head>
 	<meta charset="utf-8">
-	<title>Colabore com o Projeto <?php echo $nome; ?></title>
+	<title><?php echo ($title !== '') ? $title : 'Colabore com o Projeto '.$nome; ?></title>
 
 	<meta http-equiv="X-UA-Compatible" content="IE=edge;chrome=1">
 	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
@@ -384,7 +393,7 @@
 		<div class="col-md-6 ms-auto">
 			<?php
 				// Nome da tabela para a busca
-				$tabela = 'tb_cards';
+				$tabela = 'tb_imagens';
 				
 				// Preparando a consulta SQL
 				$stmt = $conn->prepare("SELECT * FROM $tabela ORDER BY id DESC");
@@ -417,7 +426,7 @@
 					echo '
 						<div class="row mb-3">
 							<div class="col-md-10 mt-3">
-								<img src="'. INCLUDE_PATH .'assets/img/' . $usuario['icone'] . '" alt="Card ' . $usuario['id'] . '" style="width: 500px; height: 159px; object-fit: contain;" />
+								<img src="'. INCLUDE_PATH .'assets/img/' . $usuario['imagem'] . '" alt="Card ' . $usuario['id'] . '" style="width: 500px; height: 159px; object-fit: contain;" />
 							</div>
 						</div>
 					';
@@ -433,17 +442,17 @@
 	<div class="row">
 		<div class="col-md-4">
 			<span class="h5"><?php echo $nome; ?></span><br />
-			Rua Exemplo Nome da Rua, 999<br />
-			Centro, São Paulo - SP<br />
-			Telefone: <a href="callto:1199999999">(11) 9999-9999</a> | E-mail: <a href="mailto:<?php echo $contato; ?>"><?php echo $contato; ?></a><br />
+			<?php echo $rua; ?><?php echo ($numero !== '') ? ', ' . $numero : ''; ?> - <?php echo $bairro; ?><br />
+			<?php echo $cidade; ?> - <?php echo $estado; ?>, <?php echo $cep; ?><br />
+			Telefone: <a href="callto:<?php echo $telefone; ?>"><?php echo $telefone; ?></a> | E-mail: <a href="mailto:<?php echo $email; ?>"><?php echo $email; ?></a><br />
 		</div>
 		<div class="col-md-8">
 			<div class="social-net mt-4 mb-4">
-				<a href="#"><i class="bi bi-facebook p-2"></i></a>
-				<a href="#"><i class="bi bi-instagram p-2"></i></a>
-				<a href="#"><i class="bi bi-linkedin p-2"></i></a>
-				<a href="#"><i class="bi bi-youtube p-2"></i></a>
-				<a href="#"><i class="bi bi-globe-americas p-2"></i></a>
+				<a href="<?php echo ($facebook !== '') ? $facebook : '#'; ?>" <?php echo ($facebook == '') ? 'class="d-none"' : ''; ?>><i class="bi bi-facebook p-2"></i></a>
+				<a href="<?php echo ($instagram !== '') ? $instagram : '#'; ?>" <?php echo ($instagram == '') ? 'class="d-none"' : ''; ?>><i class="bi bi-instagram p-2"></i></a>
+				<a href="<?php echo ($linkedin !== '') ? $linkedin : '#'; ?>" <?php echo ($linkedin == '') ? 'class="d-none"' : ''; ?>><i class="bi bi-linkedin p-2"></i></a>
+				<a href="<?php echo ($youtube !== '') ? $youtube : '#'; ?>" <?php echo ($youtube == '') ? 'class="d-none"' : ''; ?>><i class="bi bi-youtube p-2"></i></a>
+				<a href="<?php echo ($website !== '') ? $website : '#'; ?>" <?php echo ($website == '') ? 'class="d-none"' : ''; ?>><i class="bi bi-globe-americas p-2"></i></a>
 			</div>
 			<p class="footer-link ps-1">
 				<a href="<?php echo $privacidade; ?>" rel="noopener noreferrer" target="_blank">

@@ -10,7 +10,7 @@
     $id = 1;
 
     // Consulta SQL
-    $sql = "SELECT nome, logo, title, descricao, titulo, conteudo, razao_social, privacidade, faq, contato FROM $tabela WHERE id = :id";
+    $sql = "SELECT nome, logo, title, descricao, privacidade, faq, facebook, instagram, linkedin, youtube, website, cep, rua, numero, bairro, cidade, estado, telefone, email FROM $tabela WHERE id = :id";
 
     // Preparar a consulta
     $stmt = $conn->prepare($sql);
@@ -31,12 +31,21 @@
         $logo = $resultado['logo'];
         $title = $resultado['title'];
         $descricao = $resultado['descricao'];
-        $titulo = $resultado['titulo'];
-        $conteudo = $resultado['conteudo'];
-        $razao_social = $resultado['razao_social'];
         $privacidade = $resultado['privacidade'];
         $faq = $resultado['faq'];
-        $contato = $resultado['contato'];
+        $facebook = $resultado['facebook'];
+        $instagram = $resultado['instagram'];
+        $linkedin = $resultado['linkedin'];
+        $youtube = $resultado['youtube'];
+        $website = $resultado['website'];
+        $cep = $resultado['cep'];
+        $rua = $resultado['rua'];
+        $numero = $resultado['numero'];
+        $bairro = $resultado['bairro'];
+        $cidade = $resultado['cidade'];
+        $estado = $resultado['estado'];
+        $telefone = $resultado['telefone'];
+        $email = $resultado['email'];
     } else {
         // ID não encontrado ou não existente
         echo "ID não encontrado.";

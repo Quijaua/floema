@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Tempo de geração: 10-Ago-2023 às 07:17
+-- Tempo de geração: 14-Ago-2023 às 01:37
 -- Versão do servidor: 10.4.22-MariaDB
 -- versão do PHP: 8.1.1
 
@@ -24,26 +24,6 @@ SET time_zone = "+00:00";
 -- --------------------------------------------------------
 
 --
--- Estrutura da tabela `tb_cards`
---
-
-CREATE TABLE `tb_cards` (
-  `id` int(11) NOT NULL,
-  `icone` varchar(255) NOT NULL,
-  `titulo` varchar(255) NOT NULL,
-  `descricao` varchar(255) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
---
--- Extraindo dados da tabela `tb_cards`
---
-
-INSERT INTO `tb_cards` (`id`, `icone`, `titulo`, `descricao`) VALUES
-(1, '1691640386.png', 'Transformamos', 'vidas através da educação');
-
--- --------------------------------------------------------
-
---
 -- Estrutura da tabela `tb_checkout`
 --
 
@@ -53,12 +33,21 @@ CREATE TABLE `tb_checkout` (
   `logo` varchar(255) NOT NULL,
   `title` varchar(255) NOT NULL,
   `descricao` text NOT NULL,
-  `titulo` varchar(255) NOT NULL,
-  `conteudo` varchar(255) NOT NULL,
-  `razao_social` varchar(255) NOT NULL,
   `privacidade` varchar(255) NOT NULL,
   `faq` varchar(255) NOT NULL,
-  `contato` varchar(255) NOT NULL,
+  `facebook` varchar(255) DEFAULT NULL,
+  `instagram` varchar(255) DEFAULT NULL,
+  `linkedin` varchar(255) DEFAULT NULL,
+  `youtube` varchar(255) DEFAULT NULL,
+  `website` varchar(255) DEFAULT NULL,
+  `cep` varchar(255) NOT NULL,
+  `rua` varchar(255) NOT NULL,
+  `numero` varchar(255) DEFAULT NULL,
+  `bairro` varchar(255) NOT NULL,
+  `cidade` varchar(255) NOT NULL,
+  `estado` varchar(255) NOT NULL,
+  `telefone` varchar(255) NOT NULL,
+  `email` varchar(255) NOT NULL,
   `cor_primaria` varchar(255) NOT NULL,
   `cor_secundaria` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
@@ -67,8 +56,8 @@ CREATE TABLE `tb_checkout` (
 -- Extraindo dados da tabela `tb_checkout`
 --
 
-INSERT INTO `tb_checkout` (`id`, `nome`, `logo`, `title`, `descricao`, `titulo`, `conteudo`, `razao_social`, `privacidade`, `faq`, `contato`, `cor_primaria`, `cor_secundaria`) VALUES
-(1, 'Floema', 'disu.png', 'Ajude o Intercept Brasil | The Intercept Brasil', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed nec ultricies ipsum. In rhoncus vestibulum mi, ac lobortis velit finibus porta. Proin venenatis mollis metus sed dictum. Sed egestas elit non justo accumsan porttitor. Nam vitae feugiat urna. Phasellus maximus mauris non purus varius tincidunt. Donec ultricies mauris in lacus commodo, sed dictum lorem lacinia. Aliquam tortor mauris, auctor vel arcu quis, consequat lacinia enim. ', 'Grupo fechado', 'Precisamos de você para seguir independentes e fortes. Faça acontecer agora o jornalismo que muda vidas. Apoie o jornalismo dedo na ferida do TIB!', 'First Look Media Brasil Agência de Notícias, Ltda', 'https://seusite.com.br/politica-de-privacidade/', 'https://seusite.com.br/perguntas-frequentes/', 'suainstitucao@email.org.br', '#f6a026', '#101010');
+INSERT INTO `tb_checkout` (`id`, `nome`, `logo`, `title`, `descricao`, `privacidade`, `faq`, `facebook`, `instagram`, `linkedin`, `youtube`, `website`, `cep`, `rua`, `numero`, `bairro`, `cidade`, `estado`, `telefone`, `email`, `cor_primaria`, `cor_secundaria`) VALUES
+(1, 'Floema', 'disu.png', 'Colabore com o Projeto Floema', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed nec ultricies ipsum. In rhoncus vestibulum mi, ac lobortis velit finibus porta. Proin venenatis mollis metus sed dictum. Sed egestas elit non justo accumsan porttitor. Nam vitae feugiat urna. Phasellus maximus mauris non purus varius tincidunt. Donec ultricies mauris in lacus commodo, sed dictum lorem lacinia. Aliquam tortor mauris, auctor vel arcu quis, consequat lacinia enim. ', 'https://seusite.com.br/politica-de-privacidade/', 'https://seusite.com.br/perguntas-frequentes/', 'https://facebook.com/seufacebook', 'https://facebook.com/seuinstagram', NULL, NULL, NULL, '11111-222', 'Rua Exemplo Nome da Rua', '999', 'Centro', 'São Paulo', 'SP', '(11) 9999-9999', 'suainstitucao@email.org.br', '#f6a026', '#101010');
 
 -- --------------------------------------------------------
 
@@ -124,24 +113,24 @@ CREATE TABLE `tb_doacoes` (
 -- --------------------------------------------------------
 
 --
--- Estrutura da tabela `tb_parametros`
+-- Estrutura da tabela `tb_imagens`
 --
 
-CREATE TABLE `tb_parametros` (
+CREATE TABLE `tb_imagens` (
   `id` int(11) NOT NULL,
-  `chave` varchar(50) NOT NULL,
-  `valor` varchar(255) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+  `imagem` varchar(255) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Extraindo dados da tabela `tb_imagens`
+--
+
+INSERT INTO `tb_imagens` (`id`, `imagem`) VALUES
+(11, '1691640386.png');
 
 --
 -- Índices para tabelas despejadas
 --
-
---
--- Índices para tabela `tb_cards`
---
-ALTER TABLE `tb_cards`
-  ADD PRIMARY KEY (`id`);
 
 --
 -- Índices para tabela `tb_checkout`
@@ -162,20 +151,14 @@ ALTER TABLE `tb_doacoes`
   ADD PRIMARY KEY (`id`);
 
 --
--- Índices para tabela `tb_parametros`
+-- Índices para tabela `tb_imagens`
 --
-ALTER TABLE `tb_parametros`
+ALTER TABLE `tb_imagens`
   ADD PRIMARY KEY (`id`);
 
 --
 -- AUTO_INCREMENT de tabelas despejadas
 --
-
---
--- AUTO_INCREMENT de tabela `tb_cards`
---
-ALTER TABLE `tb_cards`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
 -- AUTO_INCREMENT de tabela `tb_checkout`
@@ -196,10 +179,10 @@ ALTER TABLE `tb_doacoes`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
--- AUTO_INCREMENT de tabela `tb_parametros`
+-- AUTO_INCREMENT de tabela `tb_imagens`
 --
-ALTER TABLE `tb_parametros`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+ALTER TABLE `tb_imagens`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

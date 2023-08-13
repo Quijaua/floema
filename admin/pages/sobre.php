@@ -98,17 +98,17 @@
                     <h5 class="card-title">Logo</h5>
                     <form action="<?php echo INCLUDE_PATH_ADMIN; ?>back-end/update-about.php" method="post" enctype="multipart/form-data">
                         <div class="position-relative row form-group">
-                            <label for="input1" class="col-sm-2 col-form-label">Logo da sua Instituição *</label>
+                            <label for="input0" class="col-sm-2 col-form-label">Logo da sua Instituição *</label>
                             <div class="col-sm-10">
-                                <input type="file" name="logo" id="input1" class="imagemInput"
+                                <input type="file" name="logo" id="input0" class="imagemInput"
                                     accept=".jpg, .jpeg, .png" value="<?php echo $logo; ?>">
                                     
                                 <small class="form-text text-muted">
                                     Essa será a logo mostrada no header do checkout.
                                 </small>
                                 
-                                <label for="input1" id="card-img" style="max-width: 300px; margin-top: 1rem; padding: 1.5rem; border: 1px dashed #afb2d2; border-radius: .5rem; background: #dfdfdf;">
-                                    <img id="imagemPreview1" src="<?php echo INCLUDE_PATH . 'assets/img/' . $logo; ?>" alt="Miniatura da Imagem" style="width: 100%;">
+                                <label for="input0" id="card-img" style="max-width: 300px; margin-top: 1rem; padding: 1.5rem; border: 1px dashed #afb2d2; border-radius: .5rem; background: #dfdfdf;">
+                                    <img id="imagemPreview0" src="<?php echo INCLUDE_PATH . 'assets/img/' . $logo; ?>" alt="Miniatura da Imagem" style="width: 100%;">
                                 </label>
                             </div>
                         </div>
@@ -118,37 +118,133 @@
             </div>
             <div class="main-card mb-3 card">
                 <div class="card-body">
-                    <h5 class="card-title">Cabeçalho</h5>
-                    <form action="<?php echo INCLUDE_PATH_ADMIN; ?>back-end/update-about.php" method="post">
-                        <div class="position-relative row form-group">
-                            <label for="titulo" class="col-sm-2 col-form-label">Título</label>
-                            <div class="col-sm-10">
-                                <input name="titulo" id="titulo"
-                                    type="text" class="form-control" value="<?php echo $titulo; ?>">
-                            </div>
-                        </div>
-                        <div class="position-relative row form-group">
-                            <label for="conteudo" class="col-sm-2 col-form-label">Conteúdo</label>
-                            <div class="col-sm-10">
-                                <input name="conteudo" id="conteudo"
-                                    type="text" class="form-control" value="<?php echo $conteudo; ?>">
-                            </div>
-                        </div>
-                        <button type="submit" name="btnUpdHeader" class="btn btn-primary">Salvar</button>
+                    <h5 class="card-title">Adicionar Imagem</h5>
+                    <form action="<?php echo INCLUDE_PATH_ADMIN; ?>back-end/imagens.php" method="post" enctype="multipart/form-data">
+                        <?php 
+                            if(isset($_SESSION['msgaddcad'])){
+                                echo $_SESSION['msgaddcad'];
+                                unset($_SESSION['msgaddcad']);
+                            }
+                        ?>
+                        <?php
+                            // Nome da tabela para a busca
+                            $tabela = 'tb_imagens';
+                            
+                            // Preparando a consulta SQL
+                            $stmt = $conn->prepare("SELECT * FROM $tabela ORDER BY id DESC");
+                            
+                            // Executando a consulta
+                            $stmt->execute();
+                            
+                            // Obtendo os resultados da busca
+                            $imagens = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+                            // Consulta SQL para recuperar informações das tabelas
+                            $sql = "SELECT COUNT(id) FROM $tabela";
+                            $stmt = $conn->query($sql);
+                            
+                            // Obter o número de linhas
+                            $numLinhas = $stmt->fetchColumn();
+                            $novaLinha = $numLinhas + 1;
+                            
+                            // Loop através dos resultados e exibir todas as colunas
+                            if ($numLinhas < 4) {
+                                echo '
+                                    <div class="position-relative row form-group">
+                                        <label for="input' . $novaLinha . '" class="col-sm-2 col-form-label">Imagem *</label>
+                                        <div class="col-sm-10">
+                                            <input type="file" name="imagem" id="input' . $novaLinha . '" class="imagemInput"
+                                                accept=".jpg, .jpeg, .png">
+                                                
+                                            <small class="form-text text-muted">
+                                                Essa imagem será mostrada no checkout.
+                                            </small>
+                                            <small class="form-text text-muted">
+                                                Imagem em .jpg com 500px x 160px.
+                                            </small>
+                                            
+                                            <label for="input' . $novaLinha . '" id="card-img" style="max-width: 300px; margin-top: 1rem; padding: 1.5rem; border: 1px dashed #afb2d2; border-radius: .5rem; background: #dfdfdf;">
+                                                <img id="imagemPreview' . $novaLinha . '" alt="Miniatura da Imagem" style="width: 100%;">
+                                            </label>
+                                        </div>
+                                    </div>
+                                ';
+                            } else {
+                                echo 'Só é possível adicionar até 4 imagens!';
+                            }
+                        ?>
+                        <div class="divider"></div>
+                        <button type="<?php echo ($numLinhas < 4) ? 'submit' : 'button'; ?>" name="btnAddCard" class="btn <?php echo ($numLinhas < 4) ? 'btn-primary' : 'btn-secondary'; ?>">Adicionar</button>
                     </form>
+                </div>
+            </div>
+            <div class="main-card mb-3 card">
+                <div class="card-body">
+                    <h5 class="card-title">Recompensas já existentes</h5>
+                        <?php 
+                            if(isset($_SESSION['msgupdcad'])){
+                                echo $_SESSION['msgupdcad'];
+                                unset($_SESSION['msgupdcad']);
+                            }
+                        ?>
+                        <?php
+                            // Nome da tabela para a busca
+                            $tabela = 'tb_imagens';
+                            
+                            // Consulta SQL para recuperar informações das tabelas
+                            $sql = "SELECT COUNT(id) FROM $tabela";
+                            $stmt = $conn->query($sql);
+                            
+                            // Obter o número de linhas
+                            $numLinhas = $stmt->fetchColumn();
+                            
+                            // Consulta SQL para selecionar todas as colunas
+                            $sql = "SELECT * FROM $tabela ORDER BY id DESC";
+                            
+                            // Preparar e executar a consulta
+                            $stmt = $conn->prepare($sql);
+                            $stmt->execute();
+                            
+                            // Recuperar os resultados
+                            $resultados = $stmt->fetchAll(PDO::FETCH_ASSOC);
+                            
+                            // Loop através dos resultados e exibir todas as colunas
+                            foreach ($resultados as $usuario) {
+                                echo '
+                                    <form action="' . INCLUDE_PATH_ADMIN . 'back-end/imagens.php" method="post" enctype="multipart/form-data">
+                                        <div class="position-relative row form-group">
+
+                                            <label for="input' . $usuario['id'] . '" class="col-sm-2 col-form-label">Imagem *</label>
+                                            <div class="col-sm-10">
+                                                <input type="file" name="imagem" id="input' . $usuario['id'] . '" class="imagemInput"
+                                                    accept=".jpg, .jpeg, .png" value="' . $usuario['imagem'] . '">
+                                                    
+                                                <small class="form-text text-muted">
+                                                    Imagem em .jpg com 500px x 160px.
+                                                </small>
+                                                
+                                                <label for="input' . $usuario['id'] . '" id="card-img" style="max-width: 300px; margin-top: 1rem; padding: 1.5rem; border: 1px dashed #afb2d2; border-radius: .5rem; background: #dfdfdf;">
+                                                    <img id="imagemPreview' . $usuario['id'] . '" src="' . INCLUDE_PATH . 'assets/img/' . $usuario['imagem'] . '" alt="Miniatura da Imagem" style="width: 100%;">
+                                                </label>
+                                            </div>
+
+                                            <div class="col-sm-12 float-right">
+                                                <input type="hidden" name="ids[]" value="' . $usuario['id'] . '">
+                                                <button type="submit" name="btnUpdCard" class="btn btn-primary">Editar</button>
+                                                <a href="' . INCLUDE_PATH_ADMIN . 'back-end/apagar-imagem.php?id=' . $usuario['id'] . '" class="btn btn-outline-danger">Deletar</a>
+                                            </div>
+                                        </div>
+                                        <div class="divider"></div>
+                                    </form>
+                                ';
+                            }
+                        ?>
                 </div>
             </div>
             <div class="main-card mb-3 card">
                 <div class="card-body">
                     <h5 class="card-title">Rodapé</h5>
                     <form action="<?php echo INCLUDE_PATH_ADMIN; ?>back-end/update-about.php" method="post">
-                        <div class="position-relative row form-group">
-                            <label for="razao_social" class="col-sm-2 col-form-label">Razão Social</label>
-                            <div class="col-sm-10">
-                                <input name="razao_social" id="razao_social"
-                                    type="text" class="form-control" value="<?php echo $razao_social; ?>">
-                            </div>
-                        </div>
                         <div class="position-relative row form-group">
                             <label for="privacidade" class="col-sm-2 col-form-label">Privacidade dos Doadores</label>
                             <div class="col-sm-10">
@@ -163,11 +259,131 @@
                                     type="text" class="form-control" value="<?php echo $faq; ?>">
                             </div>
                         </div>
+
+                        <p class="card-title">Links</p>
                         <div class="position-relative row form-group">
-                            <label for="contato" class="col-sm-2 col-form-label">Contato</label>
+                            <label for="facebook" class="col-sm-2 col-form-label">Facebook</label>
                             <div class="col-sm-10">
-                                <input name="contato" id="contato"
-                                    type="text" class="form-control" value="<?php echo $contato; ?>">
+                                <input name="facebook" id="facebook"
+                                    type="text" class="form-control" value="<?php echo $facebook; ?>" <?php echo ($facebook == '') ? 'disabled' : '';?>>
+                                    
+                                <small class="form-text text-muted">
+                                    <input type="checkbox" name="dFacebook" id="dFacebook" data-input-id="facebook" <?php echo ($facebook == '') ? 'checked' : '';?>>
+                                    <label for="dFacebook" class="mb-0">Desabilitar Facebook</label>
+                                </small>
+                            </div>
+                        </div>
+                        <div class="position-relative row form-group">
+                            <label for="instagram" class="col-sm-2 col-form-label">Instagram</label>
+                            <div class="col-sm-10">
+                                <input name="instagram" id="instagram"
+                                    type="text" class="form-control" value="<?php echo $instagram; ?>" <?php echo ($instagram == '') ? 'disabled' : '';?>>
+                                    
+                                <small class="form-text text-muted">
+                                    <input type="checkbox" name="dInstagram" id="dInstagram" data-input-id="instagram" <?php echo ($instagram == '') ? 'checked' : '';?>>
+                                    <label for="dInstagram" class="mb-0">Desabilitar Instagram</label>
+                                </small>
+                            </div>
+                        </div>
+                        <div class="position-relative row form-group">
+                            <label for="linkedin" class="col-sm-2 col-form-label">LinkedIn</label>
+                            <div class="col-sm-10">
+                                <input name="linkedin" id="linkedin"
+                                    type="text" class="form-control" value="<?php echo $linkedin; ?>" <?php echo ($linkedin == '') ? 'disabled' : '';?>>
+                                    
+                                <small class="form-text text-muted">
+                                    <input type="checkbox" name="dLinkedin" id="dLinkedin" data-input-id="linkedin" <?php echo ($linkedin == '') ? 'checked' : '';?>>
+                                    <label for="dLinkedin" class="mb-0">Desabilitar LinkedIn</label>
+                                </small>
+                            </div>
+                        </div>
+                        <div class="position-relative row form-group">
+                            <label for="youtube" class="col-sm-2 col-form-label">YouTube</label>
+                            <div class="col-sm-10">
+                                <input name="youtube" id="youtube"
+                                    type="text" class="form-control" value="<?php echo $youtube; ?>" <?php echo ($youtube == '') ? 'disabled' : '';?>>
+                                    
+                                <small class="form-text text-muted">
+                                    <input type="checkbox" name="dYoutube" id="dYoutube" data-input-id="youtube" <?php echo ($youtube == '') ? 'checked' : '';?>>
+                                    <label for="dYoutube" class="mb-0">Desabilitar YouTube</label>
+                                </small>
+                            </div>
+                        </div>
+                        <div class="position-relative row form-group">
+                            <label for="website" class="col-sm-2 col-form-label">Website</label>
+                            <div class="col-sm-10">
+                                <input name="website" id="website"
+                                    type="text" class="form-control" value="<?php echo $website; ?>" <?php echo ($website == '') ? 'disabled' : '';?>>
+                                    
+                                <small class="form-text text-muted">
+                                    <input type="checkbox" name="dWebsite" id="dWebsite" data-input-id="website" <?php echo ($website == '') ? 'checked' : '';?>>
+                                    <label for="dWebsite" class="mb-0">Desabilitar Website</label>
+                                </small>
+                            </div>
+                        </div>
+
+                        <p class="card-title">Contato</p>
+                        <div class="position-relative row form-group">
+                            <label for="telefone" class="col-sm-2 col-form-label">Telefone</label>
+                            <div class="col-sm-10">
+                                <input name="telefone" id="telefone"
+                                    type="text" class="form-control" value="<?php echo $telefone; ?>">
+                            </div>
+                        </div>
+                        <div class="position-relative row form-group">
+                            <label for="email" class="col-sm-2 col-form-label">E-mail</label>
+                            <div class="col-sm-10">
+                                <input name="email" id="email"
+                                    type="text" class="form-control" value="<?php echo $email; ?>">
+                            </div>
+                        </div>
+
+                        <p class="card-title">Endereço</p>
+                        <div class="position-relative row form-group">
+                            <label for="cep" class="col-sm-2 col-form-label">CEP</label>
+                            <div class="col-sm-10">
+                                <input name="cep" id="cep" onblur="getCepData()"
+                                    type="text" class="form-control" value="<?php echo $cep; ?>">
+                            </div>
+                        </div>
+                        <div class="position-relative row form-group">
+                            <label for="rua" class="col-sm-2 col-form-label">Rua</label>
+                            <div class="col-sm-10">
+                                <input name="rua" id="rua"
+                                    type="text" class="form-control" value="<?php echo $rua; ?>">
+                            </div>
+                        </div>
+                        <div class="position-relative row form-group">
+                            <label for="numero" class="col-sm-2 col-form-label">Número</label>
+                            <div class="col-sm-10">
+                                <input name="numero" id="numero"
+                                    type="text" class="form-control" value="<?php echo $numero; ?>" <?php echo ($numero == '') ? 'disabled' : '';?>>
+                                    
+                                <small class="form-text text-muted">
+                                    <input type="checkbox" name="dNumero" id="dNumero" data-input-id="numero" <?php echo ($numero == '') ? 'checked' : '';?>>
+                                    <label for="dNumero" class="mb-0">Sem Número</label>
+                                </small>
+                            </div>
+                        </div>
+                        <div class="position-relative row form-group">
+                            <label for="bairro" class="col-sm-2 col-form-label">Bairro</label>
+                            <div class="col-sm-10">
+                                <input name="bairro" id="bairro"
+                                    type="text" class="form-control" value="<?php echo $bairro; ?>">
+                            </div>
+                        </div>
+                        <div class="position-relative row form-group">
+                            <label for="cidade" class="col-sm-2 col-form-label">Cidade</label>
+                            <div class="col-sm-10">
+                                <input name="cidade" id="cidade"
+                                    type="text" class="form-control" value="<?php echo $cidade; ?>">
+                            </div>
+                        </div>
+                        <div class="position-relative row form-group">
+                            <label for="estado" class="col-sm-2 col-form-label">Estado</label>
+                            <div class="col-sm-10">
+                                <input name="estado" id="estado"
+                                    type="text" class="form-control" value="<?php echo $estado; ?>">
                             </div>
                         </div>
                         <button type="submit" name="btnUpdFooter" class="btn btn-primary">Salvar</button>
@@ -177,3 +393,57 @@
         </div>
     </div>
 </div>
+<script>
+    const checkboxes = document.querySelectorAll('[name^="d"]');
+    checkboxes.forEach(function(checkbox) {
+        checkbox.addEventListener('change', function() {
+            const inputId = this.getAttribute('data-input-id');
+            const input = document.getElementById(inputId);
+            
+            if (this.checked) {
+                input.disabled = true;
+            } else {
+                input.disabled = false;
+            }
+        });
+    });
+</script>
+<script>
+    
+function getCepData()
+{
+    let cep = $('#cep').val();
+    cep = cep.replace(/\D/g, "");
+    if(cep.length<8)
+    {
+        $("#div-errors-price").html("CEP deve conter no mínimo 8 dígitos").slideDown('fast').effect( "shake" );
+        $("#cep").addClass('is-invalid').focus();
+        return;
+    }
+    $("#cep").removeClass('is-invalid');
+    $("#div-errors-price").slideUp('fast');
+
+
+    if(cep != "")
+    {
+        $("#rua").val("Carregando...");
+        $("#bairro").val("Carregando...");
+        $("#cidade").val("Carregando...");
+        $("#estado").val("...");
+        $.getJSON( "https://viacep.com.br/ws/"+cep+"/json/", function( data )
+        {
+            $("#rua").val(data.logradouro);
+            $("#bairro").val(data.bairro);
+            $("#cidade").val(data.localidade);
+            $("#estado").val(data.uf);
+            $("#numero").focus();
+        }).fail(function()
+        {
+            $("#rua").val("");
+            $("#bairro").val("");
+            $("#cidade").val("");
+            $("#estado").val(" ");
+        });
+    }
+}
+</script>
