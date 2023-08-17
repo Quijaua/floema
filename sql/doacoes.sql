@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Tempo de geração: 14-Ago-2023 às 01:37
+-- Tempo de geração: 18-Ago-2023 às 01:13
 -- Versão do servidor: 10.4.22-MariaDB
 -- versão do PHP: 8.1.1
 
@@ -74,7 +74,7 @@ CREATE TABLE `tb_clientes` (
   `cep` char(10) DEFAULT NULL,
   `endereco` varchar(255) DEFAULT NULL,
   `numero` int(11) NOT NULL,
-  `complemento` varchar(255) NOT NULL,
+  `complemento` varchar(255) DEFAULT NULL,
   `municipio` varchar(255) NOT NULL,
   `cidade` varchar(255) NOT NULL,
   `uf` varchar(255) NOT NULL,
