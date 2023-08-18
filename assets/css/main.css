@@ -8,6 +8,23 @@ h1.highlight{
 input{
     font-family: 'SwiftNeueLTW01', Georgia, serif;
 }
+.btn:hover{
+    color: var(--bs-btn-hover-color) !important;
+    background-color: var(--hover-color);
+    border-color: var(--hover-color);
+}
+.btn:focus-visible {
+    background-color: var(--hover-color) !important;
+}
+.active
+{
+    border: var(--bs-btn-border-width) solid var(--primary-color) !important;
+    background-color: var(--primary-color) !important;
+}
+.progress-active {
+    --bs-bg-opacity: 1;
+    background-color: rgba(var(--progress-color),var(--bs-bg-opacity))!important;
+}
 .text-block
 {
     /*font-family: 'SwiftNeueLTW01', Georgia, serif;*/

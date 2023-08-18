@@ -271,6 +271,52 @@ if (isset($_POST['btnUpdLogo'])) {
     }
 }
 
+if (isset($_POST['btnUpdColor'])) {
+    //Inclui o arquivo 'config.php'
+    include('../../config.php');
+
+    // Verifique se o formulário foi enviado
+    if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+
+        //Tabela onde sera feita a alteracao
+        $tabela = 'tb_checkout';
+
+        //Id da tabela
+        $id = '1';
+
+        //Informacoes coletadas pelo metodo POST
+        $color = $_POST['color'];
+        $hover = $_POST['hover'];
+
+        $red = $_POST['red'];
+        $green = $_POST['green'];
+        $blue = $_POST['blue'];
+
+        $progress = $red . ', ' . $green . ', ' . $blue;
+
+        // Atualize o item no banco de dados
+        $sql = "UPDATE $tabela SET color = :color, hover = :hover, progress = :progress WHERE id = :id";
+        $stmt = $conn->prepare($sql);
+        $stmt->bindParam(':color', $color);
+        $stmt->bindParam(':hover', $hover);
+        $stmt->bindParam(':progress', $progress);
+        $stmt->bindParam(':id', $id);
+
+        try {
+            $stmt->execute();
+
+            // Exibir a modal após salvar as informações
+            $_SESSION['show_modal'] = "<script>$('#staticBackdrop').modal('toggle');</script>";
+            $_SESSION['msg'] = 'As informações sobre sua instituição foram atualizadas com sucesso!';
+
+            //Voltar para a pagina do formulario
+            header('Location: ' . INCLUDE_PATH_ADMIN . 'sobre');
+        } catch (PDOException $e) {
+            echo "Erro na atualização: " . $e->getMessage();
+        }
+    }
+}
+
 if (isset($_POST['btnUpdFooter'])) {
     //Inclui o arquivo 'config.php'
     include('../../config.php');

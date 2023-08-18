@@ -1,3 +1,41 @@
+<style>
+.form-color {
+    outline: none;
+    background: none;
+    width: 38px;
+    height: 38px;
+    border: 1px solid #ced4da;
+    border-radius: .25rem;
+    margin-right: 10px;
+}
+  #colorPickerRGB {
+    outline: none;
+    background: none;
+    width: 38px;
+    height: 38px;
+    border: 1px solid #ced4da;
+    border-radius: .25rem;
+    margin-right: 10px;
+  }
+
+  #rgbInputs {
+    display: flex;
+    align-items: center;
+  }
+
+  .rgbInput {
+    width: 70px;
+    margin-right: 10px;
+    text-align: center;
+  }
+
+  #colorPreview {
+    width: 50px;
+    height: 50px;
+    margin-top: 10px;
+    border: 1px solid #ccc;
+  }
+</style>
 <div class="app-main__inner">
     <div class="app-page-title">
         <div class="page-title-wrapper">
@@ -62,7 +100,7 @@
             <div class="main-card mb-3 card">
                 <div class="card-body">
                     <h5 class="card-title">Sobre a Instituição</h5>
-                    <form action="<?php echo INCLUDE_PATH_ADMIN; ?>back-end/update-about.php" method="post">
+                    <form action="<?php echo INCLUDE_PATH_ADMIN; ?>back-end/update.php" method="post">
                         <div class="position-relative row form-group">
                             <label for="nome" class="col-sm-2 col-form-label">Nome da sua Instituição *</label>
                             <div class="col-sm-10">
@@ -96,7 +134,7 @@
             <div class="main-card mb-3 card">
                 <div class="card-body">
                     <h5 class="card-title">Logo</h5>
-                    <form action="<?php echo INCLUDE_PATH_ADMIN; ?>back-end/update-about.php" method="post" enctype="multipart/form-data">
+                    <form action="<?php echo INCLUDE_PATH_ADMIN; ?>back-end/update.php" method="post" enctype="multipart/form-data">
                         <div class="position-relative row form-group">
                             <label for="input0" class="col-sm-2 col-form-label">Logo da sua Instituição *</label>
                             <div class="col-sm-10">
@@ -113,6 +151,60 @@
                             </div>
                         </div>
                         <button type="submit" name="btnUpdLogo" class="btn btn-primary">Salvar</button>
+                    </form>
+                </div>
+            </div>
+            <div class="main-card mb-3 card">
+                <div class="card-body">
+                    <h5 class="card-title">Cores</h5>
+                    <form action="<?php echo INCLUDE_PATH_ADMIN; ?>back-end/update.php" method="post" enctype="multipart/form-data">
+                        <div class="position-relative row form-group">
+                            <label for="colorCode" class="col-sm-2 col-form-label">Cor dos Botões *</label>
+                            <div class="col-sm-10 d-flex">
+                                <input type="color" id="colorPicker" class="form-color" value="<?php echo $color; ?>">
+                                <input type="text" id="colorCode" name="color" class="form-control" placeholder="Digite o código hexadecimal da cor" value="<?php echo $color; ?>">
+                            </div>
+                        </div>
+                        <div class="position-relative row form-group">
+                            <label for="hoverCode" class="col-sm-2 col-form-label">Hover *</label>
+                            <div class="col-sm-10 d-flex">
+                                <input type="color" id="hoverPicker" class="form-color" value="<?php echo $hover; ?>">
+                                <input type="text" id="hoverCode" name="hover" class="form-control" placeholder="Digite o código hexadecimal da cor" value="<?php echo $hover; ?>">
+                            </div>
+                        </div>
+                        <div class="position-relative row form-group">
+                            <label for="hoverCode" class="col-sm-2 col-form-label">Cor do botão carregar *</label>
+                            <div class="col-sm-10 d-flex">
+                                    <?php
+                                        $numbersArray = explode(", ", $progress);
+
+                                        if (count($numbersArray) === 3) {
+                                            list($red, $green, $blue) = $numbersArray;
+                                        }
+
+                                        // Função para converter um valor decimal em hexadecimal
+                                        function decimalToHex($decimalValue) {
+                                            // Converte o valor decimal para hexadecimal e adiciona um zero à esquerda se necessário
+                                            return str_pad(dechex($decimalValue), 2, '0', STR_PAD_LEFT);
+                                        }
+
+                                        // Converte os valores RGB em códigos hexadecimais
+                                        $hexRed = decimalToHex($red);
+                                        $hexGreen = decimalToHex($green);
+                                        $hexBlue = decimalToHex($blue);
+
+                                        // Combina os códigos hexadecimais e adiciona o prefixo '#'
+                                        $hexColorCode = "#" . $hexRed . $hexGreen . $hexBlue;
+                                    ?>
+                                <input type="color" id="colorPickerRGB" value="<?php echo $hexColorCode; ?>">
+                                <div id="rgbInputs">
+                                    <input type="number" name="red" class="form-control rgbInput" id="red" min="0" max="255" value="<?php echo $red; ?>">
+                                    <input type="number" name="green" class="form-control rgbInput" id="green" min="0" max="255" value="<?php echo $green; ?>">
+                                    <input type="number" name="blue" class="form-control rgbInput" id="blue" min="0" max="255" value="<?php echo $blue; ?>">
+                                </div>
+                            </div>
+                        </div>
+                        <button type="submit" name="btnUpdColor" class="btn btn-primary">Salvar</button>
                     </form>
                 </div>
             </div>
@@ -244,7 +336,7 @@
             <div class="main-card mb-3 card">
                 <div class="card-body">
                     <h5 class="card-title">Rodapé</h5>
-                    <form action="<?php echo INCLUDE_PATH_ADMIN; ?>back-end/update-about.php" method="post">
+                    <form action="<?php echo INCLUDE_PATH_ADMIN; ?>back-end/update.php" method="post">
                         <div class="position-relative row form-group">
                             <label for="privacidade" class="col-sm-2 col-form-label">Privacidade dos Doadores</label>
                             <div class="col-sm-10">
@@ -447,3 +539,94 @@ function getCepData()
     }
 }
 </script>
+<script>
+    const colorPicker = document.getElementById('colorPicker');
+    const colorCodeInput = document.getElementById('colorCode');
+
+    colorPicker.addEventListener('input', updateColorPreview);
+    colorCodeInput.addEventListener('input', updateColorFromCode);
+
+    function updateColorPreview(event) {
+        const selectedColor = event.target.value;
+        colorCodeInput.value = selectedColor;
+    }
+
+    function updateColorFromCode() {
+        const colorCode = colorCodeInput.value;
+        if (isValidHexColorCode(colorCode)) {
+            colorPicker.value = colorCode;
+        }
+    }
+
+    function isValidHexColorCode(code) {
+        return /^#([0-9A-F]{3}){1,2}$/i.test(code);
+    }
+</script>
+<script>
+    const hoverPicker = document.getElementById('hoverPicker');
+    const hoverCodeInput = document.getElementById('hoverCode');
+
+    hoverPicker.addEventListener('input', updateHoverPreview);
+    hoverCodeInput.addEventListener('input', updateHoverFromCode);
+
+    function updateHoverPreview(event) {
+        const selectedHover = event.target.value;
+        hoverCodeInput.value = selectedHover;
+    }
+
+    function updateHoverFromCode() {
+        const hoverCode = hoverCodeInput.value;
+        if (isValidHexHoverCode(hoverCode)) {
+            hoverPicker.value = hoverCode;
+        }
+    }
+
+    function isValidHexHoverCode(code) {
+        return /^#([0-9A-F]{3}){1,2}$/i.test(code);
+    }
+</script>
+<script>
+    const colorPickerRGB = document.getElementById('colorPickerRGB');
+    const redInput = document.getElementById('red');
+    const greenInput = document.getElementById('green');
+    const blueInput = document.getElementById('blue');
+
+    colorPickerRGB.addEventListener('input', updateColorFromPicker);
+    redInput.addEventListener('input', updateColorFromRGBInputs);
+    greenInput.addEventListener('input', updateColorFromRGBInputs);
+    blueInput.addEventListener('input', updateColorFromRGBInputs);
+
+    function updateColorFromPicker(event) {
+      const selectedColor = event.target.value;
+      const rgbValues = hexToRGB(selectedColor);
+      redInput.value = rgbValues.r;
+      greenInput.value = rgbValues.g;
+      blueInput.value = rgbValues.b;
+      updateColorPreview();
+    }
+
+    function updateColorFromRGBInputs() {
+      const redValue = parseInt(redInput.value);
+      const greenValue = parseInt(greenInput.value);
+      const blueValue = parseInt(blueInput.value);
+      const hexColor = RGBToHex(redValue, greenValue, blueValue);
+      colorPickerRGB.value = hexColor;
+      updateColorPreview();
+    }
+
+    function updateColorPreview() {
+      const hexColor = RGBToHex(parseInt(redInput.value), parseInt(greenInput.value), parseInt(blueInput.value));
+    }
+
+    function hexToRGB(hex) {
+      const bigint = parseInt(hex.slice(1), 16);
+      const r = (bigint >> 16) & 255;
+      const g = (bigint >> 8) & 255;
+      const b = bigint & 255;
+      return { r, g, b };
+    }
+
+    function RGBToHex(r, g, b) {
+      return `#${(1 << 24 | r << 16 | g << 8 | b).toString(16).slice(1)}`;
+    }
+  </script>

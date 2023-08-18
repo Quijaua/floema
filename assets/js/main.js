@@ -278,8 +278,8 @@ function setPeriodOption(periodicity)
 function donationOption(el,type,amount,showAddOnFee)
 {
     lastDonationButtonClicked = el;
-    $('#donation-'+type+'-group button').addClass('btn-outline-dark').removeClass('btn-warning');
-    $(el).addClass('btn-warning').removeClass('btn-outline-dark');
+    $('#donation-'+type+'-group button').addClass('btn-outline-dark').removeClass('active');
+    $(el).addClass('active').removeClass('btn-outline-dark');
     $("#field-other-"+type).css('background-color','#fff').val("");
 
     if(showAddOnFee)
@@ -380,7 +380,7 @@ function donationOtherOption(el,type,showAddOnFee)
 
 
 
-        $('#donation-'+type+'-group button').addClass('btn-outline-dark').removeClass('btn-warning');
+        $('#donation-'+type+'-group button').addClass('btn-outline-dark').removeClass('active');
         $(el).css('background-color','#FFC107');
 
         if(showAddOnFee)
@@ -778,7 +778,7 @@ function printPaymentData(data)
 				html    += "<div class='row'><div class='col-md-12 p-3 mb-3 border text-center fw-bold text-muted' id='bank-slip-code'>"+mascaraCodigoBoleto(data.boleto_identificationField)+"</div></div>";
 				html    += "<div class='row'>";
 				html    += "    <div class='col-md-6 text-center'><a href='"+data.link_boleto+"' target='_blank' class='btn btn-lg btn-light w-100'>Download PDF</a></div>";
-				html    += "    <div class='col-md-6 text-center'><a href=\"javascript:copyToClipboard('#bank-slip-code')\" class='btn btn-lg btn-warning  w-100'>Copiar código</a></div>";
+				html    += "    <div class='col-md-6 text-center'><a href=\"javascript:copyToClipboard('#bank-slip-code')\" class='btn btn-lg active  w-100'>Copiar código</a></div>";
 				html    += "</div>";
 				break;
 			case "CREDIT_CARD":
@@ -791,7 +791,7 @@ function printPaymentData(data)
 				html    += "<div class='row'><div class='col-md-12 p-3 mb-3 border text-center fw-bold text-muted' id='pix-qrcode-code' style='white-space: pre-wrap;word-break: break-word;'>"+data.pix_payload+"</div></div>";
 				html    += "<div class='row'>";
 				html    += "    <div class='col-md-6 text-center'><a href='data:image/png;base64,"+data.pix_encodedImage+"' target='_blank' class='btn btn-lg btn-light w-100'>Abrir QRCode</a></div>";
-				html    += "    <div class='col-md-6 text-center'><a href=\"javascript:copyToClipboard('#pix-qrcode-code')\" class='btn btn-lg btn-warning  w-100'>Copia e cola</a></div>";
+				html    += "    <div class='col-md-6 text-center'><a href=\"javascript:copyToClipboard('#pix-qrcode-code')\" class='btn btn-lg active  w-100'>Copia e cola</a></div>";
 				html    += "</div>";
 				break;
 

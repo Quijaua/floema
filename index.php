@@ -63,6 +63,9 @@
         $estado = $resultado['estado'];
         $telefone = $resultado['telefone'];
         $email = $resultado['email'];
+        $color = $resultado['color'];
+        $hover = $resultado['hover'];
+        $progress = $resultado['progress'];
     } else {
         // ID não encontrado ou não existente
         echo "ID não encontrado.";
@@ -378,7 +381,7 @@
 								</button>
 								<div class="progress progress-subscription d-none" role="progressbar" style="height: 50px"
 									aria-valuenow="100" aria-valuemin="0" aria-valuemax="100">
-									<div class="progress-bar progress-bar-striped progress-bar-animated bg-warning text-dark fw-bold"
+									<div class="progress-bar progress-bar-striped progress-bar-animated progress-active text-dark fw-bold"
 										style="width: 100%">Processando requisição...
 									</div>
 								</div>
@@ -537,6 +540,17 @@
 		});
     });
 </script>
+<script>
+	// Seleciona o elemento <html> (ou qualquer outro elemento de nível superior)
+	const root = document.documentElement;
+	const color = "<?php echo $color; ?>";
+	const hover = "<?php echo $hover; ?>";
+	const progress = "<?php echo $progress; ?>";
 
+	// Altera o valor da variável --background-color
+	root.style.setProperty('--primary-color', color);
+	root.style.setProperty('--hover-color', hover);
+	root.style.setProperty('--progress-color', progress);
+</script>
 </body>
 </html>
