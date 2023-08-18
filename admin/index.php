@@ -69,10 +69,11 @@
         <link rel="stylesheet" href="<?php echo INCLUDE_PATH_ADMIN; ?>vendors/pixeden-stroke-7-icon-master/pe-icon-7-stroke/dist/pe-icon-7-stroke.css">
         <link href="<?php echo INCLUDE_PATH_ADMIN; ?>styles/css/base.css" rel="stylesheet">
         
-        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
-        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+        <link href="<?php echo INCLUDE_PATH; ?>assets/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet"
+            type="text/css">
+        <script src="<?php echo INCLUDE_PATH; ?>assets/jquery/3.5.1/jquery.min.js"></script>
+        <script src="<?php echo INCLUDE_PATH; ?>assets/ajax/1.16.0/popper.min.js"></script>
+        <script src="<?php echo INCLUDE_PATH; ?>assets/bootstrap/4.5.2/js/bootstrap.min.js"></script>
     </head>
     <body>
         <!-- Modal -->

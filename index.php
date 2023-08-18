@@ -76,14 +76,12 @@
 	<meta http-equiv="X-UA-Compatible" content="IE=edge;chrome=1">
 	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
-
-	<link href="//fonts.googleapis.com/css?family=Open+Sans:100,300,400,600,700" rel="stylesheet" type="text/css">
-	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet"
+	<link href="<?php echo INCLUDE_PATH; ?>assets/google/fonts/open-sans" rel="stylesheet" type="text/css">
+	<link href="<?php echo INCLUDE_PATH; ?>assets/bootstrap/5.3.0/css/bootstrap.min.css" rel="stylesheet"
 		  type="text/css">
-	<link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,200;0,6..72,300;0,6..72,400;0,6..72,500;1,6..72,200;1,6..72,300;1,6..72,400&display=swap"
-		  rel="stylesheet">
+	<link href="<?php echo INCLUDE_PATH; ?>assets/google/fonts/newsreader" rel="stylesheet">
 
-	<link rel="stylesheet" type="text/css" href="assets/css/main.css"/>
+	<link rel="stylesheet" type="text/css" href="<?php echo INCLUDE_PATH; ?>assets/css/main.css"/>
 </head>
 <body>
 
@@ -473,15 +471,13 @@
 	.bi {font-size:32px}
 </style>
 
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
+<link rel="stylesheet" href="<?php echo INCLUDE_PATH; ?>assets/bootstrap/1.10.5/font/bootstrap-icons.css">
 
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.3/jquery.min.js"></script>
-<script src="//code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.16/jquery.mask.min.js"
-		integrity="sha512-pHVGpX7F/27yZ0ISY+VVjyULApbDlD0/X0rgGbTqCE7WFW5MezNTWG/dnhtbBuICzsd0WQPgpE4REBLv+UqChw=="
-		crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-<script src="assets/js/main.js"></script>
+<script src="<?php echo INCLUDE_PATH; ?>assets/bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
+<script src="<?php echo INCLUDE_PATH; ?>assets/ajax/3.6.3/jquery.min.js"></script>
+<script src="<?php echo INCLUDE_PATH; ?>assets/google/jquery/1.12.1/jquery-ui.js"></script>
+<script src="<?php echo INCLUDE_PATH; ?>assets/ajax/1.14.16/jquery.mask.min.js"></script>
+<script src="<?php echo INCLUDE_PATH; ?>assets/js/main.js"></script>
 <script src="https://www.google.com/recaptcha/api.js?render=<?=$recaptcha_key?>"></script>
 <script>
 	// Captura do evento de submit do formulário
@@ -513,7 +509,7 @@
 
 				// Requisição AJAX para o arquivo de criação do cliente
 				$.ajax({
-					url: './back-end/subscription.php',
+					url: '<?php echo INCLUDE_PATH; ?>back-end/subscription.php',
 					method: 'POST',
 					data: {method: method, params: btoa($(dataForm).serialize())},
 					dataType: 'JSON'
@@ -527,7 +523,7 @@
 						var encodedCode = btoa(response.code);
 
 						$.ajax({
-							url: './back-end/sql.php',
+							url: '<?php echo INCLUDE_PATH; ?>back-end/sql.php',
 							method: 'POST',
 							data: {encodedCode: encodedCode},
 							dataType: 'JSON'
