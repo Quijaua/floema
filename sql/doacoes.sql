@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Tempo de geração: 18-Ago-2023 às 01:13
+-- Tempo de geração: 18-Ago-2023 às 20:41
 -- Versão do servidor: 10.4.22-MariaDB
 -- versão do PHP: 8.1.1
 
@@ -48,16 +48,17 @@ CREATE TABLE `tb_checkout` (
   `estado` varchar(255) NOT NULL,
   `telefone` varchar(255) NOT NULL,
   `email` varchar(255) NOT NULL,
-  `cor_primaria` varchar(255) NOT NULL,
-  `cor_secundaria` varchar(255) NOT NULL
+  `color` varchar(255) NOT NULL,
+  `hover` varchar(255) NOT NULL,
+  `progress` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Extraindo dados da tabela `tb_checkout`
 --
 
-INSERT INTO `tb_checkout` (`id`, `nome`, `logo`, `title`, `descricao`, `privacidade`, `faq`, `facebook`, `instagram`, `linkedin`, `youtube`, `website`, `cep`, `rua`, `numero`, `bairro`, `cidade`, `estado`, `telefone`, `email`, `cor_primaria`, `cor_secundaria`) VALUES
-(1, 'Floema', 'disu.png', 'Colabore com o Projeto Floema', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed nec ultricies ipsum. In rhoncus vestibulum mi, ac lobortis velit finibus porta. Proin venenatis mollis metus sed dictum. Sed egestas elit non justo accumsan porttitor. Nam vitae feugiat urna. Phasellus maximus mauris non purus varius tincidunt. Donec ultricies mauris in lacus commodo, sed dictum lorem lacinia. Aliquam tortor mauris, auctor vel arcu quis, consequat lacinia enim. ', 'https://seusite.com.br/politica-de-privacidade/', 'https://seusite.com.br/perguntas-frequentes/', 'https://facebook.com/seufacebook', 'https://facebook.com/seuinstagram', NULL, NULL, NULL, '11111-222', 'Rua Exemplo Nome da Rua', '999', 'Centro', 'São Paulo', 'SP', '(11) 9999-9999', 'suainstitucao@email.org.br', '#f6a026', '#101010');
+INSERT INTO `tb_checkout` (`id`, `nome`, `logo`, `title`, `descricao`, `privacidade`, `faq`, `facebook`, `instagram`, `linkedin`, `youtube`, `website`, `cep`, `rua`, `numero`, `bairro`, `cidade`, `estado`, `telefone`, `email`, `color`, `hover`, `progress`) VALUES
+(1, 'Floema', 'disu.png', 'Colabore com o Projeto Floema', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed nec ultricies ipsum. In rhoncus vestibulum mi, ac lobortis velit finibus porta. Proin venenatis mollis metus sed dictum. Sed egestas elit non justo accumsan porttitor. Nam vitae feugiat urna. Phasellus maximus mauris non purus varius tincidunt. Donec ultricies mauris in lacus commodo, sed dictum lorem lacinia. Aliquam tortor mauris, auctor vel arcu quis, consequat lacinia enim. ', 'https://seusite.com.br/politica-de-privacidade/', 'https://seusite.com.br/perguntas-frequentes/', 'https://facebook.com/seufacebook', 'https://facebook.com/seuinstagram', NULL, NULL, NULL, '11111-222', 'Rua Exemplo Nome da Rua', '999', 'Centro', 'São Paulo', 'SP', '(11) 9999-9999', 'suainstitucao@email.org.br', '#ffc107', '#212529', '0, 204, 255');
 
 -- --------------------------------------------------------
 
