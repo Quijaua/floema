@@ -318,6 +318,13 @@
 										<label for="field-complement">Complemento</label>
 									</div>
 								</div>
+								<div class="col-md-12 mb-2 country-brasil">
+									<div class="form-floating">
+										<input type="text" class="form-control text-left" name="city" id="field-city"
+											placeholder="Cidade endereço">
+										<label for="field-city">Cidade</label>
+									</div>
+								</div>
 
 							</div>
 						</div>

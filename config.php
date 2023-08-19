@@ -27,4 +27,5 @@
     
     define('INCLUDE_PATH', $_ENV['URL']);
     define('INCLUDE_PATH_ADMIN',INCLUDE_PATH.'admin/');
+    define('INCLUDE_PATH_USER',INCLUDE_PATH.'user/');
 ?>
