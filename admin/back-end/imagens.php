@@ -10,7 +10,7 @@
     if (isset($_POST['btnAddCard'])) {
 
         // Nome da tabela para a busca
-        $tabela = 'tb_cards';
+        $tabela = 'tb_imagens';
         
         $arquivo = $_FILES['imagem']['name'];
         
@@ -85,7 +85,7 @@
 
     if (isset($_POST['btnUpdCard'])) {
         // Nome da tabela para a busca
-        $tabela = 'tb_cards';
+        $tabela = 'tb_imagens';
 
         // Dados para o update
         $ids = $_POST['ids']; // ID do registro a ser atualizado
