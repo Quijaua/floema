@@ -1,7 +1,13 @@
 <?php
     session_start();
-    ob_start();
     include('../config.php');
+
+    $asaas_id = $_SESSION['asaas_id'];
+
+    if (!isset($asaas_id)) {
+        header("Location: " . INCLUDE_PATH . "login/");
+        exit();
+    }
 ?>
 <!doctype html>
 <html lang="pt-BR">
@@ -69,8 +75,8 @@
                             <div class="mx-auto app-login-box col-sm-12 col-md-10 col-lg-9">
                                 <div class="app-logo"></div>
                                 <h4 class="mb-0">
-                                    <span class="d-block">Bem vindo de volta,</span>
-                                    <span>Por favor entre em sua conta.</span>
+                                    <span class="d-block">Bem vindo,</span>
+                                    <span>Por favor crie uma senha para sua conta.</span>
                                 </h4>
                                 <br>
                                 <p class="text-danger">
@@ -93,27 +99,29 @@
                                 </p>
                                 <div class="divider row"></div>
                                 <div>
-                                    <form action="<?php echo INCLUDE_PATH_ADMIN; ?>back-end/login.php" method="post">
+                                    <form action="<?php echo INCLUDE_PATH_ADMIN; ?>back-end/salvar-senha.php" method="post">
+                                        <p id="message"></p>
                                         <div class="form-row">
                                             <div class="col-md-6">
                                                 <div class="position-relative form-group">
-                                                    <label for="exampleEmail" class="">E-mail</label>
-                                                    <input name="email" id="exampleEmail"
-                                                        placeholder="Seu e-mail..." type="email" class="form-control">
+                                                    <label for="password" class="">Senha</label>
+                                                    <input name="password" id="password"
+                                                        placeholder="Sua senha..." type="password" class="form-control" onblur="validatePassword()" required>
                                                 </div>
                                             </div>
                                             <div class="col-md-6">
                                                 <div class="position-relative form-group">
-                                                    <label for="examplePassword" class="">Senha</label>
-                                                    <input name="password" id="examplePassword"
-                                                        placeholder="Sua senha..." type="password" class="form-control">
+                                                    <label for="confirmPassword" class="">Confirmar Senha</label>
+                                                    <input name="confirmPassword" id="confirmPassword"
+                                                        placeholder="Confirme sua senha..." type="password" class="form-control" onblur="validatePassword()" required>
                                                 </div>
                                             </div>
                                         </div>
+                                        <input type="hidden" name="asaas_id" value="<?php echo $asaas_id; ?>">
                                         <div class="divider row"></div>
                                         <div class="d-flex align-items-center">
                                             <div class="ml-auto">
-                                                <button class="btn btn-primary btn-lg" name="btnLogin">Entrar no Painel</button>
+                                                <button class="btn btn-primary btn-lg" name="btnLogin" id="btnAddPassword" disabled>Salvar senha</button>
                                             </div>
                                         </div>
                                     </form>
@@ -129,5 +137,29 @@
         <script type="text/javascript" src="<?php echo INCLUDE_PATH_ADMIN; ?>vendors/slick-carousel/slick/slick.min.js"></script>
         <!-- custome.js -->
         <script type="text/javascript" src="<?php echo INCLUDE_PATH_ADMIN; ?>js/carousel-slider.js"></script>
+
+        <script>
+            function validatePassword() {
+                var password = document.getElementById("password").value;
+                var confirmPassword = document.getElementById("confirmPassword").value;
+                
+                var btnAddPassword = document.getElementById("btnAddPassword");
+
+                if (password.length  < 7) {
+                    document.getElementById("message").innerHTML = "A senha deve ter no minimo 8 caracteres";
+                    document.getElementById("message").style.color = "red";
+                    btnAddPassword.disabled = true;
+                } else {
+                    if (password !== confirmPassword) {
+                        document.getElementById("message").innerHTML = "As senhas não coincidem";
+                        document.getElementById("message").style.color = "red";
+                        btnAddPassword.disabled = true;
+                    } else {
+                        document.getElementById("message").innerHTML = "";
+                        btnAddPassword.disabled = false;
+                    }
+                }
+            }
+        </script>
     </body>
 </html>

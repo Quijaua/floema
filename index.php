@@ -522,7 +522,11 @@
 					url: '<?php echo INCLUDE_PATH; ?>back-end/subscription.php',
 					method: 'POST',
 					data: {method: method, params: btoa($(dataForm).serialize())},
-					dataType: 'JSON'
+					dataType: 'JSON',
+					success: function(response) {
+						window.respostaGlobal = response.id; // Atribui a resposta à propriedade global do objeto window
+						// Outras ações que você queira fazer com a resposta
+					}
 				})
 				.done(function(response) {
 					if (response.status == 200) {
@@ -541,18 +545,18 @@
 						})
 						.done(function(data) {
 							printPaymentData(data);
+							
 
+						})
 
-
-							$.ajax({
-								url: '<?php echo INCLUDE_PATH_ADMIN; ?>back-end/magic-link.php',
-								method: 'POST',
-								data: {customerId: customerId},
-								dataType: 'JSON'
-							})
-							.done(function(data) {
-								console.log(data.msg);
-							})
+						$.ajax({
+							url: '<?php echo INCLUDE_PATH_ADMIN; ?>back-end/magic-link.php',
+							method: 'POST',
+							data: {customerId: customerId},
+							dataType: 'JSON'
+						})
+						.done(function(data) {
+							console.log(data.msg);
 						})
 					}
 				})

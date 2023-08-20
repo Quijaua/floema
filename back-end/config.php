@@ -5,9 +5,6 @@
     // Caminho para o diretório pai
     $parentDir = dirname(__DIR__);
 
-    // Caminho completo para a pasta acima
-    $projectDir = dirname($parentDir);
-
 	require $parentDir . '/vendor/autoload.php';
 	$dotenv = Dotenv\Dotenv::createImmutable($parentDir);
 	$dotenv->load();

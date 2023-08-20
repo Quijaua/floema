@@ -72,13 +72,13 @@ parse_str(base64_decode($_POST['params']), $dataForm);
                 }else if($dataForm['inlineRadioOptions'] == "option3"){
                     $payment_id = asaas_CriarCobrancaCartao($customer_id, $dataForm, $config);
                 }
-                echo json_encode(["status"=>200, "code"=>$payment_id]);
+                echo json_encode(["status"=>200, "code"=>$payment_id, "id"=>$customer_id]);
                 break;
             case '101':
                 $customer_id = asaas_CriarCliente($dataForm, $config);
                 $payment_id = asaas_CriarCobrancaBoleto($customer_id, $dataForm, $config);
                 asaas_ObterLinhaDigitavelBoleto($payment_id, $config);
-                echo json_encode(["status"=>200, "code"=>$payment_id]);
+                echo json_encode(["status"=>200, "code"=>$payment_id, "id"=>$customer_id]);
                 break;
             case '102':
                 $customer_id = asaas_CriarCliente($dataForm, $config);

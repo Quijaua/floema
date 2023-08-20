@@ -1,56 +1,88 @@
 <?php
-include_once('../../config.php');
+    // Caso prefira o .env apenas descomente o codigo e comente o "include('parameters.php');" acima
+	// Carrega as variáveis de ambiente do arquivo .env
 
-// Tabela onde sera inserido o codigo
-$tabela = "tb_clientes";
+    // Caminho para o diretório pai
+    $parentDir = dirname(dirname(__DIR__));
 
-//Decodificando base64 e passando para $p
-$asaas_id = base64_decode($_POST['customerId']);
+	require $parentDir . '/vendor/autoload.php';
+	$dotenv = Dotenv\Dotenv::createImmutable($parentDir);
+	$dotenv->load();
 
-// Gera um valor aleatório seguro em hexadecimal
-$random_value = bin2hex(random_bytes(16));
-$hash = hash('sha256', $asaas_id . $random_value); // Combinação do ID do usuário e valor aleatório
-$link_magico = INCLUDE_PATH_USER . 'ativar-conta?token=' . $hash; // URL do link mágico
+    // Informacoes para PHPMailer
+	$smtp_host = $_ENV['SMTP_HOST'];
+	$smtp_username = $_ENV['SMTP_USERNAME'];
+	$smtp_password = $_ENV['SMTP_PASSWORD'];
+	$smtp_secure = $_ENV['SMTP_SECURE'];
+	$smtp_port = $_ENV['SMTP_PORT'];
+        
+    include_once('../../config.php');
 
-// Suponha que você já tem uma conexão com o banco de dados
-$query = "UPDATE $tabela SET magic_link = :magic_link WHERE asaas_id = :asaas_id";
-$stmt = $conn->prepare($query);
-$stmt->bindParam(':magic_link', $hash, PDO::PARAM_STR);
-$stmt->bindParam(':asaas_id', $asaas_id, PDO::PARAM_STR);
-$stmt->execute();
+    // Tabela onde sera inserido o codigo
+    $tabela = "tb_clientes";
 
-use PHPMailer\PHPMailer\PHPMailer;
-use PHPMailer\PHPMailer\SMTP;
-use PHPMailer\PHPMailer\Exception;
+    //Decodificando base64 e passando para $p
+    $asaas_id = base64_decode($_POST['customerId']);
 
-require './lib/vendor/autoload.php';
+    // Gera um valor aleatório seguro em hexadecimal
+    $random_value = bin2hex(random_bytes(16));
+    $hash = hash('sha256', $asaas_id . $random_value); // Combinação do ID do usuário e valor aleatório
+    $link_magico = INCLUDE_PATH_ADMIN . 'back-end/ativar-conta.php?token=' . $hash; // URL do link mágico
 
-// Crie uma nova instância do PHPMailer
-$mail = new PHPMailer(true);
+    $query = "UPDATE $tabela SET magic_link = :magic_link WHERE asaas_id = :asaas_id";
+    $stmt = $conn->prepare($query);
+    $stmt->bindParam(':magic_link', $hash, PDO::PARAM_STR);
+    $stmt->bindParam(':asaas_id', $asaas_id, PDO::PARAM_STR);
+    $stmt->execute();
 
-try {
-    /*$mail->SMTPDebug = SMTP::DEBUG_SERVER;*/
-    $mail->CharSet = 'UTF-8';
-    $mail->isSMTP();
-    $mail->Host       = 'smtp.mailtrap.io';
-    $mail->SMTPAuth   = true;
-    $mail->Username   = '8b6afa6cf7c2eb';
-    $mail->Password   = '8a525ea217cae2';
-    $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;
-    $mail->Port       = 2525;
+    $sql = "SELECT * FROM $tabela WHERE asaas_id = :asaas_id";
+    $stmt = $conn->prepare($sql);
+    $stmt->bindParam(':asaas_id', $asaas_id, PDO::PARAM_STR);
+    $stmt->execute();
 
-    // Define o remetente e destinatário
-    $mail->setFrom('cauaserpa092@gmail.com', 'Caua Serpa');
-    $mail->addAddress('email_do_usuario@dominio.com', 'Nome do Usuário');
+    // Recuperar os resultados
+    $resultados = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
-    // Configurações do e-mail
-    $mail->isHTML(true);
-    $mail->Subject = 'Link Mágico para Ativar Sua Conta';
-    $mail->Body = 'Clique no link a seguir para ativar sua conta: <a href="' . $link_magico . '">Ativar Conta</a>';
+    // Verificar se o resultado foi encontrado
+    if (!empty($resultados)) {
+        $primeiroResultado = $resultados[0]; // Acessar o primeiro resultado do array
 
-    // Envia o e-mail
-    $mail->send();
-    echo json_encode(["msg"=>"E-mail enviado com sucesso!"]);
-} catch (Exception $e) {
-    echo json_encode(["msg"=>"Erro ao enviar o e-mail: " . $mail->ErrorInfo]);
-}
+        $nome = $primeiroResultado['nome'];
+        $email = $primeiroResultado['email'];
+    }
+
+    use PHPMailer\PHPMailer\PHPMailer;
+    use PHPMailer\PHPMailer\SMTP;
+    use PHPMailer\PHPMailer\Exception;
+
+    require './lib/vendor/autoload.php';
+
+    // Crie uma nova instância do PHPMailer
+    $mail = new PHPMailer(true);
+
+    try {
+        /*$mail->SMTPDebug = SMTP::DEBUG_SERVER;*/
+        $mail->CharSet = 'UTF-8';
+        $mail->isSMTP();
+        $mail->Host       = $smtp_host;
+        $mail->SMTPAuth   = true;
+        $mail->Username   = $smtp_username;
+        $mail->Password   = $smtp_password;
+        $mail->SMTPSecure = $smtp_secure;
+        $mail->Port       = $smtp_port;
+
+        // Define o remetente e destinatário
+        $mail->setFrom('nao-responda@suainstituicao.com', 'Sua instituição');
+        $mail->addAddress($email, $nome);
+
+        // Configurações do e-mail
+        $mail->isHTML(true);
+        $mail->Subject = 'Ativar sua conta';
+        $mail->Body = 'Olá ' . $nome . ',<br>Muito obrigado por colaborar com nossa instituição.<br><br>Clique no link a seguir para ativar sua conta: <a href="' . $link_magico . '">Ativar Conta</a><br><br>Ou<br><br>Cole esse link no seu navegador:<br>' . $link_magico . '';
+
+        // Envia o e-mail
+        $mail->send();
+        echo json_encode(["msg"=>"E-mail enviado com sucesso!"]);
+    } catch (Exception $e) {
+        echo json_encode(["msg"=>"Erro ao enviar o e-mail: " . $mail->ErrorInfo]);
+    }
