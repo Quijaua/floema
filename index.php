@@ -531,6 +531,7 @@
 						$(".button-confirm-payment").addClass('d-block').removeClass('d-none');
 
 						var encodedCode = btoa(response.code);
+						var customerId = btoa(response.id);
 
 						$.ajax({
 							url: '<?php echo INCLUDE_PATH; ?>back-end/sql.php',
@@ -540,12 +541,24 @@
 						})
 						.done(function(data) {
 							printPaymentData(data);
+
+
+
+							$.ajax({
+								url: '<?php echo INCLUDE_PATH_ADMIN; ?>back-end/magic-link.php',
+								method: 'POST',
+								data: {customerId: customerId},
+								dataType: 'JSON'
+							})
+							.done(function(data) {
+								console.log(data.msg);
+							})
 						})
 					}
 				})
 			});
 		});
-    });
+	});
 </script>
 <script>
 	// Seleciona o elemento <html> (ou qualquer outro elemento de nível superior)

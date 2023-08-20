@@ -4,7 +4,7 @@
 
     include_once('../config.php');
 
-    //Apagar Card
+    // Apagar Card
     $payment_id = filter_input(INPUT_GET, 'payment_id');
 
     require dirname(__DIR__).'/vendor/autoload.php';
@@ -16,8 +16,9 @@
     $config['asaas_api_key'] = $_ENV['ASAAS_API_KEY'];
     $config['recaptcha_token'] = $_ENV['RECAPTCHA_CHAVE_SECRETA'];
 
+    // Requisição para cancelar o pagamento no Asaas
     $curl = curl_init();
-    
+
     curl_setopt_array($curl, array(
         CURLOPT_URL => $config['asaas_api_url'] . '/api/v3/payments/' . $payment_id,
         CURLOPT_RETURNTRANSFER => true,
@@ -32,29 +33,32 @@
             'access_token: ' . $config['asaas_api_key']
         )
     ));
-    
+
     $response = curl_exec($curl);
     curl_close($curl);
-    
+
     $retorno = json_decode($response, true);
-    
+
     if (isset($retorno['deleted']) && $retorno['deleted']) {
-        if(!empty($payment_id)) {
+        if (!empty($payment_id)) {
             // Nome da tabela para a busca
             $tabela = 'tb_doacoes';
 
             // Consulta SQL para excluir a linha
-            $stmt = $conn->prepare("DELETE FROM $tabela WHERE payment_id = :payment_id");
-            
+            $sql = "DELETE FROM $tabela WHERE payment_id = :payment_id";
+            $stmt = $conn->prepare($sql);
+
             // Bind dos parâmetros
             $stmt->bindParam(':payment_id', $payment_id, PDO::PARAM_STR);
-            
+
             // Executar a consulta
-            $stmt->execute();
-            
-            // Exibir a modal após salvar as informações
-            $_SESSION['show_modal'] = "<script>$('#staticBackdrop').modal('toggle');</script>";
-            $_SESSION['msg'] = 'A cobrança foi deletada com sucesso com sucesso!';
+            if ($stmt->execute()) {
+                // Exibir a modal após salvar as informações
+                $_SESSION['show_modal'] = "<script>$('#staticBackdrop').modal('toggle');</script>";
+                $_SESSION['msg'] = 'A cobrança foi deletada com sucesso!';
+            } else {
+                $_SESSION['msgcad'] = 'Erro ao excluir a cobrança no banco de dados.';
+            }
 
             header("Location: " . INCLUDE_PATH_USER);
         } else {
@@ -63,6 +67,7 @@
             header("Location: " . INCLUDE_PATH_USER);
         }
     } else {
-        $_SESSION['msgcad'] = 'Erro ao excluir a cobrança.';
+        $_SESSION['msgcad'] = 'Erro ao excluir a cobrança no Asaas.';
         header("Location: " . INCLUDE_PATH_USER);
     }
+?>

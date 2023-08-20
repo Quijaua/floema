@@ -84,7 +84,7 @@ parse_str(base64_decode($_POST['params']), $dataForm);
                 $customer_id = asaas_CriarCliente($dataForm, $config);
                 $payment_id = asaas_CriarCobrancaPix($customer_id, $dataForm, $config);
                 asaas_ObterQRCodePix($payment_id, $config);
-                echo json_encode(["status"=>200, "code"=>$payment_id]);
+                echo json_encode(["status"=>200, "code"=>$payment_id, "id"=>$customer_id]);
                 break;
             default:
                 echo json_encode(['status' => 404, 'message' => 'Método de pagamento inválido!']);

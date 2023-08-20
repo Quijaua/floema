@@ -1,20 +1,22 @@
 <?php
 include_once('../../config.php');
 
-//Decodificando base64 e passando para $dataForm
-$dataForm = [];
-parse_str(base64_decode($_POST['params']), $dataForm);
+// Tabela onde sera inserido o codigo
+$tabela = "tb_clientes";
 
-$user_id = $dataForm['asaas_id']; // Substitua pelo ID real do usuário
-$random_value = bin2hex(random_bytes(16)); // Gera um valor aleatório seguro em hexadecimal
-$hash = hash('sha256', $user_id . $random_value); // Combinação do ID do usuário e valor aleatório
+//Decodificando base64 e passando para $p
+$asaas_id = base64_decode($_POST['customerId']);
+
+// Gera um valor aleatório seguro em hexadecimal
+$random_value = bin2hex(random_bytes(16));
+$hash = hash('sha256', $asaas_id . $random_value); // Combinação do ID do usuário e valor aleatório
 $link_magico = INCLUDE_PATH_USER . 'ativar-conta?token=' . $hash; // URL do link mágico
 
 // Suponha que você já tem uma conexão com o banco de dados
-$query = "INSERT INTO usuarios_links_magicos (user_id, token) VALUES (:user_id, :token)";
-$stmt = $pdo->prepare($query);
-$stmt->bindParam(':user_id', $user_id, PDO::PARAM_INT);
-$stmt->bindParam(':token', $hash, PDO::PARAM_STR);
+$query = "UPDATE $tabela SET magic_link = :magic_link WHERE asaas_id = :asaas_id";
+$stmt = $conn->prepare($query);
+$stmt->bindParam(':magic_link', $hash, PDO::PARAM_STR);
+$stmt->bindParam(':asaas_id', $asaas_id, PDO::PARAM_STR);
 $stmt->execute();
 
 use PHPMailer\PHPMailer\PHPMailer;
@@ -27,17 +29,18 @@ require './lib/vendor/autoload.php';
 $mail = new PHPMailer(true);
 
 try {
-    // Configurações do servidor SMTP e autenticação
+    /*$mail->SMTPDebug = SMTP::DEBUG_SERVER;*/
+    $mail->CharSet = 'UTF-8';
     $mail->isSMTP();
-    $mail->Host = 'smtp.seuservidor.com';
-    $mail->SMTPAuth = true;
-    $mail->Username = 'seu_email@dominio.com';
-    $mail->Password = 'sua_senha';
-    $mail->SMTPSecure = 'tls';
-    $mail->Port = 587;
+    $mail->Host       = 'smtp.mailtrap.io';
+    $mail->SMTPAuth   = true;
+    $mail->Username   = '8b6afa6cf7c2eb';
+    $mail->Password   = '8a525ea217cae2';
+    $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;
+    $mail->Port       = 2525;
 
     // Define o remetente e destinatário
-    $mail->setFrom('seu_email@dominio.com', 'Seu Nome');
+    $mail->setFrom('cauaserpa092@gmail.com', 'Caua Serpa');
     $mail->addAddress('email_do_usuario@dominio.com', 'Nome do Usuário');
 
     // Configurações do e-mail
@@ -47,7 +50,7 @@ try {
 
     // Envia o e-mail
     $mail->send();
-    echo 'E-mail enviado com sucesso!';
+    echo json_encode(["msg"=>"E-mail enviado com sucesso!"]);
 } catch (Exception $e) {
-    echo 'Erro ao enviar o e-mail: ' . $mail->ErrorInfo;
+    echo json_encode(["msg"=>"Erro ao enviar o e-mail: " . $mail->ErrorInfo]);
 }
