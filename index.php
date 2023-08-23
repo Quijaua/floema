@@ -488,7 +488,7 @@
 <script src="<?php echo INCLUDE_PATH; ?>assets/google/jquery/1.12.1/jquery-ui.js"></script>
 <script src="<?php echo INCLUDE_PATH; ?>assets/ajax/1.14.16/jquery.mask.min.js"></script>
 <script src="<?php echo INCLUDE_PATH; ?>assets/js/main.js"></script>
-<script src="https://www.google.com/recaptcha/api.js?render=<?=$recaptcha_key?>"></script>
+<!-- <script src="https://www.google.com/recaptcha/api.js?render=<?=$recaptcha_key?>"></script>
 <script>
 	// Captura do evento de submit do formulário
     $('#form-checkout').submit(function(event) {
@@ -563,6 +563,114 @@
 			});
 		});
 	});
+</script> -->
+
+<!-- Inclua a biblioteca reCAPTCHA -->
+<?php if (!empty($recaptcha_key)): ?>
+    <script src="https://www.google.com/recaptcha/api.js?render=<?=$recaptcha_key?>"></script>
+<?php endif; ?>
+
+<script>
+    // Captura do evento de submit do formulário
+    $('#form-checkout').submit(function(event) {
+        event.preventDefault();
+
+
+		
+		//Botão carregando
+		$(".progress-subscription").addClass('d-flex').removeClass('d-none');
+		$(".button-confirm-payment").addClass('d-none').removeClass('d-block');
+
+
+
+        // // Bloquear o submit do formulário
+        // $(this).find('button[type="submit"]').prop('disabled', true);
+
+        // if(!validateFields()) {
+        //     // Desbloquear o submit do formulário se a validação falhar
+        //     $(this).find('button[type="submit"]').prop('disabled', false);
+        //     return;
+        // }
+
+        var dataForm = this;
+
+        // Verifica se recaptcha_key está definido
+        if ('<?=$recaptcha_key?>' !== '') {
+            // Faz a validação do reCAPTCHA
+            grecaptcha.ready(function() {
+                // Insira a chave do site do reCAPTCHA no método execute()
+                grecaptcha.execute('<?=$recaptcha_key?>', { action: 'submit' }).then(function(token) {
+                    // Obtém o token do reCAPTCHA e chama a função processForm
+                    processForm(dataForm, token);
+                });
+            });
+        } else {
+            // Chama a função processForm sem passar o token do reCAPTCHA
+            processForm(dataForm);
+        }
+    });
+
+    function processForm(dataForm, recaptchaToken) {
+        var typePayment = $('input[name="payment"]:checked').val();
+        localStorage.setItem("method", typePayment);
+        method = localStorage.getItem("method");
+
+        // Adicionar valor ao input valor
+        document.getElementById('value').value = donationAmount;
+
+        // Criação do objeto de dados para a requisição AJAX
+        var ajaxData = {
+            method: method,
+            params: btoa($(dataForm).serialize())
+        };
+
+        // Adiciona o token do reCAPTCHA se estiver definido
+        if (recaptchaToken) {
+            ajaxData.recaptcha_token = recaptchaToken;
+        }
+
+        // Requisição AJAX para o arquivo de criação do cliente
+        $.ajax({
+            url: '<?php echo INCLUDE_PATH; ?>back-end/subscription.php',
+            method: 'POST',
+            data: ajaxData,
+            dataType: 'JSON',
+            success: function(response) {
+                window.respostaGlobal = response.id; // Atribui a resposta à propriedade global do objeto window
+                // Outras ações que você queira fazer com a resposta
+            }
+        })
+		.done(function(response) {
+			if (response.status == 200) {
+				//Remove botão carregando
+				$(".progress-subscription").addClass('d-none').removeClass('d-flex');
+				$(".button-confirm-payment").addClass('d-block').removeClass('d-none');
+
+				var encodedCode = btoa(response.code);
+				var customerId = btoa(response.id);
+
+				$.ajax({
+					url: '<?php echo INCLUDE_PATH; ?>back-end/sql.php',
+					method: 'POST',
+					data: {encodedCode: encodedCode},
+					dataType: 'JSON'
+				})
+				.done(function(data) {
+					printPaymentData(data);
+				})
+
+				$.ajax({
+					url: '<?php echo INCLUDE_PATH_ADMIN; ?>back-end/magic-link.php',
+					method: 'POST',
+					data: {customerId: customerId},
+					dataType: 'JSON'
+				})
+				.done(function(data) {
+					console.log(data.msg);
+				})
+			}
+		})
+    }
 </script>
 <script>
 	// Seleciona o elemento <html> (ou qualquer outro elemento de nível superior)

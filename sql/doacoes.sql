@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Tempo de geração: 18-Ago-2023 às 20:41
+-- Tempo de geração: 20-Ago-2023 às 08:14
 -- Versão do servidor: 10.4.22-MariaDB
 -- versão do PHP: 8.1.1
 
@@ -58,7 +58,7 @@ CREATE TABLE `tb_checkout` (
 --
 
 INSERT INTO `tb_checkout` (`id`, `nome`, `logo`, `title`, `descricao`, `privacidade`, `faq`, `facebook`, `instagram`, `linkedin`, `youtube`, `website`, `cep`, `rua`, `numero`, `bairro`, `cidade`, `estado`, `telefone`, `email`, `color`, `hover`, `progress`) VALUES
-(1, 'Floema', 'disu.png', 'Colabore com o Projeto Floema', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed nec ultricies ipsum. In rhoncus vestibulum mi, ac lobortis velit finibus porta. Proin venenatis mollis metus sed dictum. Sed egestas elit non justo accumsan porttitor. Nam vitae feugiat urna. Phasellus maximus mauris non purus varius tincidunt. Donec ultricies mauris in lacus commodo, sed dictum lorem lacinia. Aliquam tortor mauris, auctor vel arcu quis, consequat lacinia enim. ', 'https://seusite.com.br/politica-de-privacidade/', 'https://seusite.com.br/perguntas-frequentes/', 'https://facebook.com/seufacebook', 'https://facebook.com/seuinstagram', NULL, NULL, NULL, '11111-222', 'Rua Exemplo Nome da Rua', '999', 'Centro', 'São Paulo', 'SP', '(11) 9999-9999', 'suainstitucao@email.org.br', '#ffc107', '#212529', '0, 204, 255');
+(1, 'Floema', 'disu.png', '', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam tempus tortor nec gravida pretium. Vestibulum ipsum diam, lacinia a est sit amet, tempor elementum odio. Phasellus vel eros sit amet dolor mollis ultricies id eu lectus. Nunc mattis magna id augue malesuada luctus. Donec sit amet diam id diam interdum sollicitudin.', 'https://seusite.com.br/politica-de-privacidade/', 'https://seusite.com.br/perguntas-frequentes/', 'https://facebook.com/seufacebook', 'https://facebook.com/seuinstagram', NULL, NULL, NULL, '11111-222', 'Rua Exemplo Nome da Rua', '999', 'Centro', 'São Paulo', 'SP', '(11) 9999-9999', 'suainstitucao@email.org.br', '#ffc107', '#212529', '0, 204, 255');
 
 -- --------------------------------------------------------
 
@@ -70,6 +70,8 @@ CREATE TABLE `tb_clientes` (
   `id` int(11) NOT NULL,
   `nome` varchar(100) DEFAULT NULL,
   `email` varchar(100) DEFAULT NULL,
+  `password` varchar(255) DEFAULT NULL,
+  `magic_link` varchar(255) NOT NULL,
   `phone` varchar(50) NOT NULL,
   `cpf` varchar(25) DEFAULT NULL,
   `cep` char(10) DEFAULT NULL,
