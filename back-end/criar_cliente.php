@@ -86,10 +86,11 @@ function asaas_CriarCliente($dataForm, $config) {
 	
 			$tabela = 'tb_clientes';
 	
-			$stmt = $conn->prepare("INSERT INTO $tabela (nome, email, phone, cpf, cep, endereco, numero, complemento, municipio, cidade, uf, asaas_id) VALUES (
-				:name, :email, :phone, :cpfCnpj, :postalCode, :address, :addressNumber, :complement, :province, :city, :state, :id)");
+			$stmt = $conn->prepare("INSERT INTO $tabela (roles, nome, email, phone, cpf, cep, endereco, numero, complemento, municipio, cidade, uf, asaas_id) VALUES (
+				:roles, :name, :email, :phone, :cpfCnpj, :postalCode, :address, :addressNumber, :complement, :province, :city, :state, :id)");
 			
 			// Bind dos parâmetros
+			$stmt->bindParam(':roles', 0, PDO::PARAM_INT);
 			$stmt->bindParam(':name', $retorno['name'], PDO::PARAM_STR);
 			$stmt->bindParam(':email', $retorno['email'], PDO::PARAM_STR);
 			$stmt->bindParam(':phone', $dataForm['phone'], PDO::PARAM_STR);

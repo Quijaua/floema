@@ -335,21 +335,21 @@
 								<div class="col-md-12 mb-2">
 									<div class="form-floating">
 										<input type="text" class="form-control" name="card-number" id="field-card-number"
-											placeholder="Numero cartão">
+											placeholder="XXXX XXXX XXXX XXXX">
 										<label for="field-card-number">Número do cartão</label>
 									</div>
 								</div>
 								<div class="col-md-12 mb-2">
 									<div class="form-floating">
 										<input type="text" class="form-control" name="card-name" id="field-card-number"
-											placeholder="Numero cartão">
+											placeholder="Marcelo h Almeida">
 										<label for="field-card-number">Titular do cartão</label>
 									</div>
 								</div>
 								<div class="col-md-8 mb-2">
 									<div class="form-floating">
 										<input type="text" class="form-control text-center" name="card-expiry" id="field-card-expiration"
-											placeholder="Validade">
+											placeholder="MM/AA">
 										<label for="field-card-expiration">Validade</label>
 									</div>
 								</div>

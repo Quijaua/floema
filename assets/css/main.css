@@ -8,6 +8,10 @@ h1.highlight{
 input{
     font-family: 'SwiftNeueLTW01', Georgia, serif;
 }
+.form-control:focus::placeholder {
+    color: #000 !important;
+    opacity: .65 !important;
+}
 .btn:hover{
     color: var(--bs-btn-hover-color) !important;
     background-color: var(--hover-color);
