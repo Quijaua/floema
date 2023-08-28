@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Tempo de geração: 28-Ago-2023 às 01:02
+-- Tempo de geração: 28-Ago-2023 às 06:18
 -- Versão do servidor: 10.4.22-MariaDB
 -- versão do PHP: 8.1.1
 
@@ -64,28 +64,28 @@ INSERT INTO `tb_checkout` (`id`, `nome`, `logo`, `title`, `descricao`, `privacid
 -- Extraindo dados da tabela `tb_clientes`
 --
 
-INSERT INTO `tb_clientes` (`id`, `roles`, `nome`, `email`, `password`, `magic_link`, `phone`, `cpf`, `cep`, `endereco`, `numero`, `complemento`, `municipio`, `cidade`, `uf`, `asaas_id`) VALUES
-(227, 0, 'Cauã Serpa', 'cauaserpa007@gmail.com', '$2y$10$lTWruPe3OSS3BGhiey8FjuQDBj2IfkYmS50pALl07z5XONAf83dcu', '69ae276b1590b587f6cbe510170699557740cedbb4b82140127cdbb8baca7c6c', '21972775758', '24971563792', '24736295', 'Rua Cardeal Sebastião Leme', 6, 'Apto 202', 'Lagoinha', 'São Gonçalo', 'RJ', 'cus_000005405848'),
-(228, 0, 'Cauã Serpa', 'AdminZ1@teste.com', NULL, '', '21972775758', '24971563792', '24736295', 'Rua Cardeal Sebastião Leme', 6, 'Apto 202', 'Lagoinha', 'São Gonçalo', 'RJ', 'cus_000005405872'),
-(229, 0, 'Cauã Serpa', 'adminZ2@teste.com', '$2y$10$lTWruPe3OSS3BGhiey8FjuQDBj2IfkYmS50pALl07z5XONAf83dcu', 'a371a348fc5747cf039a8af25a4a9601df787f99e95b7539b531ff2abd60d862', '21972775758', '24971563792', '24736295', 'Rua Cardeal Sebastião Leme', 6, 'Apto 202', 'Lagoinha', 'São Gonçalo', 'RJ', 'cus_000005405873'),
-(230, 0, 'Lucas Nascimento', 'adminZ3@teste.com', NULL, 'f14400bc907af4c55e39e57fc0c6f9b9a335f978b6a79e2af8e364cbb12617ca', '(21) 97277-5758', '249.715.637-92', '24736-295', 'Rua Cardeal Sebastião Leme', 6, NULL, 'Lagoinha', 'São Gonçalo', 'RJ', 'cus_000005406293'),
-(231, 0, 'Priscila Almeida', 'adminZ4@teste.com', NULL, '6b076e6757a0909103d321787ba507633718521552a9fe704939fe99cefd4a84', '(21) 97277-5758', '249.715.637-92', '24736-295', 'Rua Cardeal Sebastião Leme', 6, NULL, 'Lagoinha', 'São Gonçalo', 'RJ', 'cus_000005406295'),
-(232, 0, 'Artur  Matos', 'adminZ5@teste.com', NULL, 'c85d0539a14a099bde4a08696125b5f93f46b488384b7ac2936680be0f9a65f6', '(21) 97277-5758', '249.715.637-92', '24736-295', 'Rua Cardeal Sebastião Leme', 6, NULL, 'Lagoinha', 'São Gonçalo', 'RJ', 'cus_000005406296'),
-(233, 0, 'Artur  Matos', 'adminD1@gmail.com', NULL, 'd1ca734466dfbb303e91715845e0412fcd918446608c20ff116addb4fed3d672', '(21) 97277-5758', '249.715.637-92', '24736-295', 'Rua Cardeal Sebastião Leme', 6, NULL, 'Lagoinha', 'São Gonçalo', 'RJ', 'cus_000005406312'),
-(234, 0, 'Artur  Matos', 'adminD2@gmail.com', NULL, 'c9af4c676f6ae452122ec53cb166955c706a0f1128cd4609371dab60200e21d1', '(21) 97277-5758', '249.715.637-92', '24736-295', 'Rua Cardeal Sebastião Leme', 6, NULL, 'Lagoinha', 'São Gonçalo', 'RJ', 'cus_000005406314'),
-(235, 0, 'Cauã Serpa', 'adminD3@gmail.com', NULL, '', '(21) 97277-5758', '249.715.637-92', '24736-295', 'Rua Cardeal Sebastião Leme', 6, 'Apto 202', 'Lagoinha', 'São Gonçalo', 'RJ', 'cus_000005406316'),
-(236, 0, 'Artur  Matos', 'adminD4@gmail.com', NULL, '', '(21) 97277-5758', '249.715.637-92', '24736-295', 'Rua Cardeal Sebastião Leme', 6, 'Apto 202', 'Lagoinha', 'São Gonçalo', 'RJ', 'cus_000005406317'),
-(237, 0, 'Cauã Serpa', 'adminD5@gmail.com', NULL, '', '(21) 97277-5758', '249.715.637-92', '24736-295', 'Rua Cardeal Sebastião Leme', 6, 'Apto 202', 'Lagoinha', 'São Gonçalo', 'RJ', 'cus_000005406318'),
-(238, 0, 'Cauã Serpa', 'adminE1@gmail.com', NULL, '3ce4ecaaddc0897f1b1041a6a54f01f982b0824706c96a191a2a7fde029a49c1', '(21) 97277-5758', '249.715.637-92', '24736-295', 'Rua Cardeal Sebastião Leme', 6, 'Apto 202', 'Lagoinha', 'São Gonçalo', 'RJ', 'cus_000005406319'),
-(239, 0, 'Cauã Serpa', 'adminE2@teste.com', NULL, '857b874043cf080f0f7bd33f8922f72760c70577708032834cf9c5faca383819', '(21) 97277-5758', '249.715.637-92', '24736-295', 'Rua Cardeal Sebastião Leme', 6, 'Apto 202', 'Lagoinha', 'São Gonçalo', 'RJ', 'cus_000005406320'),
-(240, 0, 'Cauã Serpa', 'adminE3@gmail.com', NULL, '658ea7eb11997d4e6ee92d2a8cf75165a9afb75094d735596693ac60ff23497b', '(21) 97277-5758', '249.715.637-92', '24736-295', 'Rua Cardeal Sebastião Leme', 6, 'Apto 202', 'Lagoinha', 'São Gonçalo', 'RJ', 'cus_000005406321'),
-(241, 0, 'Cauã Serpa', 'adminF1@gmail.com', NULL, '', '(21) 97277-5758', '249.715.637-92', '24736-295', 'Rua Cardeal Sebastião Leme', 6, 'Apto 202', 'Lagoinha', 'São Gonçalo', 'RJ', 'cus_000005406322'),
-(242, 0, 'Priscila Matos', 'adminF2@gmail.com', '$2y$10$GaH6yFZJBYtRz4cIdHPQFumO4.6XEs8glAswG5bKg8wjVcG2J4/G2', '', '(21) 97277-5758', '249.715.637-92', '24736-295', 'Rua Cardeal Sebastião Leme', 6, 'Apto 202', 'Lagoinha', 'São Gonçalo', 'RJ', 'cus_000005406327'),
-(243, 0, 'Cauã Serpa', 'adminG1@gmail.com', '$2y$10$LP95Z3FDnzgwLBQZXDe7WOsxGerMK2XXaUEsuesqjKKJtFvW8yoJq', '', '(21) 97277-5758', '249.715.637-92', '24736-295', 'Rua Cardeal Sebastião Leme', 6, 'Apto 202', 'Lagoinha', 'São Gonçalo', 'RJ', 'cus_000005406339'),
-(244, 0, 'Lucas Almeida', 'adminG2@teste.com', '$2y$10$eV74nvFTP0bDQlKwRIkYqOgemaipEJ6iK.p2AGkGFqkMtCIzj5ghy', '', '(21) 97277-5758', '249.715.637-92', '24736-295', 'Rua Cardeal Sebastião Leme', 6, 'Apto 202', 'Lagoinha', 'São Gonçalo', 'RJ', 'cus_000005406340'),
-(245, 0, 'Cauã Matos', 'adminG3@gmail.com', '$2y$10$gphtP5ZDgkZNctcEhLKfs.MQ8qWc6Ebf8V6sqRf4q7QhClHSojT7.', '', '(21) 97277-5758', '249.715.637-92', '24736-295', 'Rua Cardeal Sebastião Leme', 6, 'Apto 202', 'Lagoinha', 'São Gonçalo', 'RJ', 'cus_000005406341'),
-(246, 0, 'Cauã Serpa', 'cauaserpa092@gmail.com', NULL, '3730b743e28ca2da45167218e178e815152da6160e82cb79746647ea256cd98b', '(21) 97277-5758', '249.715.637-92', '24736-295', 'Rua Cardeal Sebastião Leme', 6, NULL, 'Lagoinha', 'São Gonçalo', 'RJ', 'cus_000005407709'),
-(247, 1, 'Admin', 'admin@admin.com', '$2y$10$gphtP5ZDgkZNctcEhLKfs.MQ8qWc6Ebf8V6sqRf4q7QhClHSojT7.', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
+INSERT INTO `tb_clientes` (`id`, `roles`, `nome`, `email`, `password`, `recup_password`, `magic_link`, `phone`, `cpf`, `cep`, `endereco`, `numero`, `complemento`, `municipio`, `cidade`, `uf`, `asaas_id`) VALUES
+(227, 0, 'Cauã Serpa', 'cauaserpa007@gmail.com', '$2y$10$JkYETxthhCqykaVZXZVVe.qdSCMMvHc7J2y3X4dgKo6PWnJ0w3dyK', NULL, NULL, '21972775758', '24971563792', '24736295', 'Rua Cardeal Sebastião Leme', 6, 'Apto 202', 'Lagoinha', 'São Gonçalo', 'RJ', 'cus_000005405848'),
+(228, 0, 'Cauã Serpa', 'AdminZ1@teste.com', NULL, NULL, '', '21972775758', '24971563792', '24736295', 'Rua Cardeal Sebastião Leme', 6, 'Apto 202', 'Lagoinha', 'São Gonçalo', 'RJ', 'cus_000005405872'),
+(229, 0, 'Cauã Serpa', 'adminZ2@teste.com', '$2y$10$lTWruPe3OSS3BGhiey8FjuQDBj2IfkYmS50pALl07z5XONAf83dcu', NULL, 'a371a348fc5747cf039a8af25a4a9601df787f99e95b7539b531ff2abd60d862', '21972775758', '24971563792', '24736295', 'Rua Cardeal Sebastião Leme', 6, 'Apto 202', 'Lagoinha', 'São Gonçalo', 'RJ', 'cus_000005405873'),
+(230, 0, 'Lucas Nascimento', 'adminZ3@teste.com', NULL, NULL, 'f14400bc907af4c55e39e57fc0c6f9b9a335f978b6a79e2af8e364cbb12617ca', '(21) 97277-5758', '249.715.637-92', '24736-295', 'Rua Cardeal Sebastião Leme', 6, NULL, 'Lagoinha', 'São Gonçalo', 'RJ', 'cus_000005406293'),
+(231, 0, 'Priscila Almeida', 'adminZ4@teste.com', NULL, NULL, '6b076e6757a0909103d321787ba507633718521552a9fe704939fe99cefd4a84', '(21) 97277-5758', '249.715.637-92', '24736-295', 'Rua Cardeal Sebastião Leme', 6, NULL, 'Lagoinha', 'São Gonçalo', 'RJ', 'cus_000005406295'),
+(232, 0, 'Artur  Matos', 'adminZ5@teste.com', NULL, NULL, 'c85d0539a14a099bde4a08696125b5f93f46b488384b7ac2936680be0f9a65f6', '(21) 97277-5758', '249.715.637-92', '24736-295', 'Rua Cardeal Sebastião Leme', 6, NULL, 'Lagoinha', 'São Gonçalo', 'RJ', 'cus_000005406296'),
+(233, 0, 'Artur  Matos', 'adminD1@gmail.com', NULL, NULL, 'd1ca734466dfbb303e91715845e0412fcd918446608c20ff116addb4fed3d672', '(21) 97277-5758', '249.715.637-92', '24736-295', 'Rua Cardeal Sebastião Leme', 6, NULL, 'Lagoinha', 'São Gonçalo', 'RJ', 'cus_000005406312'),
+(234, 0, 'Artur  Matos', 'adminD2@gmail.com', NULL, NULL, 'c9af4c676f6ae452122ec53cb166955c706a0f1128cd4609371dab60200e21d1', '(21) 97277-5758', '249.715.637-92', '24736-295', 'Rua Cardeal Sebastião Leme', 6, NULL, 'Lagoinha', 'São Gonçalo', 'RJ', 'cus_000005406314'),
+(235, 0, 'Cauã Serpa', 'adminD3@gmail.com', NULL, NULL, '', '(21) 97277-5758', '249.715.637-92', '24736-295', 'Rua Cardeal Sebastião Leme', 6, 'Apto 202', 'Lagoinha', 'São Gonçalo', 'RJ', 'cus_000005406316'),
+(236, 0, 'Artur  Matos', 'adminD4@gmail.com', NULL, NULL, '', '(21) 97277-5758', '249.715.637-92', '24736-295', 'Rua Cardeal Sebastião Leme', 6, 'Apto 202', 'Lagoinha', 'São Gonçalo', 'RJ', 'cus_000005406317'),
+(237, 0, 'Cauã Serpa', 'adminD5@gmail.com', NULL, NULL, '', '(21) 97277-5758', '249.715.637-92', '24736-295', 'Rua Cardeal Sebastião Leme', 6, 'Apto 202', 'Lagoinha', 'São Gonçalo', 'RJ', 'cus_000005406318'),
+(238, 0, 'Cauã Serpa', 'adminE1@gmail.com', NULL, NULL, '3ce4ecaaddc0897f1b1041a6a54f01f982b0824706c96a191a2a7fde029a49c1', '(21) 97277-5758', '249.715.637-92', '24736-295', 'Rua Cardeal Sebastião Leme', 6, 'Apto 202', 'Lagoinha', 'São Gonçalo', 'RJ', 'cus_000005406319'),
+(239, 0, 'Cauã Serpa', 'adminE2@teste.com', NULL, NULL, '857b874043cf080f0f7bd33f8922f72760c70577708032834cf9c5faca383819', '(21) 97277-5758', '249.715.637-92', '24736-295', 'Rua Cardeal Sebastião Leme', 6, 'Apto 202', 'Lagoinha', 'São Gonçalo', 'RJ', 'cus_000005406320'),
+(240, 0, 'Cauã Serpa', 'adminE3@gmail.com', NULL, NULL, '658ea7eb11997d4e6ee92d2a8cf75165a9afb75094d735596693ac60ff23497b', '(21) 97277-5758', '249.715.637-92', '24736-295', 'Rua Cardeal Sebastião Leme', 6, 'Apto 202', 'Lagoinha', 'São Gonçalo', 'RJ', 'cus_000005406321'),
+(241, 0, 'Cauã Serpa', 'adminF1@gmail.com', NULL, '$2y$10$riB7Xjj6XJKZEVRkaCLL0.dyOh6wtpFWWwKni9qKvYw8/oObPGVXG', '', '(21) 97277-5758', '249.715.637-92', '24736-295', 'Rua Cardeal Sebastião Leme', 6, 'Apto 202', 'Lagoinha', 'São Gonçalo', 'RJ', 'cus_000005406322'),
+(242, 0, 'Priscila Matos', 'adminF2@gmail.com', '$2y$10$GaH6yFZJBYtRz4cIdHPQFumO4.6XEs8glAswG5bKg8wjVcG2J4/G2', NULL, '', '(21) 97277-5758', '249.715.637-92', '24736-295', 'Rua Cardeal Sebastião Leme', 6, 'Apto 202', 'Lagoinha', 'São Gonçalo', 'RJ', 'cus_000005406327'),
+(243, 0, 'Cauã Serpa', 'adminG1@gmail.com', '$2y$10$LP95Z3FDnzgwLBQZXDe7WOsxGerMK2XXaUEsuesqjKKJtFvW8yoJq', NULL, '', '(21) 97277-5758', '249.715.637-92', '24736-295', 'Rua Cardeal Sebastião Leme', 6, 'Apto 202', 'Lagoinha', 'São Gonçalo', 'RJ', 'cus_000005406339'),
+(244, 0, 'Lucas Almeida', 'adminG2@teste.com', '$2y$10$eV74nvFTP0bDQlKwRIkYqOgemaipEJ6iK.p2AGkGFqkMtCIzj5ghy', NULL, '', '(21) 97277-5758', '249.715.637-92', '24736-295', 'Rua Cardeal Sebastião Leme', 6, 'Apto 202', 'Lagoinha', 'São Gonçalo', 'RJ', 'cus_000005406340'),
+(245, 0, 'Cauã Matos', 'adminG3@gmail.com', '$2y$10$gphtP5ZDgkZNctcEhLKfs.MQ8qWc6Ebf8V6sqRf4q7QhClHSojT7.', NULL, '', '(21) 97277-5758', '249.715.637-92', '24736-295', 'Rua Cardeal Sebastião Leme', 6, 'Apto 202', 'Lagoinha', 'São Gonçalo', 'RJ', 'cus_000005406341'),
+(246, 0, 'Cauã Serpa', 'cauaserpa092@gmail.com', NULL, NULL, '3730b743e28ca2da45167218e178e815152da6160e82cb79746647ea256cd98b', '(21) 97277-5758', '249.715.637-92', '24736-295', 'Rua Cardeal Sebastião Leme', 6, NULL, 'Lagoinha', 'São Gonçalo', 'RJ', 'cus_000005407709'),
+(247, 1, 'Admin', 'admin@admin.com', '$2y$10$gphtP5ZDgkZNctcEhLKfs.MQ8qWc6Ebf8V6sqRf4q7QhClHSojT7.', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
 
 --
 -- Extraindo dados da tabela `tb_doacoes`

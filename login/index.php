@@ -113,7 +113,8 @@
                                         <div class="divider row"></div>
                                         <div class="d-flex align-items-center">
                                             <div class="ml-auto">
-                                                <button class="btn btn-primary btn-lg" name="btnLogin">Entrar no Painel</button>
+                                                <a href="<?php echo INCLUDE_PATH; ?>login/recuperar-senha.php" class="btn-lg btn btn-link">Recuperar Senha</a>
+                                                <button class="btn btn-primary btn-lg">Recuperar Senha</button>
                                             </div>
                                         </div>
                                     </form>

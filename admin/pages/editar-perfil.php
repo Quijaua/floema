@@ -52,7 +52,7 @@
                         </div>
                         <h5 class="card-title">Redefinir senha</h5>
                         <div class="position-relative row form-group">
-                            <p class="col-sm-12 col-form-label">Enviar E-mail para redefinir senha! <a href="#">Clique aqui</a></p>
+                            <p class="col-sm-12 col-form-label">Enviar E-mail para redefinir senha! <a href="<?php echo INCLUDE_PATH ?>login/recuperar-senha.php">Clique aqui</a></p>
                         </div>
                         <button type="submit" name="btnUpdAbout" class="btn btn-primary">Salvar</button>
                     </form>
