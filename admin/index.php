@@ -3,6 +3,12 @@
     ob_start();
     include('../config.php');
 
+    if (!isset($_SESSION['user_id'])) {
+        $_SESSION['msg'] = "Por favor faça login para acessar essa página!";
+        header("Location: " . INCLUDE_PATH . "login/");
+        exit();
+    }
+
     // Tabela que sera feita a consulta
     $tabela = "tb_checkout";
 
