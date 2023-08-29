@@ -114,7 +114,7 @@
                                         <div class="d-flex align-items-center">
                                             <div class="ml-auto">
                                                 <a href="<?php echo INCLUDE_PATH; ?>login/recuperar-senha.php" class="btn-lg btn btn-link">Recuperar Senha</a>
-                                                <button class="btn btn-primary btn-lg">Recuperar Senha</button>
+                                                <button class="btn btn-primary btn-lg">Entrar no Painel</button>
                                             </div>
                                         </div>
                                     </form>
