@@ -12,9 +12,9 @@
                 </div>
             </div>
             <div class="page-title-actions">
-                <a href="<?php echo INCLUDE_PATH_ADMIN; ?>back-end/logout.php" class="btn btn-info btn-shadow">
+                <!-- <a href="<?php echo INCLUDE_PATH_ADMIN; ?>back-end/logout.php" class="btn btn-info btn-shadow">
                     Sair
-                </a>
+                </a> -->
             </div>
         </div>
     </div>
@@ -22,7 +22,7 @@
         <div class="tab-pane tabs-animation fade show active" id="tab-content-1" role="tabpanel">
             <div class="main-card mb-3 card">
                 <div class="card-body">
-                    <h5 class="card-title">Sobre a Instituição</h5>
+                    <!-- <h5 class="card-title">Sobre a Instituição</h5>
                     <form action="<?php echo INCLUDE_PATH_ADMIN; ?>back-end/update.php" method="post">
                         <div class="position-relative row form-group">
                             <label for="nome" class="col-sm-2 col-form-label">Nome da sua Instituição *</label>
@@ -49,10 +49,11 @@
                                     Preencha o campo com uma breve descrição sobre sua instituição. Esta informação ficará disponível no canto inferior direito do checkout.
                                 </small>
                             </div>
-                        </div>
+                        </div> -->
+
                         <h5 class="card-title">Redefinir senha</h5>
                         <div class="position-relative row form-group">
-                            <p class="col-sm-12 col-form-label">Enviar E-mail para redefinir senha! <a href="<?php echo INCLUDE_PATH ?>login/recuperar-senha.php">Clique aqui</a></p>
+                            <p class="col-sm-12 col-form-label"><a href="<?php echo INCLUDE_PATH ?>login/recuperar-senha.php">Enviar e-mail para redefinir senha</a></p>
                         </div>
                         <button type="submit" name="btnUpdAbout" class="btn btn-primary">Salvar</button>
                     </form>
