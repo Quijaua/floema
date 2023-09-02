@@ -252,13 +252,13 @@
 					<div class="row">
 						<div class="col-md-12 mb-2">
 							<div class="form-floating ">
-								<input type="email" class="form-control" name="email" id="field-email" placeholder="name@example.com">
+								<input type="email" class="form-control" name="email" id="field-email" placeholder="nome@exemplo.com">
 								<label for="field-email">Endereço de e-mail</label>
 							</div>
 						</div>
 						<div class="col-md-12 mb-2">
 							<div class="form-floating ">
-								<input type="phone" class="form-control" name="phone" id="field-phone" placeholder="(00) 98765-4321" maxlength="15">
+								<input type="phone" class="form-control" name="phone" id="field-phone" placeholder="(99) 99999-9999" maxlength="15">
 								<label for="field-phone">Telefone</label>
 							</div>
 						</div>
