@@ -10,9 +10,9 @@
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta http-equiv="Content-Language" content="en">
         <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-        <title>Login - ArchitectUI HTML Bootstrap 4 Dashboard Template</title>
+        <title>Floema Doar - Login</title>
         <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, shrink-to-fit=no">
-        <meta name="description" content="ArchitectUI HTML Bootstrap 4 Dashboard Template">
+        <meta name="description" content="Solução para recebimentos de doações">
         <!-- Disable tap highlight on IE -->
         <meta name="msapplication-tap-highlight" content="no">
         <link rel="stylesheet" href="<?php echo INCLUDE_PATH_ADMIN; ?>vendors/@fortawesome/fontawesome-free/css/all.min.css">
@@ -70,7 +70,7 @@
                                 <div class="app-logo"></div>
                                 <h4 class="mb-0">
                                     <span class="d-block">Bem vindo de volta,</span>
-                                    <span>Por favor entre em sua conta.</span>
+                                    <span>Por favor, entre em sua conta.</span>
                                 </h4>
                                 <br>
                                 <p class="text-danger">
