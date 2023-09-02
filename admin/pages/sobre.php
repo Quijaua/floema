@@ -49,9 +49,9 @@
                 </div>
             </div>
             <div class="page-title-actions">
-                <a href="<?php echo INCLUDE_PATH_ADMIN; ?>back-end/logout.php" class="btn btn-info btn-shadow">
+                <!-- <a href="<?php echo INCLUDE_PATH_ADMIN; ?>back-end/logout.php" class="btn btn-info btn-shadow">
                     Sair
-                </a>
+                </a> -->
             </div>
         </div>
     </div>
