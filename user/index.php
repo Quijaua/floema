@@ -67,10 +67,8 @@
         <link rel="stylesheet" href="<?php echo INCLUDE_PATH_ADMIN; ?>vendors/linearicons-master/dist/web-font/style.css">
         <link rel="stylesheet" href="<?php echo INCLUDE_PATH_ADMIN; ?>vendors/pixeden-stroke-7-icon-master/pe-icon-7-stroke/dist/pe-icon-7-stroke.css">
         <link href="<?php echo INCLUDE_PATH_ADMIN; ?>styles/css/base.css" rel="stylesheet">
-        
-        <link href="<?php echo INCLUDE_PATH; ?>assets/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet"
-            type="text/css">
-        <script src="<?php echo INCLUDE_PATH; ?>assets/jquery/3.5.1/jquery.min.js"></script>
+        <link href="<?php echo INCLUDE_PATH; ?>assets/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet" type="text/css">
+        <script src="<?php echo INCLUDE_PATH; ?>assets/google/jquery/3.5.1/jquery.min.js"></script>
         <script src="<?php echo INCLUDE_PATH; ?>assets/ajax/1.16.0/popper.min.js"></script>
         <script src="<?php echo INCLUDE_PATH; ?>assets/bootstrap/4.5.2/js/bootstrap.min.js"></script>
     </head>
@@ -93,14 +91,12 @@
                             </div>
                             <div class="results-subtitle mt-4">Salvo com sucesso!</div>
                             <div class="results-title">
-                                
                                 <?php
                                     if(isset($_SESSION['msg'])){
                                         echo $_SESSION['msg'];
                                         unset($_SESSION['msg']);
                                     }
                                 ?>
-
                             </div>
                             <div class="mt-3 mb-3"></div>
                             <div class="text-center">
@@ -160,7 +156,6 @@
                                     <i class="nav-link-icon pe-7s-global"></i>
                                     <a href="<?php echo INCLUDE_PATH; ?>" target="_blank">Website</a>
                             </li>
-                            
                             <li class="nav-item p-1">
                                     <i class="nav-link-icon pe-7s-cash"></i>
                                     <a href="https://www.asaas.com" target="_blank">Asaas</a>
@@ -168,7 +163,6 @@
                         </ul>
                     </div>
                     <div class="app-header-right">
-                        
                         <div class="header-btn-lg pr-0">
                             <div class="widget-content p-0">
                                 <div class="widget-content-wrapper">
@@ -236,7 +230,6 @@
                     <?php
                         //Url Amigavel
                         $url = isset($_GET['url']) ? $_GET['url'] : 'user';
-                        
                         if(file_exists('pages/'.$url.'.php')){
                             include('pages/'.$url.'.php');
                         }else{
@@ -680,14 +673,9 @@
         <script type="text/javascript" src="<?php echo INCLUDE_PATH_ADMIN; ?>vendors/jquery/dist/jquery.min.js"></script>
         <script type="text/javascript" src="<?php echo INCLUDE_PATH_ADMIN; ?>vendors/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
         <script type="text/javascript" src="<?php echo INCLUDE_PATH_ADMIN; ?>vendors/moment/moment.js"></script>
-        <script type="text/javascript" src="<?php echo INCLUDE_PATH_ADMIN; ?>vendors/bootstrap4-toggle/js/bootstrap4-toggle.min.js"></script>
-        <script type="text/javascript" src="<?php echo INCLUDE_PATH_ADMIN; ?>vendors/jquery-circle-progress/dist/circle-progress.min.js"></script>
         <script type="text/javascript" src="<?php echo INCLUDE_PATH_ADMIN; ?>vendors/perfect-scrollbar/dist/perfect-scrollbar.min.js"></script>
-        <script type="text/javascript" src="<?php echo INCLUDE_PATH_ADMIN; ?>vendors/toastr/build/toastr.min.js"></script>
-        <script type="text/javascript" src="<?php echo INCLUDE_PATH_ADMIN; ?>js/circle-progress.js"></script>
         <script type="text/javascript" src="<?php echo INCLUDE_PATH_ADMIN; ?>js/demo.js"></script>
         <script type="text/javascript" src="<?php echo INCLUDE_PATH_ADMIN; ?>js/scrollbar.js"></script>
-        <script type="text/javascript" src="<?php echo INCLUDE_PATH_ADMIN; ?>js/toastr.js"></script>
         <script type="text/javascript" src="<?php echo INCLUDE_PATH_ADMIN; ?>js/app.js"></script>
 
     </body>
