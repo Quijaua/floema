@@ -98,7 +98,7 @@
 				</a>
 			</div>
 			<div class="col-md-8 mt-4">
-				<h1 class="h2">Colabore com o Projeto  <?php echo $nome; ?></h1>
+				<h1 class="h2"><?php echo ($title !== '') ? $title : 'Colabore com o Projeto '.$nome; ?></h1>
 			</div>
 		</div>
 	</div>
@@ -434,7 +434,7 @@
 					echo '
 						<div class="row mb-3">
 							<div class="col-md-10 mt-3">
-								<img src="'. INCLUDE_PATH .'assets/img/' . $usuario['imagem'] . '" alt="Card ' . $usuario['id'] . '" style="width: 500px; height: 159px; object-fit: contain;" />
+								<img src="'. INCLUDE_PATH .'assets/img/' . $usuario['imagem'] . '" alt="Card ' . $usuario['id'] . '" style="width: 500px; height: 159px" />
 							</div>
 						</div>
 					';
@@ -448,14 +448,16 @@
 <footer>
  <div class="container mt-5">
 	<div class="row">
-		<div class="col-md-4">
+		<div class="col-md-3">
 			<span class="h5"><?php echo $nome; ?></span><br />
-			<?php echo $rua; ?><?php echo ($numero !== '') ? ', ' . $numero : ''; ?> - <?php echo $bairro; ?><br />
+			<div class="font-weight-light" style="font-size:13px;margin-top:5px">
+			<?php echo $rua; ?><?php echo ($numero !== '') ? ', ' . $numero : ''; ?> - <?php echo $bairro; ?>
 			<?php echo $cidade; ?> - <?php echo $estado; ?>, <?php echo $cep; ?><br />
 			Telefone: <a href="callto:<?php echo $telefone; ?>"><?php echo $telefone; ?></a> | E-mail: <a href="mailto:<?php echo $email; ?>"><?php echo $email; ?></a><br />
+			</div>
 		</div>
-		<div class="col-md-8">
-			<div class="social-net mt-4 mb-4">
+		<div class="col-md-6">
+			<div class="social-net mt-2 mb-4">
 				<a href="<?php echo ($facebook !== '') ? $facebook : '#'; ?>" <?php echo ($facebook == '') ? 'class="d-none"' : ''; ?>><i class="bi bi-facebook p-2"></i></a>
 				<a href="<?php echo ($instagram !== '') ? $instagram : '#'; ?>" <?php echo ($instagram == '') ? 'class="d-none"' : ''; ?>><i class="bi bi-instagram p-2"></i></a>
 				<a href="<?php echo ($linkedin !== '') ? $linkedin : '#'; ?>" <?php echo ($linkedin == '') ? 'class="d-none"' : ''; ?>><i class="bi bi-linkedin p-2"></i></a>
@@ -469,6 +471,17 @@
 				 | 
 				<a href="<?php echo $faq; ?>" rel="noopener noreferrer" target="_blank">
 					PERGUNTAS FREQUENTES
+				</a>
+				| 
+				<a href="/login" rel="noopener noreferrer" target="_blank">
+					LOGIN
+				</a>
+			</p>
+		</div>
+		<div class="col-md-3">
+		<p class="footer-linkd mt-5 footer-floema-doar font-weight-bold">
+				<a href="#" rel="noopener noreferrer" target="_blank">
+					Usamos Floema Doar | Open source
 				</a>
 			</p>
 		</div>

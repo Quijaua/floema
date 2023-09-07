@@ -232,7 +232,7 @@
             </div>
             <div class="main-card mb-3 card">
                 <div class="card-body">
-                    <h5 class="card-title">Recompensas já existentes</h5>
+                    <h5 class="card-title">Imagens existentes</h5>
                         <?php 
                             if(isset($_SESSION['msgupdcad'])){
                                 echo $_SESSION['msgupdcad'];

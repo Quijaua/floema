@@ -31,11 +31,10 @@ input{
 }
 .text-block
 {
-    /*font-family: 'SwiftNeueLTW01', Georgia, serif;*/
     font-family: 'Newsreader', serif;
     font-weight: 400;
     font-size: 21px;
-    line-height: normal;
+    line-height: 1.4em;
 }
 .text-block2
 {
@@ -88,15 +87,26 @@ input{
 .footer-link, .footer-link a
 {
     color: #000;
-
     font-weight: normal;
-    font-size: 14px;
+    font-size: 12px;
     font-style: normal;
     letter-spacing: 0.1em;
-    line-height: 15px;
+    line-height: 22px;
     text-transform: capitalize;
     text-decoration: none;
 }
+
+.footer-floema-doar {
+float: right;
+}
+
+.footer-floema-doar a {
+color: #127622;
+text-decoration: none;
+font-weight: 500;
+font-size: 12px;
+}
+
 #div-errors-price
 {
     border: 1px solid #ff0000;
