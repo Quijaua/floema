@@ -84,6 +84,77 @@
 		  type="text/css">
 	<link href="<?php echo INCLUDE_PATH; ?>assets/google/fonts/newsreader" rel="stylesheet">
 
+<link rel="icon" href="<?php echo INCLUDE_PATH; ?>assets/img/favicon.png" sizes="32x32" />
+<link rel="apple-touch-icon" href="<?php echo INCLUDE_PATH; ?>assets/img/favicon.png" />
+<meta name="msapplication-TileImage" content="<?php echo INCLUDE_PATH; ?>assets/img/favicon.png" />
+
+
+
+<link rel="canonical" href="<?php echo INCLUDE_PATH; ?>" />
+<meta property="og:locale" content="pt_BR" />
+<meta property="og:type" content="website" />
+<meta property="og:title" content="<?php echo $title; ?>"/>
+<meta property="og:description" name="description" content="Lorem ipsum" />
+<meta property="og:url" value="<?php echo INCLUDE_PATH; ?>"/>
+<meta property="og:site_name" content="<?php echo $nome; ?>" />
+<meta property="article:modified_time" content="2022-12-01T18:38:06+00:00" />
+<meta property="og:image" content="<?php echo INCLUDE_PATH; ?>assets/img/<?php echo $logo; ?>"/>
+<meta property="og:image" value="<?php echo INCLUDE_PATH; ?>assets/img/<?php echo $logo; ?>"/>
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:site" content="@FloemaDoar" />
+<meta name="twitter:title" value="<?php echo $title; ?>"/>
+<meta name="twitter:url" value="<?php echo INCLUDE_PATH; ?>"/>
+<meta name="twitter:image" value="<?php echo INCLUDE_PATH; ?>assets/img/<?php echo $logo; ?>"/>
+<meta name="twitter:image" content="<?php echo INCLUDE_PATH; ?>assets/img/<?php echo $logo; ?>"/>
+<meta name="twitter:description" value="Lorem ipsum"/>
+
+
+<script type="application/ld+json">{
+	"@context": "https://schema.org",
+	"@graph": [
+		{
+			"@type": "WebSite",
+			"@id": "<?php echo INCLUDE_PATH; ?>",
+			"url": "<?php echo INCLUDE_PATH; ?>",
+			"name": "<?php echo $title; ?>",
+			"isPartOf": {
+				"@id": "<?php echo INCLUDE_PATH; ?>#website"
+			},
+			"datePublished": "2023-03-02T19:50:30+00:00",
+			"dateModified": "2023-03-21T12:51:52+00:00",
+			"description": "Lorem ipsum",
+			"inLanguage": "pt-BR",
+			"interactAction": [
+				{
+					"@type": "SubscribeAction",
+					"target": [
+						"<?php echo INCLUDE_PATH; ?>"
+					]
+				}
+			]
+		},
+		{
+			"@type": "Organization",
+			"@id": "<?php echo INCLUDE_PATH; ?>#organization",
+			"name": "<?php echo $nome; ?>",
+			"url": "<?php echo INCLUDE_PATH; ?>",
+			"logo": {
+				"@type": "ImageObject",
+				"inLanguage": "pt-BR",
+				"@id": "<?php echo INCLUDE_PATH; ?>#/schema/logo/image/",
+				"url": "<?php echo INCLUDE_PATH; ?>assets/img/<?php echo $logo; ?>",
+				"contentUrl": "<?php echo INCLUDE_PATH; ?>assets/img/<?php echo $logo; ?>",
+				"width": 140,
+				"height": 64,
+				"caption": "<?php echo $nome; ?>"
+			},
+			"image": {
+				"@id": "<?php echo INCLUDE_PATH; ?>#/schema/logo/image/"
+			}
+		}
+	]
+}</script>
+
 	<link rel="stylesheet" type="text/css" href="<?php echo INCLUDE_PATH; ?>assets/css/main.css"/>
 </head>
 <body>
@@ -93,9 +164,7 @@
 	<div class="container">
 		<div class="row">
 			<div class="col-md-4 p-3">
-				<a href="https://link#fake.com.br/">
-					<img src="assets/img/<?php echo $logo; ?>" class="w-75">
-				</a>
+				<img src="assets/img/<?php echo $logo; ?>" class="w-75">
 			</div>
 			<div class="col-md-8 mt-4">
 				<h1 class="h2"><?php echo ($title !== '') ? $title : 'Colabore com o Projeto '.$nome; ?></h1>
@@ -108,7 +177,7 @@
 	<div class="row">
 		<div class="col-md-5 mb-3">
 
-			<h3 class="highlight mb-3"> Faça sua doação</h3>
+			<h3 class="highlight mb-3">Faça sua doação</h3>
 			<div id="div-container-form">
 				<form id="form-checkout">
 					<div class="mb-3" style="display: flex;justify-content: space-between">
