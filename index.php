@@ -434,7 +434,7 @@
 					echo '
 						<div class="row mb-3">
 							<div class="col-md-10 mt-3">
-								<img src="'. INCLUDE_PATH .'assets/img/' . $usuario['imagem'] . '" alt="Card ' . $usuario['id'] . '" style="width: 500px; height: 159px; object-fit: contain;" />
+								<img src="'. INCLUDE_PATH .'assets/img/' . $usuario['imagem'] . '" alt="Card ' . $usuario['id'] . '" style="width: 500px; height: 159px" />
 							</div>
 						</div>
 					';
@@ -469,6 +469,10 @@
 				 | 
 				<a href="<?php echo $faq; ?>" rel="noopener noreferrer" target="_blank">
 					PERGUNTAS FREQUENTES
+				</a>
+				| 
+				<a href="/login" rel="noopener noreferrer" target="_blank">
+					LOGIN
 				</a>
 			</p>
 		</div>
