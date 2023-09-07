@@ -98,7 +98,7 @@
 				</a>
 			</div>
 			<div class="col-md-8 mt-4">
-				<h1 class="h2">Colabore com o Projeto  <?php echo $nome; ?></h1>
+				<h1 class="h2"><?php echo ($title !== '') ? $title : 'Colabore com o Projeto '.$nome; ?></h1>
 			</div>
 		</div>
 	</div>
