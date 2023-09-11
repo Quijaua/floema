@@ -234,7 +234,24 @@
                                         Checkout
                                     </a>
                                 </li>
-
+                                <li>
+                                    <a href="<?php echo INCLUDE_PATH_ADMIN; ?>aparencia">
+                                        <i class="metismenu-icon pe-7s-paint"></i>
+                                        Aparência
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="<?php echo INCLUDE_PATH_ADMIN; ?>cabecalho">
+                                        <i class="metismenu-icon pe-7s-plugin"></i>
+                                        Cabeçalho
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="<?php echo INCLUDE_PATH_ADMIN; ?>rodape">
+                                        <i class="metismenu-icon pe-7s-map-marker"></i>
+                                        Rodapé
+                                    </a>
+                                </li>
                                 <li>
                                     <a href="<?php echo INCLUDE_PATH_ADMIN; ?>editar-perfil">
                                         <i class="metismenu-icon pe-7s-id"></i>
