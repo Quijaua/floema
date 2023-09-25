@@ -16,7 +16,7 @@
     $id = 1;
 
     // Consulta SQL
-    $sql = "SELECT nome, logo, title, descricao, privacidade, faq, facebook, instagram, linkedin, youtube, website, cep, rua, numero, bairro, cidade, estado, telefone, email, color, hover, progress FROM $tabela WHERE id = :id";
+    $sql = "SELECT nome, logo, title, descricao, privacidade, faq, facebook, instagram, linkedin, youtube, website, cep, rua, numero, bairro, cidade, estado, telefone, email, color, hover, load_btn FROM $tabela WHERE id = :id";
 
     // Preparar a consulta
     $stmt = $conn->prepare($sql);
@@ -54,7 +54,7 @@
         $email = $resultado['email'];
         $color = $resultado['color'];
         $hover = $resultado['hover'];
-        $progress = $resultado['progress'];
+        $load_btn = $resultado['load_btn'];
     } else {
         // ID não encontrado ou não existente
         echo "ID não encontrado.";
@@ -234,7 +234,24 @@
                                         Checkout
                                     </a>
                                 </li>
-
+                                <li>
+                                    <a href="<?php echo INCLUDE_PATH_ADMIN; ?>aparencia">
+                                        <i class="metismenu-icon pe-7s-paint"></i>
+                                        Aparência
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="<?php echo INCLUDE_PATH_ADMIN; ?>cabecalho">
+                                        <i class="metismenu-icon pe-7s-plugin"></i>
+                                        Cabeçalho
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="<?php echo INCLUDE_PATH_ADMIN; ?>rodape">
+                                        <i class="metismenu-icon pe-7s-map-marker"></i>
+                                        Rodapé
+                                    </a>
+                                </li>
                                 <li>
                                     <a href="<?php echo INCLUDE_PATH_ADMIN; ?>editar-perfil">
                                         <i class="metismenu-icon pe-7s-id"></i>

@@ -44,8 +44,8 @@
                     <i class="pe-7s-graph text-success"></i>
                 </div>
                 <div>
-                    Sobre a sua Instituição
-                    <div class="page-title-subheading">Altere as informações da sua instituição aqui!</div>
+                    Rodapé
+                    <div class="page-title-subheading">Altere configurações da parte inferior da página</div>
                 </div>
             </div>
             <div class="page-title-actions">
@@ -57,220 +57,14 @@
     </div>
     <div class="tab-content">
         <div class="tab-pane tabs-animation fade show active" id="tab-content-1" role="tabpanel">
-            <div class="main-card mb-3 card">
-                <div class="card-body">
-                    <h5 class="card-title">Sobre a Instituição</h5>
-                    <form action="<?php echo INCLUDE_PATH_ADMIN; ?>back-end/update.php" method="post">
-                        <div class="position-relative row form-group">
-                            <label for="nome" class="col-sm-2 col-form-label">Nome da sua Instituição *</label>
-                            <div class="col-sm-10">
-                                <input name="nome" id="nome"
-                                    type="text" class="form-control" value="<?php echo $nome; ?>">
-                            </div>
-                        </div>
-                        <div class="position-relative row form-group">
-                            <label for="title" class="col-sm-2 col-form-label">Texto do Título da Página</label>
-                            <div class="col-sm-10">
-                                <input name="title" id="title"
-                                    type="text" class="form-control" value="<?php echo $title; ?>">
-                                <small class="form-text text-muted">
-                                    Será mostrado na aba do seu navegador e na página do Google.
-                                </small>
-                            </div>
-                        </div>
-                        <div class="position-relative row form-group">
-                            <label for="descricao" class="col-sm-2 col-form-label">Descrição da Instituição</label>
-                            <div class="col-sm-10">
-                                <textarea name="descricao" id="descricao" class="form-control"><?php echo $descricao; ?></textarea>
-                                <small class="form-text text-muted">
-                                    Preencha o campo com uma breve descrição sobre sua instituição. Esta informação ficará disponível no canto inferior direito do checkout.
-                                </small>
-                            </div>
-                        </div>
-                        <button type="submit" name="btnUpdAbout" class="btn btn-primary">Salvar</button>
-                    </form>
-                </div>
-            </div>
-            <div class="main-card mb-3 card">
-                <div class="card-body">
-                    <h5 class="card-title">Logo</h5>
-                    <form action="<?php echo INCLUDE_PATH_ADMIN; ?>back-end/update.php" method="post" enctype="multipart/form-data">
-                        <div class="position-relative row form-group">
-                            <label for="input0" class="col-sm-2 col-form-label">Logo da sua Instituição *</label>
-                            <div class="col-sm-10">
-                                <input type="file" name="logo" id="input0" class="imagemInput"
-                                    accept=".jpg, .jpeg, .png" value="<?php echo $logo; ?>">
-                                    
-                                <small class="form-text text-muted">
-                                    Essa será a logo mostrada no header do checkout.
-                                </small>
-                                
-                                <label for="input0" id="card-img" style="max-width: 300px; margin-top: 1rem; padding: 1.5rem; border: 1px dashed #afb2d2; border-radius: .5rem; background: #dfdfdf;">
-                                    <img id="imagemPreview0" src="<?php echo INCLUDE_PATH . 'assets/img/' . $logo; ?>" alt="Miniatura da Imagem" style="width: 100%;">
-                                </label>
-                            </div>
-                        </div>
-                        <button type="submit" name="btnUpdLogo" class="btn btn-primary">Salvar</button>
-                    </form>
-                </div>
-            </div>
-            <div class="main-card mb-3 card">
-                <div class="card-body">
-                    <h5 class="card-title">Cores</h5>
-                    <form action="<?php echo INCLUDE_PATH_ADMIN; ?>back-end/update.php" method="post" enctype="multipart/form-data">
-                        <div class="position-relative row form-group">
-                            <label for="colorCode" class="col-sm-2 col-form-label">Cor dos Botões *</label>
-                            <div class="col-sm-10 d-flex">
-                                <input type="color" id="colorPicker" class="form-color" value="<?php echo $color; ?>">
-                                <input type="text" id="colorCode" name="color" class="form-control" placeholder="Digite o código hexadecimal da cor" value="<?php echo $color; ?>">
-                            </div>
-                        </div>
-                        <div class="position-relative row form-group">
-                            <label for="hoverCode" class="col-sm-2 col-form-label">Hover *</label>
-                            <div class="col-sm-10 d-flex">
-                                <input type="color" id="hoverPicker" class="form-color" value="<?php echo $hover; ?>">
-                                <input type="text" id="hoverCode" name="hover" class="form-control" placeholder="Digite o código hexadecimal da cor" value="<?php echo $hover; ?>">
-                            </div>
-                        </div>
-                        <div class="position-relative row form-group">
-                            <label for="hoverCode" class="col-sm-2 col-form-label">Cor do botão carregar *</label>
-                            <div class="col-sm-10 d-flex">
-                                <input type="color" id="loadBtnPicker" class="form-color" value="<?php echo $load_btn; ?>">
-                                <input type="text" id="loadBtnCode" name="loadBtn" class="form-control" placeholder="Digite o código hexadecimal da cor" value="<?php echo $load_btn; ?>">
-                            </div>
-                        </div>
-                        <button type="submit" name="btnUpdColor" class="btn btn-primary">Salvar</button>
-                    </form>
-                </div>
-            </div>
-            <div class="main-card mb-3 card">
-                <div class="card-body">
-                    <h5 class="card-title">Adicionar Imagem</h5>
-                    <form action="<?php echo INCLUDE_PATH_ADMIN; ?>back-end/imagens.php" method="post" enctype="multipart/form-data">
-                        <?php 
-                            if(isset($_SESSION['msgaddcad'])){
-                                echo $_SESSION['msgaddcad'];
-                                unset($_SESSION['msgaddcad']);
-                            }
-                        ?>
-                        <?php
-                            // Nome da tabela para a busca
-                            $tabela = 'tb_imagens';
-                            
-                            // Preparando a consulta SQL
-                            $stmt = $conn->prepare("SELECT * FROM $tabela ORDER BY id DESC");
-                            
-                            // Executando a consulta
-                            $stmt->execute();
-                            
-                            // Obtendo os resultados da busca
-                            $imagens = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
-                            // Consulta SQL para recuperar informações das tabelas
-                            $sql = "SELECT COUNT(id) FROM $tabela";
-                            $stmt = $conn->query($sql);
-                            
-                            // Obter o número de linhas
-                            $numLinhas = $stmt->fetchColumn();
-                            $novaLinha = $numLinhas + 1;
-                            
-                            // Loop através dos resultados e exibir todas as colunas
-                            if ($numLinhas < 4) {
-                                echo '
-                                    <div class="position-relative row form-group">
-                                        <label for="input' . $novaLinha . '" class="col-sm-2 col-form-label">Imagem *</label>
-                                        <div class="col-sm-10">
-                                            <input type="file" name="imagem" id="input' . $novaLinha . '" class="imagemInput"
-                                                accept=".jpg, .jpeg, .png">
-                                                
-                                            <small class="form-text text-muted">
-                                                Essa imagem será mostrada no checkout.
-                                            </small>
-                                            <small class="form-text text-muted">
-                                                Imagem em .jpg com 500px x 160px.
-                                            </small>
-                                            
-                                            <label for="input' . $novaLinha . '" id="card-img" style="max-width: 300px; margin-top: 1rem; padding: 1.5rem; border: 1px dashed #afb2d2; border-radius: .5rem; background: #dfdfdf;">
-                                                <img id="imagemPreview' . $novaLinha . '" alt="Miniatura da Imagem" style="width: 100%;">
-                                            </label>
-                                        </div>
-                                    </div>
-                                ';
-                            } else {
-                                echo 'Só é possível adicionar até 4 imagens!';
-                            }
-                        ?>
-                        <div class="divider"></div>
-                        <button type="<?php echo ($numLinhas < 4) ? 'submit' : 'button'; ?>" name="btnAddCard" class="btn <?php echo ($numLinhas < 4) ? 'btn-primary' : 'btn-secondary'; ?>">Adicionar</button>
-                    </form>
-                </div>
-            </div>
+            
+            
+            
+            
             <div class="main-card mb-3 card">
                 <div class="card-body">
-                    <h5 class="card-title">Imagens existentes</h5>
-                        <?php 
-                            if(isset($_SESSION['msgupdcad'])){
-                                echo $_SESSION['msgupdcad'];
-                                unset($_SESSION['msgupdcad']);
-                            }
-                        ?>
-                        <?php
-                            // Nome da tabela para a busca
-                            $tabela = 'tb_imagens';
-                            
-                            // Consulta SQL para recuperar informações das tabelas
-                            $sql = "SELECT COUNT(id) FROM $tabela";
-                            $stmt = $conn->query($sql);
-                            
-                            // Obter o número de linhas
-                            $numLinhas = $stmt->fetchColumn();
-                            
-                            // Consulta SQL para selecionar todas as colunas
-                            $sql = "SELECT * FROM $tabela ORDER BY id DESC";
-                            
-                            // Preparar e executar a consulta
-                            $stmt = $conn->prepare($sql);
-                            $stmt->execute();
-                            
-                            // Recuperar os resultados
-                            $resultados = $stmt->fetchAll(PDO::FETCH_ASSOC);
-                            
-                            // Loop através dos resultados e exibir todas as colunas
-                            foreach ($resultados as $usuario) {
-                                echo '
-                                    <form action="' . INCLUDE_PATH_ADMIN . 'back-end/imagens.php" method="post" enctype="multipart/form-data">
-                                        <div class="position-relative row form-group">
-
-                                            <label for="input' . $usuario['id'] . '" class="col-sm-2 col-form-label">Imagem *</label>
-                                            <div class="col-sm-10">
-                                                <input type="file" name="imagem" id="input' . $usuario['id'] . '" class="imagemInput"
-                                                    accept=".jpg, .jpeg, .png" value="' . $usuario['imagem'] . '">
-                                                    
-                                                <small class="form-text text-muted">
-                                                    Imagem em .jpg com 500px x 160px.
-                                                </small>
-                                                
-                                                <label for="input' . $usuario['id'] . '" id="card-img" style="max-width: 300px; margin-top: 1rem; padding: 1.5rem; border: 1px dashed #afb2d2; border-radius: .5rem; background: #dfdfdf;">
-                                                    <img id="imagemPreview' . $usuario['id'] . '" src="' . INCLUDE_PATH . 'assets/img/' . $usuario['imagem'] . '" alt="Miniatura da Imagem" style="width: 100%;">
-                                                </label>
-                                            </div>
-
-                                            <div class="col-sm-12 float-right">
-                                                <input type="hidden" name="ids[]" value="' . $usuario['id'] . '">
-                                                <button type="submit" name="btnUpdCard" class="btn btn-primary">Editar</button>
-                                                <a href="' . INCLUDE_PATH_ADMIN . 'back-end/apagar-imagem.php?id=' . $usuario['id'] . '" class="btn btn-outline-danger">Deletar</a>
-                                            </div>
-                                        </div>
-                                        <div class="divider"></div>
-                                    </form>
-                                ';
-                            }
-                        ?>
-                </div>
-            </div>
-            <div class="main-card mb-3 card">
-                <div class="card-body">
-                    <h5 class="card-title">Rodapé</h5>
+                    
                     <form action="<?php echo INCLUDE_PATH_ADMIN; ?>back-end/update.php" method="post">
                         <div class="position-relative row form-group">
                             <label for="privacidade" class="col-sm-2 col-form-label">Privacidade dos Doadores</label>
@@ -312,6 +106,7 @@
                                 </small>
                             </div>
                         </div>
+
                         <div class="position-relative row form-group">
                             <label for="linkedin" class="col-sm-2 col-form-label">LinkedIn</label>
                             <div class="col-sm-10">
@@ -513,29 +308,6 @@ function getCepData()
         const hoverCode = hoverCodeInput.value;
         if (isValidHexHoverCode(hoverCode)) {
             hoverPicker.value = hoverCode;
-        }
-    }
-
-    function isValidHexHoverCode(code) {
-        return /^#([0-9A-F]{3}){1,2}$/i.test(code);
-    }
-</script>
-<script>
-    const loadBtnPicker = document.getElementById('loadBtnPicker');
-    const loadBtnCodeInput = document.getElementById('loadBtnCode');
-
-    loadBtnPicker.addEventListener('input', updateLoadBtnPreview);
-    loadbtnCodeInput.addEventListener('input', updateLoadBtnFromCode);
-
-    function updateLoadBtnPreview(event) {
-        const selectedLoadBtn = event.target.value;
-        loadBtnCodeInput.value = selectedLoadBtn;
-    }
-
-    function updateLoadBtnFromCode() {
-        const loadBtnCode = loadBtnCodeInput.value;
-        if (isValidHexHoverCode(loadBtnCode)) {
-            loadBtnPicker.value = loadBtnCode;
         }
     }
 
