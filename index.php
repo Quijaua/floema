@@ -766,5 +766,16 @@
 	root.style.setProperty('--hover-color', hover);
 	root.style.setProperty('--progress-color', progress);
 </script>
+<script>
+	$(document).ready(function(){
+		const header = $("nav")
+		const footer = $("footer")
+
+		if ( self !== top ) {
+			header.hide()
+			footer.hide()
+		}
+	})
+</script>
 </body>
 </html>

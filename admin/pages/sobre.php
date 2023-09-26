@@ -135,33 +135,8 @@
                         <div class="position-relative row form-group">
                             <label for="hoverCode" class="col-sm-2 col-form-label">Cor do botão carregar *</label>
                             <div class="col-sm-10 d-flex">
-                                    <?php
-                                        $numbersArray = explode(", ", $progress);
-
-                                        if (count($numbersArray) === 3) {
-                                            list($red, $green, $blue) = $numbersArray;
-                                        }
-
-                                        // Função para converter um valor decimal em hexadecimal
-                                        function decimalToHex($decimalValue) {
-                                            // Converte o valor decimal para hexadecimal e adiciona um zero à esquerda se necessário
-                                            return str_pad(dechex($decimalValue), 2, '0', STR_PAD_LEFT);
-                                        }
-
-                                        // Converte os valores RGB em códigos hexadecimais
-                                        $hexRed = decimalToHex($red);
-                                        $hexGreen = decimalToHex($green);
-                                        $hexBlue = decimalToHex($blue);
-
-                                        // Combina os códigos hexadecimais e adiciona o prefixo '#'
-                                        $hexColorCode = "#" . $hexRed . $hexGreen . $hexBlue;
-                                    ?>
-                                <input type="color" id="colorPickerRGB" value="<?php echo $hexColorCode; ?>">
-                                <div id="rgbInputs">
-                                    <input type="number" name="red" class="form-control rgbInput" id="red" min="0" max="255" value="<?php echo $red; ?>">
-                                    <input type="number" name="green" class="form-control rgbInput" id="green" min="0" max="255" value="<?php echo $green; ?>">
-                                    <input type="number" name="blue" class="form-control rgbInput" id="blue" min="0" max="255" value="<?php echo $blue; ?>">
-                                </div>
+                                <input type="color" id="loadBtnPicker" class="form-color" value="<?php echo $load_btn; ?>">
+                                <input type="text" id="loadBtnCode" name="loadBtn" class="form-control" placeholder="Digite o código hexadecimal da cor" value="<?php echo $load_btn; ?>">
                             </div>
                         </div>
                         <button type="submit" name="btnUpdColor" class="btn btn-primary">Salvar</button>
@@ -442,6 +417,19 @@
                     </form>
                 </div>
             </div>
+            <div class="main-card mb-3 card">
+                <div class="card-body">
+                    <h5 class="card-title">incorporar em um site</h5>
+                    <p class="card-text">
+                    <div class="alert alert-dark" role="alert">
+                        <textarea id="embed_wrapper" class="m-0 p-0" disabled style="border: none; overflow: hidden; resize: none; width: 100%; background: transparent; text-align: left">
+                            <iframe id="embed" src="<?php echo INCLUDE_PATH; ?>" frameborder="0" width="100%" height="1400"></iframe>
+                        </textarea>
+                        <button id="btnIframe" class="btn btn-primary">Copiar código</button>
+                    </div>
+                    </p>
+                </div>
+            </div>
         </div>
     </div>
 </div>
@@ -546,6 +534,29 @@ function getCepData()
     }
 </script>
 <script>
+    const loadBtnPicker = document.getElementById('loadBtnPicker');
+    const loadBtnCodeInput = document.getElementById('loadBtnCode');
+
+    loadBtnPicker.addEventListener('input', updateLoadBtnPreview);
+    loadbtnCodeInput.addEventListener('input', updateLoadBtnFromCode);
+
+    function updateLoadBtnPreview(event) {
+        const selectedLoadBtn = event.target.value;
+        loadBtnCodeInput.value = selectedLoadBtn;
+    }
+
+    function updateLoadBtnFromCode() {
+        const loadBtnCode = loadBtnCodeInput.value;
+        if (isValidHexHoverCode(loadBtnCode)) {
+            loadBtnPicker.value = loadBtnCode;
+        }
+    }
+
+    function isValidHexHoverCode(code) {
+        return /^#([0-9A-F]{3}){1,2}$/i.test(code);
+    }
+</script>
+<script>
     const colorPickerRGB = document.getElementById('colorPickerRGB');
     const redInput = document.getElementById('red');
     const greenInput = document.getElementById('green');
@@ -589,4 +600,25 @@ function getCepData()
     function RGBToHex(r, g, b) {
       return `#${(1 << 24 | r << 16 | g << 8 | b).toString(16).slice(1)}`;
     }
+  </script>
+  <script>
+    $(document).ready(function() {
+        $('#btnIframe').on('click', function() {
+            let iframe = $('textarea#embed_wrapper').val()
+            iframe = $.trim(iframe)
+
+            if ( typeof navigator.clipboard !== 'undefined' ) {
+                navigator.clipboard.writeText(iframe)
+                $('#btnIframe').removeClass('btn-primary').addClass('btn-success').prop('disabled', true).html('Copiado!')
+            } else if ( typeof navigator.clipboard === 'undefined' ) {
+                let iframeText = $("#embed_wrapper")
+                iframeText.focus()
+                iframeText.select()
+                document.execCommand('copy')
+                $('#btnIframe').removeClass('btn-primary').addClass('btn-success').prop('disabled', true).html('Copiado!')
+            } else {
+                $('#btnIframe').removeClass('btn-primary').addClass('btn-danger').prop('disabled', true).html('Não foi possivel copiar o código!')
+            }
+        });
+    })
   </script>

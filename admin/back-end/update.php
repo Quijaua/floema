@@ -287,19 +287,14 @@ if (isset($_POST['btnUpdColor'])) {
         //Informacoes coletadas pelo metodo POST
         $color = $_POST['color'];
         $hover = $_POST['hover'];
-
-        $red = $_POST['red'];
-        $green = $_POST['green'];
-        $blue = $_POST['blue'];
-
-        $progress = $red . ', ' . $green . ', ' . $blue;
+        $load_btn = $_POST['loadBtn'];
 
         // Atualize o item no banco de dados
-        $sql = "UPDATE $tabela SET color = :color, hover = :hover, progress = :progress WHERE id = :id";
+        $sql = "UPDATE $tabela SET color = :color, hover = :hover, load_btn = :loadBtn WHERE id = :id";
         $stmt = $conn->prepare($sql);
         $stmt->bindParam(':color', $color);
         $stmt->bindParam(':hover', $hover);
-        $stmt->bindParam(':progress', $progress);
+        $stmt->bindParam(':loadBtn', $load_btn);
         $stmt->bindParam(':id', $id);
 
         try {
