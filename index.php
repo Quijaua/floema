@@ -768,7 +768,6 @@
 </script>
 <script>
 	$(document).ready(function(){
-		console.log("ready...")
 		const header = $("nav")
 		const footer = $("footer")
 

@@ -423,7 +423,7 @@
                     <p class="card-text">
                     <div class="alert alert-dark" role="alert">
                         <textarea id="embed_wrapper" class="m-0 p-0" disabled style="border: none; overflow: hidden; resize: none; width: 100%; background: transparent; text-align: left">
-                            <iframe id="embed" src="<?php echo INCLUDE_PATH; ?>" frameborder="0" width="100%" height="700"></iframe>
+                            <iframe id="embed" src="<?php echo INCLUDE_PATH; ?>" frameborder="0" width="100%" height="1400"></iframe>
                         </textarea>
                         <button id="btnIframe" class="btn btn-primary">Copiar código</button>
                     </div>
@@ -609,15 +609,15 @@ function getCepData()
 
             if ( typeof navigator.clipboard !== 'undefined' ) {
                 navigator.clipboard.writeText(iframe)
-                $('#btnIframe').removeClass('btn-primary').addClass('btn-success').html('Copiado!')
+                $('#btnIframe').removeClass('btn-primary').addClass('btn-success').prop('disabled', true).html('Copiado!')
             } else if ( typeof navigator.clipboard === 'undefined' ) {
                 let iframeText = $("#embed_wrapper")
                 iframeText.focus()
                 iframeText.select()
                 document.execCommand('copy')
-                $('#btnIframe').removeClass('btn-primary').addClass('btn-success').html('Copiado!')
+                $('#btnIframe').removeClass('btn-primary').addClass('btn-success').prop('disabled', true).html('Copiado!')
             } else {
-                $('#btnIframe').removeClass('btn-primary').addClass('btn-danger').html('Não foi possivel copiar o código!')
+                $('#btnIframe').removeClass('btn-primary').addClass('btn-danger').prop('disabled', true).html('Não foi possivel copiar o código!')
             }
         });
     })
