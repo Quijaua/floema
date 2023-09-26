@@ -417,6 +417,19 @@
                     </form>
                 </div>
             </div>
+            <div class="main-card mb-3 card">
+                <div class="card-body">
+                    <h5 class="card-title">incorporar em um site</h5>
+                    <p class="card-text">
+                    <div class="alert alert-dark" role="alert">
+                        <textarea id="embed_wrapper" class="m-0 p-0" disabled style="border: none; overflow: hidden; resize: none; width: 100%; background: transparent; text-align: left">
+                            <iframe id="embed" src="<?php echo INCLUDE_PATH; ?>" frameborder="0"></iframe>
+                        </textarea>
+                        <button id="btnIframe" class="btn btn-primary">Copiar código</button>
+                    </div>
+                    </p>
+                </div>
+            </div>
         </div>
     </div>
 </div>
@@ -587,4 +600,18 @@ function getCepData()
     function RGBToHex(r, g, b) {
       return `#${(1 << 24 | r << 16 | g << 8 | b).toString(16).slice(1)}`;
     }
+  </script>
+  <script>
+    $(document).ready(function() {
+        $('#btnIframe').on('click', function() {
+            let iframe = $('textarea#embed_wrapper').val()
+            iframe = $.trim(iframe)
+
+            if ( navigator.clipboard.writeText(iframe) ) {
+                $('#btnIframe').removeClass('btn-primary').addClass('btn-success').html('Copiado!')
+            } else {
+                $('#btnIframe').removeClass('btn-primary').addClass('btn-danger').html('Não foi possivel copiar o código!')
+            }
+        });
+    })
   </script>
