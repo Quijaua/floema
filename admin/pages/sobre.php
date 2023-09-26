@@ -417,6 +417,85 @@
                     </form>
                 </div>
             </div>
+
+            <div class="main-card mb-3 card">
+                <div class="card-body">
+                    <h5 class="card-title">valores das doações</h5>
+                    <div class="mb-3">
+                        <small class="text-muted">Insira 5 opçoes de valores para cada modalidade, uma em cada box</small>
+                    </div>
+                    <form id="donations_form" action="<?php echo INCLUDE_PATH_ADMIN; ?>back-end/update.php" method="post">
+                        <div class="position-relative row form-group">
+                            <label for="estado" class="col-sm-2 col-form-label">Valores mensais</label>
+                            <div class="col-sm-10">
+                                <div class="row">
+                                    <div class="col">
+                                        <input name="monthly_1" id="monthly_1" type="text" class="form-control" value="<?php echo $monthly_1; ?>">
+                                    </div>
+                                    <div class="col">
+                                        <input name="monthly_2" id="monthly_2" type="text" class="form-control" value="<?php echo $monthly_2; ?>">
+                                    </div>
+                                    <div class="col">
+                                        <input name="monthly_3" id="monthly_3" type="text" class="form-control" value="<?php echo $monthly_3; ?>">
+                                    </div>
+                                    <div class="col">
+                                        <input name="monthly_4" id="monthly_4" type="text" class="form-control" value="<?php echo $monthly_4; ?>">
+                                    </div>
+                                    <div class="col">
+                                        <input name="monthly_5" id="monthly_5" type="text" class="form-control" value="<?php echo $monthly_5; ?>">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="position-relative row form-group">
+                            <label for="estado" class="col-sm-2 col-form-label">Valores anuais</label>
+                            <div class="col-sm-10">
+                                <div class="row">
+                                    <div class="col">
+                                        <input name="yearly_1" id="yearly_1" type="text" class="form-control" value="<?php echo $yearly_1; ?>">
+                                    </div>
+                                    <div class="col">
+                                        <input name="yearly_2" id="yearly_2" type="text" class="form-control" value="<?php echo $yearly_2; ?>">
+                                    </div>
+                                    <div class="col">
+                                        <input name="yearly_3" id="yearly_3" type="text" class="form-control" value="<?php echo $yearly_3; ?>">
+                                    </div>
+                                    <div class="col">
+                                        <input name="yearly_4" id="yearly_4" type="text" class="form-control" value="<?php echo $yearly_4; ?>">
+                                    </div>
+                                    <div class="col">
+                                        <input name="yearly_5" id="yearly_5" type="text" class="form-control" value="<?php echo $yearly_5; ?>">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="position-relative row form-group">
+                            <label for="estado" class="col-sm-2 col-form-label">Valores únicos</label>
+                            <div class="col-sm-10">
+                                <div class="row">
+                                    <div class="col">
+                                        <input name="once_1" id="once_1" type="text" class="form-control" value="<?php echo $once_1; ?>">
+                                    </div>
+                                    <div class="col">
+                                        <input name="once_2" id="once_2" type="text" class="form-control" value="<?php echo $once_2; ?>">
+                                    </div>
+                                    <div class="col">
+                                        <input name="once_3" id="once_3" type="text" class="form-control" value="<?php echo $once_3; ?>">
+                                    </div>
+                                    <div class="col">
+                                        <input name="once_4" id="once_4" type="text" class="form-control" value="<?php echo $once_4; ?>">
+                                    </div>
+                                    <div class="col">
+                                        <input name="once_5" id="once_5" type="text" class="form-control" value="<?php echo $once_5; ?>">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <button type="submit" name="btnUpdDonations" class="btn btn-primary" form="donations_form">Salvar</button>
+                    </form>
+                </div>
+            </div>
+
             <div class="main-card mb-3 card">
                 <div class="card-body">
                     <h5 class="card-title">incorporar em um site</h5>
