@@ -66,6 +66,21 @@
         $color = $resultado['color'];
         $hover = $resultado['hover'];
         $progress = $resultado['progress'];
+		$monthly_1 = $resultado['monthly_1'];
+        $monthly_2 = $resultado['monthly_2'];
+        $monthly_3 = $resultado['monthly_3'];
+        $monthly_4 = $resultado['monthly_4'];
+        $monthly_5 = $resultado['monthly_5'];
+        $yearly_1 = $resultado['yearly_1'];
+        $yearly_2 = $resultado['yearly_2'];
+        $yearly_3 = $resultado['yearly_3'];
+        $yearly_4 = $resultado['yearly_4'];
+        $yearly_5 = $resultado['yearly_5'];
+        $once_1 = $resultado['once_1'];
+        $once_2 = $resultado['once_2'];
+        $once_3 = $resultado['once_3'];
+        $once_4 = $resultado['once_4'];
+        $once_5 = $resultado['once_5'];
     } else {
         // ID não encontrado ou não existente
         echo "ID não encontrado.";
@@ -199,22 +214,22 @@
 					</div>
 					<div id="donation-monthly-group" class="d-block">
 						<div class="d-flex">
-							<button type="button" id="button-monthly1" onclick="donationOption(this,'monthly',30,true)"
-									class="btn btn-outline-dark button-options">R$ 30
+							<button type="button" id="button-monthly1" onclick="donationOption(this,'monthly',<?php echo $monthly_1; ?>,true)"
+									class="btn btn-outline-dark button-options" data-amount-for-selection="<?php echo $monthly_1; ?>">R$ <?php echo $monthly_1; ?>
 							</button>
-							<button type="button" id="button-monthly2" onclick="donationOption(this,'monthly',50,true)"
-									class="btn btn-outline-dark button-options option-default-monthly">R$ 50
+							<button type="button" id="button-monthly2" onclick="donationOption(this,'monthly',<?php echo $monthly_2; ?>,true)"
+									class="btn btn-outline-dark button-options option-default-monthly" data-amount-for-selection="<?php echo $monthly_2; ?>">R$ <?php echo $monthly_2; ?>
 							</button>
-							<button type="button" id="button-monthly3" onclick="donationOption(this,'monthly',100,true)"
-									class="btn btn-outline-dark button-options">R$ 100
+							<button type="button" id="button-monthly3" onclick="donationOption(this,'monthly',<?php echo $monthly_3; ?>,true)"
+									class="btn btn-outline-dark button-options" data-amount-for-selection="<?php echo $monthly_3; ?>">R$ <?php echo $monthly_3; ?>
 							</button>
 						</div>
 						<div class="d-flex">
-							<button type="button" id="button-monthly4" onclick="donationOption(this,'monthly',200,true)"
-									class="btn btn-outline-dark button-options">R$ 200
+							<button type="button" id="button-monthly4" onclick="donationOption(this,'monthly',<?php echo $monthly_4; ?>,true)"
+									class="btn btn-outline-dark button-options" data-amount-for-selection="<?php echo $monthly_4; ?>">R$ <?php echo $monthly_4; ?>
 							</button>
-							<button type="button" id="button-monthly5" onclick="donationOption(this,'monthly',300,true)"
-									class="btn btn-outline-dark button-options">R$ 300
+							<button type="button" id="button-monthly5" onclick="donationOption(this,'monthly',<?php echo $monthly_5; ?>,true)"
+									class="btn btn-outline-dark button-options" data-amount-for-selection="<?php echo $monthly_5; ?>">R$ <?php echo $monthly_5; ?>
 							</button>
 							<div class="form-floating button-options">
 								<input type="text" class="form-control" id="field-other-monthly"
@@ -233,22 +248,22 @@
 					</script>
 					<div id="donation-yearly-group" class="d-none">
 						<div class="d-flex">
-							<button type="button" id="button-yearly1" onclick="donationOption(this,'yearly',120,true)"
-									class="btn btn-outline-dark button-options">R$ 120
+							<button type="button" id="button-yearly1" onclick="donationOption(this,'yearly',<?php echo $yearly_1; ?>,true)"
+									class="btn btn-outline-dark button-options" data-amount-for-selection="<?php echo $yearly_1; ?>">R$ <?php echo $yearly_1; ?>
 							</button>
-							<button type="button" id="button-yearly2" onclick="donationOption(this,'yearly',240,true)"
-									class="btn btn-outline-dark button-options option-default-yearly">R$ 240
+							<button type="button" id="button-yearly2" onclick="donationOption(this,'yearly',<?php echo $yearly_2; ?>,true)"
+									class="btn btn-outline-dark button-options option-default-yearly" data-amount-for-selection="<?php echo $yearly_2; ?>">R$ <?php echo $yearly_2; ?>
 							</button>
-							<button type="button" id="button-yearly3" onclick="donationOption(this,'yearly',500,true)"
-									class="btn btn-outline-dark button-options">R$ 500
+							<button type="button" id="button-yearly3" onclick="donationOption(this,'yearly',<?php echo $yearly_3; ?>,true)"
+									class="btn btn-outline-dark button-options" data-amount-for-selection="<?php echo $yearly_3; ?>">R$ <?php echo $yearly_3; ?>
 							</button>
 						</div>
 						<div class="d-flex">
-							<button type="button" id="button-yearly4" onclick="donationOption(this,'yearly',1000,true)"
-									class="btn btn-outline-dark button-options">R$ 1000
+							<button type="button" id="button-yearly4" onclick="donationOption(this,'yearly',<?php echo $yearly_4; ?>,true)"
+									class="btn btn-outline-dark button-options" data-amount-for-selection="<?php echo $yearly_4; ?>">R$ <?php echo $yearly_4; ?>
 							</button>
-							<button type="button" id="button-yearly5" onclick="donationOption(this,'yearly',2000,true)"
-									class="btn btn-outline-dark button-options">R$ 2000
+							<button type="button" id="button-yearly5" onclick="donationOption(this,'yearly',<?php echo $yearly_5; ?>,true)"
+									class="btn btn-outline-dark button-options" data-amount-for-selection="<?php echo $yearly_5; ?>">R$ <?php echo $yearly_5; ?>
 							</button>
 							<div class="form-floating button-options">
 								<input type="text" class="form-control" id="field-other-yearly"
@@ -262,22 +277,22 @@
 					</div>
 					<div id="donation-once-group" class="d-none">
 						<div class="d-flex">
-							<button type="button" id="button-once1" onclick="donationOption(this,'once',100,true)"
-									class="btn btn-outline-dark button-options">R$ 100
+							<button type="button" id="button-once1" onclick="donationOption(this,'once',<?php echo $once_1; ?>,true)"
+									class="btn btn-outline-dark button-options" data-amount-for-selection="<?php echo $once_1; ?>">R$ <?php echo $once_1; ?>
 							</button>
-							<button type="button" id="button-once2" onclick="donationOption(this,'once',200,true)"
-									class="btn btn-outline-dark button-options option-default-once">R$ 200
+							<button type="button" id="button-once2" onclick="donationOption(this,'once',<?php echo $once_2; ?>,true)"
+									class="btn btn-outline-dark button-options option-default-once" data-amount-for-selection="<?php echo $once_2; ?>">R$ <?php echo $once_2; ?>
 							</button>
-							<button type="button" id="button-once3" onclick="donationOption(this,'once',500,true)"
-									class="btn btn-outline-dark button-options">R$ 500
+							<button type="button" id="button-once3" onclick="donationOption(this,'once',<?php echo $once_3; ?>,true)"
+									class="btn btn-outline-dark button-options" data-amount-for-selection="<?php echo $once_3; ?>">R$ <?php echo $once_3; ?>
 							</button>
 						</div>
 						<div class="d-flex">
-							<button type="button" id="button-once4" onclick="donationOption(this,'once',1000,true)"
-									class="btn btn-outline-dark button-options">R$ 1000
+							<button type="button" id="button-once4" onclick="donationOption(this,'once',<?php echo $once_4; ?>,true)"
+									class="btn btn-outline-dark button-options" data-amount-for-selection="<?php echo $once_4; ?>">R$ <?php echo $once_4; ?>
 							</button>
-							<button type="button" id="button-once5" onclick="donationOption(this,'once',2000,true)"
-									class="btn btn-outline-dark button-options">R$ 2000
+							<button type="button" id="button-once5" onclick="donationOption(this,'once',<?php echo $once_5; ?>,true)"
+									class="btn btn-outline-dark button-options" data-amount-for-selection="<?php echo $once_5; ?>">R$ <?php echo $once_5; ?>
 							</button>
 							<div class="form-floating button-options">
 								<input type="text" class="form-control" id="field-other-once"
