@@ -766,5 +766,20 @@
 	root.style.setProperty('--hover-color', hover);
 	root.style.setProperty('--progress-color', progress);
 </script>
+<script>
+	$(document).ready(function(){
+		console.log("ready...")
+		const header = $("nav")
+		const footer = $("footer")
+		const iframe = $("iframe#embed")
+
+		console.log(iframe)
+
+		if (iframe.length > 0) {
+			header.hide()
+			footer.hide()
+		}
+	})
+</script>
 </body>
 </html>
