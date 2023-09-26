@@ -771,11 +771,8 @@
 		console.log("ready...")
 		const header = $("nav")
 		const footer = $("footer")
-		const iframe = $("iframe#embed")
 
-		console.log(iframe)
-
-		if (iframe.length > 0) {
+		if ( self !== top ) {
 			header.hide()
 			footer.hide()
 		}

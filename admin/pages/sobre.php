@@ -423,7 +423,7 @@
                     <p class="card-text">
                     <div class="alert alert-dark" role="alert">
                         <textarea id="embed_wrapper" class="m-0 p-0" disabled style="border: none; overflow: hidden; resize: none; width: 100%; background: transparent; text-align: left">
-                            <iframe id="embed" src="<?php echo INCLUDE_PATH; ?>" frameborder="0"></iframe>
+                            <iframe id="embed" src="<?php echo INCLUDE_PATH; ?>" frameborder="0" width="100%" height="700"></iframe>
                         </textarea>
                         <button id="btnIframe" class="btn btn-primary">Copiar código</button>
                     </div>
@@ -607,7 +607,14 @@ function getCepData()
             let iframe = $('textarea#embed_wrapper').val()
             iframe = $.trim(iframe)
 
-            if ( navigator.clipboard.writeText(iframe) ) {
+            if ( typeof navigator.clipboard !== 'undefined' ) {
+                navigator.clipboard.writeText(iframe)
+                $('#btnIframe').removeClass('btn-primary').addClass('btn-success').html('Copiado!')
+            } else if ( typeof navigator.clipboard === 'undefined' ) {
+                let iframeText = $("#embed_wrapper")
+                iframeText.focus()
+                iframeText.select()
+                document.execCommand('copy')
                 $('#btnIframe').removeClass('btn-primary').addClass('btn-success').html('Copiado!')
             } else {
                 $('#btnIframe').removeClass('btn-primary').addClass('btn-danger').html('Não foi possivel copiar o código!')
