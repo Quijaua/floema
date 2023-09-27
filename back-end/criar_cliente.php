@@ -1,8 +1,6 @@
 <?php
 	function asaas_CriarCliente($dataForm, $config) {
 
-		dd($dataForm);
-
 		include('config.php');
 
 		//removendo campos que não serão usados para incluir o cliente

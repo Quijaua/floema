@@ -109,6 +109,21 @@ INSERT INTO `tb_clientes` (`id`, `roles`, `nome`, `email`, `password`, `magic_li
 -- --------------------------------------------------------
 
 --
+-- Estrutura da tabela `tb_integracoes`
+--
+
+CREATE TABLE `tb_integracoes` (
+  `id` int(11) NOT NULL,
+  `fb_pixel` longtext DEFAULT NULL,
+  `gtm` longtext DEFAULT NULL,
+  `g_analytics` longtext DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+INSERT INTO `tb_integracoes` (`id`, `fb_pixel`, `gtm`, `g_analytics`) VALUES (1, '', '', '');
+
+-- --------------------------------------------------------
+
+--
 -- Estrutura da tabela `tb_doacoes`
 --
 
