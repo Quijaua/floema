@@ -12,6 +12,12 @@
 		// ID que você deseja pesquisar
 		$email = $dataForm['email'];
 
+		// Armazena a opção newsletter
+		$newsletter = $dataForm['newsletter'];
+
+		// Armazena a opção private
+		$private = $dataForm['private'];
+
 		// Consulta SQL
 		$sql = "SELECT asaas_id FROM $tabela WHERE email = :email";
 
@@ -61,8 +67,8 @@
 
 				$tabela = 'tb_clientes';
 
-				$stmt = $conn->prepare("INSERT INTO $tabela (roles, nome, email, phone, cpf, cep, endereco, numero, complemento, municipio, cidade, uf, asaas_id) VALUES (
-					:roles, :name, :email, :phone, :cpfCnpj, :postalCode, :address, :addressNumber, :complement, :province, :city, :state, :id)");
+				$stmt = $conn->prepare("INSERT INTO $tabela (roles, nome, email, phone, cpf, cep, endereco, numero, complemento, municipio, cidade, uf, asaas_id, newsletter, private) VALUES (
+					:roles, :name, :email, :phone, :cpfCnpj, :postalCode, :address, :addressNumber, :complement, :province, :city, :state, :id, :newsletter, :private)");
 
 				$roles = 0;
 
@@ -80,6 +86,8 @@
 				$stmt->bindParam(':city', $dataForm['city'], PDO::PARAM_STR);
 				$stmt->bindParam(':state', $retorno['state'], PDO::PARAM_STR);
 				$stmt->bindParam(':id', $retorno['id'], PDO::PARAM_STR);
+				$stmt->bindParam(':newsletter', $newsletter, PDO::PARAM_INT);
+				$stmt->bindParam(':private', $private, PDO::PARAM_INT);
 
 				// Executando o update
 				$stmt->execute();

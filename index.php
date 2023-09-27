@@ -22,24 +22,30 @@
 
     // Tabela que sera feita a consulta
     $tabela = "tb_checkout";
+	$tabela_2 = "tb_integracoes";
 
     // ID que você deseja pesquisar
     $id = 1;
 
     // Consulta SQL
     $sql = "SELECT * FROM $tabela WHERE id = :id";
+	$sql_2 = "SELECT * FROM $tabela_2 WHERE id = :id";
 
     // Preparar a consulta
     $stmt = $conn->prepare($sql);
+	$stmt_2 = $conn->prepare($sql_2);
 
     // Vincular o valor do parâmetro
     $stmt->bindParam(':id', $id, PDO::PARAM_INT);
+	$stmt_2->bindParam(':id', $id, PDO::PARAM_INT);
 
     // Executar a consulta
     $stmt->execute();
+	$stmt_2->execute();
 
     // Obter o resultado como um array associativo
     $resultado = $stmt->fetch(PDO::FETCH_ASSOC);
+	$resultado_2 = $stmt_2->fetch(PDO::FETCH_ASSOC);
 
     // Verificar se o resultado foi encontrado
     if ($resultado) {
@@ -66,10 +72,36 @@
         $color = $resultado['color'];
         $hover = $resultado['hover'];
         $progress = $resultado['progress'];
+		$monthly_1 = $resultado['monthly_1'];
+        $monthly_2 = $resultado['monthly_2'];
+        $monthly_3 = $resultado['monthly_3'];
+        $monthly_4 = $resultado['monthly_4'];
+        $monthly_5 = $resultado['monthly_5'];
+        $yearly_1 = $resultado['yearly_1'];
+        $yearly_2 = $resultado['yearly_2'];
+        $yearly_3 = $resultado['yearly_3'];
+        $yearly_4 = $resultado['yearly_4'];
+        $yearly_5 = $resultado['yearly_5'];
+        $once_1 = $resultado['once_1'];
+        $once_2 = $resultado['once_2'];
+        $once_3 = $resultado['once_3'];
+        $once_4 = $resultado['once_4'];
+        $once_5 = $resultado['once_5'];
     } else {
         // ID não encontrado ou não existente
         echo "ID não encontrado.";
     }
+
+	// Verificar se o resultado_2 foi encontrado
+	if ($resultado_2) {
+		// Atribuir o valor da coluna à variável, ex.: "nome" = $nome
+		$fb_pixel = $resultado_2['fb_pixel'];
+		$gtm = $resultado_2['gtm'];
+		$g_analytics = $resultado_2['g_analytics'];
+	} else {
+		// ID não encontrado ou não existente
+		echo "ID não encontrado.";
+	}
 ?>
 <html lang="pt">
 <head>
@@ -84,7 +116,84 @@
 		  type="text/css">
 	<link href="<?php echo INCLUDE_PATH; ?>assets/google/fonts/newsreader" rel="stylesheet">
 
+<link rel="icon" href="<?php echo INCLUDE_PATH; ?>assets/img/favicon.png" sizes="32x32" />
+<link rel="apple-touch-icon" href="<?php echo INCLUDE_PATH; ?>assets/img/favicon.png" />
+<meta name="msapplication-TileImage" content="<?php echo INCLUDE_PATH; ?>assets/img/favicon.png" />
+
+
+
+<link rel="canonical" href="<?php echo INCLUDE_PATH; ?>" />
+<meta property="og:locale" content="pt_BR" />
+<meta property="og:type" content="website" />
+<meta property="og:title" content="<?php echo $title; ?>"/>
+<meta property="og:description" name="description" content="Lorem ipsum" />
+<meta property="og:url" value="<?php echo INCLUDE_PATH; ?>"/>
+<meta property="og:site_name" content="<?php echo $nome; ?>" />
+<meta property="article:modified_time" content="2022-12-01T18:38:06+00:00" />
+<meta property="og:image" content="<?php echo INCLUDE_PATH; ?>assets/img/<?php echo $logo; ?>"/>
+<meta property="og:image" value="<?php echo INCLUDE_PATH; ?>assets/img/<?php echo $logo; ?>"/>
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:site" content="@FloemaDoar" />
+<meta name="twitter:title" value="<?php echo $title; ?>"/>
+<meta name="twitter:url" value="<?php echo INCLUDE_PATH; ?>"/>
+<meta name="twitter:image" value="<?php echo INCLUDE_PATH; ?>assets/img/<?php echo $logo; ?>"/>
+<meta name="twitter:image" content="<?php echo INCLUDE_PATH; ?>assets/img/<?php echo $logo; ?>"/>
+<meta name="twitter:description" value="Lorem ipsum"/>
+
+
+<script type="application/ld+json">{
+	"@context": "https://schema.org",
+	"@graph": [
+		{
+			"@type": "WebSite",
+			"@id": "<?php echo INCLUDE_PATH; ?>",
+			"url": "<?php echo INCLUDE_PATH; ?>",
+			"name": "<?php echo $title; ?>",
+			"isPartOf": {
+				"@id": "<?php echo INCLUDE_PATH; ?>#website"
+			},
+			"datePublished": "2023-03-02T19:50:30+00:00",
+			"dateModified": "2023-03-21T12:51:52+00:00",
+			"description": "Lorem ipsum",
+			"inLanguage": "pt-BR",
+			"interactAction": [
+				{
+					"@type": "SubscribeAction",
+					"target": [
+						"<?php echo INCLUDE_PATH; ?>"
+					]
+				}
+			]
+		},
+		{
+			"@type": "Organization",
+			"@id": "<?php echo INCLUDE_PATH; ?>#organization",
+			"name": "<?php echo $nome; ?>",
+			"url": "<?php echo INCLUDE_PATH; ?>",
+			"logo": {
+				"@type": "ImageObject",
+				"inLanguage": "pt-BR",
+				"@id": "<?php echo INCLUDE_PATH; ?>#/schema/logo/image/",
+				"url": "<?php echo INCLUDE_PATH; ?>assets/img/<?php echo $logo; ?>",
+				"contentUrl": "<?php echo INCLUDE_PATH; ?>assets/img/<?php echo $logo; ?>",
+				"width": 140,
+				"height": 64,
+				"caption": "<?php echo $nome; ?>"
+			},
+			"image": {
+				"@id": "<?php echo INCLUDE_PATH; ?>#/schema/logo/image/"
+			}
+		}
+	]
+}</script>
+
 	<link rel="stylesheet" type="text/css" href="<?php echo INCLUDE_PATH; ?>assets/css/main.css"/>
+
+	<?php echo $fb_pixel; ?>
+
+	<?php echo $gtm; ?>
+	
+	<?php echo $g_analytics; ?>
 </head>
 <body>
 
@@ -93,12 +202,10 @@
 	<div class="container">
 		<div class="row">
 			<div class="col-md-4 p-3">
-				<a href="https://link#fake.com.br/">
-					<img src="assets/img/<?php echo $logo; ?>" class="w-75">
-				</a>
+				<img src="assets/img/<?php echo $logo; ?>" class="w-75">
 			</div>
 			<div class="col-md-8 mt-4">
-				<h1 class="h2">Colabore com o Projeto  <?php echo $nome; ?></h1>
+				<h1 class="h2"><?php echo ($title !== '') ? $title : 'Colabore com o Projeto '.$nome; ?></h1>
 			</div>
 		</div>
 	</div>
@@ -108,7 +215,7 @@
 	<div class="row">
 		<div class="col-md-5 mb-3">
 
-			<h3 class="highlight mb-3"> Faça sua doação</h3>
+			<h3 class="highlight mb-3">Faça sua doação</h3>
 			<div id="div-container-form">
 				<form id="form-checkout">
 					<div class="mb-3" style="display: flex;justify-content: space-between">
@@ -130,22 +237,22 @@
 					</div>
 					<div id="donation-monthly-group" class="d-block">
 						<div class="d-flex">
-							<button type="button" id="button-monthly1" onclick="donationOption(this,'monthly',30,true)"
-									class="btn btn-outline-dark button-options">R$ 30
+							<button type="button" id="button-monthly1" onclick="donationOption(this,'monthly',<?php echo $monthly_1; ?>,true)"
+									class="btn btn-outline-dark button-options" data-amount-for-selection="<?php echo $monthly_1; ?>">R$ <?php echo $monthly_1; ?>
 							</button>
-							<button type="button" id="button-monthly2" onclick="donationOption(this,'monthly',50,true)"
-									class="btn btn-outline-dark button-options option-default-monthly">R$ 50
+							<button type="button" id="button-monthly2" onclick="donationOption(this,'monthly',<?php echo $monthly_2; ?>,true)"
+									class="btn btn-outline-dark button-options option-default-monthly" data-amount-for-selection="<?php echo $monthly_2; ?>">R$ <?php echo $monthly_2; ?>
 							</button>
-							<button type="button" id="button-monthly3" onclick="donationOption(this,'monthly',100,true)"
-									class="btn btn-outline-dark button-options">R$ 100
+							<button type="button" id="button-monthly3" onclick="donationOption(this,'monthly',<?php echo $monthly_3; ?>,true)"
+									class="btn btn-outline-dark button-options" data-amount-for-selection="<?php echo $monthly_3; ?>">R$ <?php echo $monthly_3; ?>
 							</button>
 						</div>
 						<div class="d-flex">
-							<button type="button" id="button-monthly4" onclick="donationOption(this,'monthly',200,true)"
-									class="btn btn-outline-dark button-options">R$ 200
+							<button type="button" id="button-monthly4" onclick="donationOption(this,'monthly',<?php echo $monthly_4; ?>,true)"
+									class="btn btn-outline-dark button-options" data-amount-for-selection="<?php echo $monthly_4; ?>">R$ <?php echo $monthly_4; ?>
 							</button>
-							<button type="button" id="button-monthly5" onclick="donationOption(this,'monthly',300,true)"
-									class="btn btn-outline-dark button-options">R$ 300
+							<button type="button" id="button-monthly5" onclick="donationOption(this,'monthly',<?php echo $monthly_5; ?>,true)"
+									class="btn btn-outline-dark button-options" data-amount-for-selection="<?php echo $monthly_5; ?>">R$ <?php echo $monthly_5; ?>
 							</button>
 							<div class="form-floating button-options">
 								<input type="text" class="form-control" id="field-other-monthly"
@@ -164,22 +271,22 @@
 					</script>
 					<div id="donation-yearly-group" class="d-none">
 						<div class="d-flex">
-							<button type="button" id="button-yearly1" onclick="donationOption(this,'yearly',120,true)"
-									class="btn btn-outline-dark button-options">R$ 120
+							<button type="button" id="button-yearly1" onclick="donationOption(this,'yearly',<?php echo $yearly_1; ?>,true)"
+									class="btn btn-outline-dark button-options" data-amount-for-selection="<?php echo $yearly_1; ?>">R$ <?php echo $yearly_1; ?>
 							</button>
-							<button type="button" id="button-yearly2" onclick="donationOption(this,'yearly',240,true)"
-									class="btn btn-outline-dark button-options option-default-yearly">R$ 240
+							<button type="button" id="button-yearly2" onclick="donationOption(this,'yearly',<?php echo $yearly_2; ?>,true)"
+									class="btn btn-outline-dark button-options option-default-yearly" data-amount-for-selection="<?php echo $yearly_2; ?>">R$ <?php echo $yearly_2; ?>
 							</button>
-							<button type="button" id="button-yearly3" onclick="donationOption(this,'yearly',500,true)"
-									class="btn btn-outline-dark button-options">R$ 500
+							<button type="button" id="button-yearly3" onclick="donationOption(this,'yearly',<?php echo $yearly_3; ?>,true)"
+									class="btn btn-outline-dark button-options" data-amount-for-selection="<?php echo $yearly_3; ?>">R$ <?php echo $yearly_3; ?>
 							</button>
 						</div>
 						<div class="d-flex">
-							<button type="button" id="button-yearly4" onclick="donationOption(this,'yearly',1000,true)"
-									class="btn btn-outline-dark button-options">R$ 1000
+							<button type="button" id="button-yearly4" onclick="donationOption(this,'yearly',<?php echo $yearly_4; ?>,true)"
+									class="btn btn-outline-dark button-options" data-amount-for-selection="<?php echo $yearly_4; ?>">R$ <?php echo $yearly_4; ?>
 							</button>
-							<button type="button" id="button-yearly5" onclick="donationOption(this,'yearly',2000,true)"
-									class="btn btn-outline-dark button-options">R$ 2000
+							<button type="button" id="button-yearly5" onclick="donationOption(this,'yearly',<?php echo $yearly_5; ?>,true)"
+									class="btn btn-outline-dark button-options" data-amount-for-selection="<?php echo $yearly_5; ?>">R$ <?php echo $yearly_5; ?>
 							</button>
 							<div class="form-floating button-options">
 								<input type="text" class="form-control" id="field-other-yearly"
@@ -193,22 +300,22 @@
 					</div>
 					<div id="donation-once-group" class="d-none">
 						<div class="d-flex">
-							<button type="button" id="button-once1" onclick="donationOption(this,'once',100,true)"
-									class="btn btn-outline-dark button-options">R$ 100
+							<button type="button" id="button-once1" onclick="donationOption(this,'once',<?php echo $once_1; ?>,true)"
+									class="btn btn-outline-dark button-options" data-amount-for-selection="<?php echo $once_1; ?>">R$ <?php echo $once_1; ?>
 							</button>
-							<button type="button" id="button-once2" onclick="donationOption(this,'once',200,true)"
-									class="btn btn-outline-dark button-options option-default-once">R$ 200
+							<button type="button" id="button-once2" onclick="donationOption(this,'once',<?php echo $once_2; ?>,true)"
+									class="btn btn-outline-dark button-options option-default-once" data-amount-for-selection="<?php echo $once_2; ?>">R$ <?php echo $once_2; ?>
 							</button>
-							<button type="button" id="button-once3" onclick="donationOption(this,'once',500,true)"
-									class="btn btn-outline-dark button-options">R$ 500
+							<button type="button" id="button-once3" onclick="donationOption(this,'once',<?php echo $once_3; ?>,true)"
+									class="btn btn-outline-dark button-options" data-amount-for-selection="<?php echo $once_3; ?>">R$ <?php echo $once_3; ?>
 							</button>
 						</div>
 						<div class="d-flex">
-							<button type="button" id="button-once4" onclick="donationOption(this,'once',1000,true)"
-									class="btn btn-outline-dark button-options">R$ 1000
+							<button type="button" id="button-once4" onclick="donationOption(this,'once',<?php echo $once_4; ?>,true)"
+									class="btn btn-outline-dark button-options" data-amount-for-selection="<?php echo $once_4; ?>">R$ <?php echo $once_4; ?>
 							</button>
-							<button type="button" id="button-once5" onclick="donationOption(this,'once',2000,true)"
-									class="btn btn-outline-dark button-options">R$ 2000
+							<button type="button" id="button-once5" onclick="donationOption(this,'once',<?php echo $once_5; ?>,true)"
+									class="btn btn-outline-dark button-options" data-amount-for-selection="<?php echo $once_5; ?>">R$ <?php echo $once_5; ?>
 							</button>
 							<div class="form-floating button-options">
 								<input type="text" class="form-control" id="field-other-once"
@@ -252,13 +359,13 @@
 					<div class="row">
 						<div class="col-md-12 mb-2">
 							<div class="form-floating ">
-								<input type="email" class="form-control" name="email" id="field-email" placeholder="name@example.com">
+								<input type="email" class="form-control" name="email" id="field-email" placeholder="nome@exemplo.com">
 								<label for="field-email">Endereço de e-mail</label>
 							</div>
 						</div>
 						<div class="col-md-12 mb-2">
 							<div class="form-floating ">
-								<input type="phone" class="form-control" name="phone" id="field-phone" placeholder="(00) 98765-4321" maxlength="15">
+								<input type="phone" class="form-control" name="phone" id="field-phone" placeholder="(99) 99999-9999" maxlength="15">
 								<label for="field-phone">Telefone</label>
 							</div>
 						</div>
@@ -364,6 +471,24 @@
 						</div>
 					</div>
 
+					<div class="row">
+						<div class="col-md-12 mb-2">
+							<div class="form-check">
+								<input class="form-check-input" type="checkbox" value="0" id="private" name="private">
+								<label class="form-check-label" for="anonymous_donation">
+									Fazer doação anonimamente
+								</label>
+							</div>
+						</div>
+						<div class="col-md-12 mb-2">
+							<div class="form-check">
+								<input class="form-check-input" type="checkbox" value="0" id="newsletter" name="newsletter">
+								<label class="form-check-label" for="newsletter">
+									Quero receber divulgações e comunicações por e-mail
+								</label>
+							</div>
+						</div>
+					</div>
 
 					<div class="row" id="div-add-on-fee" style="display: none">
 						<div class="col-md-12 mb-2">
@@ -434,7 +559,7 @@
 					echo '
 						<div class="row mb-3">
 							<div class="col-md-10 mt-3">
-								<img src="'. INCLUDE_PATH .'assets/img/' . $usuario['imagem'] . '" alt="Card ' . $usuario['id'] . '" style="width: 500px; height: 159px; object-fit: contain;" />
+								<img src="'. INCLUDE_PATH .'assets/img/' . $usuario['imagem'] . '" alt="Card ' . $usuario['id'] . '" style="width: 500px; height: 159px" />
 							</div>
 						</div>
 					';
@@ -448,14 +573,16 @@
 <footer>
  <div class="container mt-5">
 	<div class="row">
-		<div class="col-md-4">
+		<div class="col-md-3">
 			<span class="h5"><?php echo $nome; ?></span><br />
-			<?php echo $rua; ?><?php echo ($numero !== '') ? ', ' . $numero : ''; ?> - <?php echo $bairro; ?><br />
+			<div class="font-weight-light" style="font-size:13px;margin-top:5px">
+			<?php echo $rua; ?><?php echo ($numero !== '') ? ', ' . $numero : ''; ?> - <?php echo $bairro; ?>
 			<?php echo $cidade; ?> - <?php echo $estado; ?>, <?php echo $cep; ?><br />
 			Telefone: <a href="callto:<?php echo $telefone; ?>"><?php echo $telefone; ?></a> | E-mail: <a href="mailto:<?php echo $email; ?>"><?php echo $email; ?></a><br />
+			</div>
 		</div>
-		<div class="col-md-8">
-			<div class="social-net mt-4 mb-4">
+		<div class="col-md-6">
+			<div class="social-net mt-2 mb-4">
 				<a href="<?php echo ($facebook !== '') ? $facebook : '#'; ?>" <?php echo ($facebook == '') ? 'class="d-none"' : ''; ?>><i class="bi bi-facebook p-2"></i></a>
 				<a href="<?php echo ($instagram !== '') ? $instagram : '#'; ?>" <?php echo ($instagram == '') ? 'class="d-none"' : ''; ?>><i class="bi bi-instagram p-2"></i></a>
 				<a href="<?php echo ($linkedin !== '') ? $linkedin : '#'; ?>" <?php echo ($linkedin == '') ? 'class="d-none"' : ''; ?>><i class="bi bi-linkedin p-2"></i></a>
@@ -469,6 +596,17 @@
 				 | 
 				<a href="<?php echo $faq; ?>" rel="noopener noreferrer" target="_blank">
 					PERGUNTAS FREQUENTES
+				</a>
+				| 
+				<a href="/login" rel="noopener noreferrer" target="_blank">
+					LOGIN
+				</a>
+			</p>
+		</div>
+		<div class="col-md-3">
+		<p class="footer-linkd mt-5 footer-floema-doar font-weight-bold">
+				<a href="#" rel="noopener noreferrer" target="_blank">
+					Usamos Floema Doar | Open source
 				</a>
 			</p>
 		</div>
@@ -683,6 +821,17 @@
 	root.style.setProperty('--primary-color', color);
 	root.style.setProperty('--hover-color', hover);
 	root.style.setProperty('--progress-color', progress);
+</script>
+<script>
+	$(document).ready(function(){
+		const header = $("nav")
+		const footer = $("footer")
+
+		if ( self !== top ) {
+			header.hide()
+			footer.hide()
+		}
+	})
 </script>
 </body>
 </html>

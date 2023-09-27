@@ -41,17 +41,17 @@
         <div class="page-title-wrapper">
             <div class="page-title-heading">
                 <div class="page-title-icon">
-                    <i class="pe-7s-graph text-success"></i>
+                    <i class="pe-7s-tools text-success"></i>
                 </div>
                 <div>
                     Bem vindo <?php echo $nome; ?>
-                    <div class="page-title-subheading">Altere as informações da sua conta aqui!</div>
+                    <div class="page-title-subheading">Dados pessoais</div>
                 </div>
             </div>
             <div class="page-title-actions">
-                <a href="<?php echo INCLUDE_PATH_ADMIN; ?>back-end/logout.php" class="btn btn-info btn-shadow">
+                <!-- <a href="<?php echo INCLUDE_PATH_ADMIN; ?>back-end/logout.php" class="btn btn-info btn-shadow">
                     Sair
-                </a>
+                </a> -->
             </div>
         </div>
     </div>
