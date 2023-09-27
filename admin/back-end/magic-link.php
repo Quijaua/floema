@@ -35,12 +35,13 @@
     $stmt->bindParam(':asaas_id', $asaas_id, PDO::PARAM_STR);
     $stmt->execute();
 
+    // Informacoes do usuario
     $sql = "SELECT * FROM $tabela WHERE asaas_id = :asaas_id";
     $stmt = $conn->prepare($sql);
     $stmt->bindParam(':asaas_id', $asaas_id, PDO::PARAM_STR);
     $stmt->execute();
 
-    // Recuperar os resultados
+    // Recuperar os resultados do usuario
     $resultados = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
     // Verificar se o resultado foi encontrado
@@ -72,7 +73,7 @@
         $mail->Port       = $smtp_port;
 
         // Define o remetente e destinatário
-        $mail->setFrom('nao-responda@suainstituicao.com', 'Sua instituição');
+        $mail->setFrom($email, 'Atendimento - ' . $nome);
         $mail->addAddress($email, $nome);
 
         // Configurações do e-mail
