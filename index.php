@@ -22,24 +22,30 @@
 
     // Tabela que sera feita a consulta
     $tabela = "tb_checkout";
+	$tabela_2 = "tb_integracoes";
 
     // ID que você deseja pesquisar
     $id = 1;
 
     // Consulta SQL
     $sql = "SELECT * FROM $tabela WHERE id = :id";
+	$sql_2 = "SELECT * FROM $tabela_2 WHERE id = :id";
 
     // Preparar a consulta
     $stmt = $conn->prepare($sql);
+	$stmt_2 = $conn->prepare($sql_2);
 
     // Vincular o valor do parâmetro
     $stmt->bindParam(':id', $id, PDO::PARAM_INT);
+	$stmt_2->bindParam(':id', $id, PDO::PARAM_INT);
 
     // Executar a consulta
     $stmt->execute();
+	$stmt_2->execute();
 
     // Obter o resultado como um array associativo
     $resultado = $stmt->fetch(PDO::FETCH_ASSOC);
+	$resultado_2 = $stmt_2->fetch(PDO::FETCH_ASSOC);
 
     // Verificar se o resultado foi encontrado
     if ($resultado) {
@@ -85,6 +91,17 @@
         // ID não encontrado ou não existente
         echo "ID não encontrado.";
     }
+
+	// Verificar se o resultado_2 foi encontrado
+	if ($resultado_2) {
+		// Atribuir o valor da coluna à variável, ex.: "nome" = $nome
+		$fb_pixel = $resultado_2['fb_pixel'];
+		$gtm = $resultado_2['gtm'];
+		$g_analytics = $resultado_2['g_analytics'];
+	} else {
+		// ID não encontrado ou não existente
+		echo "ID não encontrado.";
+	}
 ?>
 <html lang="pt">
 <head>
@@ -171,6 +188,12 @@
 }</script>
 
 	<link rel="stylesheet" type="text/css" href="<?php echo INCLUDE_PATH; ?>assets/css/main.css"/>
+
+	<?php echo $fb_pixel; ?>
+
+	<?php echo $gtm; ?>
+	
+	<?php echo $g_analytics; ?>
 </head>
 <body>
 
