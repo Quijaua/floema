@@ -455,3 +455,43 @@ if (isset($_POST['btnUpdDonations'])) {
         }   
     }
 }
+
+if (isset($_POST['btnIntegration'])) {
+    //Inclui o arquivo 'config.php'
+    include('../../config.php');
+
+    // Verifique se o formulário foi enviado
+    if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+        // Tabela onde sera feita a alteracao
+        $tabela = 'tb_integracoes';
+
+        // Id da tabela
+        $id = '1';
+
+        // Informacoes coletadas pelo metodo POST
+        $fb_pixel = $_POST['fb_pixel'];
+        $gtm = $_POST['gtm'];
+        $g_analytics = $_POST['g_analytics'];
+
+        // Atualize o item no banco de dados
+        $sql = "UPDATE $tabela SET fb_pixel = :fb_pixel, gtm = :gtm, g_analytics = :g_analytics WHERE id = :id";
+        $stmt = $conn->prepare($sql);
+        $stmt->bindParam(':fb_pixel', $fb_pixel);
+        $stmt->bindParam(':gtm', $gtm);
+        $stmt->bindParam(':g_analytics', $g_analytics);
+        $stmt->bindParam(':id', $id);
+
+        try {
+            $stmt->execute();
+
+            // Exibir a modal após salvar as informações
+            $_SESSION['show_modal'] = "<script>$('#staticBackdrop').modal('toggle');</script>";
+            $_SESSION['msg'] = 'As informações de integração foram atualizadas com sucesso!';
+
+            //Voltar para a pagina do formulario
+            header('Location: ' . INCLUDE_PATH_ADMIN);
+        } catch (PDOException $e) {
+            echo "Erro na atualização: " . $e->getMessage();
+        }   
+    }
+}

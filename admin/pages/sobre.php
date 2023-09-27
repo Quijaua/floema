@@ -504,7 +504,6 @@
                         <textarea id="embed_wrapper" class="m-0 p-0" disabled style="border: none; overflow: hidden; resize: none; width: 100%; background: transparent; text-align: left">
                             <iframe id="embed" src="<?php echo INCLUDE_PATH; ?>" frameborder="0" width="100%" height="1400"></iframe>
                         </textarea>
-                        <!--<button id="btnIframe" class="btn btn-primary">Copiar código</button>-->
                     </div>
                     </p>
                     <button id="btnIframe" class="btn btn-primary">Copiar código</button>
