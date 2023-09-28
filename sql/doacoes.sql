@@ -40,6 +40,7 @@ CREATE TABLE `tb_checkout` (
   `linkedin` varchar(255) DEFAULT NULL,
   `youtube` varchar(255) DEFAULT NULL,
   `website` varchar(255) DEFAULT NULL,
+  `twitter` varchar(255) DEFAULT NULL,
   `cep` varchar(255) NOT NULL,
   `rua` varchar(255) NOT NULL,
   `numero` varchar(255) DEFAULT NULL,
@@ -73,8 +74,8 @@ CREATE TABLE `tb_checkout` (
 -- Extraindo dados da tabela `tb_checkout`
 --
 
-INSERT INTO `tb_checkout` (`id`, `nome`, `logo`, `title`, `descricao`, `privacidade`, `faq`, `facebook`, `instagram`, `linkedin`, `youtube`, `website`, `cep`, `rua`, `numero`, `bairro`, `cidade`, `estado`, `telefone`, `email`, `color`, `hover`, `load_btn`, `progress`, `monthly_1`, `monthly_2`, `monthly_3`, `monthly_4`, `monthly_5`, `yearly_1`, `yearly_2`, `yearly_3`, `yearly_4`, `yearly_5`, `once_1`, `once_2`, `once_3`, `once_4`, `once_5`) VALUES
-(1, 'Floema', 'floema-logo.png', '', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam tempus tortor nec gravida pretium. Vestibulum ipsum diam, lacinia a est sit amet, tempor elementum odio. Phasellus vel eros sit amet dolor mollis ultricies id eu lectus. Nunc mattis magna id augue malesuada luctus. Donec sit amet diam id diam interdum sollicitudin.', 'https://seusite.com.br/politica-de-privacidade/', 'https://seusite.com.br/perguntas-frequentes/', 'https://facebook.com/seufacebook', 'https://facebook.com/seuinstagram', NULL, NULL, NULL, '11111-222', 'Rua Exemplo Nome da Rua', '999', 'Centro', 'São Paulo', 'SP', '(11) 9999-9999', 'suainstitucao@email.org.br', '#ffc107', '#212529', '#212529', '0, 204, 255', '20', '50', '100', '200', '300', '120', '240', '500', '1000', '2000', '100', '200', '500', '1000', '2000');
+INSERT INTO `tb_checkout` (`id`, `nome`, `logo`, `title`, `descricao`, `privacidade`, `faq`, `facebook`, `instagram`, `linkedin`, `youtube`, `twitter`, `website`, `cep`, `rua`, `numero`, `bairro`, `cidade`, `estado`, `telefone`, `email`, `color`, `hover`, `load_btn`, `progress`, `monthly_1`, `monthly_2`, `monthly_3`, `monthly_4`, `monthly_5`, `yearly_1`, `yearly_2`, `yearly_3`, `yearly_4`, `yearly_5`, `once_1`, `once_2`, `once_3`, `once_4`, `once_5`) VALUES
+(1, 'Floema', 'floema-logo.png', '', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam tempus tortor nec gravida pretium. Vestibulum ipsum diam, lacinia a est sit amet, tempor elementum odio. Phasellus vel eros sit amet dolor mollis ultricies id eu lectus. Nunc mattis magna id augue malesuada luctus. Donec sit amet diam id diam interdum sollicitudin.', 'https://seusite.com.br/politica-de-privacidade/', 'https://seusite.com.br/perguntas-frequentes/', 'https://facebook.com/seufacebook', 'https://facebook.com/seuinstagram', NULL, NULL, NULL, NULL, '11111-222', 'Rua Exemplo Nome da Rua', '999', 'Centro', 'São Paulo', 'SP', '(11) 9999-9999', 'suainstitucao@email.org.br', '#ffc107', '#212529', '#212529', '0, 204, 255', '20', '50', '100', '200', '300', '120', '240', '500', '1000', '2000', '100', '200', '500', '1000', '2000');
 
 -- --------------------------------------------------------
 
@@ -100,8 +101,8 @@ CREATE TABLE `tb_clientes` (
   `cidade` varchar(255) DEFAULT NULL,
   `uf` varchar(255) DEFAULT NULL,
   `asaas_id` varchar(255) DEFAULT NULL,
-  `newsletter` tinyint(1) DEFAULT NULL,
-  `private` tinyint(1) DEFAULT NULL
+  `newsletter` tinyint(1) NOT NULL,
+  `private` tinyint(1) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 INSERT INTO `tb_clientes` (`id`, `roles`, `nome`, `email`, `password`, `magic_link`, `phone`, `cpf`, `cep`, `endereco`, `numero`, `complemento`, `municipio`, `cidade`, `uf`, `asaas_id`, `newsletter`, `private`) VALUES (247, 1, 'Admin', 'admin@admin.com', '$2y$10$gphtP5ZDgkZNctcEhLKfs.MQ8qWc6Ebf8V6sqRf4q7QhClHSojT7.', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0, 0);
