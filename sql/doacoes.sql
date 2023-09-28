@@ -40,6 +40,7 @@ CREATE TABLE `tb_checkout` (
   `linkedin` varchar(255) DEFAULT NULL,
   `youtube` varchar(255) DEFAULT NULL,
   `website` varchar(255) DEFAULT NULL,
+  `twitter` varchar(255) DEFAULT NULL,
   `cep` varchar(255) NOT NULL,
   `rua` varchar(255) NOT NULL,
   `numero` varchar(255) DEFAULT NULL,
@@ -73,8 +74,8 @@ CREATE TABLE `tb_checkout` (
 -- Extraindo dados da tabela `tb_checkout`
 --
 
-INSERT INTO `tb_checkout` (`id`, `nome`, `logo`, `title`, `descricao`, `privacidade`, `faq`, `facebook`, `instagram`, `linkedin`, `youtube`, `website`, `cep`, `rua`, `numero`, `bairro`, `cidade`, `estado`, `telefone`, `email`, `color`, `hover`, `load_btn`, `progress`, `monthly_1`, `monthly_2`, `monthly_3`, `monthly_4`, `monthly_5`, `yearly_1`, `yearly_2`, `yearly_3`, `yearly_4`, `yearly_5`, `once_1`, `once_2`, `once_3`, `once_4`, `once_5`) VALUES
-(1, 'Floema', 'floema-logo.png', '', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam tempus tortor nec gravida pretium. Vestibulum ipsum diam, lacinia a est sit amet, tempor elementum odio. Phasellus vel eros sit amet dolor mollis ultricies id eu lectus. Nunc mattis magna id augue malesuada luctus. Donec sit amet diam id diam interdum sollicitudin.', 'https://seusite.com.br/politica-de-privacidade/', 'https://seusite.com.br/perguntas-frequentes/', 'https://facebook.com/seufacebook', 'https://facebook.com/seuinstagram', NULL, NULL, NULL, '11111-222', 'Rua Exemplo Nome da Rua', '999', 'Centro', 'São Paulo', 'SP', '(11) 9999-9999', 'suainstitucao@email.org.br', '#ffc107', '#212529', '#212529', '0, 204, 255', '20', '50', '100', '200', '300', '120', '240', '500', '1000', '2000', '100', '200', '500', '1000', '2000');
+INSERT INTO `tb_checkout` (`id`, `nome`, `logo`, `title`, `descricao`, `privacidade`, `faq`, `facebook`, `instagram`, `linkedin`, `youtube`, `twitter`, `website`, `cep`, `rua`, `numero`, `bairro`, `cidade`, `estado`, `telefone`, `email`, `color`, `hover`, `load_btn`, `progress`, `monthly_1`, `monthly_2`, `monthly_3`, `monthly_4`, `monthly_5`, `yearly_1`, `yearly_2`, `yearly_3`, `yearly_4`, `yearly_5`, `once_1`, `once_2`, `once_3`, `once_4`, `once_5`) VALUES
+(1, 'Floema', 'floema-logo.png', '', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam tempus tortor nec gravida pretium. Vestibulum ipsum diam, lacinia a est sit amet, tempor elementum odio. Phasellus vel eros sit amet dolor mollis ultricies id eu lectus. Nunc mattis magna id augue malesuada luctus. Donec sit amet diam id diam interdum sollicitudin.', 'https://seusite.com.br/politica-de-privacidade/', 'https://seusite.com.br/perguntas-frequentes/', 'https://facebook.com/seufacebook', 'https://facebook.com/seuinstagram', NULL, NULL, NULL, NULL, '11111-222', 'Rua Exemplo Nome da Rua', '999', 'Centro', 'São Paulo', 'SP', '(11) 9999-9999', 'suainstitucao@email.org.br', '#ffc107', '#212529', '#212529', '0, 204, 255', '20', '50', '100', '200', '300', '120', '240', '500', '1000', '2000', '100', '200', '500', '1000', '2000');
 
 -- --------------------------------------------------------
 
@@ -100,8 +101,8 @@ CREATE TABLE `tb_clientes` (
   `cidade` varchar(255) DEFAULT NULL,
   `uf` varchar(255) DEFAULT NULL,
   `asaas_id` varchar(255) DEFAULT NULL,
-  `newsletter` tinyint(1) DEFAULT NULL,
-  `private` tinyint(1) DEFAULT NULL
+  `newsletter` tinyint(1) NOT NULL,
+  `private` tinyint(1) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 INSERT INTO `tb_clientes` (`id`, `roles`, `nome`, `email`, `password`, `magic_link`, `phone`, `cpf`, `cep`, `endereco`, `numero`, `complemento`, `municipio`, `cidade`, `uf`, `asaas_id`, `newsletter`, `private`) VALUES (247, 1, 'Admin', 'admin@admin.com', '$2y$10$gphtP5ZDgkZNctcEhLKfs.MQ8qWc6Ebf8V6sqRf4q7QhClHSojT7.', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0, 0);
@@ -120,6 +121,19 @@ CREATE TABLE `tb_integracoes` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 INSERT INTO `tb_integracoes` (`id`, `fb_pixel`, `gtm`, `g_analytics`) VALUES (1, '', '', '');
+
+-- --------------------------------------------------------
+
+--
+-- Estrutura da tabela `tb_mensagens`
+--
+
+CREATE TABLE `tb_mensagens` (
+  `id` int(11) NOT NULL,
+  `welcome_email` longtext DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+INSERT INTO `tb_mensagens` (`id`, `welcome_email`) VALUES (1, 'Muito obrigado por colaborar com nossa instituição.');
 
 -- --------------------------------------------------------
 
@@ -149,6 +163,12 @@ CREATE TABLE `tb_doacoes` (
   `cartao_numero` int(4) DEFAULT NULL,
   `cartao_bandeira` varchar(100) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+LOCK TABLES `tb_doacoes` WRITE;
+/*!40000 ALTER TABLE `tb_doacoes` DISABLE KEYS */;
+INSERT INTO `tb_doacoes` VALUES (1,'cus_000005450967','pay_6237274104232346',NULL,200.00,'BOLETO','https://sandbox.asaas.com/i/6237274104232346','https://sandbox.asaas.com/b/pdf/6237274104232346','PENDING','2023-10-04','2023-09-27',NULL,NULL,NULL,NULL,'23795949300000200002693090000121979000092560','1219790','23792693079000012197190000925603594930000020000',NULL,NULL),(2,'cus_000005450969','pay_7644352752939147',NULL,213.00,'BOLETO','https://sandbox.asaas.com/i/7644352752939147','https://sandbox.asaas.com/b/pdf/7644352752939147','PENDING','2023-10-04','2023-09-27',NULL,NULL,NULL,NULL,'23794949300000213002693090000121979100092560','1219791','23792693079000012197191000925601494930000021300',NULL,NULL);
+/*!40000 ALTER TABLE `tb_doacoes` ENABLE KEYS */;
+UNLOCK TABLES;
 
 -- --------------------------------------------------------
 

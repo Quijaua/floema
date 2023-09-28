@@ -495,3 +495,39 @@ if (isset($_POST['btnIntegration'])) {
         }   
     }
 }
+
+if (isset($_POST['btnMessages'])) {
+    //Inclui o arquivo 'config.php'
+    include('../../config.php');
+
+    // Verifique se o formulário foi enviado
+    if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+        // Tabela onde sera feita a alteracao
+        $tabela = 'tb_mensagens';
+
+        // Id da tabela
+        $id = '1';
+
+        // Informacoes coletadas pelo metodo POST
+        $welcome_email = $_POST['welcome_email'];
+
+        // Atualize o item no banco de dados
+        $sql = "UPDATE $tabela SET welcome_email = :welcome_email WHERE id = :id";
+        $stmt = $conn->prepare($sql);
+        $stmt->bindParam(':welcome_email', $welcome_email);
+        $stmt->bindParam(':id', $id);
+
+        try {
+            $stmt->execute();
+
+            // Exibir a modal após salvar as informações
+            $_SESSION['show_modal'] = "<script>$('#staticBackdrop').modal('toggle');</script>";
+            $_SESSION['msg'] = 'As informações de mensagens foram atualizadas com sucesso!';
+
+            //Voltar para a pagina do formulario
+            header('Location: ' . INCLUDE_PATH_ADMIN);
+        } catch (PDOException $e) {
+            echo "Erro na atualização: " . $e->getMessage();
+        }
+    }
+}
