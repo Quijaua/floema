@@ -17,7 +17,7 @@
     $id = 1;
 
     // Consulta SQL
-    $sql = "SELECT nome, logo, title, descricao, privacidade, faq, facebook, instagram, linkedin, twitter, youtube, website, cep, rua, numero, bairro, cidade, estado, telefone, email, color, hover, load_btn, monthly_1, monthly_2, monthly_3, monthly_4, monthly_5, yearly_1, yearly_2, yearly_3, yearly_4, yearly_5, once_1, once_2, once_3, once_4, once_5 FROM $tabela WHERE id = :id";
+    $sql = "SELECT nome, logo, title, descricao, privacidade, faq, facebook, instagram, linkedin, twitter, youtube, website, cep, rua, numero, bairro, cidade, estado, telefone, email, nav_color, nav_background, background, color, hover, text_color, load_btn, monthly_1, monthly_2, monthly_3, monthly_4, monthly_5, yearly_1, yearly_2, yearly_3, yearly_4, yearly_5, once_1, once_2, once_3, once_4, once_5 FROM $tabela WHERE id = :id";
     $sql_2 = "SELECT fb_pixel, gtm, g_analytics FROM $tabela_2 WHERE id = :id";
 
     // Preparar a consulta
@@ -59,8 +59,12 @@
         $estado = $resultado['estado'];
         $telefone = $resultado['telefone'];
         $email = $resultado['email'];
+        $nav_color = $resultado['nav_color'];
+        $nav_background = $resultado['nav_background'];
+        $background = $resultado['background'];
         $color = $resultado['color'];
         $hover = $resultado['hover'];
+        $text_color = $resultado['text_color'];
         $load_btn = $resultado['load_btn'];
         $monthly_1 = $resultado['monthly_1'];
         $monthly_2 = $resultado['monthly_2'];

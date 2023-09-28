@@ -69,6 +69,10 @@
         $estado = $resultado['estado'];
         $telefone = $resultado['telefone'];
         $email = $resultado['email'];
+        $nav_color = $resultado['nav_color'];
+        $nav_background = $resultado['nav_background'];
+        $background = $resultado['background'];
+        $text_color = $resultado['text_color'];
         $color = $resultado['color'];
         $hover = $resultado['hover'];
         $progress = $resultado['progress'];
@@ -198,7 +202,7 @@
 <body>
 
 
-<nav class="navbar navbar-expand-md navbar-dark" style="background-color: #fff;">
+<nav class="navbar navbar-expand-md navbar-dark" style="background-color: <?php echo $nav_background; ?>; color: <?php echo $nav_color; ?>;">
 	<div class="container">
 		<div class="row">
 			<div class="col-md-4 p-3">
@@ -813,11 +817,16 @@
 <script>
 	// Seleciona o elemento <html> (ou qualquer outro elemento de nível superior)
 	const root = document.documentElement;
+	const background = "<?php echo $background; ?>";
+	const textColor = "<?php echo $text_color; ?>";
 	const color = "<?php echo $color; ?>";
 	const hover = "<?php echo $hover; ?>";
 	const progress = "<?php echo $progress; ?>";
 
 	// Altera o valor da variável --background-color
+	root.style.setProperty('--background', background);
+	root.style.setProperty('--text-color', textColor);
+
 	root.style.setProperty('--primary-color', color);
 	root.style.setProperty('--hover-color', hover);
 	root.style.setProperty('--progress-color', progress);

@@ -64,6 +64,20 @@
                     <h5 class="card-title">Cores</h5>
                     <form action="<?php echo INCLUDE_PATH_ADMIN; ?>back-end/update.php" method="post" enctype="multipart/form-data">
                         <div class="position-relative row form-group">
+                            <label for="backgroundCode" class="col-sm-2 col-form-label">Cor de fundo *</label>
+                            <div class="col-sm-10 d-flex">
+                                <input type="color" id="backgroundPicker" class="form-color" value="<?php echo $background; ?>">
+                                <input type="text" id="backgroundCode" name="background" class="form-control" placeholder="Digite o código hexadecimal da cor" value="<?php echo $background; ?>">
+                            </div>
+                        </div>
+                        <div class="position-relative row form-group">
+                            <label for="textColorCode" class="col-sm-2 col-form-label">Cor dos textos *</label>
+                            <div class="col-sm-10 d-flex">
+                                <input type="color" id="textColorPicker" class="form-color" value="<?php echo $text_color; ?>">
+                                <input type="text" id="textColorCode" name="text_color" class="form-control" placeholder="Digite o código hexadecimal da cor" value="<?php echo $text_color; ?>">
+                            </div>
+                        </div>
+                        <div class="position-relative row form-group">
                             <label for="colorCode" class="col-sm-2 col-form-label">Cor dos Botões *</label>
                             <div class="col-sm-10 d-flex">
                                 <input type="color" id="colorPicker" class="form-color" value="<?php echo $color; ?>">
@@ -147,6 +161,52 @@ function getCepData()
         });
     }
 }
+</script>
+<script>
+    const backgroundPicker = document.getElementById('backgroundPicker');
+    const backgroundCodeInput = document.getElementById('backgroundCode');
+
+    backgroundPicker.addEventListener('input', updateBackgroundPreview);
+    backgroundCodeInput.addEventListener('input', updateBackgroundFromCode);
+
+    function updateBackgroundPreview(event) {
+        const selectedBackground = event.target.value;
+        backgroundCodeInput.value = selectedBackground;
+    }
+
+    function updateBackgroundFromCode() {
+        const backgroundCode = backgroundCodeInput.value;
+        if (isValidHexBackgroundCode(backgroundCode)) {
+            backgroundPicker.value = backgroundCode;
+        }
+    }
+
+    function isValidHexBackgroundCode(code) {
+        return /^#([0-9A-F]{3}){1,2}$/i.test(code);
+    }
+</script>
+<script>
+    const textColorPicker = document.getElementById('textColorPicker');
+    const textColorCodeInput = document.getElementById('textColorCode');
+
+    textColorPicker.addEventListener('input', updateTextColorPreview);
+    textColorCodeInput.addEventListener('input', updateTextColorFromCode);
+
+    function updateTextColorPreview(event) {
+        const selectedTextColor = event.target.value;
+        textColorCodeInput.value = selectedTextColor;
+    }
+
+    function updateTextColorFromCode() {
+        const textColorCode = textColorCodeInput.value;
+        if (isValidHexTextColorCode(textColorCode)) {
+            textColorPicker.value = textColorCode;
+        }
+    }
+
+    function isValidHexTextColorCode(code) {
+        return /^#([0-9A-F]{3}){1,2}$/i.test(code);
+    }
 </script>
 <script>
     const colorPicker = document.getElementById('colorPicker');
