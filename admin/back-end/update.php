@@ -36,7 +36,7 @@ if (isset($_POST['btnUpdAbout'])) {
             $_SESSION['msg'] = 'As informações sobre sua instituição foram atualizadas com sucesso!';
 
             //Voltar para a pagina do formulario
-            header('Location: ' . INCLUDE_PATH_ADMIN . 'sobre');
+            header('Location: ' . INCLUDE_PATH_ADMIN . 'cabecalho');
         } catch (PDOException $e) {
             echo "Erro na atualização: " . $e->getMessage();
         }
@@ -96,7 +96,7 @@ if (isset($_POST['btnUpdLogo'])) {
                     $_SESSION['msg'] = 'A logo foi salva com sucesso com sucesso!';
 
                     //Voltar para a pagina do formulario
-                    header('Location: ' . INCLUDE_PATH_ADMIN . 'sobre');
+                    header('Location: ' . INCLUDE_PATH_ADMIN . 'cabecalho');
                 } else {
                     echo "Erro ao enviar o arquivo para o servidor.";
                 }
@@ -104,169 +104,6 @@ if (isset($_POST['btnUpdLogo'])) {
 
         } catch (PDOException $e) {
             echo "Erro ao salvar o nome da logo no banco de dados: " . $e->getMessage();
-        }
-    }
-
-    if(isset($_POST['btnUpdatePersonalize']))
-    {
-        // Nome da tabela para a busca
-        $tabela = 'tb_checkout';
-
-        // Dados para o update
-        $id = '1'; // ID do registro a ser atualizado
-        $cores_cabecalho = $_POST['cores_cabecalho']; // Novo valor para atualizar
-        $cores_elementos = $_POST['cores_elementos']; // Novo valor para atualizar
-        $logo_position = $_POST['logo_position']; // Novo valor para atualizar
-        $privacidade = $_POST['privacidade']; // Novo valor para atualizar
-        $faq = $_POST['faq']; // Novo valor para atualizar
-        $contato = $_POST['contato']; // Novo valor para atualizar
-        $title = $_POST['title']; // Novo valor para atualizar
-        $text = $_POST['text']; // Novo valor para atualizar
-
-        // Preparando a consulta SQL
-        $sqlSelect = $conn->prepare("SELECT (logo) FROM $tabela WHERE id=:id");
-        
-        // Substituindo os parâmetros na consulta
-        $sqlSelect->bindParam(':id', $id);
-
-        // Executando a consulta
-        $sqlSelect->execute();
-        
-        // Obtendo os resultados da busca
-        $logo = $sqlSelect->fetchAll(PDO::FETCH_ASSOC);
-        
-        // Iterando sobre os resultados
-        foreach ($logo as $data) {
-            // Acessando os valores dos campos do resultado
-            $logo = $data['logo'];
-        }
-
-        $updImage = true;
-    
-        $dados = filter_input_array(INPUT_POST, FILTER_DEFAULT);
-        
-        $arquivo = $_FILES['logo']['name'];
-        
-        //Pasta onde o arquivo vai ser salvo
-        $_UP['pasta'] = INCLUDE_PATH . 'assets/img/';
-        
-        //Tamanho máximo do arquivo em Bytes
-        $_UP['tamanho'] = 1024*1024*2; //2mb
-        
-        //Array com a extensões permitidas
-        $_UP['extensoes'] = array('png', 'jpg', 'jpeg');
-        
-        //Renomeiar
-        $_UP['renomeia'] = true;
-        
-        //Array com os tipos de erros de upload do PHP
-        $_UP['erros'][0] = 'Não houve erro';
-        $_UP['erros'][1] = 'O arquivo no upload é maior que o limite do PHP';
-        $_UP['erros'][2] = 'O arquivo ultrapassa o limite de tamanho especificado no HTML';
-        $_UP['erros'][3] = 'O upload do arquivo foi feito parcialmente';
-        $_UP['erros'][4] = 'Não foi feito o upload do arquivo';
-        
-        //O arquivo passou em todas as verificações, hora de tentar move-lo para a pasta foto
-        //Primeiro verifica se deve trocar o nome do arquivo
-        if($_UP['renomeia'] == true){
-            //Cria um nome baseado no UNIX TIMESTAMP atual e com extensão .jpg
-            $nome_final = time().'.png';
-        }else{
-            //mantem o nome original do arquivo
-            $nome_final = $_FILES['logo']['name'];
-        }
-        if ($_FILES['logo']['name'] == '')
-        {
-            $updImage = false;
-        }
-
-        //Faz a verificação da extensao do arquivo
-        $tmp = explode('.', $_FILES['logo']['name']);
-        $extensao = strtolower(end($tmp));
-
-        if ($updImage == false) {
-            // Preparando a consulta SQL
-            $stmt = $conn->prepare("UPDATE $tabela SET 
-                cores_cabecalho=:cores_cabecalho,
-                cores_elementos=:cores_elementos,
-                logo_position=:logo_position,
-                privacidade=:privacidade,
-                faq=:faq,
-                contato=:contato,
-                title=:title,
-                text=:text
-            WHERE id=:id");
-
-            // Substituindo os parâmetros na consulta
-            $stmt->bindParam(':cores_cabecalho', $cores_cabecalho);
-            $stmt->bindParam(':cores_elementos', $cores_elementos);
-            $stmt->bindParam(':logo_position', $logo_position);
-            $stmt->bindParam(':privacidade', $privacidade);
-            $stmt->bindParam(':faq', $faq);
-            $stmt->bindParam(':contato', $contato);
-            $stmt->bindParam(':title', $title);
-            $stmt->bindParam(':text', $text);
-            $stmt->bindParam(':id', $id);
-
-            // Executando o update
-            $stmt->execute();
-
-            // Mensagem de sucesso
-            $_SESSION['msgcad'] = 'As informações de segurança foram atualizadas com sucesso!';
-            header("Location: ".INCLUDE_PATH_CHECKOUT."personalizar");
-        }
-
-        else if(array_search($extensao, $_UP['extensoes']) === false){
-            // Mensagem de falha
-            $_SESSION['msgcad'] = 'A extensão da imagem é inválida.';
-        }
-        
-        //Faz a verificação do tamanho do arquivo
-        else if ($_UP['tamanho'] < $_FILES['logo']['size']){
-            // Mensagem de falha
-            $_SESSION['msgcad'] = 'Arquivo muito grande.';
-        }
-
-        else if ($updImage == true){
-            //Verificar se é possivel mover o arquivo para a pasta escolhida
-            if(unlink("../assets/img/".$logo)){
-                if(move_uploaded_file($_FILES['logo']['tmp_name'], $_UP['pasta']. $nome_final)){
-                    // Preparando a consulta SQL
-                    $stmt = $conn->prepare("UPDATE $tabela SET 
-                        cores_cabecalho=:cores_cabecalho,
-                        cores_elementos=:cores_elementos,
-                        logo=:logo,
-                        logo_position=:logo_position,
-                        privacidade=:privacidade,
-                        faq=:faq,
-                        contato=:contato,
-                        title=:title,
-                        text=:text
-                    WHERE id=:id");
-    
-                    // Substituindo os parâmetros na consulta
-                    $stmt->bindParam(':cores_cabecalho', $cores_cabecalho);
-                    $stmt->bindParam(':cores_elementos', $cores_elementos);
-                    $stmt->bindParam(':logo', $nome_final);
-                    $stmt->bindParam(':logo_position', $logo_position);
-                    $stmt->bindParam(':privacidade', $privacidade);
-                    $stmt->bindParam(':faq', $faq);
-                    $stmt->bindParam(':contato', $contato);
-                    $stmt->bindParam(':title', $title);
-                    $stmt->bindParam(':text', $text);
-                    $stmt->bindParam(':id', $id);
-    
-                    // Executando o update
-                    $stmt->execute();
-
-                    // Mensagem de sucesso
-                    $_SESSION['msgcad'] = 'As informações de segurança foram atualizadas com sucesso!';
-                    header("Location: ".INCLUDE_PATH_CHECKOUT."personalizar");
-                }else{
-                    //Upload não efetuado com sucesso, exibe a mensagem
-                    $_SESSION['msgcad'] = 'Erro ao atualizar.';
-                }
-            }
         }
     }
 }
@@ -285,13 +122,17 @@ if (isset($_POST['btnUpdColor'])) {
         $id = '1';
 
         //Informacoes coletadas pelo metodo POST
+        $background = $_POST['background'];
+        $text_color = $_POST['text_color'];
         $color = $_POST['color'];
         $hover = $_POST['hover'];
         $load_btn = $_POST['loadBtn'];
 
         // Atualize o item no banco de dados
-        $sql = "UPDATE $tabela SET color = :color, hover = :hover, load_btn = :loadBtn WHERE id = :id";
+        $sql = "UPDATE $tabela SET background = :background, text_color = :text_color, color = :color, hover = :hover, load_btn = :loadBtn WHERE id = :id";
         $stmt = $conn->prepare($sql);
+        $stmt->bindParam(':background', $background);
+        $stmt->bindParam(':text_color', $text_color);
         $stmt->bindParam(':color', $color);
         $stmt->bindParam(':hover', $hover);
         $stmt->bindParam(':loadBtn', $load_btn);
@@ -305,7 +146,46 @@ if (isset($_POST['btnUpdColor'])) {
             $_SESSION['msg'] = 'As informações sobre sua instituição foram atualizadas com sucesso!';
 
             //Voltar para a pagina do formulario
-            header('Location: ' . INCLUDE_PATH_ADMIN . 'sobre');
+            header('Location: ' . INCLUDE_PATH_ADMIN . 'aparencia');
+        } catch (PDOException $e) {
+            echo "Erro na atualização: " . $e->getMessage();
+        }
+    }
+}
+
+if (isset($_POST['btnUpdNavColor'])) {
+    //Inclui o arquivo 'config.php'
+    include('../../config.php');
+
+    // Verifique se o formulário foi enviado
+    if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+
+        //Tabela onde sera feita a alteracao
+        $tabela = 'tb_checkout';
+
+        //Id da tabela
+        $id = '1';
+
+        //Informacoes coletadas pelo metodo POST
+        $nav_color = $_POST['nav_color'];
+        $nav_background = $_POST['nav_background'];
+
+        // Atualize o item no banco de dados
+        $sql = "UPDATE $tabela SET nav_color = :nav_color, nav_background = :nav_background WHERE id = :id";
+        $stmt = $conn->prepare($sql);
+        $stmt->bindParam(':nav_color', $nav_color);
+        $stmt->bindParam(':nav_background', $nav_background);
+        $stmt->bindParam(':id', $id);
+
+        try {
+            $stmt->execute();
+
+            // Exibir a modal após salvar as informações
+            $_SESSION['show_modal'] = "<script>$('#staticBackdrop').modal('toggle');</script>";
+            $_SESSION['msg'] = 'As informações sobre sua instituição foram atualizadas com sucesso!';
+
+            //Voltar para a pagina do formulario
+            header('Location: ' . INCLUDE_PATH_ADMIN . 'cabecalho');
         } catch (PDOException $e) {
             echo "Erro na atualização: " . $e->getMessage();
         }
@@ -338,6 +218,9 @@ if (isset($_POST['btnUpdFooter'])) {
         if (!isset($_POST["dLinkedin"])) {
             $linkedin = $_POST['linkedin'];
         }
+        if (!isset($_POST["dTwitter"])) {
+            $twitter = $_POST['twitter'];
+        }
         if (!isset($_POST["dYoutube"])) {
             $youtube = $_POST['youtube'];
         }
@@ -358,13 +241,14 @@ if (isset($_POST['btnUpdFooter'])) {
         $email = $_POST['email'];
 
         // Atualize o item no banco de dados
-        $sql = "UPDATE $tabela SET privacidade = :privacidade, faq = :faq, facebook = :facebook, instagram = :instagram, linkedin = :linkedin, youtube = :youtube, website = :website, cep = :cep, rua = :rua, numero = :numero, bairro = :bairro, cidade = :cidade, estado = :estado, telefone = :telefone, email = :email WHERE id = :id";
+        $sql = "UPDATE $tabela SET privacidade = :privacidade, faq = :faq, facebook = :facebook, instagram = :instagram, linkedin = :linkedin, twitter = :twitter, youtube = :youtube, website = :website, cep = :cep, rua = :rua, numero = :numero, bairro = :bairro, cidade = :cidade, estado = :estado, telefone = :telefone, email = :email WHERE id = :id";
         $stmt = $conn->prepare($sql);
         $stmt->bindParam(':privacidade', $privacidade);
         $stmt->bindParam(':faq', $faq);
         $stmt->bindParam(':facebook', $facebook);
         $stmt->bindParam(':instagram', $instagram);
         $stmt->bindParam(':linkedin', $linkedin);
+        $stmt->bindParam(':twitter', $twitter);
         $stmt->bindParam(':youtube', $youtube);
         $stmt->bindParam(':website', $website);
         $stmt->bindParam(':cep', $cep);
@@ -385,7 +269,7 @@ if (isset($_POST['btnUpdFooter'])) {
             $_SESSION['msg'] = 'As informações do rodapé foram atualizadas com sucesso!';
 
             //Voltar para a pagina do formulario
-            header('Location: ' . INCLUDE_PATH_ADMIN . 'sobre');
+            header('Location: ' . INCLUDE_PATH_ADMIN . 'rodape');
         } catch (PDOException $e) {
             echo "Erro na atualização: " . $e->getMessage();
         }
@@ -489,7 +373,7 @@ if (isset($_POST['btnIntegration'])) {
             $_SESSION['msg'] = 'As informações de integração foram atualizadas com sucesso!';
 
             //Voltar para a pagina do formulario
-            header('Location: ' . INCLUDE_PATH_ADMIN);
+            header('Location: ' . INCLUDE_PATH_ADMIN . 'integracoes');
         } catch (PDOException $e) {
             echo "Erro na atualização: " . $e->getMessage();
         }   

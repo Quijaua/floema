@@ -32,6 +32,9 @@
             {
                 $_SESSION['asaas_id'] = $asaas_id;
                 header("Location: " . INCLUDE_PATH . "login/ativar-conta.php");
+            } else {
+                $_SESSION['msg'] = "Por favor faça login em sua conta!";
+                header("Location: " . INCLUDE_PATH_USER);
             }
         } else {
             $_SESSION['msg'] = "Link inválido!";

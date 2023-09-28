@@ -36,6 +36,7 @@
 
     if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["SendRecupPassword"])) {
         //var_dump($dados);
+        // Informacoes do usuario
         $query_usuario = "SELECT id, nome, email 
                     FROM $tabela 
                     WHERE email =:email  
@@ -46,6 +47,7 @@
 
         if (($result_usuario) and ($result_usuario->rowCount() != 0)) {
             $row_usuario = $result_usuario->fetch(PDO::FETCH_ASSOC);
+
             $token = password_hash($row_usuario['id'], PASSWORD_DEFAULT);
             //echo "Chave $token <br>";
 
@@ -73,7 +75,7 @@
                     $mail->SMTPSecure = $smtp_secure;
                     $mail->Port       = $smtp_port;
 
-                    $mail->setFrom('atendimento@seusite.com.br', 'Atendimento');
+                    $mail->setFrom($row_usuario['email'], 'Atendimento - ' . $row_usuario['nome']);
                     $mail->addAddress($row_usuario['email'], $row_usuario['nome']);
 
                     $mail->isHTML(true);                                  //Set email format to HTML
