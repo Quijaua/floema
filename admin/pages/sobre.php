@@ -512,6 +512,14 @@
         </div>
     </div>
 </div>
+<script src="https://cdn.ckeditor.com/ckeditor5/39.0.2/classic/ckeditor.js"></script>
+<script>
+    ClassicEditor
+    .create( document.querySelector( '#descricao' ), {})
+    .catch( error => {
+        console.error( error );
+    })
+</script>
 <script>
     const checkboxes = document.querySelectorAll('[name^="d"]');
     checkboxes.forEach(function(checkbox) {
