@@ -17,7 +17,7 @@
     $id = 1;
 
     // Consulta SQL
-    $sql = "SELECT nome, logo, title, descricao, privacidade, faq, facebook, instagram, linkedin, youtube, website, cep, rua, numero, bairro, cidade, estado, telefone, email, color, hover, load_btn, monthly_1, monthly_2, monthly_3, monthly_4, monthly_5, yearly_1, yearly_2, yearly_3, yearly_4, yearly_5, once_1, once_2, once_3, once_4, once_5 FROM $tabela WHERE id = :id";
+    $sql = "SELECT nome, logo, title, descricao, privacidade, faq, facebook, instagram, linkedin, twitter, youtube, website, cep, rua, numero, bairro, cidade, estado, telefone, email, color, hover, load_btn, monthly_1, monthly_2, monthly_3, monthly_4, monthly_5, yearly_1, yearly_2, yearly_3, yearly_4, yearly_5, once_1, once_2, once_3, once_4, once_5 FROM $tabela WHERE id = :id";
     $sql_2 = "SELECT fb_pixel, gtm, g_analytics FROM $tabela_2 WHERE id = :id";
 
     // Preparar a consulta
@@ -48,6 +48,7 @@
         $facebook = $resultado['facebook'];
         $instagram = $resultado['instagram'];
         $linkedin = $resultado['linkedin'];
+        $twitter = $resultado['twitter'];
         $youtube = $resultado['youtube'];
         $website = $resultado['website'];
         $cep = $resultado['cep'];

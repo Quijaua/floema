@@ -338,6 +338,9 @@ if (isset($_POST['btnUpdFooter'])) {
         if (!isset($_POST["dLinkedin"])) {
             $linkedin = $_POST['linkedin'];
         }
+        if (!isset($_POST["dTwitter"])) {
+            $twitter = $_POST['twitter'];
+        }
         if (!isset($_POST["dYoutube"])) {
             $youtube = $_POST['youtube'];
         }
@@ -358,13 +361,14 @@ if (isset($_POST['btnUpdFooter'])) {
         $email = $_POST['email'];
 
         // Atualize o item no banco de dados
-        $sql = "UPDATE $tabela SET privacidade = :privacidade, faq = :faq, facebook = :facebook, instagram = :instagram, linkedin = :linkedin, youtube = :youtube, website = :website, cep = :cep, rua = :rua, numero = :numero, bairro = :bairro, cidade = :cidade, estado = :estado, telefone = :telefone, email = :email WHERE id = :id";
+        $sql = "UPDATE $tabela SET privacidade = :privacidade, faq = :faq, facebook = :facebook, instagram = :instagram, linkedin = :linkedin, twitter = :twitter, youtube = :youtube, website = :website, cep = :cep, rua = :rua, numero = :numero, bairro = :bairro, cidade = :cidade, estado = :estado, telefone = :telefone, email = :email WHERE id = :id";
         $stmt = $conn->prepare($sql);
         $stmt->bindParam(':privacidade', $privacidade);
         $stmt->bindParam(':faq', $faq);
         $stmt->bindParam(':facebook', $facebook);
         $stmt->bindParam(':instagram', $instagram);
         $stmt->bindParam(':linkedin', $linkedin);
+        $stmt->bindParam(':twitter', $twitter);
         $stmt->bindParam(':youtube', $youtube);
         $stmt->bindParam(':website', $website);
         $stmt->bindParam(':cep', $cep);
