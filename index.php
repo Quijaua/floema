@@ -474,7 +474,7 @@
 					<div class="row">
 						<div class="col-md-12 mb-2">
 							<div class="form-check">
-								<input class="form-check-input" type="checkbox" value="0" id="private" name="private">
+								<input class="form-check-input" type="checkbox" value="1" id="private" name="private">
 								<label class="form-check-label" for="anonymous_donation">
 									Fazer doação anonimamente
 								</label>
@@ -482,7 +482,7 @@
 						</div>
 						<div class="col-md-12 mb-2">
 							<div class="form-check">
-								<input class="form-check-input" type="checkbox" value="0" id="newsletter" name="newsletter">
+								<input class="form-check-input" type="checkbox" value="1" id="newsletter" name="newsletter">
 								<label class="form-check-label" for="newsletter">
 									Quero receber divulgações e comunicações por e-mail
 								</label>
