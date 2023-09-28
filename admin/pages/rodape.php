@@ -120,6 +120,18 @@
                             </div>
                         </div>
                         <div class="position-relative row form-group">
+                            <label for="twitter" class="col-sm-2 col-form-label">Twitter</label>
+                            <div class="col-sm-10">
+                                <input name="twitter" id="twitter"
+                                    type="text" class="form-control" value="<?php echo $twitter; ?>" <?php echo ($twitter == '') ? 'disabled' : '';?>>
+                                    
+                                <small class="form-text text-muted">
+                                    <input type="checkbox" name="dTwitter" id="dTwitter" data-input-id="twitter" <?php echo ($twitter == '') ? 'checked' : '';?>>
+                                    <label for="dTwitter" class="mb-0">Desabilitar Twitter</label>
+                                </small>
+                            </div>
+                        </div>
+                        <div class="position-relative row form-group">
                             <label for="youtube" class="col-sm-2 col-form-label">YouTube</label>
                             <div class="col-sm-10">
                                 <input name="youtube" id="youtube"
