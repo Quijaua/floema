@@ -12,6 +12,7 @@
     // Tabela que sera feita a consulta
     $tabela = "tb_checkout";
     $tabela_2 = "tb_integracoes";
+    $tabela_3 = "tb_mensagens";
 
     // ID que você deseja pesquisar
     $id = 1;
@@ -19,22 +20,27 @@
     // Consulta SQL
     $sql = "SELECT nome, logo, title, descricao, privacidade, faq, facebook, instagram, linkedin, twitter, youtube, website, cep, rua, numero, bairro, cidade, estado, telefone, email, nav_color, nav_background, background, color, hover, text_color, load_btn, monthly_1, monthly_2, monthly_3, monthly_4, monthly_5, yearly_1, yearly_2, yearly_3, yearly_4, yearly_5, once_1, once_2, once_3, once_4, once_5 FROM $tabela WHERE id = :id";
     $sql_2 = "SELECT fb_pixel, gtm, g_analytics FROM $tabela_2 WHERE id = :id";
+    $sql_3 = "SELECT welcome_email FROM $tabela_3 WHERE id = :id";
 
     // Preparar a consulta
     $stmt = $conn->prepare($sql);
     $stmt_2 = $conn->prepare($sql_2);
+    $stmt_3 = $conn->prepare($sql_3);
 
     // Vincular o valor do parâmetro
     $stmt->bindParam(':id', $id, PDO::PARAM_INT);
     $stmt_2->bindParam(':id', $id, PDO::PARAM_INT);
+    $stmt_3->bindParam(':id', $id, PDO::PARAM_INT);
 
     // Executar a consulta
     $stmt->execute();
     $stmt_2->execute();
+    $stmt_3->execute();
 
     // Obter o resultado como um array associativo
     $resultado = $stmt->fetch(PDO::FETCH_ASSOC);
     $resultado_2 = $stmt_2->fetch(PDO::FETCH_ASSOC);
+    $resultado_3 = $stmt_3->fetch(PDO::FETCH_ASSOC);
 
     // Verificar se o resultado foi encontrado
     if ($resultado) {
@@ -96,6 +102,14 @@
         // ID não encontrado ou não existente
         echo "ID não encontrado.";
     }
+
+    // Verificar se o resultado_3 foi encontrado
+    if ($resultado_3) {
+        // Atribuir o valor da coluna à variável, ex.: "nome" = $nome
+        $welcome_email = $resultado_3['welcome_email'];
+    } else {
+        // ID não encontrado ou não existente
+        echo "ID não encontrado.";}
 ?>
 <!doctype html>
 <html lang="pt-BR">
@@ -275,6 +289,12 @@
                                     <a href="<?php echo INCLUDE_PATH_ADMIN; ?>integracoes">
                                         <i class="metismenu-icon pe-7s-settings"></i>
                                         Integrações
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="<?php echo INCLUDE_PATH_ADMIN; ?>mensagens">
+                                        <i class="metismenu-icon pe-7s-paper-plane"></i>
+                                        Mensagens
                                     </a>
                                 </li>
                                 <li>
