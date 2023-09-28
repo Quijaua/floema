@@ -62,10 +62,10 @@
         <meta name="description" content="Solução para recebimentos de doações">
         <!-- Disable tap highlight on IE -->
         <meta name="msapplication-tap-highlight" content="no">
-        <link rel="stylesheet" href="<?php echo INCLUDE_PATH_ADMIN; ?>vendors/@fortawesome/fontawesome-free/css/all.min.css">
-        <link rel="stylesheet" href="<?php echo INCLUDE_PATH_ADMIN; ?>vendors/ionicons-npm/css/ionicons.css">
-        <link rel="stylesheet" href="<?php echo INCLUDE_PATH_ADMIN; ?>vendors/linearicons-master/dist/web-font/style.css">
-        <link rel="stylesheet" href="<?php echo INCLUDE_PATH_ADMIN; ?>vendors/pixeden-stroke-7-icon-master/pe-icon-7-stroke/dist/pe-icon-7-stroke.css">
+        <link rel="stylesheet" href="<?php echo INCLUDE_PATH; ?>vendors/@fortawesome/fontawesome-free/css/all.min.css">
+        <link rel="stylesheet" href="<?php echo INCLUDE_PATH; ?>vendors/ionicons-npm/css/ionicons.css">
+        <link rel="stylesheet" href="<?php echo INCLUDE_PATH; ?>vendors/linearicons-master/dist/web-font/style.css">
+        <link rel="stylesheet" href="<?php echo INCLUDE_PATH; ?>vendors/pixeden-stroke-7-icon-master/pe-icon-7-stroke/dist/pe-icon-7-stroke.css">
         <link href="<?php echo INCLUDE_PATH_ADMIN; ?>styles/css/base.css" rel="stylesheet">
         <link href="<?php echo INCLUDE_PATH; ?>assets/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet" type="text/css">
         <script src="<?php echo INCLUDE_PATH; ?>assets/google/jquery/3.5.1/jquery.min.js"></script>
@@ -670,10 +670,10 @@
             </div>
         </div>
         <div class="app-drawer-overlay d-none animated fadeIn"></div>
-        <script type="text/javascript" src="<?php echo INCLUDE_PATH_ADMIN; ?>vendors/jquery/dist/jquery.min.js"></script>
-        <script type="text/javascript" src="<?php echo INCLUDE_PATH_ADMIN; ?>vendors/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
-        <script type="text/javascript" src="<?php echo INCLUDE_PATH_ADMIN; ?>vendors/moment/moment.js"></script>
-        <script type="text/javascript" src="<?php echo INCLUDE_PATH_ADMIN; ?>vendors/perfect-scrollbar/dist/perfect-scrollbar.min.js"></script>
+        <script type="text/javascript" src="<?php echo INCLUDE_PATH; ?>vendors/jquery/dist/jquery.min.js"></script>
+        <script type="text/javascript" src="<?php echo INCLUDE_PATH; ?>vendors/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+        <script type="text/javascript" src="<?php echo INCLUDE_PATH; ?>vendors/moment/moment.js"></script>
+        <script type="text/javascript" src="<?php echo INCLUDE_PATH; ?>vendors/perfect-scrollbar/dist/perfect-scrollbar.min.js"></script>
         <script type="text/javascript" src="<?php echo INCLUDE_PATH_ADMIN; ?>js/demo.js"></script>
         <script type="text/javascript" src="<?php echo INCLUDE_PATH_ADMIN; ?>js/scrollbar.js"></script>
         <script type="text/javascript" src="<?php echo INCLUDE_PATH_ADMIN; ?>js/app.js"></script>
