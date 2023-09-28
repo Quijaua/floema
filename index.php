@@ -220,7 +220,7 @@
 	<div class="row">
 		<div class="col-md-5 mb-3">
 
-			<h3 class="highlight mb-3">Faça sua doação</h3>
+			<h3 class="highlight mb-3" id="highlight">Faça sua doação</h3>
 			<div id="div-container-form">
 				<form id="form-checkout">
 					<div class="mb-3" style="display: flex;justify-content: space-between">

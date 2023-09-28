@@ -715,8 +715,9 @@ function validateFields() {
 }
 
 function printPaymentData(data) {
-    let html = "<h4 class='highlight mb-3'>Muito obrigado!</h4>";
-    html += "<p class='text-block2'>Sua doação estímulo a continuar nosso trabalho pela construção de um mundo melhor</p>";
+    $("#highlight").html("Muito obrigado!");
+
+    let html = "<p class='text-block2'>Sua doação estímulo a continuar nosso trabalho pela construção de um mundo melhor</p>";
 
     switch (data.forma_pagamento) {
         case "BOLETO":
