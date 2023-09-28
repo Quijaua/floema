@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Tempo de geração: 28-Ago-2023 às 06:26
+-- Tempo de geração: 28-Set-2023 às 20:05
 -- Versão do servidor: 10.4.22-MariaDB
 -- versão do PHP: 8.1.1
 
@@ -38,6 +38,7 @@ CREATE TABLE `tb_checkout` (
   `facebook` varchar(255) DEFAULT NULL,
   `instagram` varchar(255) DEFAULT NULL,
   `linkedin` varchar(255) DEFAULT NULL,
+  `twitter` varchar(255) DEFAULT NULL,
   `youtube` varchar(255) DEFAULT NULL,
   `website` varchar(255) DEFAULT NULL,
   `twitter` varchar(255) DEFAULT NULL,
@@ -49,8 +50,12 @@ CREATE TABLE `tb_checkout` (
   `estado` varchar(255) NOT NULL,
   `telefone` varchar(255) NOT NULL,
   `email` varchar(255) NOT NULL,
+  `nav_background` varchar(255) NOT NULL,
+  `nav_color` varchar(255) NOT NULL,
+  `background` varchar(255) NOT NULL,
   `color` varchar(255) NOT NULL,
   `hover` varchar(255) NOT NULL,
+  `text_color` varchar(255) NOT NULL,
   `load_btn` varchar(255) NOT NULL,
   `progress` varchar(255) NOT NULL,
   `monthly_1` varchar(255) NOT NULL,
@@ -105,22 +110,18 @@ CREATE TABLE `tb_clientes` (
   `private` tinyint(1) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
-INSERT INTO `tb_clientes` (`id`, `roles`, `nome`, `email`, `password`, `magic_link`, `phone`, `cpf`, `cep`, `endereco`, `numero`, `complemento`, `municipio`, `cidade`, `uf`, `asaas_id`, `newsletter`, `private`) VALUES (247, 1, 'Admin', 'admin@admin.com', '$2y$10$gphtP5ZDgkZNctcEhLKfs.MQ8qWc6Ebf8V6sqRf4q7QhClHSojT7.', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0, 0);
-
 -- --------------------------------------------------------
 
 --
--- Estrutura da tabela `tb_integracoes`
+-- Estrutura da tabela `tb_mensagens`
 --
 
-CREATE TABLE `tb_integracoes` (
+CREATE TABLE `tb_mensagens` (
   `id` int(11) NOT NULL,
-  `fb_pixel` longtext DEFAULT NULL,
-  `gtm` longtext DEFAULT NULL,
-  `g_analytics` longtext DEFAULT NULL
+  `welcome_email` longtext DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
-INSERT INTO `tb_integracoes` (`id`, `fb_pixel`, `gtm`, `g_analytics`) VALUES (1, '', '', '');
+INSERT INTO `tb_mensagens` (`id`, `welcome_email`) VALUES (1, 'Muito obrigado por colaborar com nossa instituição.');
 
 -- --------------------------------------------------------
 
@@ -151,6 +152,12 @@ CREATE TABLE `tb_doacoes` (
   `cartao_bandeira` varchar(100) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
+LOCK TABLES `tb_doacoes` WRITE;
+/*!40000 ALTER TABLE `tb_doacoes` DISABLE KEYS */;
+INSERT INTO `tb_doacoes` VALUES (1,'cus_000005450967','pay_6237274104232346',NULL,200.00,'BOLETO','https://sandbox.asaas.com/i/6237274104232346','https://sandbox.asaas.com/b/pdf/6237274104232346','PENDING','2023-10-04','2023-09-27',NULL,NULL,NULL,NULL,'23795949300000200002693090000121979000092560','1219790','23792693079000012197190000925603594930000020000',NULL,NULL),(2,'cus_000005450969','pay_7644352752939147',NULL,213.00,'BOLETO','https://sandbox.asaas.com/i/7644352752939147','https://sandbox.asaas.com/b/pdf/7644352752939147','PENDING','2023-10-04','2023-09-27',NULL,NULL,NULL,NULL,'23794949300000213002693090000121979100092560','1219791','23792693079000012197191000925601494930000021300',NULL,NULL);
+/*!40000 ALTER TABLE `tb_doacoes` ENABLE KEYS */;
+UNLOCK TABLES;
+
 -- --------------------------------------------------------
 
 --
@@ -168,6 +175,26 @@ CREATE TABLE `tb_imagens` (
 
 INSERT INTO `tb_imagens` (`id`, `imagem`) VALUES
 (11, '1691640386.png');
+
+-- --------------------------------------------------------
+
+--
+-- Estrutura da tabela `tb_integracoes`
+--
+
+CREATE TABLE `tb_integracoes` (
+  `id` int(11) NOT NULL,
+  `fb_pixel` longtext DEFAULT NULL,
+  `gtm` longtext DEFAULT NULL,
+  `g_analytics` longtext DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Extraindo dados da tabela `tb_integracoes`
+--
+
+INSERT INTO `tb_integracoes` (`id`, `fb_pixel`, `gtm`, `g_analytics`) VALUES
+(1, '', '', '');
 
 --
 -- Índices para tabelas despejadas

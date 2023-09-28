@@ -122,13 +122,17 @@ if (isset($_POST['btnUpdColor'])) {
         $id = '1';
 
         //Informacoes coletadas pelo metodo POST
+        $background = $_POST['background'];
+        $text_color = $_POST['text_color'];
         $color = $_POST['color'];
         $hover = $_POST['hover'];
         $load_btn = $_POST['loadBtn'];
 
         // Atualize o item no banco de dados
-        $sql = "UPDATE $tabela SET color = :color, hover = :hover, load_btn = :loadBtn WHERE id = :id";
+        $sql = "UPDATE $tabela SET background = :background, text_color = :text_color, color = :color, hover = :hover, load_btn = :loadBtn WHERE id = :id";
         $stmt = $conn->prepare($sql);
+        $stmt->bindParam(':background', $background);
+        $stmt->bindParam(':text_color', $text_color);
         $stmt->bindParam(':color', $color);
         $stmt->bindParam(':hover', $hover);
         $stmt->bindParam(':loadBtn', $load_btn);
@@ -143,6 +147,45 @@ if (isset($_POST['btnUpdColor'])) {
 
             //Voltar para a pagina do formulario
             header('Location: ' . INCLUDE_PATH_ADMIN . 'aparencia');
+        } catch (PDOException $e) {
+            echo "Erro na atualização: " . $e->getMessage();
+        }
+    }
+}
+
+if (isset($_POST['btnUpdNavColor'])) {
+    //Inclui o arquivo 'config.php'
+    include('../../config.php');
+
+    // Verifique se o formulário foi enviado
+    if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+
+        //Tabela onde sera feita a alteracao
+        $tabela = 'tb_checkout';
+
+        //Id da tabela
+        $id = '1';
+
+        //Informacoes coletadas pelo metodo POST
+        $nav_color = $_POST['nav_color'];
+        $nav_background = $_POST['nav_background'];
+
+        // Atualize o item no banco de dados
+        $sql = "UPDATE $tabela SET nav_color = :nav_color, nav_background = :nav_background WHERE id = :id";
+        $stmt = $conn->prepare($sql);
+        $stmt->bindParam(':nav_color', $nav_color);
+        $stmt->bindParam(':nav_background', $nav_background);
+        $stmt->bindParam(':id', $id);
+
+        try {
+            $stmt->execute();
+
+            // Exibir a modal após salvar as informações
+            $_SESSION['show_modal'] = "<script>$('#staticBackdrop').modal('toggle');</script>";
+            $_SESSION['msg'] = 'As informações sobre sua instituição foram atualizadas com sucesso!';
+
+            //Voltar para a pagina do formulario
+            header('Location: ' . INCLUDE_PATH_ADMIN . 'cabecalho');
         } catch (PDOException $e) {
             echo "Erro na atualização: " . $e->getMessage();
         }
@@ -334,5 +377,41 @@ if (isset($_POST['btnIntegration'])) {
         } catch (PDOException $e) {
             echo "Erro na atualização: " . $e->getMessage();
         }   
+    }
+}
+
+if (isset($_POST['btnMessages'])) {
+    //Inclui o arquivo 'config.php'
+    include('../../config.php');
+
+    // Verifique se o formulário foi enviado
+    if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+        // Tabela onde sera feita a alteracao
+        $tabela = 'tb_mensagens';
+
+        // Id da tabela
+        $id = '1';
+
+        // Informacoes coletadas pelo metodo POST
+        $welcome_email = $_POST['welcome_email'];
+
+        // Atualize o item no banco de dados
+        $sql = "UPDATE $tabela SET welcome_email = :welcome_email WHERE id = :id";
+        $stmt = $conn->prepare($sql);
+        $stmt->bindParam(':welcome_email', $welcome_email);
+        $stmt->bindParam(':id', $id);
+
+        try {
+            $stmt->execute();
+
+            // Exibir a modal após salvar as informações
+            $_SESSION['show_modal'] = "<script>$('#staticBackdrop').modal('toggle');</script>";
+            $_SESSION['msg'] = 'As informações de mensagens foram atualizadas com sucesso!';
+
+            //Voltar para a pagina do formulario
+            header('Location: ' . INCLUDE_PATH_ADMIN);
+        } catch (PDOException $e) {
+            echo "Erro na atualização: " . $e->getMessage();
+        }
     }
 }

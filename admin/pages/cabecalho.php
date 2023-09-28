@@ -119,27 +119,20 @@
                     <h5 class="card-title">Cores</h5>
                     <form action="<?php echo INCLUDE_PATH_ADMIN; ?>back-end/update.php" method="post" enctype="multipart/form-data">
                         <div class="position-relative row form-group">
-                            <label for="colorCode" class="col-sm-2 col-form-label">Cor dos Botões *</label>
+                            <label for="navColorCode" class="col-sm-2 col-form-label">Cor dos textos *</label>
                             <div class="col-sm-10 d-flex">
-                                <input type="color" id="colorPicker" class="form-color" value="<?php echo $color; ?>">
-                                <input type="text" id="colorCode" name="color" class="form-control" placeholder="Digite o código hexadecimal da cor" value="<?php echo $color; ?>">
+                                <input type="color" id="navColorPicker" class="form-color" value="<?php echo $nav_color; ?>">
+                                <input type="text" id="navColorCode" name="nav_color" class="form-control" placeholder="Digite o código hexadecimal da cor" value="<?php echo $nav_color; ?>">
                             </div>
                         </div>
                         <div class="position-relative row form-group">
-                            <label for="hoverCode" class="col-sm-2 col-form-label">Hover *</label>
+                            <label for="navBackgroundCode" class="col-sm-2 col-form-label">Cor de fundo *</label>
                             <div class="col-sm-10 d-flex">
-                                <input type="color" id="hoverPicker" class="form-color" value="<?php echo $hover; ?>">
-                                <input type="text" id="hoverCode" name="hover" class="form-control" placeholder="Digite o código hexadecimal da cor" value="<?php echo $hover; ?>">
+                                <input type="color" id="navBackgroundPicker" class="form-color" value="<?php echo $nav_background; ?>">
+                                <input type="text" id="navBackgroundCode" name="nav_background" class="form-control" placeholder="Digite o código hexadecimal da cor" value="<?php echo $nav_background; ?>">
                             </div>
                         </div>
-                        <div class="position-relative row form-group">
-                            <label for="hoverCode" class="col-sm-2 col-form-label">Cor do botão carregar *</label>
-                            <div class="col-sm-10 d-flex">
-                                <input type="color" id="loadBtnPicker" class="form-color" value="<?php echo $load_btn; ?>">
-                                <input type="text" id="loadBtnCode" name="loadBtn" class="form-control" placeholder="Digite o código hexadecimal da cor" value="<?php echo $load_btn; ?>">
-                            </div>
-                        </div>
-                        <button type="submit" name="btnUpdColor" class="btn btn-primary">Salvar</button>
+                        <button type="submit" name="btnUpdNavColor" class="btn btn-primary">Salvar</button>
                     </form>
                 </div>
             </div>
@@ -203,48 +196,48 @@ function getCepData()
 }
 </script>
 <script>
-    const colorPicker = document.getElementById('colorPicker');
-    const colorCodeInput = document.getElementById('colorCode');
+    const navColorPicker = document.getElementById('navColorPicker');
+    const navColorCodeInput = document.getElementById('navColorCode');
 
-    colorPicker.addEventListener('input', updateColorPreview);
-    colorCodeInput.addEventListener('input', updateColorFromCode);
+    navColorPicker.addEventListener('input', updateNavColorPreview);
+    navColorCodeInput.addEventListener('input', updateNavColorFromCode);
 
-    function updateColorPreview(event) {
-        const selectedColor = event.target.value;
-        colorCodeInput.value = selectedColor;
+    function updateNavColorPreview(event) {
+        const selectedNavColor = event.target.value;
+        navColorCodeInput.value = selectedNavColor;
     }
 
-    function updateColorFromCode() {
-        const colorCode = colorCodeInput.value;
-        if (isValidHexColorCode(colorCode)) {
-            colorPicker.value = colorCode;
+    function updateNavColorFromCode() {
+        const navColorCode = navColorCodeInput.value;
+        if (isValidHexNavColorCode(navColorCode)) {
+            navColorPicker.value = navColorCode;
         }
     }
 
-    function isValidHexColorCode(code) {
+    function isValidHexNavColorCode(code) {
         return /^#([0-9A-F]{3}){1,2}$/i.test(code);
     }
 </script>
 <script>
-    const hoverPicker = document.getElementById('hoverPicker');
-    const hoverCodeInput = document.getElementById('hoverCode');
+    const navBackgroundPicker = document.getElementById('navBackgroundPicker');
+    const navBackgroundCodeInput = document.getElementById('navBackgroundCode');
 
-    hoverPicker.addEventListener('input', updateHoverPreview);
-    hoverCodeInput.addEventListener('input', updateHoverFromCode);
+    navBackgroundPicker.addEventListener('input', updateNavBackgroundPreview);
+    navBackgroundCodeInput.addEventListener('input', updateNavBackgroundFromCode);
 
-    function updateHoverPreview(event) {
-        const selectedHover = event.target.value;
-        hoverCodeInput.value = selectedHover;
+    function updateNavBackgroundPreview(event) {
+        const selectedNavBackground = event.target.value;
+        navBackgroundCodeInput.value = selectedNavBackground;
     }
 
-    function updateHoverFromCode() {
-        const hoverCode = hoverCodeInput.value;
-        if (isValidHexHoverCode(hoverCode)) {
-            hoverPicker.value = hoverCode;
+    function updateNavBackgroundFromCode() {
+        const navBackgroundCode = navBackgroundCodeInput.value;
+        if (isValidHexNavBackgroundCode(navBackgroundCode)) {
+            navBackgroundPicker.value = navBackgroundCode;
         }
     }
 
-    function isValidHexHoverCode(code) {
+    function isValidHexNavBackgroundCode(code) {
         return /^#([0-9A-F]{3}){1,2}$/i.test(code);
     }
 </script>
