@@ -59,6 +59,7 @@
         $facebook = $resultado['facebook'];
         $instagram = $resultado['instagram'];
         $linkedin = $resultado['linkedin'];
+        $twitter = $resultado['twitter'];
         $youtube = $resultado['youtube'];
         $website = $resultado['website'];
         $cep = $resultado['cep'];
@@ -219,7 +220,7 @@
 	<div class="row">
 		<div class="col-md-5 mb-3">
 
-			<h3 class="highlight mb-3">Faça sua doação</h3>
+			<h3 class="highlight mb-3" id="highlight">Faça sua doação</h3>
 			<div id="div-container-form">
 				<form id="form-checkout">
 					<div class="mb-3" style="display: flex;justify-content: space-between">
@@ -590,6 +591,7 @@
 				<a href="<?php echo ($facebook !== '') ? $facebook : '#'; ?>" <?php echo ($facebook == '') ? 'class="d-none"' : ''; ?>><i class="bi bi-facebook p-2"></i></a>
 				<a href="<?php echo ($instagram !== '') ? $instagram : '#'; ?>" <?php echo ($instagram == '') ? 'class="d-none"' : ''; ?>><i class="bi bi-instagram p-2"></i></a>
 				<a href="<?php echo ($linkedin !== '') ? $linkedin : '#'; ?>" <?php echo ($linkedin == '') ? 'class="d-none"' : ''; ?>><i class="bi bi-linkedin p-2"></i></a>
+				<a href="<?php echo ($twitter !== '') ? $twitter : '#'; ?>" <?php echo ($twitter == '') ? 'class="d-none"' : ''; ?>><i class="bi bi-twitter p-2"></i></a>
 				<a href="<?php echo ($youtube !== '') ? $youtube : '#'; ?>" <?php echo ($youtube == '') ? 'class="d-none"' : ''; ?>><i class="bi bi-youtube p-2"></i></a>
 				<a href="<?php echo ($website !== '') ? $website : '#'; ?>" <?php echo ($website == '') ? 'class="d-none"' : ''; ?>><i class="bi bi-globe-americas p-2"></i></a>
 			</div>

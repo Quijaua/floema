@@ -40,7 +40,6 @@ CREATE TABLE `tb_checkout` (
   `linkedin` varchar(255) DEFAULT NULL,
   `youtube` varchar(255) DEFAULT NULL,
   `website` varchar(255) DEFAULT NULL,
-  `twitter` varchar(255) DEFAULT NULL,
   `cep` varchar(255) NOT NULL,
   `rua` varchar(255) NOT NULL,
   `numero` varchar(255) DEFAULT NULL,
