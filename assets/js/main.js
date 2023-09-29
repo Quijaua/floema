@@ -139,6 +139,99 @@ $(document).ready(function () {
     $('#field-other-yearly').mask("R$ 0#");
     $('#field-other-once').mask("R$ 0#");
 
+    
+    $.getJSON( "config.json", function( data )
+    {
+        config = data;
+
+        minOnceDonationCreditCard   = config.minOnceDonation.creditCard;
+        minOnceDonationBankSlip     = config.minOnceDonation.bankSlip;
+        minOnceDonationPix          = config.minOnceDonation.pix;
+
+        $("#text-block1-title").html(config.textBlock1.title);
+        $("#text-block1-content").html(config.textBlock1.content);
+        $("#text-block2-title").html(config.textBlock2.title);
+        $("#text-block2-content").html(config.textBlock2.content);
+
+        let htmlFooter = "";
+        for(let i=0 ; i<config.footerLinks.length ; i++)
+        {
+            htmlFooter += "<a href='"+config.footerLinks[i].link+"' target='"+config.footerLinks[i].target+"' rel='noopener noreferrer'>"+config.footerLinks[i].name+"</a>"+(i+1<config.footerLinks.length?" | ":"");
+        }
+        $("#footer-links").html(htmlFooter);
+
+
+        $("#button-monthly1")
+          .attr("onclick","donationOption(this,'monthly',"+config.donationMonthlyButton1.amount+","+config.donationMonthlyButton1.showAddOnFee+")")
+          .attr("data-amount-for-selection", config.donationMonthlyButton1.amount)
+          .text(config.donationMonthlyButton1.display);
+        $("#button-monthly2")
+          .attr("onclick","donationOption(this,'monthly',"+config.donationMonthlyButton2.amount+","+config.donationMonthlyButton2.showAddOnFee+")")
+          .attr("data-amount-for-selection", config.donationMonthlyButton2.amount)
+          .text(config.donationMonthlyButton2.display);
+        $("#button-monthly3")
+          .attr("onclick","donationOption(this,'monthly',"+config.donationMonthlyButton3.amount+","+config.donationMonthlyButton3.showAddOnFee+")")
+          .attr("data-amount-for-selection", config.donationMonthlyButton3.amount)
+          .text(config.donationMonthlyButton3.display);
+        $("#button-monthly4")
+          .attr("onclick","donationOption(this,'monthly',"+config.donationMonthlyButton4.amount+","+config.donationMonthlyButton4.showAddOnFee+")")
+          .attr("data-amount-for-selection", config.donationMonthlyButton4.amount)
+          .text(config.donationMonthlyButton4.display);
+        $("#button-monthly5")
+          .attr("onclick","donationOption(this,'monthly',"+config.donationMonthlyButton5.amount+","+config.donationMonthlyButton5.showAddOnFee+")")
+          .attr("data-amount-for-selection", config.donationMonthlyButton5.amount)
+          .text(config.donationMonthlyButton5.display);
+
+        $("#button-yearly1")
+          .attr("onclick","donationOption(this,'yearly',"+config.donationYearlyButton1.amount+","+config.donationYearlyButton1.showAddOnFee+")")
+          .attr("data-amount-for-selection", config.donationYearlyButton1.amount)
+          .text(config.donationYearlyButton1.display);
+        $("#button-yearly2")
+          .attr("onclick","donationOption(this,'yearly',"+config.donationYearlyButton2.amount+","+config.donationYearlyButton2.showAddOnFee+")")
+          .attr("data-amount-for-selection", config.donationYearlyButton2.amount)
+          .text(config.donationYearlyButton2.display);
+        $("#button-yearly3")
+          .attr("onclick","donationOption(this,'yearly',"+config.donationYearlyButton3.amount+","+config.donationYearlyButton3.showAddOnFee+")")
+          .attr("data-amount-for-selection", config.donationYearlyButton3.amount)
+          .text(config.donationYearlyButton3.display);
+        $("#button-yearly4")
+          .attr("onclick","donationOption(this,'yearly',"+config.donationYearlyButton4.amount+","+config.donationYearlyButton4.showAddOnFee+")")
+          .attr("data-amount-for-selection", config.donationYearlyButton4.amount)
+          .text(config.donationYearlyButton4.display);
+        $("#button-yearly5")
+          .attr("onclick","donationOption(this,'yearly',"+config.donationYearlyButton5.amount+","+config.donationYearlyButton5.showAddOnFee+")")
+          .attr("data-amount-for-selection", config.donationYearlyButton5.amount)
+          .text(config.donationYearlyButton5.display);
+
+        $("#button-once1")
+          .attr("onclick","donationOption(this,'once',"+config.donationOnceButton1.amount+","+config.donationOnceButton1.showAddOnFee+")")
+          .attr("data-amount-for-selection", config.donationOnceButton1.amount)
+          .text(config.donationOnceButton1.display);
+        $("#button-once2")
+          .attr("onclick","donationOption(this,'once',"+config.donationOnceButton2.amount+","+config.donationOnceButton2.showAddOnFee+")")
+          .attr("data-amount-for-selection", config.donationOnceButton2.amount)
+          .text(config.donationOnceButton2.display);
+        $("#button-once3")
+          .attr("onclick","donationOption(this,'once',"+config.donationOnceButton3.amount+","+config.donationOnceButton3.showAddOnFee+")")
+          .attr("data-amount-for-selection", config.donationOnceButton3.amount)
+          .text(config.donationOnceButton3.display);
+        $("#button-once4")
+          .attr("onclick","donationOption(this,'once',"+config.donationOnceButton4.amount+","+config.donationOnceButton4.showAddOnFee+")")
+          .attr("data-amount-for-selection", config.donationOnceButton4.amount)
+          .text(config.donationOnceButton4.display);
+        $("#button-once5")
+          .attr("onclick","donationOption(this,'once',"+config.donationOnceButton5.amount+","+config.donationOnceButton5.showAddOnFee+")")
+          .attr("data-amount-for-selection", config.donationOnceButton5.amount)
+          .text(config.donationOnceButton5.display);
+
+        $('.option-default-monthly').trigger('click');
+    }).done(function () {
+      setValuesFromQueryString();
+    }).fail(function(a) {
+        console.log(a);
+        alert( "Erro ao carregar configurações."+a);
+    });
+
     $('.option-default-monthly').trigger('click');
 });
 

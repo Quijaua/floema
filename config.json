@@ -1,0 +1,44 @@
+{
+    "textBlock1": {
+      "title": "Colabore com o Projeto Floema",
+      "content": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed quis fermentum lacus, vitae suscipit risus. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas.",
+      "tmp": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed quis fermentum lacus, vitae suscipit risus. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas."
+    },
+    "textBlock2": {
+      "title": "Recompensas",
+      "content": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed dictum neque vel nunc molestie, id fermentum quam ultrices. Nulla facilisi. Duis erat leo, venenatis quis feugiat sed, condimentum sed eros. Phasellus sed ex mi. Donec sagittis aliquet purus et imperdiet. Suspendisse erat augue, pellentesque a orci vitae, vehicula cursus nisi. Curabitur in mi nec risus pretium placerat et nec sapien. Etiam ac elit vel justo lacinia tincidunt. Maecenas congue vulputate elit vel venenatis. Sed maximus diam et metus mollis, ut faucibus mauris varius. In nec dignissim lacus."
+    },
+    "footerLinks": [
+      {
+        "name": "PRIVACIDADE DOS DOADORES",
+        "link": "https://seusite.com.br/politica-de-privacidade/",
+        "target": "_blank"
+      },
+      {
+        "name": "PERGUNTAS FREQUENTES",
+        "link": "https://seusite.com.br/perguntas-frequentes/",
+        "target": "_blank"
+      }
+
+    ],
+    "donationMonthlyButton1": {"amount": 20,"display":  "R$ 20",  "showAddOnFee": true},
+    "donationMonthlyButton2": {"amount": 50,"display":  "R$ 50",  "showAddOnFee": true},
+    "donationMonthlyButton3": {"amount": 100,"display": "R$ 100", "showAddOnFee": true},
+    "donationMonthlyButton4": {"amount": 200,"display": "R$ 200", "showAddOnFee": true},
+    "donationMonthlyButton5": {"amount": 300,"display": "R$ 300", "showAddOnFee": true},
+  
+    "donationYearlyButton1": {"amount": 120,"display":  "R$ 120",  "showAddOnFee": true},
+    "donationYearlyButton2": {"amount": 240,"display":  "R$ 240",  "showAddOnFee": true},
+    "donationYearlyButton3": {"amount": 500,"display":  "R$ 500", "showAddOnFee": true},
+    "donationYearlyButton4": {"amount": 1000,"display": "R$ 1000", "showAddOnFee": true},
+    "donationYearlyButton5": {"amount": 2000,"display": "R$ 2000", "showAddOnFee": true},
+  
+    "donationOnceButton1": {"amount": 100,"display":  "R$ 100",  "showAddOnFee": true},
+    "donationOnceButton2": {"amount": 200,"display":  "R$ 200",  "showAddOnFee": true},
+    "donationOnceButton3": {"amount": 500,"display":  "R$ 500", "showAddOnFee": true},
+    "donationOnceButton4": {"amount": 1000,"display": "R$ 1000", "showAddOnFee": true},
+    "donationOnceButton5": {"amount": 2000,"display": "R$ 2000", "showAddOnFee": true},
+  
+    "addOnFeeValues": {"creditCard": {"fix":0,"percent": 5 },"bankSlip": {"fix":3,"percent": 5 },"pix": {"fix":0,"percent": 5 }},
+    "minOnceDonation": {"creditCard": 10,"bankSlip": 10,"pix": 10}
+  }
