@@ -629,7 +629,7 @@
 
 <script src="<?php echo INCLUDE_PATH; ?>assets/bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
 <script src="<?php echo INCLUDE_PATH; ?>assets/ajax/3.6.3/jquery.min.js"></script>
-<script src="<?php echo INCLUDE_PATH; ?>assets/google/jquery/1.12.1/jquery-ui.js"></script>
+<script src="<?php echo INCLUDE_PATH; ?>assets/google/jquery/jquery-ui.js"></script>
 <script src="<?php echo INCLUDE_PATH; ?>assets/ajax/1.14.16/jquery.mask.min.js"></script>
 <script src="<?php echo INCLUDE_PATH; ?>assets/js/main.js"></script>
 <!-- <script src="https://www.google.com/recaptcha/api.js?render=<?=$recaptcha_key?>"></script>
