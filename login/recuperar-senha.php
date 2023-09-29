@@ -36,7 +36,17 @@
 
     if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["SendRecupPassword"])) {
         //var_dump($dados);
-        // Informacoes do usuario
+        // Informacoes da instituicao
+        $query_instituicao = "SELECT nome, email 
+                    FROM tb_checkout 
+                    WHERE id =:id  
+                    LIMIT 1";
+        $result_instituicao = $conn->prepare($query_instituicao);
+        $result_instituicao->bindValue(':id', 1, PDO::PARAM_INT);
+        $result_instituicao->execute();
+        
+        $row_instituicao = $result_instituicao->fetch(PDO::FETCH_ASSOC);
+            
         $query_usuario = "SELECT id, nome, email 
                     FROM $tabela 
                     WHERE email =:email  
@@ -75,7 +85,7 @@
                     $mail->SMTPSecure = $smtp_secure;
                     $mail->Port       = $smtp_port;
 
-                    $mail->setFrom($row_usuario['email'], 'Atendimento - ' . $row_usuario['nome']);
+                    $mail->setFrom($row_instituicao['email'], 'Atendimento - ' . $row_instituicao['nome']);
                     $mail->addAddress($row_usuario['email'], $row_usuario['nome']);
 
                     $mail->isHTML(true);                                  //Set email format to HTML

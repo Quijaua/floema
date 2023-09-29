@@ -36,6 +36,15 @@
     $stmt->execute();
 
     // Informacoes do usuario
+    $sql = "SELECT nome, email FROM tb_checkout WHERE id = :id";
+    $stmt = $conn->prepare($sql);
+    $stmt->bindValue(':id', 1, PDO::PARAM_INT);
+    $stmt->execute();
+
+    // Recuperar os resultados do usuario
+    $instituicao = $stmt->fetch(PDO::FETCH_ASSOC);
+
+    // Informacoes do usuario
     $sql = "SELECT * FROM $tabela WHERE asaas_id = :asaas_id";
     $stmt = $conn->prepare($sql);
     $stmt->bindParam(':asaas_id', $asaas_id, PDO::PARAM_STR);
@@ -56,8 +65,6 @@
     use PHPMailer\PHPMailer\SMTP;
     use PHPMailer\PHPMailer\Exception;
 
-    require './../../lib/vendor/autoload.php';
-    require './lib/vendor/autoload.php';
     require './../../lib/vendor/autoload.php';
 
     // Crie uma nova instância do PHPMailer
@@ -82,7 +89,7 @@
         $mail->Port       = $smtp_port;
 
         // Define o remetente e destinatário
-        $mail->setFrom($email, 'Atendimento - ' . $nome);
+        $mail->setFrom($instituicao['email'], 'Atendimento - ' . $instituicao['nome']);
         $mail->addAddress($email, $nome);
 
         // Configurações do e-mail
