@@ -38,6 +38,7 @@ CREATE TABLE `tb_checkout` (
   `facebook` varchar(255) DEFAULT NULL,
   `instagram` varchar(255) DEFAULT NULL,
   `linkedin` varchar(255) DEFAULT NULL,
+  `twitter` varchar(255) DEFAULT NULL,
   `youtube` varchar(255) DEFAULT NULL,
   `website` varchar(255) DEFAULT NULL,
   `cep` varchar(255) NOT NULL,
@@ -77,8 +78,7 @@ CREATE TABLE `tb_checkout` (
 -- Extraindo dados da tabela `tb_checkout`
 --
 
-INSERT INTO `tb_checkout` (`id`, `nome`, `logo`, `title`, `descricao`, `privacidade`, `faq`, `facebook`, `instagram`, `linkedin`, `youtube`, `twitter`, `website`, `cep`, `rua`, `numero`, `bairro`, `cidade`, `estado`, `telefone`, `email`, `color`, `hover`, `load_btn`, `progress`, `monthly_1`, `monthly_2`, `monthly_3`, `monthly_4`, `monthly_5`, `yearly_1`, `yearly_2`, `yearly_3`, `yearly_4`, `yearly_5`, `once_1`, `once_2`, `once_3`, `once_4`, `once_5`) VALUES
-(1, 'Floema', 'floema-logo.png', '', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam tempus tortor nec gravida pretium. Vestibulum ipsum diam, lacinia a est sit amet, tempor elementum odio. Phasellus vel eros sit amet dolor mollis ultricies id eu lectus. Nunc mattis magna id augue malesuada luctus. Donec sit amet diam id diam interdum sollicitudin.', 'https://seusite.com.br/politica-de-privacidade/', 'https://seusite.com.br/perguntas-frequentes/', 'https://facebook.com/seufacebook', 'https://facebook.com/seuinstagram', NULL, NULL, NULL, NULL, '11111-222', 'Rua Exemplo Nome da Rua', '999', 'Centro', 'São Paulo', 'SP', '(11) 9999-9999', 'suainstitucao@email.org.br', '#ffc107', '#212529', '#212529', '0, 204, 255', '20', '50', '100', '200', '300', '120', '240', '500', '1000', '2000', '100', '200', '500', '1000', '2000');
+INSERT INTO `tb_checkout` (`id`, `nome`, `logo`, `title`, `descricao`, `privacidade`, `faq`, `facebook`, `instagram`, `linkedin`, `twitter`, `youtube`, `website`, `cep`, `rua`, `numero`, `bairro`, `cidade`, `estado`, `telefone`, `email`, `nav_background`, `nav_color`, `background`, `color`, `hover`, `text_color`, `load_btn`, `progress`, `monthly_1`, `monthly_2`, `monthly_3`, `monthly_4`, `monthly_5`, `yearly_1`, `yearly_2`, `yearly_3`, `yearly_4`, `yearly_5`, `once_1`, `once_2`, `once_3`, `once_4`, `once_5`) VALUES (1, 'Floema', 'floema-logo.png', 'Faça uma doação', 'Doações para o projeto Floema', 'https://seusite.com.br/politica-de-privacidade', 'https://seusite.com.br/faq', 'https://facebook.com/seufacebook', 'https://instagram.com/seuinstagram', NULL, NULL, NULL, NULL, '12345678', 'Rua', '123', 'Bairro', 'Cidade', 'São Paulo', '(11) 1111-1111', 'seuemail@seusite.com.br', '#ffc107', '#212529', '#f5f5f5', '#ffc107', '#212529', '#212529', '#ffc107', '#212529', '20', '50', '100', '200', '500', '1000', '2000', '5000', '10000', '20000', '50000', '100000', '200000', '500000', '1000000');
 
 -- --------------------------------------------------------
 
@@ -118,10 +118,12 @@ INSERT INTO `tb_clientes` (`id`, `roles`, `nome`, `email`, `password`, `magic_li
 
 CREATE TABLE `tb_mensagens` (
   `id` int(11) NOT NULL,
-  `welcome_email` longtext DEFAULT NULL
+  `welcome_email` longtext DEFAULT NULL,
+  `privacy_policy` longtext DEFAULT NULL,
+  `use_privacy` tinyint(1) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
-INSERT INTO `tb_mensagens` (`id`, `welcome_email`) VALUES (1, 'Muito obrigado por colaborar com nossa instituição.');
+INSERT INTO `tb_mensagens` (`id`, `welcome_email`, `privacy_policy`, `use_privacy`) VALUES (1, 'Muito obrigado por colaborar com nossa instituição.', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam tempus tortor nec gravida pretium. Vestibulum ipsum diam, lacinia a est sit amet, tempor elementum odio. Phasellus vel eros sit amet dolor mollis ultricies id eu lectus. Nunc mattis magna id augue malesuada luctus. Donec sit amet diam id diam interdum sollicitudin.', 1);
 
 -- --------------------------------------------------------
 
@@ -225,6 +227,18 @@ ALTER TABLE `tb_imagens`
   ADD PRIMARY KEY (`id`);
 
 --
+-- Índices para tabela `tb_integracoes`
+--
+ALTER TABLE `tb_integracoes`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Índices para tabela `tb_mensagens`
+--
+ALTER TABLE `tb_mensagens`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- AUTO_INCREMENT de tabelas despejadas
 --
 
@@ -252,6 +266,17 @@ ALTER TABLE `tb_doacoes`
 ALTER TABLE `tb_imagens`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
 COMMIT;
+
+-- AUTO_INCREMENT de tabela `tb_integracoes`
+--
+ALTER TABLE `tb_integracoes`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT de tabela `tb_mensagens`
+--
+ALTER TABLE `tb_mensagens`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;

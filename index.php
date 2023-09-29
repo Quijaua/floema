@@ -23,6 +23,7 @@
     // Tabela que sera feita a consulta
     $tabela = "tb_checkout";
 	$tabela_2 = "tb_integracoes";
+	$tabela_3 = "tb_mensagens";
 
     // ID que você deseja pesquisar
     $id = 1;
@@ -30,22 +31,27 @@
     // Consulta SQL
     $sql = "SELECT * FROM $tabela WHERE id = :id";
 	$sql_2 = "SELECT * FROM $tabela_2 WHERE id = :id";
+	$sql_3 = "SELECT use_privacy FROM $tabela_3 WHERE id = :id";
 
     // Preparar a consulta
     $stmt = $conn->prepare($sql);
 	$stmt_2 = $conn->prepare($sql_2);
+	$stmt_3 = $conn->prepare($sql_3);
 
     // Vincular o valor do parâmetro
     $stmt->bindParam(':id', $id, PDO::PARAM_INT);
 	$stmt_2->bindParam(':id', $id, PDO::PARAM_INT);
+	$stmt_3->bindParam(':id', $id, PDO::PARAM_INT);
 
     // Executar a consulta
     $stmt->execute();
 	$stmt_2->execute();
+	$stmt_3->execute();
 
     // Obter o resultado como um array associativo
     $resultado = $stmt->fetch(PDO::FETCH_ASSOC);
 	$resultado_2 = $stmt_2->fetch(PDO::FETCH_ASSOC);
+	$resultado_3 = $stmt_3->fetch(PDO::FETCH_ASSOC);
 
     // Verificar se o resultado foi encontrado
     if ($resultado) {
@@ -103,6 +109,15 @@
 		$fb_pixel = $resultado_2['fb_pixel'];
 		$gtm = $resultado_2['gtm'];
 		$g_analytics = $resultado_2['g_analytics'];
+	} else {
+		// ID não encontrado ou não existente
+		echo "ID não encontrado.";
+	}
+
+	// Verificar se o resultado_3 foi encontrado
+	if ($resultado_3) {
+		// Atribuir o valor da coluna à variável, ex.: "nome" = $nome
+		$use_privacy = $resultado_3['use_privacy'];
 	} else {
 		// ID não encontrado ou não existente
 		echo "ID não encontrado.";
@@ -596,7 +611,13 @@
 				<a href="<?php echo ($website !== '') ? $website : '#'; ?>" <?php echo ($website == '') ? 'class="d-none"' : ''; ?>><i class="bi bi-globe-americas p-2"></i></a>
 			</div>
 			<p class="footer-link ps-1">
-				<a href="<?php echo $privacidade; ?>" rel="noopener noreferrer" target="_blank">
+				<?php
+					if($use_privacy) {
+						echo "<a href='/politica-de-privacidade' rel='noopener noreferrer' target='_blank'>";
+					} else {
+						echo "<a href=" . $privacidade . " rel='noopener noreferrer' target='_blank'>";
+					}
+				?>
 					PRIVACIDADE DOS DOADORES
 				</a>
 				 | 

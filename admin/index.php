@@ -20,7 +20,7 @@
     // Consulta SQL
     $sql = "SELECT nome, logo, title, descricao, privacidade, faq, facebook, instagram, linkedin, twitter, youtube, website, cep, rua, numero, bairro, cidade, estado, telefone, email, nav_color, nav_background, background, color, hover, text_color, load_btn, monthly_1, monthly_2, monthly_3, monthly_4, monthly_5, yearly_1, yearly_2, yearly_3, yearly_4, yearly_5, once_1, once_2, once_3, once_4, once_5 FROM $tabela WHERE id = :id";
     $sql_2 = "SELECT fb_pixel, gtm, g_analytics FROM $tabela_2 WHERE id = :id";
-    $sql_3 = "SELECT welcome_email FROM $tabela_3 WHERE id = :id";
+    $sql_3 = "SELECT welcome_email, privacy_policy, use_privacy FROM $tabela_3 WHERE id = :id";
 
     // Preparar a consulta
     $stmt = $conn->prepare($sql);
@@ -107,6 +107,8 @@
     if ($resultado_3) {
         // Atribuir o valor da coluna à variável, ex.: "nome" = $nome
         $welcome_email = $resultado_3['welcome_email'];
+        $privacy_policy = $resultado_3['privacy_policy'];
+        $use_privacy = $resultado_3['use_privacy'];
     } else {
         // ID não encontrado ou não existente
         echo "ID não encontrado.";}
@@ -295,6 +297,12 @@
                                     <a href="<?php echo INCLUDE_PATH_ADMIN; ?>mensagens">
                                         <i class="metismenu-icon pe-7s-paper-plane"></i>
                                         Mensagens
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="<?php echo INCLUDE_PATH_ADMIN; ?>politica-de-privacidade">
+                                        <i class="metismenu-icon pe-7s-paper-plane"></i>
+                                        Privacidade e Termo
                                     </a>
                                 </li>
                                 <li>
