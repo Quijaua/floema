@@ -75,7 +75,8 @@
     $sql_1 = "SELECT welcome_email FROM $tabela_1";
     $stmt_1 = $conn->prepare($sql_1);
     $stmt_1->execute();
-    $welcome_email = $stmt_1->fetch(PDO::FETCH_ASSOC);
+    $resultado = $stmt_1->fetch(PDO::FETCH_ASSOC);
+    $mensagem = $resultado['welcome_email'];
 
     try {
         /*$mail->SMTPDebug = SMTP::DEBUG_SERVER;*/
@@ -95,7 +96,7 @@
         // Configurações do e-mail
         $mail->isHTML(true);
         $mail->Subject = 'Ativar sua conta';
-        $mail->Body = 'Olá ' . $nome . ',<br>' . $welcome_email . '<br><br>Clique no link a seguir para ativar sua conta: <a href="' . $link_magico . '">Ativar Conta</a><br><br>Ou<br><br>Cole esse link no seu navegador:<br>' . $link_magico . '';
+        $mail->Body = 'Olá ' . $nome . ',<br>' . $mensagem . '<br><br>Clique no link a seguir para ativar sua conta: <a href="' . $link_magico . '">Ativar Conta</a><br><br>Ou<br><br>Cole esse link no seu navegador:<br>' . $link_magico . '';
 
         // Envia o e-mail
         $mail->send();
