@@ -497,7 +497,7 @@
 						<div class="col-md-12 mb-2">
 							<div class="form-check">
 								<input class="form-check-input" type="checkbox" value="1" id="private" name="private">
-								<label class="form-check-label" for="anonymous_donation">
+								<label class="form-check-label" for="private">
 									Fazer doação anonimamente
 								</label>
 							</div>
@@ -654,7 +654,7 @@
 <script src="<?php echo INCLUDE_PATH; ?>assets/ajax/3.6.3/jquery.min.js"></script>
 <script src="<?php echo INCLUDE_PATH; ?>assets/google/jquery/jquery-ui.js"></script>
 <script src="<?php echo INCLUDE_PATH; ?>assets/ajax/1.14.16/jquery.mask.min.js"></script>
-<script src="<?php echo INCLUDE_PATH; ?>assets/js/main.js"></script>
+<script src="<?php echo INCLUDE_PATH; ?>assets/js/main.js" defer></script>
 <!-- <script src="https://www.google.com/recaptcha/api.js?render=<?=$recaptcha_key?>"></script>
 <script>
 	// Captura do evento de submit do formulário
