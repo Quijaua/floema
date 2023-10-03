@@ -139,8 +139,9 @@ $(document).ready(function () {
     $('#field-other-yearly').mask("R$ 0#");
     $('#field-other-once').mask("R$ 0#");
 
-
-    $.getJSON("config.json", function (data) {
+    let origin = window.location.origin + "/";
+    //console.log(origin);
+    $.getJSON(origin + "config.json", function (data) {
         config = data;
 
         minOnceDonationCreditCard = config.minOnceDonation.creditCard;
