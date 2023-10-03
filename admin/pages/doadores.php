@@ -87,7 +87,7 @@
                             <td><?php echo $cliente["cpf"] ?></td>
                             <td>
                                 <?php
-                                    echo $cliente["endereco"] . ", " . $cliente["numero"] . " " . $cliente["municipio"] . "CEP " . $cliente["cep"] . " - " . $cliente["cidade"] . " " . $cliente["uf"]
+                                    echo $cliente["endereco"] . ", " . $cliente["numero"] . " - " . $cliente["municipio"] . " - " .$cliente["cidade"] . " / " . $cliente["uf"] . " - CEP " . $cliente["cep"]
                                 ?>
                             </td>
                             <td><?php echo $cliente["asaas_id"] ?></td>
