@@ -15,6 +15,7 @@
     $tabela_3 = "tb_mensagens";
     $tabela_4 = "tb_doacoes";
     $tabela_5 = "tb_clientes";
+    $tabela_6 = "tb_transacoes";
 
     // ID que você deseja pesquisar
     $id = 1;
@@ -25,6 +26,14 @@
     $sql_3 = "SELECT welcome_email, privacy_policy, use_privacy FROM $tabela_3 WHERE id = :id";
     $sql_4 = "SELECT * FROM $tabela_4";
     $sql_5 = "SELECT * FROM $tabela_5";
+    /*$sql_6 = "SELECT * FROM $tabela_6";*/
+    date_default_timezone_set('America/Sao_Paulo');
+    $now = date("Y-m-d");
+    $start_date = new DateTime($now);
+    $st_date_str = date_format($start_date, "Y-m-d");
+    $end_date = date_sub($start_date, date_interval_create_from_date_string("90 days"));
+    $ed_date_str = date_format($end_date, "Y-m-d");
+    $sql_6 = "SELECT * FROM $tabela_6 WHERE payment_date_created > CAST($ed_date_str as DATE)";
 
     // Preparar a consulta
     $stmt = $conn->prepare($sql);
@@ -32,6 +41,7 @@
     $stmt_3 = $conn->prepare($sql_3);
     $stmt_4 = $conn->prepare($sql_4);
     $stmt_5 = $conn->prepare($sql_5);
+    $stmt_6 = $conn->prepare($sql_6);
 
     // Vincular o valor do parâmetro
     $stmt->bindParam(':id', $id, PDO::PARAM_INT);
@@ -44,6 +54,7 @@
     $stmt_3->execute();
     $stmt_4->execute();
     $stmt_5->execute();
+    $stmt_6->execute();
 
     // Obter o resultado como um array associativo
     $resultado = $stmt->fetch(PDO::FETCH_ASSOC);
@@ -51,6 +62,7 @@
     $resultado_3 = $stmt_3->fetch(PDO::FETCH_ASSOC);
     $resultado_4 = $stmt_4->fetchAll(PDO::FETCH_ASSOC);
     $resultado_5 = $stmt_5->fetchAll(PDO::FETCH_ASSOC);
+    $resultado_6 = $stmt_6->fetchAll(PDO::FETCH_ASSOC);
 
     // Verificar se o resultado foi encontrado
     if ($resultado) {
@@ -139,6 +151,8 @@
         // ID não encontrado ou não existente
         echo "ID não encontrado.";
     }
+
+    $transacoes = $resultado_6;
 ?>
 <!doctype html>
 <html lang="pt-BR">
@@ -318,6 +332,12 @@
                                     <a href="<?php echo INCLUDE_PATH_ADMIN; ?>doadores">
                                         <i class="metismenu-icon pe-7s-graph2"></i>
                                         Doadores
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="<?php echo INCLUDE_PATH_ADMIN; ?>financeiro">
+                                        <i class="metismenu-icon pe-7s-piggy"></i>
+                                        Financeiro
                                     </a>
                                 </li>
                                 <li>

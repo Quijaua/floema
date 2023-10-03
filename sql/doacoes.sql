@@ -198,6 +198,32 @@ CREATE TABLE `tb_integracoes` (
 INSERT INTO `tb_integracoes` (`id`, `fb_pixel`, `gtm`, `g_analytics`) VALUES
 (1, '', '', '');
 
+-- --------------------------------------------------------
+
+--
+-- Estrutura da tabela `tb_integracoes`
+--
+
+CREATE TABLE `tb_transacoes` (
+  `id` int(11) NOT NULL,
+  `event` varchar(255) DEFAULT NULL,
+  `payment_id` varchar(255) DEFAULT NULL,
+  `payment_date_created` varchar(255) DEFAULT NULL,
+  `customer_id` varchar(255) DEFAULT NULL,
+  `subscription_id` varchar(255) DEFAULT NULL,
+  `value` varchar(255) DEFAULT NULL,
+  `net_value` varchar(255) DEFAULT NULL,
+  `description` varchar(255) DEFAULT NULL,
+  `billing_type` varchar(255) DEFAULT NULL,
+  `confirmed_date` varchar(255) DEFAULT NULL,
+  `credit_card_number` varchar(255) DEFAULT NULL,
+  `credit_card_brand` varchar(255) DEFAULT NULL,
+  `credit_card_token` varchar(255) DEFAULT NULL,
+  `status` varchar(255) DEFAULT NULL,
+  `credit_date` varchar(255) DEFAULT NULL,
+  `estimated_credit_date` varchar(255) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
 --
 -- Índices para tabelas despejadas
 --
@@ -239,6 +265,12 @@ ALTER TABLE `tb_mensagens`
   ADD PRIMARY KEY (`id`);
 
 --
+-- Índices para tabela `tb_transacoes`
+--
+ALTER TABLE `tb_transacoes`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- AUTO_INCREMENT de tabelas despejadas
 --
 
@@ -276,6 +308,12 @@ ALTER TABLE `tb_integracoes`
 -- AUTO_INCREMENT de tabela `tb_mensagens`
 --
 ALTER TABLE `tb_mensagens`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT de tabela `tb_transacoes`
+--
+ALTER TABLE `tb_transacoes`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
