@@ -79,7 +79,7 @@ parse_str(base64_decode($_POST['params']), $dataForm);
                 $customer_id = asaas_CriarCliente($dataForm, $config);
                 if($dataForm['inlineRadioOptions'] == "MONTHLY" || $dataForm['inlineRadioOptions'] == "YEARLY"){
                     $payment_id = asaas_CriarAssinaturaBoleto($customer_id, $dataForm, $config);
-                } else if($dataForm['inlineRadioOptions'] == "option3"){
+                } else {
                     $payment_id = asaas_CriarCobrancaBoleto($customer_id, $dataForm, $config);
                 }
                 //$payment_id = asaas_CriarCobrancaBoleto($customer_id, $dataForm, $config);
