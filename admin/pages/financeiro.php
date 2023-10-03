@@ -129,11 +129,11 @@
                             <td><span class="badge badge-<?php echo $class; ?>"><?php echo $type; ?></span></td>
                             <td><?php echo $transacao["payment_id"]; ?></td>
                             <td><?php echo date_format($created_date, "d/m/Y"); ?></td>
-                            <td><?php echo $transacao["customer_id"]; ?></td>
+                            <td><?php echo $transacao["nome"]; ?></td>
                             <td><?php echo $transacao["subscription_id"]; ?></td>
                             <td><?php echo $transacao["value"]; ?></td>
                             <td><?php echo $transacao["net_value"]; ?></td>
-                            <td><?php echo $transacao["description"]; ?></td>
+                            <td><?php echo $transacao["description"] ? $transacao["description"] : "Doação única"; ?></td>
                             <td><?php echo $transacao["billing_type"]; ?></td>
                             <td><?php echo date_format($payment_date, "d/m/Y"); ?></td>
                             <!--<td><?php echo $transacao["credit_card_number"]; ?></td>-->
