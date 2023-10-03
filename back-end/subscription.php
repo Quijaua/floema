@@ -58,6 +58,7 @@ parse_str(base64_decode($_POST['params']), $dataForm);
         include('config.php');
         include_once('criar_cliente.php');
         include_once('assinatura_cartao.php');
+        include_once('assinatura_boleto.php');
         include_once('cobranca_cartao.php');
         include_once('cobranca_pix.php');
         include_once('cobranca_boleto.php');
@@ -76,7 +77,12 @@ parse_str(base64_decode($_POST['params']), $dataForm);
                 break;
             case '101':
                 $customer_id = asaas_CriarCliente($dataForm, $config);
-                $payment_id = asaas_CriarCobrancaBoleto($customer_id, $dataForm, $config);
+                if($dataForm['inlineRadioOptions'] == "MONTHLY" || $dataForm['inlineRadioOptions'] == "YEARLY"){
+                    $payment_id = asaas_CriarAssinaturaBoleto($customer_id, $dataForm, $config);
+                } else if($dataForm['inlineRadioOptions'] == "option3"){
+                    $payment_id = asaas_CriarCobrancaBoleto($customer_id, $dataForm, $config);
+                }
+                //$payment_id = asaas_CriarCobrancaBoleto($customer_id, $dataForm, $config);
                 asaas_ObterLinhaDigitavelBoleto($payment_id, $config);
                 echo json_encode(["status"=>200, "code"=>$payment_id, "id"=>$customer_id]);
                 break;
