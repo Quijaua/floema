@@ -25,7 +25,7 @@
     $sql_2 = "SELECT fb_pixel, gtm, g_analytics FROM $tabela_2 WHERE id = :id";
     $sql_3 = "SELECT welcome_email, privacy_policy, use_privacy FROM $tabela_3 WHERE id = :id";
     $sql_4 = "SELECT * FROM $tabela_4";
-    $sql_5 = "SELECT * FROM $tabela_5";
+    $sql_5 = "SELECT * FROM $tabela_5 WHERE roles != 1";
     /*$sql_6 = "SELECT * FROM $tabela_6";*/
     date_default_timezone_set('America/Sao_Paulo');
     $now = date("Y-m-d");
@@ -34,7 +34,7 @@
     $end_date = date_sub($start_date, date_interval_create_from_date_string("90 days"));
     $ed_date_str = date_format($end_date, "Y-m-d");
     //$sql_6 = "SELECT * FROM $tabela_6 WHERE payment_date_created > CAST($ed_date_str as DATE)";
-    $sql_6 = "SELECT * FROM $tabela_6 as t6 JOIN $tabela_5 as t5 ON t6.customer_id = t5.asaas_id WHERE payment_date_created > CAST($ed_date_str as DATE)";
+    $sql_6 = "SELECT * FROM $tabela_6 as t6 JOIN $tabela_5 as t5 ON t6.customer_id = t5.asaas_id WHERE payment_date_created > CAST($ed_date_str as DATE) AND roles != 1";
 
     // Preparar a consulta
     $stmt = $conn->prepare($sql);
@@ -137,22 +137,8 @@
         echo "ID não encontrado.";
     }
 
-    if($resultado_4) {
-        // Atribuir o valor da coluna à variável, ex.: "nome" = $nome
-        $doacoes = $resultado_4;
-    } else {
-        // ID não encontrado ou não existente
-        echo "ID não encontrado.";
-    }
-
-    if($resultado_5) {
-        // Atribuir o valor da coluna à variável, ex.: "nome" = $nome
-        $clientes = $resultado_5;
-    } else {
-        // ID não encontrado ou não existente
-        echo "ID não encontrado.";
-    }
-
+    $doacoes = $resultado_4;
+    $clientes = $resultado_5;
     $transacoes = $resultado_6;
 ?>
 <!doctype html>
