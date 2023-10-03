@@ -95,6 +95,10 @@
                                         $type = "Pago";
                                         $class = "success";
                                         break;
+                                    case "PAYMENT_RECEIVED":
+                                        $type = "Recebido";
+                                        $class = "success";
+                                        break;
                                     case "PAYMENT_DELETED":
                                         $type = "Cancelado";
                                         $class = "warning";
@@ -106,6 +110,10 @@
                                     case "PAYMENT_REFUNDED":
                                         $type = "Estornado";
                                         $class = "info";
+                                        break;
+                                    case "PAYMENT_CREATED":
+                                        $type = "Criado";
+                                        $class = "primary";
                                         break;
                                     default:
                                         $type = "Desconhecido";

@@ -360,10 +360,12 @@
 						</label>
 					</div>
 					<div class="form-check">
+						<!--<input onclick="setPaymentMethod('bank_slip')" class="form-check-input" type="radio"
+							name="payment" value="101" id="payment-bank-slip" disabled>-->
 						<input onclick="setPaymentMethod('bank_slip')" class="form-check-input" type="radio"
-							name="payment" value="101" id="payment-bank-slip" disabled>
+							name="payment" value="101" id="payment-bank-slip">
 						<label class="form-check-label payment-button-options" for="payment-bank-slip">
-							Boleto - <small><i>Apenas para contribuição única</i></small>
+							Boleto<!-- - <small><i>Apenas para contribuição única</i></small>-->
 						</label>
 					</div>
 					<div class="form-check">
