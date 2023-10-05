@@ -221,8 +221,8 @@
 <nav class="navbar navbar-expand-md navbar-dark" style="background-color: <?php echo $nav_background; ?>; color: <?php echo $nav_color; ?>;">
 	<div class="container">
 		<div class="row">
-			<div class="col-md-4 p-3">
-				<img src="assets/img/<?php echo $logo; ?>" class="w-75">
+			<div class="col-md-4 p-1">
+				<img src="assets/img/<?php echo $logo; ?>">
 			</div>
 			<div class="col-md-8 mt-4">
 				<h1 class="h2"><?php echo ($title !== '') ? $title : 'Colabore com o Projeto '.$nome; ?></h1>
@@ -634,7 +634,7 @@
 		</div>
 		<div class="col-md-3">
 		<p class="footer-linkd mt-5 footer-floema-doar font-weight-bold">
-				<a href="#" rel="noopener noreferrer" target="_blank">
+				<a href="https://floema-doar.org" rel="noopener noreferrer" target="_blank">
 					Usamos Floema Doar | Open source
 				</a>
 			</p>
