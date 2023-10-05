@@ -316,7 +316,11 @@
 <script src="https://cdn.ckeditor.com/ckeditor5/39.0.2/classic/ckeditor.js"></script>
 <script>
     ClassicEditor
-    .create( document.querySelector( '#descricao' ), {})
+    .create( document.querySelector( '#descricao' ), {
+        mediaEmbed: {
+            previewsInData:true
+        },
+    })
     .catch( error => {
         console.error( error );
     })
