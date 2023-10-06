@@ -234,6 +234,7 @@ if (isset($_POST['btnUpdFooter'])) {
         //Informacoes coletadas pelo metodo POST
         $privacidade = $_POST['privacidade'];
         $faq = $_POST['faq'];
+        $use_faq = $_POST['use_faq'];
 
         if (!isset($_POST["dFacebook"])) {
             $facebook = $_POST['facebook'];
@@ -267,10 +268,11 @@ if (isset($_POST['btnUpdFooter'])) {
         $email = $_POST['email'];
 
         // Atualize o item no banco de dados
-        $sql = "UPDATE $tabela SET privacidade = :privacidade, faq = :faq, facebook = :facebook, instagram = :instagram, linkedin = :linkedin, twitter = :twitter, youtube = :youtube, website = :website, cep = :cep, rua = :rua, numero = :numero, bairro = :bairro, cidade = :cidade, estado = :estado, telefone = :telefone, email = :email WHERE id = :id";
+        $sql = "UPDATE $tabela SET privacidade = :privacidade, faq = :faq, use_faq = :use_faq, facebook = :facebook, instagram = :instagram, linkedin = :linkedin, twitter = :twitter, youtube = :youtube, website = :website, cep = :cep, rua = :rua, numero = :numero, bairro = :bairro, cidade = :cidade, estado = :estado, telefone = :telefone, email = :email WHERE id = :id";
         $stmt = $conn->prepare($sql);
         $stmt->bindParam(':privacidade', $privacidade);
         $stmt->bindParam(':faq', $faq);
+        $stmt->bindParam(':use_faq', $use_faq);
         $stmt->bindParam(':facebook', $facebook);
         $stmt->bindParam(':instagram', $instagram);
         $stmt->bindParam(':linkedin', $linkedin);

@@ -62,6 +62,7 @@
         $descricao = $resultado['descricao'];
         $privacidade = $resultado['privacidade'];
         $faq = $resultado['faq'];
+		$use_faq = $resultado['use_faq'];
         $facebook = $resultado['facebook'];
         $instagram = $resultado['instagram'];
         $linkedin = $resultado['linkedin'];
@@ -174,7 +175,7 @@
 			},
 			"datePublished": "2023-03-02T19:50:30+00:00",
 			"dateModified": "2023-03-21T12:51:52+00:00",
-			"description": "Lorem ipsum",
+			"description": "<?php echo mb_strimwidth($descricao, 0, 120, '...'); ?>",
 			"inLanguage": "pt-BR",
 			"interactAction": [
 				{
@@ -624,10 +625,12 @@
 					PRIVACIDADE DOS DOADORES
 				</a>
 				 | 
-				<a href="<?php echo $faq; ?>" rel="noopener noreferrer" target="_blank">
-					PERGUNTAS FREQUENTES
-				</a>
-				| 
+				<!--<a href="<?php echo $faq; ?>" rel="noopener noreferrer" target="_blank">-->
+				<?php 
+					if($use_faq) {
+						echo "<a href='<?php echo $faq; ?>' rel='noopener noreferrer' target='_blank'>PERGUNTAS FREQUENTES | </a>";
+					}
+				?>
 				<a href="/login" rel="noopener noreferrer" target="_blank">
 					LOGIN
 				</a>
