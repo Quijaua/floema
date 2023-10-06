@@ -174,7 +174,7 @@
 			},
 			"datePublished": "2023-03-02T19:50:30+00:00",
 			"dateModified": "2023-03-21T12:51:52+00:00",
-			"description": "Lorem ipsum",
+			"description": "<?php echo mb_strimwidth($descricao, 0, 120, '...'); ?>",
 			"inLanguage": "pt-BR",
 			"interactAction": [
 				{
