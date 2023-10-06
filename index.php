@@ -146,7 +146,7 @@
 <meta property="og:locale" content="pt_BR" />
 <meta property="og:type" content="website" />
 <meta property="og:title" content="<?php echo $title; ?>"/>
-<meta property="og:description" name="description" content="Lorem ipsum" />
+<meta property="og:description" name="description" content="<?php echo mb_strimwidth($descricao, 0, 120, '...'); ?>" />
 <meta property="og:url" value="<?php echo INCLUDE_PATH; ?>"/>
 <meta property="og:site_name" content="<?php echo $nome; ?>" />
 <meta property="article:modified_time" content="2022-12-01T18:38:06+00:00" />
@@ -158,7 +158,7 @@
 <meta name="twitter:url" value="<?php echo INCLUDE_PATH; ?>"/>
 <meta name="twitter:image" value="<?php echo INCLUDE_PATH; ?>assets/img/<?php echo $logo; ?>"/>
 <meta name="twitter:image" content="<?php echo INCLUDE_PATH; ?>assets/img/<?php echo $logo; ?>"/>
-<meta name="twitter:description" value="Lorem ipsum"/>
+<meta name="twitter:description" value="<?php echo mb_strimwidth($descricao, 0, 120, '...'); ?>"/>
 
 
 <script type="application/ld+json">{
@@ -598,10 +598,10 @@
 		<div class="col-md-3">
 			<span class="h5"><?php echo $nome; ?></span><br />
 			<div class="font-weight-light" style="font-size:13px;margin-top:5px">
-				<?php echo $rua; ?><?php echo ($numero !== '') ? ', ' . $numero : ''; ?> - <?php echo $bairro; ?>
-				<?php echo $cidade; ?> - <?php echo $estado; ?>, CEP: <?php echo $cep; ?><br />
-				Telefone: <a href="callto:<?php echo $telefone; ?>"><?php echo $telefone; ?></a><br />
-				E-mail: <a href="mailto:<?php echo $email; ?>"><?php echo $email; ?></a><br />
+			<!--<?php echo $rua; ?><?php echo ($numero !== '') ? ', ' . $numero : ''; ?> - <?php echo $bairro; ?>-->
+			<?php echo $rua . ', '; ?><?php echo $numero ? $numero :  'S/N'; ?> - <?php echo $bairro; ?>
+			<?php echo $cidade; ?> - <?php echo $estado; ?>, <?php echo $cep; ?><br />
+			Telefone: <a href="callto:<?php echo $telefone; ?>"><?php echo $telefone; ?></a> | E-mail: <a href="mailto:<?php echo $email; ?>"><?php echo $email; ?></a><br />
 			</div>
 			<div class="social-net mt-2 mb-4">
 				<a href="<?php echo ($facebook !== '') ? $facebook : '#'; ?>" <?php echo ($facebook == '') ? 'class="d-none"' : ''; ?>><i class="bi bi-facebook p-2"></i></a>
