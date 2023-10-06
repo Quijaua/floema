@@ -159,6 +159,7 @@
         <link rel="stylesheet" href="<?php echo INCLUDE_PATH; ?>vendors/linearicons-master/dist/web-font/style.css">
         <link rel="stylesheet" href="<?php echo INCLUDE_PATH; ?>vendors/pixeden-stroke-7-icon-master/pe-icon-7-stroke/dist/pe-icon-7-stroke.css">
         <link href="<?php echo INCLUDE_PATH_ADMIN; ?>styles/css/base.css" rel="stylesheet">
+        <link href="<?php echo INCLUDE_PATH_ADMIN; ?>styles/css/custom.css" rel="stylesheet">
         <link href="<?php echo INCLUDE_PATH; ?>assets/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet" type="text/css">
         <script src="<?php echo INCLUDE_PATH; ?>assets/google/jquery/jquery.min.js"></script>
         <script src="<?php echo INCLUDE_PATH; ?>assets/ajax/1.16.0/popper.min.js"></script>

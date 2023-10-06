@@ -222,8 +222,8 @@
 <nav class="navbar navbar-expand-md navbar-dark" style="background-color: <?php echo $nav_background; ?>; color: <?php echo $nav_color; ?>;">
 	<div class="container">
 		<div class="row">
-			<div class="col-md-4 p-3">
-				<img src="assets/img/<?php echo $logo; ?>" class="w-75">
+			<div class="col-md-4 p-1">
+				<img src="assets/img/<?php echo $logo; ?>">
 			</div>
 			<div class="col-md-8 mt-4">
 				<h1 class="h2"><?php echo ($title !== '') ? $title : 'Colabore com o Projeto '.$nome; ?></h1>
@@ -604,8 +604,6 @@
 			<?php echo $cidade; ?> - <?php echo $estado; ?>, <?php echo $cep; ?><br />
 			Telefone: <a href="callto:<?php echo $telefone; ?>"><?php echo $telefone; ?></a> | E-mail: <a href="mailto:<?php echo $email; ?>"><?php echo $email; ?></a><br />
 			</div>
-		</div>
-		<div class="col-md-6">
 			<div class="social-net mt-2 mb-4">
 				<a href="<?php echo ($facebook !== '') ? $facebook : '#'; ?>" <?php echo ($facebook == '') ? 'class="d-none"' : ''; ?>><i class="bi bi-facebook p-2"></i></a>
 				<a href="<?php echo ($instagram !== '') ? $instagram : '#'; ?>" <?php echo ($instagram == '') ? 'class="d-none"' : ''; ?>><i class="bi bi-instagram p-2"></i></a>
@@ -613,6 +611,15 @@
 				<a href="<?php echo ($twitter !== '') ? $twitter : '#'; ?>" <?php echo ($twitter == '') ? 'class="d-none"' : ''; ?>><i class="bi bi-twitter p-2"></i></a>
 				<a href="<?php echo ($youtube !== '') ? $youtube : '#'; ?>" <?php echo ($youtube == '') ? 'class="d-none"' : ''; ?>><i class="bi bi-youtube p-2"></i></a>
 				<a href="<?php echo ($website !== '') ? $website : '#'; ?>" <?php echo ($website == '') ? 'class="d-none"' : ''; ?>><i class="bi bi-globe-americas p-2"></i></a>
+			</div>
+
+		</div>
+		<div class="col-md-6 text-center">
+			<div class="social-net mt-2 mb-4">
+				<img src="/assets/img/security.webp" alt="ambiente seguro" />
+				<a class="p-2" href="https://transparencyreport.google.com/safe-browsing/search?url=<?php echo INCLUDE_PATH; ?>" target="_blank" rel="noreferrer">
+					<img src="/assets/img/selo-google.png" width="150" height="42" alt="Safe Browsisng">
+				</a>
 			</div>
 			<p class="footer-link ps-1">
 				<?php
@@ -638,7 +645,7 @@
 		</div>
 		<div class="col-md-3">
 		<p class="footer-linkd mt-5 footer-floema-doar font-weight-bold">
-				<a href="#" rel="noopener noreferrer" target="_blank">
+				<a href="https://floema-doar.org" rel="noopener noreferrer" target="_blank">
 					Usamos Floema Doar | Open source
 				</a>
 			</p>
