@@ -598,7 +598,8 @@
 		<div class="col-md-3">
 			<span class="h5"><?php echo $nome; ?></span><br />
 			<div class="font-weight-light" style="font-size:13px;margin-top:5px">
-			<?php echo $rua; ?><?php echo ($numero !== '') ? ', ' . $numero : ''; ?> - <?php echo $bairro; ?>
+			<!--<?php echo $rua; ?><?php echo ($numero !== '') ? ', ' . $numero : ''; ?> - <?php echo $bairro; ?>-->
+			<?php echo $rua . ', '; ?><?php echo $numero ? $numero :  'S/N'; ?> - <?php echo $bairro; ?>
 			<?php echo $cidade; ?> - <?php echo $estado; ?>, <?php echo $cep; ?><br />
 			Telefone: <a href="callto:<?php echo $telefone; ?>"><?php echo $telefone; ?></a> | E-mail: <a href="mailto:<?php echo $email; ?>"><?php echo $email; ?></a><br />
 			</div>
