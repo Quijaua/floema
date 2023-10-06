@@ -600,8 +600,9 @@
 			<div class="font-weight-light" style="font-size:13px;margin-top:5px">
 			<!--<?php echo $rua; ?><?php echo ($numero !== '') ? ', ' . $numero : ''; ?> - <?php echo $bairro; ?>-->
 			<?php echo $rua . ', '; ?><?php echo $numero ? $numero :  'S/N'; ?> - <?php echo $bairro; ?>
-			<?php echo $cidade; ?> - <?php echo $estado; ?>, <?php echo $cep; ?><br />
-			Telefone: <a href="callto:<?php echo $telefone; ?>"><?php echo $telefone; ?></a> | E-mail: <a href="mailto:<?php echo $email; ?>"><?php echo $email; ?></a><br />
+			<?php echo $cidade; ?> - <?php echo $estado; ?> CEP: <?php echo $cep; ?><br />
+			Telefone: <a href="callto:<?php echo $telefone; ?>"><?php echo $telefone; ?></a><br />
+			E-mail: <a href="mailto:<?php echo $email; ?>"><?php echo $email; ?></a>
 			</div>
 			<div class="social-net mt-2 mb-4">
 				<a href="<?php echo ($facebook !== '') ? $facebook : '#'; ?>" <?php echo ($facebook == '') ? 'class="d-none"' : ''; ?>><i class="bi bi-facebook p-2"></i></a>
