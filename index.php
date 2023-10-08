@@ -221,10 +221,10 @@
 <nav class="navbar navbar-expand-md navbar-dark" style="background-color: <?php echo $nav_background; ?>; color: <?php echo $nav_color; ?>;">
 	<div class="container">
 		<div class="row">
-			<div class="col-md-4 p-1">
+			<div class="col-md-4 p-1 text-center">
 				<img src="assets/img/<?php echo $logo; ?>">
 			</div>
-			<div class="col-md-8 mt-4">
+			<div class="col-md-8 mt-4 p-md-3">
 				<h1 class="h2"><?php echo ($title !== '') ? $title : 'Colabore com o Projeto '.$nome; ?></h1>
 			</div>
 		</div>
