@@ -95,6 +95,9 @@
                                         <input type="hidden" name="asaas_id" value="<?php echo $asaas_id; ?>">
                                         <div class="divider row"></div>
                                         <div class="d-flex align-items-center">
+                                            <div class="mr-auto">
+                                                <a href="<?php echo INCLUDE_PATH; ?>" class="d-block"><?php echo $_SESSION['project_name']; ?> - Voltar para o site</a>
+                                            </div>
                                             <div class="ml-auto">
                                                 <button class="btn btn-primary btn-lg" name="btnLogin" id="btnAddPassword" disabled>Salvar senha</button>
                                             </div>

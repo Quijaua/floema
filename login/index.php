@@ -2,6 +2,14 @@
     session_start();
     ob_start();
     include('../config.php');
+
+    $tabela = 'tb_checkout';
+    $sql = "SELECT nome FROM $tabela";
+    $stmt = $conn->prepare($sql);
+    $stmt->execute();
+    $resultado = $stmt->fetch(PDO::FETCH_ASSOC);
+    $project_name = $resultado['nome'];
+    $_SESSION['project_name'] = $project_name;
 ?>
 <!doctype html>
 <html lang="pt-BR">
@@ -86,6 +94,9 @@
                                         </div>
                                         <div class="divider row"></div>
                                         <div class="d-flex align-items-center">
+                                            <div class="mr-auto">
+                                                <a href="<?php echo INCLUDE_PATH; ?>" class="d-block"><?php echo $_SESSION['project_name']; ?> - Voltar para o site</a>
+                                            </div>
                                             <div class="ml-auto">
                                                 <a href="<?php echo INCLUDE_PATH; ?>login/recuperar-senha.php" class="btn-lg btn btn-link">Recuperar Senha</a>
                                                 <button class="btn btn-primary btn-lg">Entrar no Painel</button>

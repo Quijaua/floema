@@ -76,8 +76,11 @@
                         <div class="position-relative row form-group">
                             <label for="faq" class="col-sm-2 col-form-label">Perguntas Frequentes</label>
                             <div class="col-sm-10">
-                                <input name="faq" id="faq"
-                                    type="text" class="form-control" value="<?php echo $faq; ?>">
+                                <input name="faq" id="faq" type="text" class="form-control" value="<?php echo $faq; ?>">
+                                <small class="form-text text-muted">
+                                    <input type="checkbox" name="use_faq" id="use_faq" value="1" data-input-id="use_faq" <?php if ($use_faq) { echo 'checked'; } else { echo '';}; ?> >
+                                    <label for="use_faq" class="mb-0">Usar FAQ padrão do sistema</label>
+                                </small>
                             </div>
                         </div>
 
