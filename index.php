@@ -147,7 +147,7 @@
 <meta property="og:locale" content="pt_BR" />
 <meta property="og:type" content="website" />
 <meta property="og:title" content="<?php echo $title; ?>"/>
-<meta property="og:description" name="description" content="<?php echo mb_strimwidth($descricao, 0, 120, '...'); ?>" />
+<meta property="og:description" name="description" content="<?php echo mb_strimwidth($descricao, 3, 120, '...'); ?>" />
 <meta property="og:url" value="<?php echo INCLUDE_PATH; ?>"/>
 <meta property="og:site_name" content="<?php echo $nome; ?>" />
 <meta property="article:modified_time" content="2022-12-01T18:38:06+00:00" />
@@ -159,7 +159,7 @@
 <meta name="twitter:url" value="<?php echo INCLUDE_PATH; ?>"/>
 <meta name="twitter:image" value="<?php echo INCLUDE_PATH; ?>assets/img/<?php echo $logo; ?>"/>
 <meta name="twitter:image" content="<?php echo INCLUDE_PATH; ?>assets/img/<?php echo $logo; ?>"/>
-<meta name="twitter:description" value="<?php echo mb_strimwidth($descricao, 0, 120, '...'); ?>"/>
+<meta name="twitter:description" value="<?php echo mb_strimwidth($descricao, 3, 120, '...'); ?>"/>
 
 
 <script type="application/ld+json">{
@@ -175,7 +175,7 @@
 			},
 			"datePublished": "2023-03-02T19:50:30+00:00",
 			"dateModified": "2023-03-21T12:51:52+00:00",
-			"description": "<?php echo mb_strimwidth($descricao, 0, 120, '...'); ?>",
+			"description": "<?php echo mb_strimwidth($descricao, 3, 120, '...'); ?>",
 			"inLanguage": "pt-BR",
 			"interactAction": [
 				{
@@ -222,10 +222,10 @@
 <nav class="navbar navbar-expand-md navbar-dark" style="background-color: <?php echo $nav_background; ?>; color: <?php echo $nav_color; ?>;">
 	<div class="container">
 		<div class="row">
-			<div class="col-md-4 p-1">
+			<div class="col-md-4 p-1 text-center">
 				<img src="assets/img/<?php echo $logo; ?>">
 			</div>
-			<div class="col-md-8 mt-4">
+			<div class="col-md-8 mt-4 p-md-3">
 				<h1 class="h2"><?php echo ($title !== '') ? $title : 'Colabore com o Projeto '.$nome; ?></h1>
 			</div>
 		</div>
@@ -601,8 +601,9 @@
 			<div class="font-weight-light" style="font-size:13px;margin-top:5px">
 			<!--<?php echo $rua; ?><?php echo ($numero !== '') ? ', ' . $numero : ''; ?> - <?php echo $bairro; ?>-->
 			<?php echo $rua . ', '; ?><?php echo $numero ? $numero :  'S/N'; ?> - <?php echo $bairro; ?>
-			<?php echo $cidade; ?> - <?php echo $estado; ?>, <?php echo $cep; ?><br />
-			Telefone: <a href="callto:<?php echo $telefone; ?>"><?php echo $telefone; ?></a> | E-mail: <a href="mailto:<?php echo $email; ?>"><?php echo $email; ?></a><br />
+			<?php echo $cidade; ?> - <?php echo $estado; ?> CEP: <?php echo $cep; ?><br />
+			Telefone: <a href="callto:<?php echo $telefone; ?>"><?php echo $telefone; ?></a><br />
+			E-mail: <a href="mailto:<?php echo $email; ?>"><?php echo $email; ?></a>
 			</div>
 			<div class="social-net mt-2 mb-4">
 				<a href="<?php echo ($facebook !== '') ? $facebook : '#'; ?>" <?php echo ($facebook == '') ? 'class="d-none"' : ''; ?>><i class="bi bi-facebook p-2"></i></a>
