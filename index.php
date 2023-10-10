@@ -632,15 +632,13 @@
 				?>
 					PRIVACIDADE DOS DOADORES
 				</a>
-				 | 
-				<!--<a href="<?php echo $faq; ?>" rel="noopener noreferrer" target="_blank">-->
-				<?php 
+				<?php
 					if($use_faq) {
 						echo "<a href='<?php echo $faq; ?>' rel='noopener noreferrer' target='_blank'>PERGUNTAS FREQUENTES | </a>";
 					}
 				?>
 				<a href="/login" rel="noopener noreferrer" target="_blank">
-					LOGIN
+					ÁREA DE DOADOR(A)
 				</a>
 			</p>
 		</div>
