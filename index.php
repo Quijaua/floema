@@ -631,15 +631,15 @@
 					}
 				?>
 					PRIVACIDADE DOS DOADORES
-				</a>
+				</a> | 
+				<a href="/login" rel="noopener noreferrer" target="_blank">
+					ÁREA DE DOADOR(A)
+				</a><br />
 				<?php
 					if($use_faq) {
 						echo "<a href='<?php echo $faq; ?>' rel='noopener noreferrer' target='_blank'>PERGUNTAS FREQUENTES | </a>";
 					}
 				?>
-				<a href="/login" rel="noopener noreferrer" target="_blank">
-					ÁREA DE DOADOR(A)
-				</a>
 			</p>
 		</div>
 		<div class="col-md-3">
