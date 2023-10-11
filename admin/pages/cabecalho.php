@@ -85,7 +85,7 @@
                                     accept=".jpg, .jpeg, .png" value="<?php echo $logo; ?>">
                                     
                                 <small class="form-text text-muted">
-                                    Essa será a logo mostrada no header do checkout.
+                                    Essa será a logo mostrada no cabeçalho do checkout. Tamanho ideal é 148 x 148 px.
                                 </small>
                                 
                                 <label for="input0" id="card-img" style="max-width: 300px; margin-top: 1rem; padding: 1.5rem; border: 1px dashed #afb2d2; border-radius: .5rem; background: #dfdfdf;">

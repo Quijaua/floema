@@ -637,7 +637,7 @@
 				</a><br />
 				<?php
 					if($use_faq) {
-						echo "<a href='<?php echo $faq; ?>' rel='noopener noreferrer' target='_blank'>PERGUNTAS FREQUENTES | </a>";
+						echo "<a href='<?php echo $faq; ?>' rel='noopener noreferrer' target='_blank'>PERGUNTAS FREQUENTES</a>";
 					}
 				?>
 			</p>
