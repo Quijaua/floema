@@ -109,8 +109,10 @@
 <script type="text/javascript" src="<?php echo INCLUDE_PATH; ?>vendors/bootstrap-table/dist/bootstrap-table.min.js"></script>
 <script type="text/javascript" src="<?php echo INCLUDE_PATH; ?>vendors/datatables.net/js/jquery.dataTables.min.js" defer></script>
 <script type="text/javascript" src="https://cdn.datatables.net/buttons/2.4.1/js/dataTables.buttons.min.js" defer></script>
+<script type="text/javascript" src="https://cdn.datatables.net/1.13.6/js/dataTables.bootstrap5.min.js" defer></script>
 <script type="text/javascript" src="https://cdn.datatables.net/buttons/2.4.1/js/buttons.html5.min.js" defer></script>
 <script type="text/javascript" src="https://cdn.datatables.net/buttons/2.4.1/js/buttons.print.min.js" defer></script>
+<script type="text/javascript" src="https://cdn.datatables.net/buttons/2.4.2/js/buttons.bootstrap5.min.js" defer></script>
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js" defer></script>
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/pdfmake.min.js" defer></script>
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/vfs_fonts.js" defer></script>
@@ -120,7 +122,10 @@
             dom: "Bfrtip",
             buttons: [
                 "csv" ,"excel", "pdf", "print"
-            ]
+            ],
+            language: {
+                url: '//cdn.datatables.net/plug-ins/1.13.6/i18n/pt-BR.json',
+            }
         } )
     })
 </script>
