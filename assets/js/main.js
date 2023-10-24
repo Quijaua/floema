@@ -139,8 +139,8 @@ $(document).ready(function () {
     $('#field-other-yearly').mask("R$ 0#");
     $('#field-other-once').mask("R$ 0#");
 
-    let origin = window.location.origin + "/";
-    //console.log(origin);
+    let origin = window.location.href;
+
     $.getJSON(origin + "config.json", function (data) {
         config = data;
 
@@ -282,7 +282,7 @@ function donationOption(el, type, amount, showAddOnFee) {
     $(el).addClass('active').removeClass('btn-outline-dark');
     $("#field-other-" + type).css('background-color', '#fff').val("");
 
-    if (showAddOnFee) {
+    if (config && showAddOnFee) {
         $("#div-add-on-fee").slideDown();
 
         let feeAmount = 0;
