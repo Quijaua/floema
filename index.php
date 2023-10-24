@@ -604,7 +604,7 @@
 			<!--<?php echo $rua; ?><?php echo ($numero !== '') ? ', ' . $numero : ''; ?> - <?php echo $bairro; ?>-->
 			<?php echo $rua . ', '; ?><?php echo $numero ? $numero :  'S/N'; ?> - <?php echo $bairro; ?>
 			<?php echo $cidade; ?> - <?php echo $estado; ?> CEP: <?php echo $cep; ?><br />
-			Telefone: <a href="callto:<?php echo $telefone; ?>"><?php echo $telefone; ?></a><br />
+			<?php if($telefone): ?> Telefone: <a href="callto:<?php echo $telefone; ?>"> <?php echo $telefone; ?></a><br /> <?php endif; ?>
 			E-mail: <a href="mailto:<?php echo $email; ?>"><?php echo $email; ?></a>
 			</div>
 			<div class="social-net mt-2 mb-4">
