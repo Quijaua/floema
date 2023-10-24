@@ -69,6 +69,8 @@
         $twitter = $resultado['twitter'];
         $youtube = $resultado['youtube'];
         $website = $resultado['website'];
+		$tiktok = $resultado['tiktok'];
+		$linktree = $resultado['linktree'];
         $cep = $resultado['cep'];
         $rua = $resultado['rua'];
         $numero = $resultado['numero'];
@@ -612,6 +614,8 @@
 				<a href="<?php echo ($twitter !== '') ? $twitter : '#'; ?>" <?php echo ($twitter == '') ? 'class="d-none"' : ''; ?>><i class="bi bi-twitter p-2"></i></a>
 				<a href="<?php echo ($youtube !== '') ? $youtube : '#'; ?>" <?php echo ($youtube == '') ? 'class="d-none"' : ''; ?>><i class="bi bi-youtube p-2"></i></a>
 				<a href="<?php echo ($website !== '') ? $website : '#'; ?>" <?php echo ($website == '') ? 'class="d-none"' : ''; ?>><i class="bi bi-globe-americas p-2"></i></a>
+				<a href="<?php echo ($tiktok !== '') ? $tiktok : '#'; ?>" <?php echo ($tiktok == '') ? 'class="d-none"' : ''; ?>><i class="bi bi-tiktok p-2"></i></a>
+				<a href="<?php echo ($linktree !== '') ? $linktree : '#'; ?>" <?php echo ($linktree == '') ? 'class="d-none"' : ''; ?>><i class="bi bi-share p-2"></i></a>
 			</div>
 
 		</div>
