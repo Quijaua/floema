@@ -158,6 +158,30 @@
                                 </small>
                             </div>
                         </div>
+                        <div class="position-relative row form-group">
+                            <label for="tiktok" class="col-sm-2 col-form-label">TikTok</label>
+                            <div class="col-sm-10">
+                                <input name="tiktok" id="tiktok"
+                                    type="text" class="form-control" value="<?php echo $tiktok; ?>" <?php echo ($tiktok == '') ? 'disabled' : '';?>>
+                                    
+                                <small class="form-text text-muted">
+                                    <input type="checkbox" name="dtiktok" id="dtiktok" data-input-id="tiktok" <?php echo ($tiktok == '') ? 'checked' : '';?>>
+                                    <label for="dtiktok" class="mb-0">Desabilitar TikTok</label>
+                                </small>
+                            </div>
+                        </div>
+                        <div class="position-relative row form-group">
+                            <label for="linktree" class="col-sm-2 col-form-label">Linktr.ee</label>
+                            <div class="col-sm-10">
+                                <input name="linktree" id="linktree"
+                                    type="text" class="form-control" value="<?php echo $linktree; ?>" <?php echo ($linktree == '') ? 'disabled' : '';?>>
+                                    
+                                <small class="form-text text-muted">
+                                    <input type="checkbox" name="dlinktree" id="dlinktree" data-input-id="linktree" <?php echo ($linktree == '') ? 'checked' : '';?>>
+                                    <label for="dlinktree" class="mb-0">Desabilitar Linktr.ee</label>
+                                </small>
+                            </div>
+                        </div>
 
                         <p class="card-title">Contato</p>
                         <div class="position-relative row form-group">
