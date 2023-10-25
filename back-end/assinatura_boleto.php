@@ -14,7 +14,7 @@ function asaas_CriarAssinaturaBoleto($customer_id, $dataForm, $config) {
     ];
 
     curl_setopt_array($curl, array(
-        CURLOPT_URL => $config['asaas_api_url'].'/api/v3/subscriptions',
+        CURLOPT_URL => $config['asaas_api_url'].'subscriptions',
         CURLOPT_RETURNTRANSFER => true,
         CURLOPT_ENCODING => '',
         CURLOPT_MAXREDIRS => 10,
