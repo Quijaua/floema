@@ -11,18 +11,51 @@
 require dirname(__DIR__).'/vendor/autoload.php';
 $dotenv = Dotenv\Dotenv::createImmutable(dirname(__DIR__));
 $dotenv->load();
+$client = new GuzzleHttp\Client();
 
 // Acessa as variáveis de ambiente
 $config['asaas_api_url'] = $_ENV['ASAAS_API_URL'];
 $config['asaas_api_key'] = $_ENV['ASAAS_API_KEY'];
-$config['recaptcha_token'] = $_ENV['RECAPTCHA_CHAVE_SECRETA'];
+$config['recaptcha_secret_key'] = $_ENV['RECAPTCHA_CHAVE_SECRETA'];
 
 //Decodificando base64 e passando para $dataForm
 $dataForm = [];
 parse_str(base64_decode($_POST['params']), $dataForm);
 
-// // Capturar o token do recaptcha enviado pelo front-end
-// $recaptchaToken = $dataForm['recaptcha_token'];
+// Capturar o token do recaptcha enviado pelo front-end
+$recaptchaSecretKey = $config['recaptcha_secret_key'];
+$recaptchaToken = $_POST['recaptcha_token'];
+
+$response = $client->post('https://www.google.com/recaptcha/api/siteverify', [
+    'form_params' => [
+        'secret' => $recaptchaSecretKey,
+        'response' => $recaptchaToken
+    ]
+]);
+
+$result = json_decode($response->getBody()->getContents());
+
+if($result && $result->success) {
+    // O token do recaptcha é valido, continue com o processamento do formulário
+    // Coloque aqui o código para processar os dados recebidos do formulário
+    makeDonation($dataForm, $config);
+
+    $response = array(
+        'status' => 200,
+        'message' => 'Requisição processada com sucesso.'
+    );
+
+    return json_encode($response);
+} else {
+    // O token do recaptcha é inválido ou a pontuação é baixa, trata-se de uma ação suspeita
+    // Retorne uma resposta para o front-end indicando a falha na validação do recaptcha
+    $response = array(
+        'status' => 400,
+        'message' => 'Falha na validação do Recaptcha.'
+    );
+
+    return json_encode($response);
+};
 
 // // Verificar o token do recaptcha
 // $recaptchaSecretKey = '6LdeWbcmAAAAAJpl6AlTbWNDacHiioI50Woma1_g';
@@ -51,6 +84,7 @@ parse_str(base64_decode($_POST['params']), $dataForm);
 //     // O token do recaptcha é válido, continue com o processamento do formulário
 //     // Coloque aqui o código para processar os dados recebidos do formulário
 //     // ...
+function makeDonation($dataForm, $config){
 
     if(isset($_POST)) {
         $dataForm['name'] = $dataForm['name'] . " " . $dataForm['surname'];
@@ -98,15 +132,4 @@ parse_str(base64_decode($_POST['params']), $dataForm);
         }
     
     }
-
-// } else {
-//     // O token do recaptcha é inválido ou a pontuação é baixa, trata-se de uma ação suspeita
-//     // Retorne uma resposta para o front-end indicando a falha na validação do recaptcha
-//     $response = array(
-//         'status' => 400,
-//         'message' => 'Falha na validação do Recaptcha.'
-//     );
-// }
-
-// Retorne a resposta como JSON para o front-end
-header('Content-Type: application/json');
+}
