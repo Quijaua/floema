@@ -240,7 +240,7 @@
 
 			<h3 class="highlight mb-3" id="highlight">Faça sua doação</h3>
 			<div id="div-container-form">
-				<form id="form-checkout">
+				<form id="form-checkout" action="submit">
 					<div class="mb-3" style="display: flex;justify-content: space-between">
 						<div class="form-check form-check-inline">
 							<input onclick="setPeriodOption('monthly')" class="form-check-input" type="radio"
@@ -748,21 +748,19 @@
 
 <!-- Inclua a biblioteca reCAPTCHA -->
 <?php if (!empty($recaptcha_key)): ?>
-    <script src="https://www.google.com/recaptcha/api.js?render=<?=$recaptcha_key?>"></script>
+    <script src="https://www.google.com/recaptcha/api.js?render=<?=$recaptcha_key?>" async defer></script>
+    <!--<script src="https://www.google.com/recaptcha/api.js?onload=onloadCallback&render=explicit" async defer></script>-->
 <?php endif; ?>
 
 <script>
+
     // Captura do evento de submit do formulário
     $('#form-checkout').submit(function(event) {
         event.preventDefault();
-
-
 		
 		//Botão carregando
 		$(".progress-subscription").addClass('d-flex').removeClass('d-none');
 		$(".button-confirm-payment").addClass('d-none').removeClass('d-block');
-
-
 
         // // Bloquear o submit do formulário
         // $(this).find('button[type="submit"]').prop('disabled', true);
