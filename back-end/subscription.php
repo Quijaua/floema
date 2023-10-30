@@ -9,48 +9,74 @@
 // Caso prefira o .env apenas descomente o codigo e comente o "include('parameters.php');" acima
 // Carrega as variáveis de ambiente do arquivo .env
 require dirname(__DIR__).'/vendor/autoload.php';
+require_once dirname(__DIR__).'/back-end/functions.php';
+
 $dotenv = Dotenv\Dotenv::createImmutable(dirname(__DIR__));
 $dotenv->load();
+$client = new GuzzleHttp\Client();
 
 // Acessa as variáveis de ambiente
 $config['asaas_api_url'] = $_ENV['ASAAS_API_URL'];
 $config['asaas_api_key'] = $_ENV['ASAAS_API_KEY'];
-$config['recaptcha_token'] = $_ENV['RECAPTCHA_CHAVE_SECRETA'];
+$config['recaptcha_secret_key'] = $_ENV['RECAPTCHA_CHAVE_SECRETA'];
 
 //Decodificando base64 e passando para $dataForm
 $dataForm = [];
 parse_str(base64_decode($_POST['params']), $dataForm);
 
-// // Capturar o token do recaptcha enviado pelo front-end
-// $recaptchaToken = $dataForm['recaptcha_token'];
+// Capturar o token do recaptcha enviado pelo front-end
+$recaptchaSecretKey = $config['recaptcha_secret_key'];
+$recaptchaToken = $_POST['recaptcha_token'];
 
-// // Verificar o token do recaptcha
-// $recaptchaSecretKey = '6LdeWbcmAAAAAJpl6AlTbWNDacHiioI50Woma1_g';
+if(empty($recaptchaToken)) {
+    // Bypass caso o token do recaptcha seja nulo
+    // Processa os dados recebidos do formulário normalmente em caso de falha na comunicação
 
-// // Construir a URL da solicitação
-// $url = 'https://www.google.com/recaptcha/api/siteverify';
-// $data = array(
-//     'secret' => $recaptchaSecretKey,
-//     'response' => $recaptchaToken
-// );
+    makeDonation($dataForm, $config);
 
-// $options = array(
-//     'http' => array(
-//         'header' => "Content-type: application/x-www-form-urlencoded\r\n",
-//         'method' => 'POST',
-//         'content' => http_build_query($data)
-//     )
-// );
+    $response = array(
+        'status' => 200,
+        'message' => 'Requisição processada com sucesso.'
+    );
 
-// $context = stream_context_create($options);
-// $response = file_get_contents($url, false, $context);
-// $result = json_decode($response);
+    $log_message = "LOG::[info] Requisição processada com inconsistência no recaptcha.";
+    registerLog($log_message);
 
-// // Verificar a resposta do servidor do Google
-// if ($result && $result->success && $result->score >= 0.5) {
-//     // O token do recaptcha é válido, continue com o processamento do formulário
-//     // Coloque aqui o código para processar os dados recebidos do formulário
-//     // ...
+    return json_encode($response);
+}
+
+$response = $client->post('https://www.google.com/recaptcha/api/siteverify', [
+    'form_params' => [
+        'secret' => $recaptchaSecretKey,
+        'response' => $recaptchaToken
+    ]
+]);
+
+$result = json_decode($response->getBody()->getContents());
+
+if($result && $result->success) {
+    // O token do recaptcha é valido, continue com o processamento do formulário
+    // Coloque aqui o código para processar os dados recebidos do formulário
+    makeDonation($dataForm, $config);
+
+    $response = array(
+        'status' => 200,
+        'message' => 'Requisição processada com sucesso.'
+    );
+
+    return json_encode($response);
+} else {
+    // O token do recaptcha é inválido ou a pontuação é baixa, trata-se de uma ação suspeita
+    // Retorne uma resposta para o front-end indicando a falha na validação do recaptcha
+    $response = array(
+        'status' => 400,
+        'message' => 'Falha na validação do Recaptcha.'
+    );
+
+    return json_encode($response);
+};
+
+function makeDonation($dataForm, $config){
 
     if(isset($_POST)) {
         $dataForm['name'] = $dataForm['name'] . " " . $dataForm['surname'];
@@ -82,7 +108,6 @@ parse_str(base64_decode($_POST['params']), $dataForm);
                 } else {
                     $payment_id = asaas_CriarCobrancaBoleto($customer_id, $dataForm, $config);
                 }
-                //$payment_id = asaas_CriarCobrancaBoleto($customer_id, $dataForm, $config);
                 asaas_ObterLinhaDigitavelBoleto($payment_id, $config);
                 echo json_encode(["status"=>200, "code"=>$payment_id, "id"=>$customer_id]);
                 break;
@@ -98,15 +123,4 @@ parse_str(base64_decode($_POST['params']), $dataForm);
         }
     
     }
-
-// } else {
-//     // O token do recaptcha é inválido ou a pontuação é baixa, trata-se de uma ação suspeita
-//     // Retorne uma resposta para o front-end indicando a falha na validação do recaptcha
-//     $response = array(
-//         'status' => 400,
-//         'message' => 'Falha na validação do Recaptcha.'
-//     );
-// }
-
-// Retorne a resposta como JSON para o front-end
-header('Content-Type: application/json');
+}
