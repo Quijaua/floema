@@ -23,6 +23,7 @@
     // Tabela que sera feita a consulta
     $tabela = "tb_checkout";
 	$tabela_2 = "tb_integracoes";
+	$tabela_3 = "tb_mensagens";
 
     // ID que você deseja pesquisar
     $id = 1;
@@ -30,22 +31,27 @@
     // Consulta SQL
     $sql = "SELECT * FROM $tabela WHERE id = :id";
 	$sql_2 = "SELECT * FROM $tabela_2 WHERE id = :id";
+	$sql_3 = "SELECT use_privacy FROM $tabela_3 WHERE id = :id";
 
     // Preparar a consulta
     $stmt = $conn->prepare($sql);
 	$stmt_2 = $conn->prepare($sql_2);
+	$stmt_3 = $conn->prepare($sql_3);
 
     // Vincular o valor do parâmetro
     $stmt->bindParam(':id', $id, PDO::PARAM_INT);
 	$stmt_2->bindParam(':id', $id, PDO::PARAM_INT);
+	$stmt_3->bindParam(':id', $id, PDO::PARAM_INT);
 
     // Executar a consulta
     $stmt->execute();
 	$stmt_2->execute();
+	$stmt_3->execute();
 
     // Obter o resultado como um array associativo
     $resultado = $stmt->fetch(PDO::FETCH_ASSOC);
 	$resultado_2 = $stmt_2->fetch(PDO::FETCH_ASSOC);
+	$resultado_3 = $stmt_3->fetch(PDO::FETCH_ASSOC);
 
     // Verificar se o resultado foi encontrado
     if ($resultado) {
@@ -56,12 +62,15 @@
         $descricao = $resultado['descricao'];
         $privacidade = $resultado['privacidade'];
         $faq = $resultado['faq'];
+		$use_faq = $resultado['use_faq'];
         $facebook = $resultado['facebook'];
         $instagram = $resultado['instagram'];
         $linkedin = $resultado['linkedin'];
         $twitter = $resultado['twitter'];
         $youtube = $resultado['youtube'];
         $website = $resultado['website'];
+		$tiktok = $resultado['tiktok'];
+		$linktree = $resultado['linktree'];
         $cep = $resultado['cep'];
         $rua = $resultado['rua'];
         $numero = $resultado['numero'];
@@ -107,6 +116,15 @@
 		// ID não encontrado ou não existente
 		echo "ID não encontrado.";
 	}
+
+	// Verificar se o resultado_3 foi encontrado
+	if ($resultado_3) {
+		// Atribuir o valor da coluna à variável, ex.: "nome" = $nome
+		$use_privacy = $resultado_3['use_privacy'];
+	} else {
+		// ID não encontrado ou não existente
+		echo "ID não encontrado.";
+	}
 ?>
 <html lang="pt">
 <head>
@@ -131,7 +149,7 @@
 <meta property="og:locale" content="pt_BR" />
 <meta property="og:type" content="website" />
 <meta property="og:title" content="<?php echo $title; ?>"/>
-<meta property="og:description" name="description" content="Lorem ipsum" />
+<meta property="og:description" name="description" content="<?php echo mb_strimwidth($descricao, 3, 120, '...'); ?>" />
 <meta property="og:url" value="<?php echo INCLUDE_PATH; ?>"/>
 <meta property="og:site_name" content="<?php echo $nome; ?>" />
 <meta property="article:modified_time" content="2022-12-01T18:38:06+00:00" />
@@ -143,7 +161,7 @@
 <meta name="twitter:url" value="<?php echo INCLUDE_PATH; ?>"/>
 <meta name="twitter:image" value="<?php echo INCLUDE_PATH; ?>assets/img/<?php echo $logo; ?>"/>
 <meta name="twitter:image" content="<?php echo INCLUDE_PATH; ?>assets/img/<?php echo $logo; ?>"/>
-<meta name="twitter:description" value="Lorem ipsum"/>
+<meta name="twitter:description" value="<?php echo mb_strimwidth($descricao, 3, 120, '...'); ?>"/>
 
 
 <script type="application/ld+json">{
@@ -159,7 +177,7 @@
 			},
 			"datePublished": "2023-03-02T19:50:30+00:00",
 			"dateModified": "2023-03-21T12:51:52+00:00",
-			"description": "Lorem ipsum",
+			"description": "<?php echo mb_strimwidth($descricao, 3, 120, '...'); ?>",
 			"inLanguage": "pt-BR",
 			"interactAction": [
 				{
@@ -206,10 +224,10 @@
 <nav class="navbar navbar-expand-md navbar-dark" style="background-color: <?php echo $nav_background; ?>; color: <?php echo $nav_color; ?>;">
 	<div class="container">
 		<div class="row">
-			<div class="col-md-4 p-3">
-				<img src="assets/img/<?php echo $logo; ?>" class="w-75">
+			<div class="col-md-4 p-1 text-center">
+				<img src="assets/img/<?php echo $logo; ?>">
 			</div>
-			<div class="col-md-8 mt-4">
+			<div class="col-md-8 mt-4 p-md-3">
 				<h1 class="h2"><?php echo ($title !== '') ? $title : 'Colabore com o Projeto '.$nome; ?></h1>
 			</div>
 		</div>
@@ -220,9 +238,9 @@
 	<div class="row">
 		<div class="col-md-5 mb-3">
 
-			<h3 class="highlight mb-3">Faça sua doação</h3>
+			<h3 class="highlight mb-3" id="highlight">Faça sua doação</h3>
 			<div id="div-container-form">
-				<form id="form-checkout">
+				<form id="form-checkout" action="submit">
 					<div class="mb-3" style="display: flex;justify-content: space-between">
 						<div class="form-check form-check-inline">
 							<input onclick="setPeriodOption('monthly')" class="form-check-input" type="radio"
@@ -345,10 +363,12 @@
 						</label>
 					</div>
 					<div class="form-check">
+						<!--<input onclick="setPaymentMethod('bank_slip')" class="form-check-input" type="radio"
+							name="payment" value="101" id="payment-bank-slip" disabled>-->
 						<input onclick="setPaymentMethod('bank_slip')" class="form-check-input" type="radio"
-							name="payment" value="101" id="payment-bank-slip" disabled>
+							name="payment" value="101" id="payment-bank-slip">
 						<label class="form-check-label payment-button-options" for="payment-bank-slip">
-							Boleto - <small><i>Apenas para contribuição única</i></small>
+							Boleto<!-- - <small><i>Apenas para contribuição única</i></small>-->
 						</label>
 					</div>
 					<div class="form-check">
@@ -480,7 +500,7 @@
 						<div class="col-md-12 mb-2">
 							<div class="form-check">
 								<input class="form-check-input" type="checkbox" value="1" id="private" name="private">
-								<label class="form-check-label" for="anonymous_donation">
+								<label class="form-check-label" for="private">
 									Fazer doação anonimamente
 								</label>
 							</div>
@@ -581,12 +601,12 @@
 		<div class="col-md-3">
 			<span class="h5"><?php echo $nome; ?></span><br />
 			<div class="font-weight-light" style="font-size:13px;margin-top:5px">
-			<?php echo $rua; ?><?php echo ($numero !== '') ? ', ' . $numero : ''; ?> - <?php echo $bairro; ?>
-			<?php echo $cidade; ?> - <?php echo $estado; ?>, <?php echo $cep; ?><br />
-			Telefone: <a href="callto:<?php echo $telefone; ?>"><?php echo $telefone; ?></a> | E-mail: <a href="mailto:<?php echo $email; ?>"><?php echo $email; ?></a><br />
+			<!--<?php echo $rua; ?><?php echo ($numero !== '') ? ', ' . $numero : ''; ?> - <?php echo $bairro; ?>-->
+			<?php echo $rua . ', '; ?><?php echo $numero ? $numero :  'S/N'; ?> - <?php echo $bairro; ?>
+			<?php echo $cidade; ?> - <?php echo $estado; ?> CEP: <?php echo $cep; ?><br />
+			<?php if($telefone): ?> Telefone: <a href="callto:<?php echo $telefone; ?>"> <?php echo $telefone; ?></a><br /> <?php endif; ?>
+			E-mail: <a href="mailto:<?php echo $email; ?>"><?php echo $email; ?></a>
 			</div>
-		</div>
-		<div class="col-md-6">
 			<div class="social-net mt-2 mb-4">
 				<a href="<?php echo ($facebook !== '') ? $facebook : '#'; ?>" <?php echo ($facebook == '') ? 'class="d-none"' : ''; ?>><i class="bi bi-facebook p-2"></i></a>
 				<a href="<?php echo ($instagram !== '') ? $instagram : '#'; ?>" <?php echo ($instagram == '') ? 'class="d-none"' : ''; ?>><i class="bi bi-instagram p-2"></i></a>
@@ -594,24 +614,41 @@
 				<a href="<?php echo ($twitter !== '') ? $twitter : '#'; ?>" <?php echo ($twitter == '') ? 'class="d-none"' : ''; ?>><i class="bi bi-twitter p-2"></i></a>
 				<a href="<?php echo ($youtube !== '') ? $youtube : '#'; ?>" <?php echo ($youtube == '') ? 'class="d-none"' : ''; ?>><i class="bi bi-youtube p-2"></i></a>
 				<a href="<?php echo ($website !== '') ? $website : '#'; ?>" <?php echo ($website == '') ? 'class="d-none"' : ''; ?>><i class="bi bi-globe-americas p-2"></i></a>
+				<a href="<?php echo ($tiktok !== '') ? $tiktok : '#'; ?>" <?php echo ($tiktok == '') ? 'class="d-none"' : ''; ?>><i class="bi bi-tiktok p-2"></i></a>
+				<a href="<?php echo ($linktree !== '') ? $linktree : '#'; ?>" <?php echo ($linktree == '') ? 'class="d-none"' : ''; ?>><i class="bi bi-share p-2"></i></a>
+			</div>
+
+		</div>
+		<div class="col-md-6 text-center">
+			<div class="social-net mt-2 mb-4">
+				<img src="/assets/img/security.webp" alt="ambiente seguro" />
+				<a class="p-2" href="https://transparencyreport.google.com/safe-browsing/search?url=<?php echo INCLUDE_PATH; ?>" target="_blank" rel="noreferrer">
+					<img src="/assets/img/selo-google.png" width="150" height="42" alt="Safe Browsisng">
+				</a>
 			</div>
 			<p class="footer-link ps-1">
-				<a href="<?php echo $privacidade; ?>" rel="noopener noreferrer" target="_blank">
+				<?php
+					if($use_privacy) {
+						echo "<a href='/politica-de-privacidade' rel='noopener noreferrer' target='_blank'>";
+					} else {
+						echo "<a href=" . $privacidade . " rel='noopener noreferrer' target='_blank'>";
+					}
+				?>
 					PRIVACIDADE DOS DOADORES
-				</a>
-				 | 
-				<a href="<?php echo $faq; ?>" rel="noopener noreferrer" target="_blank">
-					PERGUNTAS FREQUENTES
-				</a>
-				| 
+				</a> | 
 				<a href="/login" rel="noopener noreferrer" target="_blank">
-					LOGIN
-				</a>
+					ÁREA DE DOADOR(A)
+				</a><br />
+				<?php
+					if($use_faq) {
+						echo "<a href='<?php echo $faq; ?>' rel='noopener noreferrer' target='_blank'>PERGUNTAS FREQUENTES</a>";
+					}
+				?>
 			</p>
 		</div>
 		<div class="col-md-3">
 		<p class="footer-linkd mt-5 footer-floema-doar font-weight-bold">
-				<a href="#" rel="noopener noreferrer" target="_blank">
+				<a href="https://floema-doar.org" rel="noopener noreferrer" target="_blank">
 					Usamos Floema Doar | Open source
 				</a>
 			</p>
@@ -629,9 +666,9 @@
 
 <script src="<?php echo INCLUDE_PATH; ?>assets/bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
 <script src="<?php echo INCLUDE_PATH; ?>assets/ajax/3.6.3/jquery.min.js"></script>
-<script src="<?php echo INCLUDE_PATH; ?>assets/google/jquery/1.12.1/jquery-ui.js"></script>
+<script src="<?php echo INCLUDE_PATH; ?>assets/google/jquery/jquery-ui.js"></script>
 <script src="<?php echo INCLUDE_PATH; ?>assets/ajax/1.14.16/jquery.mask.min.js"></script>
-<script src="<?php echo INCLUDE_PATH; ?>assets/js/main.js"></script>
+<script src="<?php echo INCLUDE_PATH; ?>assets/js/main.js" defer></script>
 <!-- <script src="https://www.google.com/recaptcha/api.js?render=<?=$recaptcha_key?>"></script>
 <script>
 	// Captura do evento de submit do formulário
@@ -711,21 +748,19 @@
 
 <!-- Inclua a biblioteca reCAPTCHA -->
 <?php if (!empty($recaptcha_key)): ?>
-    <script src="https://www.google.com/recaptcha/api.js?render=<?=$recaptcha_key?>"></script>
+    <script src="https://www.google.com/recaptcha/api.js?render=<?=$recaptcha_key?>" async defer></script>
+    <!--<script src="https://www.google.com/recaptcha/api.js?onload=onloadCallback&render=explicit" async defer></script>-->
 <?php endif; ?>
 
 <script>
+
     // Captura do evento de submit do formulário
     $('#form-checkout').submit(function(event) {
         event.preventDefault();
-
-
 		
 		//Botão carregando
 		$(".progress-subscription").addClass('d-flex').removeClass('d-none');
 		$(".button-confirm-payment").addClass('d-none').removeClass('d-block');
-
-
 
         // // Bloquear o submit do formulário
         // $(this).find('button[type="submit"]').prop('disabled', true);

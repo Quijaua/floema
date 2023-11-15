@@ -24,7 +24,7 @@
     use PHPMailer\PHPMailer\SMTP;
     use PHPMailer\PHPMailer\Exception;
 
-    require './lib/vendor/autoload.php';
+    require './../lib/vendor/autoload.php';
 
     // Crie uma nova instância do PHPMailer
     $mail = new PHPMailer(true);
@@ -36,7 +36,17 @@
 
     if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["SendRecupPassword"])) {
         //var_dump($dados);
-        // Informacoes do usuario
+        // Informacoes da instituicao
+        $query_instituicao = "SELECT nome, email 
+                    FROM tb_checkout 
+                    WHERE id =:id  
+                    LIMIT 1";
+        $result_instituicao = $conn->prepare($query_instituicao);
+        $result_instituicao->bindValue(':id', 1, PDO::PARAM_INT);
+        $result_instituicao->execute();
+        
+        $row_instituicao = $result_instituicao->fetch(PDO::FETCH_ASSOC);
+            
         $query_usuario = "SELECT id, nome, email 
                     FROM $tabela 
                     WHERE email =:email  
@@ -75,7 +85,8 @@
                     $mail->SMTPSecure = $smtp_secure;
                     $mail->Port       = $smtp_port;
 
-                    $mail->setFrom($row_usuario['email'], 'Atendimento - ' . $row_usuario['nome']);
+                    $mail->setFrom($smtp_username, 'Atendimento - ' . $row_instituicao['nome']);
+                    $mail->addReplyTo($row_instituicao['email'], 'Atendimento - ' . $row_instituicao['nome']);
                     $mail->addAddress($row_usuario['email'], $row_usuario['nome']);
 
                     $mail->isHTML(true);                                  //Set email format to HTML
@@ -108,8 +119,9 @@
         <meta name="description" content="Solução para recebimentos de doações">
         <!-- Disable tap highlight on IE -->
         <meta name="msapplication-tap-highlight" content="no">
-        <link rel="stylesheet" href="<?php echo INCLUDE_PATH_ADMIN; ?>vendors/pixeden-stroke-7-icon-master/pe-icon-7-stroke/dist/pe-icon-7-stroke.css">
+        <link rel="stylesheet" href="<?php echo INCLUDE_PATH; ?>vendors/pixeden-stroke-7-icon-master/pe-icon-7-stroke/dist/pe-icon-7-stroke.css">
         <link href="<?php echo INCLUDE_PATH_ADMIN; ?>styles/css/base.css" rel="stylesheet">
+	<link href="<?php echo INCLUDE_PATH_ADMIN; ?>styles/css/custom.css" rel="stylesheet">
     </head>
     <body>
         <div class="app-container app-theme-white body-tabs-shadow">
@@ -162,6 +174,9 @@
                                         </div>
                                         <div class="divider row"></div>
                                         <div class="d-flex align-items-center">
+                                            <div class="mr-auto">
+                                                <a href="<?php echo INCLUDE_PATH; ?>" class="d-block"><?php echo $_SESSION['project_name']; ?></a>
+                                            </div>
                                             <div class="ml-auto">
                                                 <a href="#" onclick="voltarPagina()" class="btn-lg btn btn-link">Voltar</a>
                                                 <button type="submit" class="btn btn-primary btn-lg" name="SendRecupPassword">Recuperar Senha</button>
@@ -176,8 +191,8 @@
             </div>
         </div>
         <!-- plugin dependencies -->
-        <script type="text/javascript" src="<?php echo INCLUDE_PATH_ADMIN; ?>vendors/jquery/dist/jquery.min.js"></script>
-        <script type="text/javascript" src="<?php echo INCLUDE_PATH_ADMIN; ?>vendors/slick-carousel/slick/slick.min.js"></script>
+        <script type="text/javascript" src="<?php echo INCLUDE_PATH; ?>vendors/jquery/dist/jquery.min.js"></script>
+        <script type="text/javascript" src="<?php echo INCLUDE_PATH; ?>vendors/slick-carousel/slick/slick.min.js"></script>
         <!-- custome.js -->
         <script type="text/javascript" src="<?php echo INCLUDE_PATH_ADMIN; ?>js/carousel-slider.js"></script>
         <script>

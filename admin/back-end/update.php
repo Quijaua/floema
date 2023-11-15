@@ -16,29 +16,55 @@ if (isset($_POST['btnUpdAbout'])) {
         $id = '1';
 
         //Informacoes coletadas pelo metodo POST
-        $nome = $_POST['nome'];
-        $title = $_POST['title'];
-        $descricao = $_POST['descricao'];
+        if(isset($_POST['title'])) {
+            $title = $_POST['title'];
+        }
+
+        if(isset($_POST['nome']) && isset($_POST['descricao'])) {
+            $nome = $_POST['nome'];
+            $descricao = $_POST['descricao'];
+        }
 
         // Atualize o item no banco de dados
-        $sql = "UPDATE $tabela SET nome = :nome, title = :title, descricao = :descricao WHERE id = :id";
-        $stmt = $conn->prepare($sql);
-        $stmt->bindParam(':nome', $nome);
-        $stmt->bindParam(':title', $title);
-        $stmt->bindParam(':descricao', $descricao);
-        $stmt->bindParam(':id', $id);
+        if(isset($title)) {
+            $sql = "UPDATE $tabela SET title = :title WHERE id = :id";
+            $stmt = $conn->prepare($sql);
+            $stmt->bindParam(':title', $title);
+            $stmt->bindParam(':id', $id);
 
-        try {
-            $stmt->execute();
+            try {
+                $stmt->execute();
+    
+                // Exibir a modal após salvar as informações
+                $_SESSION['show_modal'] = "<script>$('#staticBackdrop').modal('toggle');</script>";
+                $_SESSION['msg'] = 'As informações sobre sua instituição foram atualizadas com sucesso!';
+    
+                //Voltar para a pagina do formulario
+                header('Location: ' . INCLUDE_PATH_ADMIN . 'cabecalho');
+            } catch (PDOException $e) {
+                echo "Erro na atualização: " . $e->getMessage();
+            }
+        }
 
-            // Exibir a modal após salvar as informações
-            $_SESSION['show_modal'] = "<script>$('#staticBackdrop').modal('toggle');</script>";
-            $_SESSION['msg'] = 'As informações sobre sua instituição foram atualizadas com sucesso!';
+        if(isset($nome) && isset($descricao)) {
+            $sql = "UPDATE $tabela SET nome = :nome, descricao = :descricao WHERE id = :id";
+            $stmt = $conn->prepare($sql);
+            $stmt->bindParam(':nome', $nome);
+            $stmt->bindParam(':descricao', $descricao);
+            $stmt->bindParam(':id', $id);
 
-            //Voltar para a pagina do formulario
-            header('Location: ' . INCLUDE_PATH_ADMIN . 'cabecalho');
-        } catch (PDOException $e) {
-            echo "Erro na atualização: " . $e->getMessage();
+            try {
+                $stmt->execute();
+    
+                // Exibir a modal após salvar as informações
+                $_SESSION['show_modal'] = "<script>$('#staticBackdrop').modal('toggle');</script>";
+                $_SESSION['msg'] = 'As informações sobre sua instituição foram atualizadas com sucesso!';
+    
+                //Voltar para a pagina do formulario
+                header('Location: ' . INCLUDE_PATH_ADMIN);
+            } catch (PDOException $e) {
+                echo "Erro na atualização: " . $e->getMessage();
+            }
         }
     }
 }
@@ -208,6 +234,7 @@ if (isset($_POST['btnUpdFooter'])) {
         //Informacoes coletadas pelo metodo POST
         $privacidade = $_POST['privacidade'];
         $faq = $_POST['faq'];
+        $use_faq = $_POST['use_faq'];
 
         if (!isset($_POST["dFacebook"])) {
             $facebook = $_POST['facebook'];
@@ -227,6 +254,12 @@ if (isset($_POST['btnUpdFooter'])) {
         if (!isset($_POST["dWebsite"])) {
             $website = $_POST['website'];
         }
+        if (!isset($_POST["dtiktok"])) {
+            $tiktok = $_POST['tiktok'];
+        }
+        if (!isset($_POST["dlinktree"])) {
+            $linktree = $_POST['linktree'];
+        }
 
         $cep = $_POST['cep'];
         $rua = $_POST['rua'];
@@ -241,16 +274,19 @@ if (isset($_POST['btnUpdFooter'])) {
         $email = $_POST['email'];
 
         // Atualize o item no banco de dados
-        $sql = "UPDATE $tabela SET privacidade = :privacidade, faq = :faq, facebook = :facebook, instagram = :instagram, linkedin = :linkedin, twitter = :twitter, youtube = :youtube, website = :website, cep = :cep, rua = :rua, numero = :numero, bairro = :bairro, cidade = :cidade, estado = :estado, telefone = :telefone, email = :email WHERE id = :id";
+        $sql = "UPDATE $tabela SET privacidade = :privacidade, faq = :faq, use_faq = :use_faq, facebook = :facebook, instagram = :instagram, linkedin = :linkedin, twitter = :twitter, youtube = :youtube, website = :website, tiktok = :tiktok, linktree = :linktree, cep = :cep, rua = :rua, numero = :numero, bairro = :bairro, cidade = :cidade, estado = :estado, telefone = :telefone, email = :email WHERE id = :id";
         $stmt = $conn->prepare($sql);
         $stmt->bindParam(':privacidade', $privacidade);
         $stmt->bindParam(':faq', $faq);
+        $stmt->bindParam(':use_faq', $use_faq);
         $stmt->bindParam(':facebook', $facebook);
         $stmt->bindParam(':instagram', $instagram);
         $stmt->bindParam(':linkedin', $linkedin);
         $stmt->bindParam(':twitter', $twitter);
         $stmt->bindParam(':youtube', $youtube);
         $stmt->bindParam(':website', $website);
+        $stmt->bindParam(':tiktok', $tiktok);
+        $stmt->bindParam(':linktree', $linktree);
         $stmt->bindParam(':cep', $cep);
         $stmt->bindParam(':rua', $rua);
         $stmt->bindParam(':numero', $numero);
@@ -409,7 +445,51 @@ if (isset($_POST['btnMessages'])) {
             $_SESSION['msg'] = 'As informações de mensagens foram atualizadas com sucesso!';
 
             //Voltar para a pagina do formulario
-            header('Location: ' . INCLUDE_PATH_ADMIN);
+            header('Location: ' . INCLUDE_PATH_ADMIN . 'mensagens');
+        } catch (PDOException $e) {
+            echo "Erro na atualização: " . $e->getMessage();
+        }
+    }
+}
+
+if (isset($_POST['btnPrivacy'])) {
+    //Inclui o arquivo 'config.php'
+    include('../../config.php');
+
+    // Verifique se o formulário foi enviado
+    if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+        // Tabela onde sera feita a alteracao
+        $tabela = 'tb_mensagens';
+
+        // Id da tabela
+        $id = '1';
+
+        // Informacoes coletadas pelo metodo POST
+        $privacy_policy = $_POST['privacy_policy'];
+        $privacy = $_POST['use_privacy'];
+
+        if($privacy) {
+            $use_privacy = 1;
+        } else {
+            $use_privacy = 0;
+        }
+
+        // Atualize o item no banco de dados
+        $sql = "UPDATE $tabela SET privacy_policy = :privacy_policy, use_privacy = :use_privacy WHERE id = :id";
+        $stmt = $conn->prepare($sql);
+        $stmt->bindParam(':privacy_policy', $privacy_policy);
+        $stmt->bindParam(':use_privacy', $use_privacy);
+        $stmt->bindParam(':id', $id);
+
+        try {
+            $stmt->execute();
+
+            // Exibir a modal após salvar as informações
+            $_SESSION['show_modal'] = "<script>$('#staticBackdrop').modal('toggle');</script>";
+            $_SESSION['msg'] = 'As informações de privacidade foram atualizadas com sucesso!';
+
+            //Voltar para a pagina do formulario
+            header('Location: ' . INCLUDE_PATH_ADMIN . 'politica-de-privacidade');
         } catch (PDOException $e) {
             echo "Erro na atualização: " . $e->getMessage();
         }

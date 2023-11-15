@@ -76,8 +76,11 @@
                         <div class="position-relative row form-group">
                             <label for="faq" class="col-sm-2 col-form-label">Perguntas Frequentes</label>
                             <div class="col-sm-10">
-                                <input name="faq" id="faq"
-                                    type="text" class="form-control" value="<?php echo $faq; ?>">
+                                <input name="faq" id="faq" type="text" class="form-control" value="<?php echo $faq; ?>">
+                                <small class="form-text text-muted">
+                                    <input type="checkbox" name="use_faq" id="use_faq" value="1" data-input-id="use_faq" <?php if ($use_faq) { echo 'checked'; } else { echo '';}; ?> >
+                                    <label for="use_faq" class="mb-0">Usar FAQ padrão do sistema</label>
+                                </small>
                             </div>
                         </div>
 
@@ -152,6 +155,30 @@
                                 <small class="form-text text-muted">
                                     <input type="checkbox" name="dWebsite" id="dWebsite" data-input-id="website" <?php echo ($website == '') ? 'checked' : '';?>>
                                     <label for="dWebsite" class="mb-0">Desabilitar Website</label>
+                                </small>
+                            </div>
+                        </div>
+                        <div class="position-relative row form-group">
+                            <label for="tiktok" class="col-sm-2 col-form-label">TikTok</label>
+                            <div class="col-sm-10">
+                                <input name="tiktok" id="tiktok"
+                                    type="text" class="form-control" value="<?php echo $tiktok; ?>" <?php echo ($tiktok == '') ? 'disabled' : '';?>>
+                                    
+                                <small class="form-text text-muted">
+                                    <input type="checkbox" name="dtiktok" id="dtiktok" data-input-id="tiktok" <?php echo ($tiktok == '') ? 'checked' : '';?>>
+                                    <label for="dtiktok" class="mb-0">Desabilitar TikTok</label>
+                                </small>
+                            </div>
+                        </div>
+                        <div class="position-relative row form-group">
+                            <label for="linktree" class="col-sm-2 col-form-label">Linktr.ee</label>
+                            <div class="col-sm-10">
+                                <input name="linktree" id="linktree"
+                                    type="text" class="form-control" value="<?php echo $linktree; ?>" <?php echo ($linktree == '') ? 'disabled' : '';?>>
+                                    
+                                <small class="form-text text-muted">
+                                    <input type="checkbox" name="dlinktree" id="dlinktree" data-input-id="linktree" <?php echo ($linktree == '') ? 'checked' : '';?>>
+                                    <label for="dlinktree" class="mb-0">Desabilitar Linktr.ee</label>
                                 </small>
                             </div>
                         </div>

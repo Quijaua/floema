@@ -65,8 +65,9 @@
         <meta name="description" content="Solução para recebimentos de doações">
         <!-- Disable tap highlight on IE -->
         <meta name="msapplication-tap-highlight" content="no">
-        <link rel="stylesheet" href="<?php echo INCLUDE_PATH_ADMIN; ?>vendors/pixeden-stroke-7-icon-master/pe-icon-7-stroke/dist/pe-icon-7-stroke.css">
+        <link rel="stylesheet" href="<?php echo INCLUDE_PATH; ?>vendors/pixeden-stroke-7-icon-master/pe-icon-7-stroke/dist/pe-icon-7-stroke.css">
         <link href="<?php echo INCLUDE_PATH_ADMIN; ?>styles/css/base.css" rel="stylesheet">
+	<link href="<?php echo INCLUDE_PATH_ADMIN; ?>styles/css/custom.css" rel="stylesheet">
     </head>
     <body>
         <div class="app-container app-theme-white body-tabs-shadow">
@@ -126,6 +127,9 @@
                                         </div>
                                         <div class="divider row"></div>
                                         <div class="d-flex align-items-center">
+                                            <div class="mr-auto">
+                                                <a href="<?php echo INCLUDE_PATH; ?>" class="d-block"><?php echo $_SESSION['project_name']; ?></a>
+                                            </div>
                                             <div class="ml-auto">
                                                 <a href="<?php echo INCLUDE_PATH; ?>login/" class="btn-lg btn btn-link">Voltar</a>
                                                 <button type="submit" class="btn btn-primary btn-lg" id="SendNewPassword" name="SendNewPassword" disabled>Atualizar Senha</button>
@@ -140,8 +144,8 @@
             </div>
         </div>
         <!-- plugin dependencies -->
-        <script type="text/javascript" src="<?php echo INCLUDE_PATH_ADMIN; ?>vendors/jquery/dist/jquery.min.js"></script>
-        <script type="text/javascript" src="<?php echo INCLUDE_PATH_ADMIN; ?>vendors/slick-carousel/slick/slick.min.js"></script>
+        <script type="text/javascript" src="<?php echo INCLUDE_PATH; ?>vendors/jquery/dist/jquery.min.js"></script>
+        <script type="text/javascript" src="<?php echo INCLUDE_PATH; ?>vendors/slick-carousel/slick/slick.min.js"></script>
         <!-- custome.js -->
         <script type="text/javascript" src="<?php echo INCLUDE_PATH_ADMIN; ?>js/carousel-slider.js"></script>
 

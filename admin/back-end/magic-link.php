@@ -36,6 +36,15 @@
     $stmt->execute();
 
     // Informacoes do usuario
+    $sql = "SELECT nome, email FROM tb_checkout WHERE id = :id";
+    $stmt = $conn->prepare($sql);
+    $stmt->bindValue(':id', 1, PDO::PARAM_INT);
+    $stmt->execute();
+
+    // Recuperar os resultados do usuario
+    $instituicao = $stmt->fetch(PDO::FETCH_ASSOC);
+
+    // Informacoes do usuario
     $sql = "SELECT * FROM $tabela WHERE asaas_id = :asaas_id";
     $stmt = $conn->prepare($sql);
     $stmt->bindParam(':asaas_id', $asaas_id, PDO::PARAM_STR);
@@ -56,7 +65,7 @@
     use PHPMailer\PHPMailer\SMTP;
     use PHPMailer\PHPMailer\Exception;
 
-    require './lib/vendor/autoload.php';
+    require './../../lib/vendor/autoload.php';
 
     // Crie uma nova instância do PHPMailer
     $mail = new PHPMailer(true);
@@ -66,7 +75,8 @@
     $sql_1 = "SELECT welcome_email FROM $tabela_1";
     $stmt_1 = $conn->prepare($sql_1);
     $stmt_1->execute();
-    $welcome_email = $stmt_1->fetch(PDO::FETCH_ASSOC);
+    $resultado = $stmt_1->fetch(PDO::FETCH_ASSOC);
+    $mensagem = $resultado['welcome_email'];
 
     try {
         /*$mail->SMTPDebug = SMTP::DEBUG_SERVER;*/
@@ -80,13 +90,13 @@
         $mail->Port       = $smtp_port;
 
         // Define o remetente e destinatário
-        $mail->setFrom($email, 'Atendimento - ' . $nome);
+        $mail->setFrom($instituicao['email'], 'Atendimento - ' . $instituicao['nome']);
         $mail->addAddress($email, $nome);
 
         // Configurações do e-mail
         $mail->isHTML(true);
         $mail->Subject = 'Ativar sua conta';
-        $mail->Body = 'Olá ' . $nome . ',<br>' . $welcome_email . '<br><br>Clique no link a seguir para ativar sua conta: <a href="' . $link_magico . '">Ativar Conta</a><br><br>Ou<br><br>Cole esse link no seu navegador:<br>' . $link_magico . '';
+        $mail->Body = 'Olá ' . $nome . ',<br>' . $mensagem . '<br><br>Clique no link a seguir para ativar sua conta: <a href="' . $link_magico . '">Ativar Conta</a><br><br>Ou<br><br>Cole esse link no seu navegador:<br>' . $link_magico . '';
 
         // Envia o e-mail
         $mail->send();

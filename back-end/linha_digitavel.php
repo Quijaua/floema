@@ -6,7 +6,7 @@ function asaas_ObterLinhaDigitavelBoleto($payment_id, $config) {
     $curl = curl_init();
 
     curl_setopt_array($curl, array(
-        CURLOPT_URL => $config["asaas_api_url"]."/api/v3/payments/$payment_id/identificationField",
+        CURLOPT_URL => $config["asaas_api_url"]."payments/$payment_id/identificationField",
         CURLOPT_RETURNTRANSFER => true,
         CURLOPT_ENCODING => '',
         CURLOPT_MAXREDIRS => 10,

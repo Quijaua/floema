@@ -139,7 +139,9 @@ $(document).ready(function () {
     $('#field-other-yearly').mask("R$ 0#");
     $('#field-other-once').mask("R$ 0#");
 
-    $.getJSON("config.json", function (data) {
+    let origin = window.location.href;
+
+    $.getJSON(origin + "config.json", function (data) {
         config = data;
 
         minOnceDonationCreditCard = config.minOnceDonation.creditCard;
@@ -157,7 +159,7 @@ $(document).ready(function () {
         }
         $("#footer-links").html(htmlFooter);
 
-        /*
+
         $("#button-monthly1")
             .attr("onclick", "donationOption(this,'monthly'," + config.donationMonthlyButton1.amount + "," + config.donationMonthlyButton1.showAddOnFee + ")")
             .attr("data-amount-for-selection", config.donationMonthlyButton1.amount)
@@ -220,7 +222,6 @@ $(document).ready(function () {
             .attr("onclick", "donationOption(this,'once'," + config.donationOnceButton5.amount + "," + config.donationOnceButton5.showAddOnFee + ")")
             .attr("data-amount-for-selection", config.donationOnceButton5.amount)
             .text(config.donationOnceButton5.display);
-        */
 
         $('.option-default-monthly').trigger('click');
     }).done(function () {
@@ -229,6 +230,8 @@ $(document).ready(function () {
         console.log(a);
         alert("Erro ao carregar configurações." + a);
     });
+
+    $('.option-default-monthly').trigger('click');
 });
 
 function setPeriodOption(periodicity) {
@@ -247,15 +250,17 @@ function setPeriodOption(periodicity) {
     switch (periodicity) {
         case "monthly":
             $("#payment-pix").prop('disabled', true);
-            $("#payment-bank-slip").prop('disabled', true);
+            //$("#payment-bank-slip").prop('disabled', true);
+            $("#payment-bank-slip").prop('disabled', false);
             $("#payment-pix").next().html("PIX - <small><i>Apenas para pagamentos únicos</i></small>");
-            $("#payment-bank-slip").next().html("Boleto - <small><i>Apenas para pagamentos únicos</i></small>");
+            //$("#payment-bank-slip").next().html("Boleto - <small><i>Apenas para pagamentos únicos</i></small>");
             break;
         case "yearly":
             $("#payment-pix").prop('disabled', true);
-            $("#payment-bank-slip").prop('disabled', true);
+            //$("#payment-bank-slip").prop('disabled', true);
+            $("#payment-bank-slip").prop('disabled', false);
             $("#payment-pix").next().html("PIX - <small><i>Apenas para pagamentos únicos</i></small>");
-            $("#payment-bank-slip").next().html("Boleto - <small><i>Apenas para pagamentos únicos</i></small>");
+            //$("#payment-bank-slip").next().html("Boleto - <small><i>Apenas para pagamentos únicos</i></small>");
             break;
         case "once":
             $("#payment-pix").prop('disabled', false);
@@ -277,7 +282,7 @@ function donationOption(el, type, amount, showAddOnFee) {
     $(el).addClass('active').removeClass('btn-outline-dark');
     $("#field-other-" + type).css('background-color', '#fff').val("");
 
-    if (showAddOnFee) {
+    if (config && showAddOnFee) {
         $("#div-add-on-fee").slideDown();
 
         let feeAmount = 0;
@@ -715,8 +720,9 @@ function validateFields() {
 }
 
 function printPaymentData(data) {
-    let html = "<h4 class='highlight mb-3'>Muito obrigado!</h4>";
-    html += "<p class='text-block2'>Sua doação estímulo a continuar nosso trabalho pela construção de um mundo melhor</p>";
+    $("#highlight").html("Muito obrigado!");
+
+    let html = "<p class='text-block2'>Sua doação estímulo a continuar nosso trabalho pela construção de um mundo melhor</p>";
 
     switch (data.forma_pagamento) {
         case "BOLETO":

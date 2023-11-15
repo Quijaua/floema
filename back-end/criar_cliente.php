@@ -13,10 +13,18 @@
 		$email = $dataForm['email'];
 
 		// Armazena a opção newsletter
-		$newsletter = $dataForm['newsletter'];
+        if (isset($dataForm['newsletter']) && $dataForm['newsletter'] == '1') {
+            $newsletter = $dataForm['newsletter'];
+        } else {
+            $newsletter = 0;
+        }
 
 		// Armazena a opção private
-		$private = $dataForm['private'];
+        if (isset($dataForm['private']) && $dataForm['private'] == '1') {
+            $private = $dataForm['private'];
+        } else {
+            $private = 0;
+        }
 
 		// Consulta SQL
 		$sql = "SELECT asaas_id FROM $tabela WHERE email = :email";
@@ -44,7 +52,7 @@
 		} else {
 			$curl = curl_init();
 			curl_setopt_array($curl, array(
-				CURLOPT_URL => $config['asaas_api_url'].'/api/v3/customers',
+				CURLOPT_URL => $config['asaas_api_url'].'customers',
 				CURLOPT_RETURNTRANSFER => true,
 				CURLOPT_ENCODING => '',
 				CURLOPT_MAXREDIRS => 10,
