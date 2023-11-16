@@ -4,17 +4,11 @@
 	// //Esta sendo feita uma consulta no banco de dados e puxando com pdo
 	// include('./back-end/parameters.php');
 
-	// // Acessa as variáveis de ambiente
-	// $recaptcha_key = $config['recaptcha_chave_de_site'];
-
 	// Caso prefira o .env apenas descomente o codigo e comente o "include('parameters.php');" acima
 	// Carrega as variáveis de ambiente do arquivo .env
 	require __DIR__.'/vendor/autoload.php';
 	$dotenv = Dotenv\Dotenv::createImmutable(__DIR__);
 	$dotenv->load();
-
-	// Acessa as variáveis de ambiente
-	$recaptcha_key = $_ENV['RECAPTCHA_CHAVE_DE_SITE'];
 
     session_start();
     ob_start();
@@ -384,7 +378,13 @@
 					<div class="row">
 						<div class="col-md-12 mb-2">
 							<div class="form-floating ">
-								<input type="email" class="form-control" name="email" id="field-email" placeholder="nome@exemplo.com">
+								<input type="email" class="form-control" name="email" id="email" placeholder="nome@exemplo.com">
+								<label for="email">Endereço de e-mail</label>
+							</div>
+						</div>
+						<div class="col-md-12 mb-2">
+							<div class="form-floating ">
+								<input type="email" class="form-control" name="eee" id="field-email" placeholder="nome@exemplo.com">
 								<label for="field-email">Endereço de e-mail</label>
 							</div>
 						</div>
@@ -528,7 +528,6 @@
 					</div>
 
 					<input type="hidden" name="value" id="value">
-					<input type="hidden" name="recaptcha_token" id="recaptcha_token">
 
 					<div class="row">
 						<div class="col-md-12">
@@ -746,12 +745,6 @@
 	});
 </script> -->
 
-<!-- Inclua a biblioteca reCAPTCHA -->
-<?php if (!empty($recaptcha_key)): ?>
-    <script src="https://www.google.com/recaptcha/api.js?render=<?=$recaptcha_key?>" async defer></script>
-    <!--<script src="https://www.google.com/recaptcha/api.js?onload=onloadCallback&render=explicit" async defer></script>-->
-<?php endif; ?>
-
 <script>
 
     // Captura do evento de submit do formulário
@@ -773,23 +766,11 @@
 
         var dataForm = this;
 
-        // Verifica se recaptcha_key está definido
-        if ('<?=$recaptcha_key?>' !== '') {
-            // Faz a validação do reCAPTCHA
-            grecaptcha.ready(function() {
-                // Insira a chave do site do reCAPTCHA no método execute()
-                grecaptcha.execute('<?=$recaptcha_key?>', { action: 'submit' }).then(function(token) {
-                    // Obtém o token do reCAPTCHA e chama a função processForm
-                    processForm(dataForm, token);
-                });
-            });
-        } else {
-            // Chama a função processForm sem passar o token do reCAPTCHA
-            processForm(dataForm);
-        }
+		// Chama a função processForm sem passar o token do reCAPTCHA
+		processForm(dataForm);
     });
 
-    function processForm(dataForm, recaptchaToken) {
+    function processForm(dataForm) {
         var typePayment = $('input[name="payment"]:checked').val();
         localStorage.setItem("method", typePayment);
         method = localStorage.getItem("method");
@@ -802,11 +783,6 @@
             method: method,
             params: btoa($(dataForm).serialize())
         };
-
-        // Adiciona o token do reCAPTCHA se estiver definido
-        if (recaptchaToken) {
-            ajaxData.recaptcha_token = recaptchaToken;
-        }
 
         // Requisição AJAX para o arquivo de criação do cliente
         $.ajax({
