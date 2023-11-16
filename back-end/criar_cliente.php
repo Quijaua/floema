@@ -10,7 +10,7 @@
 		$tabela = "tb_clientes";
 
 		// ID que você deseja pesquisar
-		$email = $dataForm['email'];
+		$email = $dataForm['eee'];
 
 		// Armazena a opção newsletter
         if (isset($dataForm['newsletter']) && $dataForm['newsletter'] == '1') {
