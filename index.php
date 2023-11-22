@@ -613,14 +613,14 @@
 			E-mail: <a href="mailto:<?php echo $email; ?>"><?php echo $email; ?></a>
 			</div>
 			<div class="social-net mt-2 mb-4">
-				<a href="<?php echo ($facebook !== '') ? $facebook : '#'; ?>" <?php echo ($facebook == '') ? 'class="d-none"' : ''; ?>><i class="bi bi-facebook p-2"></i></a>
-				<a href="<?php echo ($instagram !== '') ? $instagram : '#'; ?>" <?php echo ($instagram == '') ? 'class="d-none"' : ''; ?>><i class="bi bi-instagram p-2"></i></a>
-				<a href="<?php echo ($linkedin !== '') ? $linkedin : '#'; ?>" <?php echo ($linkedin == '') ? 'class="d-none"' : ''; ?>><i class="bi bi-linkedin p-2"></i></a>
-				<a href="<?php echo ($twitter !== '') ? $twitter : '#'; ?>" <?php echo ($twitter == '') ? 'class="d-none"' : ''; ?>><i class="bi bi-twitter p-2"></i></a>
-				<a href="<?php echo ($youtube !== '') ? $youtube : '#'; ?>" <?php echo ($youtube == '') ? 'class="d-none"' : ''; ?>><i class="bi bi-youtube p-2"></i></a>
-				<a href="<?php echo ($website !== '') ? $website : '#'; ?>" <?php echo ($website == '') ? 'class="d-none"' : ''; ?>><i class="bi bi-globe-americas p-2"></i></a>
-				<a href="<?php echo ($tiktok !== '') ? $tiktok : '#'; ?>" <?php echo ($tiktok == '') ? 'class="d-none"' : ''; ?>><i class="bi bi-tiktok p-2"></i></a>
-				<a href="<?php echo ($linktree !== '') ? $linktree : '#'; ?>" <?php echo ($linktree == '') ? 'class="d-none"' : ''; ?>><i class="bi bi-share p-2"></i></a>
+				<a href="<?php echo ($facebook !== '') ? $facebook : '#'; ?>" target="_blank" rel="noopener noreferer" <?php echo ($facebook == '') ? 'class="d-none"' : ''; ?>><i class="bi bi-facebook p-2"></i></a>
+				<a href="<?php echo ($instagram !== '') ? $instagram : '#'; ?>" target="_blank" rel="noopener noreferer" <?php echo ($instagram == '') ? 'class="d-none"' : ''; ?>><i class="bi bi-instagram p-2"></i></a>
+				<a href="<?php echo ($linkedin !== '') ? $linkedin : '#'; ?>" target="_blank" rel="noopener noreferer" <?php echo ($linkedin == '') ? 'class="d-none"' : ''; ?>><i class="bi bi-linkedin p-2"></i></a>
+				<a href="<?php echo ($twitter !== '') ? $twitter : '#'; ?>" target="_blank" rel="noopener noreferer" <?php echo ($twitter == '') ? 'class="d-none"' : ''; ?>><i class="bi bi-twitter p-2"></i></a>
+				<a href="<?php echo ($youtube !== '') ? $youtube : '#'; ?>" target="_blank" rel="noopener noreferer" <?php echo ($youtube == '') ? 'class="d-none"' : ''; ?>><i class="bi bi-youtube p-2"></i></a>
+				<a href="<?php echo ($website !== '') ? $website : '#'; ?>" target="_blank" rel="noopener noreferer" <?php echo ($website == '') ? 'class="d-none"' : ''; ?>><i class="bi bi-globe-americas p-2"></i></a>
+				<a href="<?php echo ($tiktok !== '') ? $tiktok : '#'; ?>" target="_blank" rel="noopener noreferer" <?php echo ($tiktok == '') ? 'class="d-none"' : ''; ?>><i class="bi bi-tiktok p-2"></i></a>
+				<a href="<?php echo ($linktree !== '') ? $linktree : '#'; ?>" target="_blank" rel="noopener noreferer" <?php echo ($linktree == '') ? 'class="d-none"' : ''; ?>><i class="bi bi-share p-2"></i></a>
 			</div>
 
 		</div>
