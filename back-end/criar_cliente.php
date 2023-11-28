@@ -9,9 +9,6 @@
 		// Tabela que sera feita a consulta
 		$tabela = "tb_clientes";
 
-		// ID que você deseja pesquisar
-		$email = $dataForm['eee'];
-
 		// Armazena a opção newsletter
         if (isset($dataForm['newsletter']) && $dataForm['newsletter'] == '1') {
             $newsletter = $dataForm['newsletter'];
@@ -33,7 +30,7 @@
 		$stmt = $conn->prepare($sql);
 
 		// Vincular o valor do parâmetro
-		$stmt->bindParam(':email', $email, PDO::PARAM_STR);
+		$stmt->bindParam(':email', $dataForm["email"], PDO::PARAM_STR);
 
 		// Executar a consulta
 		$stmt->execute();

@@ -1,6 +1,6 @@
 <?php
 
-function asaas_ObterLinhaDigitavelBoleto($payment_id, $config) {
+function asaas_ObterLinhaDigitavelBoleto($subscription_id, $payment_id, $config) {
 	include('config.php');
 
     $curl = curl_init();
@@ -30,14 +30,31 @@ function asaas_ObterLinhaDigitavelBoleto($payment_id, $config) {
 
         $tabela = 'tb_doacoes';
 
-        $stmt = $conn->prepare("UPDATE $tabela SET boleto_barCode = :boleto_barCode, boleto_nossoNumero = :boleto_nossoNumero, boleto_identificationField = :boleto_identificationField WHERE payment_id = :payment_id");
+        // Faz uma verficacao para saber se e assinatura ou unico
+        if (empty($subscription_id))
+        {
+            // Se o "$subscription_id" esta vazio faz isso
+            $stmt = $conn->prepare("UPDATE $tabela SET boleto_barCode = :boleto_barCode, boleto_nossoNumero = :boleto_nossoNumero, boleto_identificationField = :boleto_identificationField WHERE payment_id = :payment_id");
+        } else {
+            // Se o "$subscription_id" nao esta vazio faz isso
+            $stmt = $conn->prepare("UPDATE $tabela SET boleto_barCode = :boleto_barCode, boleto_nossoNumero = :boleto_nossoNumero, boleto_identificationField = :boleto_identificationField WHERE payment_id = :subscription_id");
+        }
         
         // Bind dos parâmetros
         $stmt->bindValue(':boleto_barCode', $retorno['barCode']);
         $stmt->bindValue(':boleto_nossoNumero', $retorno['nossoNumero']);
         $stmt->bindValue(':boleto_identificationField', $retorno['identificationField']);
-        $stmt->bindValue(':payment_id', $payment_id);
-    
+
+        // Faz uma verficacao para saber se e assinatura ou unico
+        if (empty($subscription_id))
+        {
+            // Se o "$subscription_id" esta vazio faz isso
+            $stmt->bindValue(':payment_id', $payment_id);
+        } else {
+            // Se o "$subscription_id" nao esta vazio faz isso
+            $stmt->bindValue(':subscription_id', $subscription_id);
+        }
+
         // Executando o update
         $stmt->execute();
 
