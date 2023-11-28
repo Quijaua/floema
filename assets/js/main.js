@@ -252,15 +252,19 @@ function setPeriodOption(periodicity) {
             $("#payment-pix").prop('disabled', true);
             //$("#payment-bank-slip").prop('disabled', true);
             $("#payment-bank-slip").prop('disabled', false);
-            $("#payment-pix").next().html("PIX - <small><i>Apenas para pagamentos únicos</i></small>");
+            //$("#payment-pix").prop('disabled', true);
+            $("#payment-pix").prop('disabled', false);
             //$("#payment-bank-slip").next().html("Boleto - <small><i>Apenas para pagamentos únicos</i></small>");
+            //$("#payment-pix").next().html("PIX - <small><i>Apenas para pagamentos únicos</i></small>");
             break;
         case "yearly":
             $("#payment-pix").prop('disabled', true);
             //$("#payment-bank-slip").prop('disabled', true);
             $("#payment-bank-slip").prop('disabled', false);
-            $("#payment-pix").next().html("PIX - <small><i>Apenas para pagamentos únicos</i></small>");
+            //$("#payment-pix").prop('disabled', true);
+            $("#payment-pix").prop('disabled', false);
             //$("#payment-bank-slip").next().html("Boleto - <small><i>Apenas para pagamentos únicos</i></small>");
+            //$("#payment-pix").next().html("PIX - <small><i>Apenas para pagamentos únicos</i></small>");
             break;
         case "once":
             $("#payment-pix").prop('disabled', false);

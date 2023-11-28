@@ -366,10 +366,12 @@
 						</label>
 					</div>
 					<div class="form-check">
+						<!-- <input onclick="setPaymentMethod('Pix')" class="form-check-input" type="radio" name="payment"
+							value="102" id="payment-pix" disabled> -->
 						<input onclick="setPaymentMethod('Pix')" class="form-check-input" type="radio" name="payment"
-							value="102" id="payment-pix" disabled>
+							value="102" id="payment-pix">
 						<label class="form-check-label payment-button-options" for="payment-pix">
-							PIX - <small><i>Apenas para contribuição única</i></small>
+							PIX<!-- - <small><i>Apenas para contribuição única</i></small> -->
 						</label>
 					</div>
 
@@ -674,82 +676,6 @@
 <script src="<?php echo INCLUDE_PATH; ?>assets/google/jquery/jquery-ui.js"></script>
 <script src="<?php echo INCLUDE_PATH; ?>assets/ajax/1.14.16/jquery.mask.min.js"></script>
 <script src="<?php echo INCLUDE_PATH; ?>assets/js/main.js" defer></script>
-<!-- <script src="https://www.google.com/recaptcha/api.js?render=<?=$recaptcha_key?>"></script>
-<script>
-	// Captura do evento de submit do formulário
-    $('#form-checkout').submit(function(event) {
-        event.preventDefault();
-
-        if(!validateFields()) return;
-
-		var dataForm = this;
-
-		// Faz a validação do reCAPTCHA
-		grecaptcha.ready(function() {
-			// Insira a chave do site do reCAPTCHA no método execute()
-			grecaptcha.execute('<?=$recaptcha_key?>', { action: 'submit' }).then(function(token) {
-			// Obtém o token do reCAPTCHA
-
-				var typePayment = $('input[name="payment"]:checked').val();
-				localStorage.setItem("method", typePayment);
-				method = localStorage.getItem("method");
-
-				//Botão carregando
-				$(".progress-subscription").addClass('d-flex').removeClass('d-none');
-				$(".button-confirm-payment").addClass('d-none').removeClass('d-block');
-
-				//Adicionar valor ao input valor
-				document.getElementById('value').value = donationAmount;
-				//Adicionar token ao input reCAPTCHA
-				document.getElementById('recaptcha_token').value = token;
-
-				// Requisição AJAX para o arquivo de criação do cliente
-				$.ajax({
-					url: '<?php echo INCLUDE_PATH; ?>back-end/subscription.php',
-					method: 'POST',
-					data: {method: method, params: btoa($(dataForm).serialize())},
-					dataType: 'JSON',
-					success: function(response) {
-						window.respostaGlobal = response.id; // Atribui a resposta à propriedade global do objeto window
-						// Outras ações que você queira fazer com a resposta
-					}
-				})
-				.done(function(response) {
-					if (response.status == 200) {
-						//Remove botão carregando
-						$(".progress-subscription").addClass('d-none').removeClass('d-flex');
-						$(".button-confirm-payment").addClass('d-block').removeClass('d-none');
-
-						var encodedCode = btoa(response.code);
-						var customerId = btoa(response.id);
-
-						$.ajax({
-							url: '<?php echo INCLUDE_PATH; ?>back-end/sql.php',
-							method: 'POST',
-							data: {encodedCode: encodedCode},
-							dataType: 'JSON'
-						})
-						.done(function(data) {
-							printPaymentData(data);
-							
-
-						})
-
-						$.ajax({
-							url: '<?php echo INCLUDE_PATH_ADMIN; ?>back-end/magic-link.php',
-							method: 'POST',
-							data: {customerId: customerId},
-							dataType: 'JSON'
-						})
-						.done(function(data) {
-							console.log(data.msg);
-						})
-					}
-				})
-			});
-		});
-	});
-</script> -->
 
 <script>
 
