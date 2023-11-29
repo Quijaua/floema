@@ -24,12 +24,12 @@
             "valor" => $result['valor'],
             "pix_encodedImage" => $result['pix_encodedImage'],
             "pix_payload" => $result['pix_payload'],
-            "pix_expirationDate" => date("d/m/Y", strtotime($result['pix_expirationDate'])),
+            "pix_expirationDate" => $result['pix_expirationDate'] ? date("d/m/Y", strtotime($result['pix_expirationDate'])) : null,
             "forma_pagamento" => $result['forma_pagamento'],
             "boleto_barCode" => $result['boleto_barCode'],
-            "boleto_identificationField" => $result['boleto_identificationField'],		
-            "data_vencimento" => date("d/m/Y", strtotime($result['data_vencimento'])),
-            "data_criacao" => date("d/m/Y", strtotime($result['data_criacao'])),
+            "boleto_identificationField" => $result['boleto_identificationField'],
+            "data_vencimento" => $result['data_vencimento'] ? date("d/m/Y", strtotime($result['data_vencimento'])) : null,
+            "data_criacao" => $result['data_criacao'] ? date("d/m/Y", strtotime($result['data_criacao'])) : null,
             "link_boleto" => $result['link_boleto']
         ]);
     } else {
