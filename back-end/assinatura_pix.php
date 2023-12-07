@@ -2,6 +2,12 @@
 function asaas_CriarAssinaturaPix($customer_id, $dataForm, $config) {
     include('config.php');
 
+    // Configura o fuso horário para São Paulo, Brasil
+    date_default_timezone_set('America/Sao_Paulo');
+
+    $date = date("Y-m-d"); // Obtém a data atual no formato "aaaa-mm-dd"
+    $vencimento = date("Y-m-d", strtotime($date . "+7 days")); // Adiciona 7 dias à data atual
+
     $curl = curl_init();
 
     $fields = [
@@ -39,8 +45,8 @@ function asaas_CriarAssinaturaPix($customer_id, $dataForm, $config) {
 
         $tabela = 'tb_doacoes';
 
-        $stmt = $conn->prepare("INSERT INTO $tabela (customer_id, payment_id, valor, forma_pagamento, link_pagamento, status, data_vencimento, cycle, cartao_numero, cartao_bandeira) VALUES (
-            :customer_id, :payment_id, :value, :forma_pagamento, :link_pagamento, :status, :data_vencimento, :cycle, :cartao_numero, :cartao_bandeira)");
+        $stmt = $conn->prepare("INSERT INTO $tabela (customer_id, payment_id, valor, forma_pagamento, link_pagamento, status, data_vencimento, data_criacao, cycle, cartao_numero, cartao_bandeira) VALUES (
+            :customer_id, :payment_id, :value, :forma_pagamento, :link_pagamento, :status, :data_vencimento, :data_criacao, :cycle, :cartao_numero, :cartao_bandeira)");
         
         // Bind dos parâmetros
         $stmt->bindParam(':customer_id', $customer_id, PDO::PARAM_STR);
@@ -50,6 +56,7 @@ function asaas_CriarAssinaturaPix($customer_id, $dataForm, $config) {
         $stmt->bindParam(':link_pagamento', $retorno['invoiceUrl'], PDO::PARAM_STR);
         $stmt->bindParam(':status', $retorno['status'], PDO::PARAM_STR);
         $stmt->bindParam(':data_vencimento', $vencimento, PDO::PARAM_STR);
+        $stmt->bindParam(':data_criacao', $date, PDO::PARAM_STR);
         $stmt->bindParam(':cycle', $retorno['cycle'], PDO::PARAM_STR);
         $stmt->bindParam(':cartao_numero', $retorno['creditCard']['creditCardNumber'], PDO::PARAM_STR);
         $stmt->bindParam(':cartao_bandeira', $retorno['creditCard']['creditCardBrand'], PDO::PARAM_STR);
