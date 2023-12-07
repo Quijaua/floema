@@ -143,7 +143,7 @@ CREATE TABLE `tb_doacoes` (
   `link_boleto` longtext DEFAULT NULL,
   `status` varchar(100) NOT NULL,
   `data_vencimento` date DEFAULT NULL,
-  `data_criacao` date NOT NULL DEFAULT curdate(),
+  `data_criacao` date DEFAULT NULL,
   `data_pagamento` date DEFAULT NULL,
   `pix_encodedImage` longtext DEFAULT NULL,
   `pix_payload` longtext DEFAULT NULL,

@@ -4,6 +4,9 @@ function asaas_CriarCobrancaBoleto($customer_id, $dataForm, $config) {
 
 	include('config.php');
 
+    // Configura o fuso horário para São Paulo, Brasil
+    date_default_timezone_set('America/Sao_Paulo');
+
     $date = date("Y-m-d"); // Obtém a data atual no formato "aaaa-mm-dd"
     $vencimento = date("Y-m-d", strtotime($date . "+7 days")); // Adiciona 7 dias à data atual
 
@@ -42,8 +45,8 @@ function asaas_CriarCobrancaBoleto($customer_id, $dataForm, $config) {
 
 		$tabela = 'tb_doacoes';
 
-		$stmt = $conn->prepare("INSERT INTO $tabela (customer_id, payment_id, valor, forma_pagamento, link_pagamento, link_boleto, status, data_vencimento) VALUES (
-			:customer_id, :payment_id, :value, :forma_pagamento, :link_pagamento, :link_boleto, :status, :data_vencimento)");
+		$stmt = $conn->prepare("INSERT INTO $tabela (customer_id, payment_id, valor, forma_pagamento, link_pagamento, link_boleto, status, data_vencimento, data_criacao) VALUES (
+			:customer_id, :payment_id, :value, :forma_pagamento, :link_pagamento, :link_boleto, :status, :data_vencimento, :data_criacao)");
 		
 		// Bind dos parâmetros
 		$stmt->bindParam(':customer_id', $customer_id, PDO::PARAM_STR);
@@ -54,6 +57,7 @@ function asaas_CriarCobrancaBoleto($customer_id, $dataForm, $config) {
 		$stmt->bindParam(':link_boleto', $retorno['bankSlipUrl'], PDO::PARAM_STR);
 		$stmt->bindParam(':status', $retorno['status'], PDO::PARAM_STR);
 		$stmt->bindParam(':data_vencimento', $vencimento, PDO::PARAM_STR);
+        $stmt->bindParam(':data_criacao', $date, PDO::PARAM_STR);
 
 		// Executando o update
 		$stmt->execute();
