@@ -3,9 +3,9 @@ let donationPeriodicity = "monthly";
 let donationAmount = 50;
 let config = null;
 let selectedPayment = "credit_card";
-let minOnceDonationCreditCard = 0;
-let minOnceDonationBankSlip = 0;
-let minOnceDonationPix = 0;
+let minOnceDonationCreditCard = 10;
+let minOnceDonationBankSlip = 10;
+let minOnceDonationPix = 10;
 let lastDonationButtonClicked = null;
 
 function setValuesFromQueryString() {
@@ -126,21 +126,6 @@ function setValuesFromQueryString() {
         }
     }
 }
-
-$(document).ready(function () {
-    //$('.option-default-monthly').trigger('click');
-    $('#field-zipcode').mask('00000-000');
-    $('#field-cpf').mask('000.000.000-00');
-    $('#field-card-number').mask('0000 0000 0000 0000');
-    $('#field-card-expiration').mask('00/00');
-    $('#field-card-cvc').mask('0000');
-
-    $('#field-other-monthly').mask("R$ 0#");
-    $('#field-other-yearly').mask("R$ 0#");
-    $('#field-other-once').mask("R$ 0#");
-
-    $('.option-default-monthly').trigger('click');
-});
 
 function setPeriodOption(periodicity) {
     $('#field-other-monthly').val("");

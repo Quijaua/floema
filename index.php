@@ -120,6 +120,45 @@
 		echo "ID não encontrado.";
 	}
 ?>
+<?php
+	$donationButtons = array(
+		"donationMonthlyButton1" => array("amount" => $monthly_1, "display" => "R$ $monthly_1", "showAddOnFee" => true),
+		"donationMonthlyButton2" => array("amount" => $monthly_2, "display" => "R$ $monthly_2", "showAddOnFee" => true),
+		"donationMonthlyButton3" => array("amount" => $monthly_3, "display" => "R$ $monthly_3", "showAddOnFee" => true),
+		"donationMonthlyButton4" => array("amount" => $monthly_4, "display" => "R$ $monthly_4", "showAddOnFee" => true),
+		"donationMonthlyButton5" => array("amount" => $monthly_5, "display" => "R$ $monthly_5", "showAddOnFee" => true),
+	
+		"donationYearlyButton1" => array("amount" => $yearly_1, "display" => "R$ $yearly_1", "showAddOnFee" => true),
+		"donationYearlyButton2" => array("amount" => $yearly_2, "display" => "R$ $yearly_2", "showAddOnFee" => true),
+		"donationYearlyButton3" => array("amount" => $yearly_3, "display" => "R$ $yearly_3", "showAddOnFee" => true),
+		"donationYearlyButton4" => array("amount" => $yearly_4, "display" => "R$ $yearly_4", "showAddOnFee" => true),
+		"donationYearlyButton5" => array("amount" => $yearly_5, "display" => "R$ $yearly_5", "showAddOnFee" => true),
+	
+		"donationOnceButton1" => array("amount" => $once_1, "display" => "R$ $once_1", "showAddOnFee" => true),
+		"donationOnceButton2" => array("amount" => $once_2, "display" => "R$ $once_2", "showAddOnFee" => true),
+		"donationOnceButton3" => array("amount" => $once_3, "display" => "R$ $once_3", "showAddOnFee" => true),
+		"donationOnceButton4" => array("amount" => $once_4, "display" => "R$ $once_4", "showAddOnFee" => true),
+		"donationOnceButton5" => array("amount" => $once_5, "display" => "R$ $once_5", "showAddOnFee" => true),
+	);
+	
+	$addOnFeeValues = array(
+		"creditCard" => array("fix" => 0, "percent" => 5),
+		"bankSlip" => array("fix" => 3, "percent" => 5),
+		"pix" => array("fix" => 0, "percent" => 5),
+	);
+	
+	$minOnceDonation = array(
+		"creditCard" => 10,
+		"bankSlip" => 10,
+		"pix" => 10,
+	);
+	
+	$jsonData = array(
+		"donationButtons" => $donationButtons,
+		"addOnFeeValues" => $addOnFeeValues,
+		"minOnceDonation" => $minOnceDonation,
+	);
+?>
 <html lang="pt">
 <head>
 	<meta charset="utf-8">
@@ -676,6 +715,111 @@
 <script src="<?php echo INCLUDE_PATH; ?>assets/google/jquery/jquery-ui.js"></script>
 <script src="<?php echo INCLUDE_PATH; ?>assets/ajax/1.14.16/jquery.mask.min.js"></script>
 <script src="<?php echo INCLUDE_PATH; ?>assets/js/main.js" defer></script>
+
+<script>
+$(document).ready(function () {
+    //$('.option-default-monthly').trigger('click');
+    $('#field-zipcode').mask('00000-000');
+    $('#field-cpf').mask('000.000.000-00');
+    $('#field-card-number').mask('0000 0000 0000 0000');
+    $('#field-card-expiration').mask('00/00');
+    $('#field-card-cvc').mask('0000');
+
+    $('#field-other-monthly').mask("R$ 0#");
+    $('#field-other-yearly').mask("R$ 0#");
+    $('#field-other-once').mask("R$ 0#");
+
+	config = <?php echo json_encode($jsonData, JSON_PRETTY_PRINT); ?>;
+
+	minOnceDonationCreditCard = config.minOnceDonation.creditCard;
+	minOnceDonationBankSlip = config.minOnceDonation.bankSlip;
+	minOnceDonationPix = config.minOnceDonation.pix;
+
+	$("#text-block1-title").html(config.textBlock1.title);
+	$("#text-block1-content").html(config.textBlock1.content);
+	$("#text-block2-title").html(config.textBlock2.title);
+	$("#text-block2-content").html(config.textBlock2.content);
+
+	let htmlFooter = "";
+	for (let i = 0; i < config.footerLinks.length; i++) {
+		htmlFooter += "<a href='" + config.footerLinks[i].link + "' target='" + config.footerLinks[i].target + "' rel='noopener noreferrer'>" + config.footerLinks[i].name + "</a>" + (i + 1 < config.footerLinks.length ? " | " : "");
+	}
+	$("#footer-links").html(htmlFooter);
+
+
+	$("#button-monthly1")
+		.attr("onclick", "donationOption(this,'monthly'," + config.donationMonthlyButton1.amount + "," + config.donationMonthlyButton1.showAddOnFee + ")")
+		.attr("data-amount-for-selection", config.donationMonthlyButton1.amount)
+		.text(config.donationMonthlyButton1.display);
+	$("#button-monthly2")
+		.attr("onclick", "donationOption(this,'monthly'," + config.donationMonthlyButton2.amount + "," + config.donationMonthlyButton2.showAddOnFee + ")")
+		.attr("data-amount-for-selection", config.donationMonthlyButton2.amount)
+		.text(config.donationMonthlyButton2.display);
+	$("#button-monthly3")
+		.attr("onclick", "donationOption(this,'monthly'," + config.donationMonthlyButton3.amount + "," + config.donationMonthlyButton3.showAddOnFee + ")")
+		.attr("data-amount-for-selection", config.donationMonthlyButton3.amount)
+		.text(config.donationMonthlyButton3.display);
+	$("#button-monthly4")
+		.attr("onclick", "donationOption(this,'monthly'," + config.donationMonthlyButton4.amount + "," + config.donationMonthlyButton4.showAddOnFee + ")")
+		.attr("data-amount-for-selection", config.donationMonthlyButton4.amount)
+		.text(config.donationMonthlyButton4.display);
+	$("#button-monthly5")
+		.attr("onclick", "donationOption(this,'monthly'," + config.donationMonthlyButton5.amount + "," + config.donationMonthlyButton5.showAddOnFee + ")")
+		.attr("data-amount-for-selection", config.donationMonthlyButton5.amount)
+		.text(config.donationMonthlyButton5.display);
+
+	$("#button-yearly1")
+		.attr("onclick", "donationOption(this,'yearly'," + config.donationYearlyButton1.amount + "," + config.donationYearlyButton1.showAddOnFee + ")")
+		.attr("data-amount-for-selection", config.donationYearlyButton1.amount)
+		.text(config.donationYearlyButton1.display);
+	$("#button-yearly2")
+		.attr("onclick", "donationOption(this,'yearly'," + config.donationYearlyButton2.amount + "," + config.donationYearlyButton2.showAddOnFee + ")")
+		.attr("data-amount-for-selection", config.donationYearlyButton2.amount)
+		.text(config.donationYearlyButton2.display);
+	$("#button-yearly3")
+		.attr("onclick", "donationOption(this,'yearly'," + config.donationYearlyButton3.amount + "," + config.donationYearlyButton3.showAddOnFee + ")")
+		.attr("data-amount-for-selection", config.donationYearlyButton3.amount)
+		.text(config.donationYearlyButton3.display);
+	$("#button-yearly4")
+		.attr("onclick", "donationOption(this,'yearly'," + config.donationYearlyButton4.amount + "," + config.donationYearlyButton4.showAddOnFee + ")")
+		.attr("data-amount-for-selection", config.donationYearlyButton4.amount)
+		.text(config.donationYearlyButton4.display);
+	$("#button-yearly5")
+		.attr("onclick", "donationOption(this,'yearly'," + config.donationYearlyButton5.amount + "," + config.donationYearlyButton5.showAddOnFee + ")")
+		.attr("data-amount-for-selection", config.donationYearlyButton5.amount)
+		.text(config.donationYearlyButton5.display);
+
+	$("#button-once1")
+		.attr("onclick", "donationOption(this,'once'," + config.donationOnceButton1.amount + "," + config.donationOnceButton1.showAddOnFee + ")")
+		.attr("data-amount-for-selection", config.donationOnceButton1.amount)
+		.text(config.donationOnceButton1.display);
+	$("#button-once2")
+		.attr("onclick", "donationOption(this,'once'," + config.donationOnceButton2.amount + "," + config.donationOnceButton2.showAddOnFee + ")")
+		.attr("data-amount-for-selection", config.donationOnceButton2.amount)
+		.text(config.donationOnceButton2.display);
+	$("#button-once3")
+		.attr("onclick", "donationOption(this,'once'," + config.donationOnceButton3.amount + "," + config.donationOnceButton3.showAddOnFee + ")")
+		.attr("data-amount-for-selection", config.donationOnceButton3.amount)
+		.text(config.donationOnceButton3.display);
+	$("#button-once4")
+		.attr("onclick", "donationOption(this,'once'," + config.donationOnceButton4.amount + "," + config.donationOnceButton4.showAddOnFee + ")")
+		.attr("data-amount-for-selection", config.donationOnceButton4.amount)
+		.text(config.donationOnceButton4.display);
+	$("#button-once5")
+		.attr("onclick", "donationOption(this,'once'," + config.donationOnceButton5.amount + "," + config.donationOnceButton5.showAddOnFee + ")")
+		.attr("data-amount-for-selection", config.donationOnceButton5.amount)
+		.text(config.donationOnceButton5.display);
+
+    $('.option-default-monthly').trigger('click');
+});
+</script>
+
+<script>
+	// Aguarde o carregamento do documento e, em seguida, chame a função
+    $(document).ready(function () {
+        donationOption('#button-monthly2', 'monthly', <?php echo $monthly_2; ?>, true);
+    });
+</script>
 
 <script>
 
