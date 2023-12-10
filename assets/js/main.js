@@ -143,21 +143,13 @@ function setPeriodOption(periodicity) {
     switch (periodicity) {
         case "monthly":
             $("#payment-pix").prop('disabled', true);
-            //$("#payment-bank-slip").prop('disabled', true);
             $("#payment-bank-slip").prop('disabled', false);
-            //$("#payment-pix").prop('disabled', true);
             $("#payment-pix").prop('disabled', false);
-            //$("#payment-bank-slip").next().html("Boleto - <small><i>Apenas para pagamentos únicos</i></small>");
-            //$("#payment-pix").next().html("PIX - <small><i>Apenas para pagamentos únicos</i></small>");
             break;
         case "yearly":
             $("#payment-pix").prop('disabled', true);
-            //$("#payment-bank-slip").prop('disabled', true);
             $("#payment-bank-slip").prop('disabled', false);
-            //$("#payment-pix").prop('disabled', true);
             $("#payment-pix").prop('disabled', false);
-            //$("#payment-bank-slip").next().html("Boleto - <small><i>Apenas para pagamentos únicos</i></small>");
-            //$("#payment-pix").next().html("PIX - <small><i>Apenas para pagamentos únicos</i></small>");
             break;
         case "once":
             $("#payment-pix").prop('disabled', false);
@@ -211,7 +203,6 @@ function donationOption(el, type, amount, showAddOnFee) {
         $("#div-add-on-fee").slideUp();
     }
 
-
     switch (type) {
         case "monthly":
             $(".button-confirm-payment").text("Contribuir com R$ " + amount + " por mês");
@@ -224,18 +215,14 @@ function donationOption(el, type, amount, showAddOnFee) {
             break;
     }
 
-
     donationPeriodicity = type;
     donationAmount = amount;
 }
 function donationOtherOption(el, type, showAddOnFee) {
-
     lastDonationButtonClicked = el;
     amount = parseFloat($(el).cleanVal());
 
-
     if (amount != "" && amount > 0) {
-
         switch (selectedPayment) {
             case "credit_card":
                 if (amount < minOnceDonationCreditCard) {
@@ -263,8 +250,6 @@ function donationOtherOption(el, type, showAddOnFee) {
                 break;
         }
         $("#div-errors-price").slideUp('fast');
-
-
 
         $('#donation-' + type + '-group button').addClass('btn-outline-dark').removeClass('active');
         $(el).css('background-color', '#FFC107');
@@ -301,10 +286,6 @@ function donationOtherOption(el, type, showAddOnFee) {
             $("#div-add-on-fee").slideUp();
         }
 
-
-
-        //amount = amount/100
-
         switch (type) {
             case "monthly":
                 $(".button-confirm-payment").text("Contribuir com R$ " + amount.toFixed(2) + " por mês");
@@ -318,14 +299,13 @@ function donationOtherOption(el, type, showAddOnFee) {
         }
         donationPeriodicity = type;
         donationAmount = amount;
-
-
     }
     else {
         $(el).next().html("OUTRO<br/>VALOR");
         $('.option-default-' + type).trigger('click');
     }
 }
+
 function setPaymentMethod(paymentMethod) {
     switch (paymentMethod) {
         case "credit_card":
@@ -335,14 +315,12 @@ function setPaymentMethod(paymentMethod) {
         case "Pix":
             $("#credit-card-fields").slideUp();
             break;
-        // case "Pix":
-        //     $("#credit-card-fields").slideUp();
-        // break;
     }
     if (lastDonationButtonClicked != null) $(lastDonationButtonClicked).trigger('click').trigger('blur');
 
     selectedPayment = paymentMethod;
 }
+
 function getCepData() {
     let cep = $('#field-zipcode').val();
     cep = cep.replace(/\D/g, "");
@@ -353,7 +331,6 @@ function getCepData() {
     }
     $("#field-zipcode").removeClass('is-invalid');
     $("#div-errors-price").slideUp('fast');
-
 
     if (cep != "") {
         $("#field-street").val("Carregando...");
@@ -377,7 +354,6 @@ function getCepData() {
 }
 
 function flowProces(token) {
-
     if (window.inPaymentFlow === true) {
         return;
     }
@@ -393,112 +369,8 @@ function flowProces(token) {
 
     window.inPaymentFlow = false;
 }
-//Codigo novo
-
-//Codigo antigo
-
-// function getCreditCardToken(cap_token)
-// {
-//     if(!validateFields()) return;
-
-//     let obj                 = {};
-//     obj.card_cvv            = $("#field-card-cvc").val();
-//     obj.card_expiration     = $("#field-card-expiration").val();
-//     obj.card_number         = $("#field-card-number").val();
-//     obj.holder_name         = $("#field-name").val()+" "+$("#field-surname").val();
-//     obj.payment_method_code = "credit_card";
-//     obj.registry_code       = $("#field-cpf").val();
-
-//     $.ajax({
-//         type: "POST",
-//         url: "https://sandbox.asaas.com/api/v3/payments",
-//         dataType: "json",
-//         headers: { "Authorization": "Basic " + btoa("$aact_YTU5YTE0M2M2N2I4MTliNzk0YTI5N2U5MzdjNWZmNDQ6OjAwMDAwMDAwMDAwMDAwNTczMDU6OiRhYWNoXzUwNDliOTg5LTUxZGItNDRmZS1hNDcwLTljOGJmODdmOWYxOQ==" + ":") },
-//         data: obj,
-//         success:function(data)
-//         {
-//             //alert(data.payment_profile.gateway_token);
-//             subscription(data.payment_profile.gateway_token, cap_token)
-//         },
-//         error: function(request, status, error)
-//         {
-//             console.log(error);
-//             console.log(request.responseText);
-//             $("#div-errors-price").html("Erro ao cadastrar perfil de pagamento").slideDown('fast').effect( "shake" );
-//         }
-//     });
-// }
-
-// function subscription(gateway_token, cap_token)
-// {
-//     if(!validateFields()) return;
-
-//     let obj                 = {};
-//     obj.amount              = donationAmount;
-//     obj.addressCountry      = $("#field-country").val();
-//     obj.addressState        = $("#field-state").val();
-//     obj.addressCity         = $("#field-city").val();
-//     obj.addressStreet       = $("#field-street").val();
-//     obj.addressDistrict     = $("#field-district").val();
-//     obj.addressStreetNumber = $("#field-street-number").val();
-//     obj.addressComplement   = $("#field-complement").val();
-//     obj.addressZipCode      = $("#field-zipcode").val();
-//     obj.email               = $("#field-email").val();
-//     obj.customerName        = $("#field-name").val();
-//     obj.customerSurname     = $("#field-surname").val();
-//     obj.paymentMethod       = selectedPayment;
-//     obj.recurringPeriod     = donationPeriodicity;
-//     obj.taxpayerId          = $("#field-cpf").val();
-//     obj.gatewayToken        = gateway_token;
-//     obj.capToken            = cap_token;
-//     obj.metadata            = {
-//         'source': $( '#field-source' ).val(),
-//         'source_url': $( '#field-source-url' ).val(),
-//         'source_id': $( '#field-source-id' ).val(),
-//     };
-
-//     //let tmp = $(".button-confirm-payment").html();
-//     $(".progress-subscription").addClass('d-flex').removeClass('d-none');
-//     $(".button-confirm-payment").addClass('d-none').removeClass('d-block');
-
-//     //Pegar method
-//     var typePayment = $('input[name="payment"]:checked').val();
-//     localStorage.setItem("method", typePayment);
-//     method = localStorage.getItem("method");
-
-//     $.ajax({
-//         url: "/back-end/subscription.php",
-//         method: 'POST',
-//         data: {method: method, params: btoa($(this).serialize())},
-//         dataType: 'JSON',
-//         success:function(data)
-//         {
-//             $(".progress-subscription").addClass('d-none').removeClass('d-flex');
-//             $(".button-confirm-payment").addClass('d-block').removeClass('d-none');
-//             printPaymentData(data);
-//         },
-//         error: function(request, status, error)
-//         {
-//             var error = JSON.parse(request.responseText);
-//             var error_msg = 'Erro efetuar a contribuição';
-
-//             if ( error && error.bill.charges.length > 0 ) {
-//                 var charge = error.bill.charges[0];
-//                 if ( charge.status == 'pending' ) {
-//                     error_msg = charge.last_transaction.gateway_message
-//                 }
-
-//             }
-
-//             $(".progress-subscription").addClass('d-none').removeClass('d-flex');
-//             $(".button-confirm-payment").addClass('d-block').removeClass('d-none');
-//             $("#div-errors-price").text(error_msg).slideDown('fast').effect( "shake" );
-//         }
-//     });
-// }
 
 function validateFields() {
-
     if ($("#field-email").val() == "") {
         $("#div-errors-price").html("Informe o E-mail").slideDown('fast').effect("shake");
         $("#field-email").addClass('is-invalid').focus();
@@ -522,7 +394,7 @@ function validateFields() {
         return false;
     }
     $("#field-surname").removeClass('is-invalid');
-    if ($('#is_foreigner').is(':checked') === false)//sOU ESTRANGEIRO
+    if ($('#is_foreigner').is(':checked') === false) // Sou estrangeiro
     {
         if ($("#field-cpf").val() == "") {
             $("#div-errors-price").html("Informe o CPF").slideDown('fast').effect("shake");
@@ -558,7 +430,8 @@ function validateFields() {
         }
         $("#field-card-cvc").removeClass('is-invalid');
     }
-    else {//Endereço é obrigatório
+    else {
+        //Endereço é obrigatório
         if ($("#field-country").val() == "") {
             $("#div-errors-price").html("Selecione o país").slideDown('fast').effect("shake");
             $("#field-country").addClass('is-invalid').focus();
@@ -610,8 +483,6 @@ function validateFields() {
         $("#field-state").removeClass('is-invalid');
     }
 
-
-
     $("#div-errors-price").slideUp('fast');
     return true;
 }
@@ -645,13 +516,11 @@ function printPaymentData(data) {
             html += "    <div class='col-md-6 text-center'><a href=\"javascript:copyToClipboard('#pix-qrcode-code')\" class='btn btn-lg active  w-100'>Copia e cola</a></div>";
             html += "</div>";
             break;
-
     }
 
-    //data.bill.charges[0].last_transaction.gateway_response_fields.print_url
-    //data.bill.charges[0].last_transaction.gateway_response_fields.typeable_barcode
     $("#div-container-form").html(html);
 }
+
 function copyToClipboard(element) {
     var $temp = $("<input>");
     $("body").append($temp);
@@ -659,6 +528,7 @@ function copyToClipboard(element) {
     document.execCommand("copy");
     $temp.remove();
 }
+
 function isValidCPF(strCPF) {
     strCPF = strCPF.replace(/\D/g, "");
     let sumMod;
@@ -691,6 +561,7 @@ function isValidCPF(strCPF) {
     if (modRest != parseInt(strCPF.substring(10, 11))) return false;
     return true;
 }
+
 document.addEventListener('DOMContentLoaded', function () {
     var phoneInput = document.getElementById('field-phone');
 
@@ -713,9 +584,11 @@ document.addEventListener('DOMContentLoaded', function () {
         this.value = formattedPhoneNumber;
     });
 });
+
 function isValidEmail(input) {
     return String(input).toLowerCase().match(/^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/) != null;
 }
+
 function mascaraCodigoBoleto(codigo) {
     // Remover todos os caracteres não numéricos
     codigo = codigo.replace(/\D/g, '');
