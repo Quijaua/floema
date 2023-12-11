@@ -87,7 +87,7 @@
                     $mail->Port       = $smtp_port;
 
                     $mail->setFrom($smtp_from, 'Atendimento - ' . $row_instituicao['nome']);
-                    $mail->addReplyTo($smtp_from, 'Atendimento - ' . $row_instituicao['nome']);
+                    $mail->addReplyTo($row_instituicao['email'], 'Atendimento - ' . $row_instituicao['nome']);
                     $mail->addAddress($row_usuario['email'], $row_usuario['nome']);
 
                     $mail->isHTML(true);                                  //Set email format to HTML

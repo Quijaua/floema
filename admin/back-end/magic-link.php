@@ -92,7 +92,7 @@
 
         // Define o remetente e destinatário
         $mail->setFrom($smtp_from, 'Atendimento - ' . $instituicao['nome']);
-        $mail->addReplyTo($smtp_from, 'Atendimento - ' . $instituicao['nome']);
+        $mail->addReplyTo($instituicao['email'], 'Atendimento - ' . $instituicao['nome']);
         $mail->addAddress($email, $nome);
 
         // Configurações do e-mail
