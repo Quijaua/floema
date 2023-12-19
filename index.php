@@ -254,14 +254,14 @@
 <body>
 
 
-<nav class="navbar navbar-expand-md navbar-dark" style="background-color: <?php echo $nav_background; ?>; color: <?php echo $nav_color; ?>;">
+<nav class="navbar-disable navbar-expand-md navbar-dark" style="background-color: <?php echo $nav_background; ?>; color: <?php echo $nav_color; ?>;">
 	<div class="container">
 		<div class="row">
 			<div class="col-md-4 p-1 text-center">
 				<img src="assets/img/<?php echo $logo; ?>">
 			</div>
-			<div class="col-md-8 mt-4 p-md-3">
-				<h1 class="h2"><?php echo ($title !== '') ? $title : 'Colabore com o Projeto '.$nome; ?></h1>
+			<div class="col-md-8 mt-4 p-md-3 text-center">
+				<h1 class="h1"><?php echo ($title !== '') ? $title : 'Colabore com o Projeto '.$nome; ?></h1>
 			</div>
 		</div>
 	</div>
@@ -271,7 +271,7 @@
 	<div class="row">
 		<div class="col-md-5 mb-3">
 
-			<h3 class="highlight mb-3" id="highlight">Faça sua doação</h3>
+			<h3 class="highlight mb-3 text-center" id="highlight">Faça sua doação</h3>
 			<div id="div-container-form">
 				<form id="form-checkout" action="submit">
 					<div class="mb-3" style="display: flex;justify-content: space-between">
@@ -667,22 +667,22 @@
 		</div>
 		<div class="col-md-6 text-center">
 			<div class="social-net mt-2 mb-4">
-				<img src="/assets/img/security.webp" alt="ambiente seguro" />
+				<img src="<?php echo INCLUDE_PATH; ?>assets/img/security.webp" alt="ambiente seguro" />
 				<a class="p-2" href="https://transparencyreport.google.com/safe-browsing/search?url=<?php echo INCLUDE_PATH; ?>" target="_blank" rel="noreferrer">
-					<img src="/assets/img/selo-google.png" width="150" height="42" alt="Safe Browsisng">
+					<img src="<?php echo INCLUDE_PATH; ?>assets/img/selo-google.png" width="150" height="42" alt="Safe Browsisng">
 				</a>
 			</div>
 			<p class="footer-link ps-1">
 				<?php
 					if($use_privacy) {
-						echo "<a href='/politica-de-privacidade' rel='noopener noreferrer' target='_blank'>";
+						echo "<a href='<?php echo INCLUDE_PATH; ?>politica-de-privacidade' rel='noopener noreferrer' target='_blank'>";
 					} else {
 						echo "<a href=" . $privacidade . " rel='noopener noreferrer' target='_blank'>";
 					}
 				?>
 					PRIVACIDADE DOS DOADORES
 				</a> | 
-				<a href="/login" rel="noopener noreferrer" target="_blank">
+				<a href="<?php echo INCLUDE_PATH; ?>login" rel="noopener noreferrer" target="_blank">
 					ÁREA DE DOADOR(A)
 				</a><br />
 				<?php
