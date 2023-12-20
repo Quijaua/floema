@@ -675,7 +675,7 @@
 			<p class="footer-link ps-1">
 				<?php
 					if($use_privacy) {
-						echo "<a href='<?php echo INCLUDE_PATH; ?>politica-de-privacidade' rel='noopener noreferrer' target='_blank'>";
+						echo "<a href='politica-de-privacidade' rel='noopener noreferrer' target='_blank'>";
 					} else {
 						echo "<a href=" . $privacidade . " rel='noopener noreferrer' target='_blank'>";
 					}
