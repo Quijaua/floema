@@ -33,8 +33,7 @@
     $st_date_str = date_format($start_date, "Y-m-d");
     $end_date = date_sub($start_date, date_interval_create_from_date_string("90 days"));
     $ed_date_str = date_format($end_date, "Y-m-d");
-    //$sql_6 = "SELECT * FROM $tabela_6 WHERE payment_date_created > CAST($ed_date_str as DATE)";
-    $sql_6 = "SELECT * FROM $tabela_6 as t6 JOIN $tabela_5 as t5 ON t6.customer_id = t5.asaas_id WHERE payment_date_created > CAST($ed_date_str as DATE) AND roles != 1";
+    $sql_6 = "SELECT * FROM $tabela_6 as t6 JOIN $tabela_5 as t5 ON t6.customer_id = t5.asaas_id WHERE payment_date_created > $ed_date_str AND roles != 1";
 
     // Preparar a consulta
     $stmt = $conn->prepare($sql);
