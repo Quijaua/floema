@@ -11,6 +11,7 @@
 
     // Informacoes para PHPMailer
 	$smtp_host = $_ENV['SMTP_HOST'];
+	$smtp_from = $_ENV['SMTP_FROM'];
 	$smtp_username = $_ENV['SMTP_USERNAME'];
 	$smtp_password = $_ENV['SMTP_PASSWORD'];
 	$smtp_secure = $_ENV['SMTP_SECURE'];
@@ -85,7 +86,7 @@
                     $mail->SMTPSecure = $smtp_secure;
                     $mail->Port       = $smtp_port;
 
-                    $mail->setFrom($smtp_username, 'Atendimento - ' . $row_instituicao['nome']);
+                    $mail->setFrom($smtp_from, 'Atendimento - ' . $row_instituicao['nome']);
                     $mail->addReplyTo($row_instituicao['email'], 'Atendimento - ' . $row_instituicao['nome']);
                     $mail->addAddress($row_usuario['email'], $row_usuario['nome']);
 

@@ -15,7 +15,6 @@
 	$dbPassword = $_ENV['DB_PASSWORD'];
 	$dbName = $_ENV['DB_NAME'];
 	$port = $_ENV['DB_PORT'];
-    $port = 3306;
 
     try{
         //Conexão com a porta

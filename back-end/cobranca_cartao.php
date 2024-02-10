@@ -2,6 +2,10 @@
 function asaas_CriarCobrancaCartao($customer_id, $dataForm, $config) {
 	include('config.php');
 
+    // Configura o fuso horário para São Paulo, Brasil
+    date_default_timezone_set('America/Sao_Paulo');
+    $date = date("Y-m-d"); // Obtém a data atual no formato "aaaa-mm-dd"
+
 	$expiry = explode("/", $dataForm["card-expiry"]);
 
     $curl = curl_init();
@@ -54,8 +58,8 @@ function asaas_CriarCobrancaCartao($customer_id, $dataForm, $config) {
 
         $tabela = 'tb_doacoes';
 
-        $stmt = $conn->prepare("INSERT INTO $tabela (customer_id, payment_id, valor, forma_pagamento, status, data_vencimento, cartao_numero, cartao_bandeira) VALUES (
-            :customer_id, :payment_id, :value, :forma_pagamento, :status, :data_vencimento, :cartao_numero, :cartao_bandeira)");
+        $stmt = $conn->prepare("INSERT INTO $tabela (customer_id, payment_id, valor, forma_pagamento, status, data_criacao, cartao_numero, cartao_bandeira) VALUES (
+            :customer_id, :payment_id, :value, :forma_pagamento, :status, :data_criacao, :cartao_numero, :cartao_bandeira)");
         
         // Bind dos parâmetros
         $stmt->bindParam(':customer_id', $customer_id, PDO::PARAM_STR);
@@ -63,7 +67,7 @@ function asaas_CriarCobrancaCartao($customer_id, $dataForm, $config) {
         $stmt->bindParam(':value', $retorno['value'], PDO::PARAM_STR);
         $stmt->bindParam(':forma_pagamento', $retorno['billingType'], PDO::PARAM_STR);
         $stmt->bindParam(':status', $retorno['status'], PDO::PARAM_STR);
-        $stmt->bindParam(':data_vencimento', $vencimento, PDO::PARAM_STR);
+        $stmt->bindParam(':data_criacao', $date, PDO::PARAM_STR);
         $stmt->bindParam(':cartao_numero', $retorno['creditCard']['creditCardNumber'], PDO::PARAM_STR);
         $stmt->bindParam(':cartao_bandeira', $retorno['creditCard']['creditCardBrand'], PDO::PARAM_STR);
     

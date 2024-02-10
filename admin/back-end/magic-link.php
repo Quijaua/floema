@@ -11,6 +11,7 @@
 
     // Informacoes para PHPMailer
 	$smtp_host = $_ENV['SMTP_HOST'];
+	$smtp_from = $_ENV['SMTP_FROM'];
 	$smtp_username = $_ENV['SMTP_USERNAME'];
 	$smtp_password = $_ENV['SMTP_PASSWORD'];
 	$smtp_secure = $_ENV['SMTP_SECURE'];
@@ -90,7 +91,8 @@
         $mail->Port       = $smtp_port;
 
         // Define o remetente e destinatário
-        $mail->setFrom($instituicao['email'], 'Atendimento - ' . $instituicao['nome']);
+        $mail->setFrom($smtp_from, 'Atendimento - ' . $instituicao['nome']);
+        $mail->addReplyTo($instituicao['email'], 'Atendimento - ' . $instituicao['nome']);
         $mail->addAddress($email, $nome);
 
         // Configurações do e-mail

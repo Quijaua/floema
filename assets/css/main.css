@@ -124,3 +124,9 @@ font-size: 12px;
     text-align: center!important;
     overflow: visible!important;
 }
+
+
+/* Honeypot */
+#email {
+    display: none;
+}
