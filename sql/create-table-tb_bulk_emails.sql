@@ -1,4 +1,4 @@
-CREATE TABLE doacoes.tb_bulk_emails (
+CREATE TABLE tb_bulk_emails (
 	title varchar(100) NULL,
 	body varchar(100) NULL,
 	`date` DATETIME DEFAULT now() NULL

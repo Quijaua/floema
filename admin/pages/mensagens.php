@@ -73,6 +73,23 @@
                 </div>
                 <button type="submit" name="btnMessages" class="btn btn-primary mb-5" form="messages_form">Salvar</button>
             </form>
+        </div>
+    </div>
+
+    <div class="tab-content">
+        <div class="tab-pane tabs-animation fade show active" id="tab-content-1" role="tabpanel">
+
+            <form id="unregister_form" action="<?php echo INCLUDE_PATH_ADMIN; ?>back-end/update.php" method="post">
+                <div class="main-card mb-3 card">
+                    <div class="card-body">
+                        <div class="form-floating mb-4">
+                            <label for="unregister_message">Mensagem da notificação de cancelamento de assinatura</label>
+                            <textarea class="form-control" placeholder="Insira a mensagem de notificação que será exibida aqui" id="unregister_message" name="unregister_message" style="min-height: 300px"><?php echo $unregister_message ?></textarea>
+                        </div>
+                    </div>
+                </div>
+                <button type="submit" name="btnUnregister" class="btn btn-primary mb-5" form="unregister_form">Salvar</button>
+            </form>
 
         </div>
 
@@ -83,6 +100,12 @@
 <script>
     ClassicEditor
     .create( document.querySelector( '#welcome_email' ), {})
+    .catch( error => {
+        console.error( error );
+    })
+
+    ClassicEditor
+    .create( document.querySelector( '#unregister_message' ), {})
     .catch( error => {
         console.error( error );
     })
