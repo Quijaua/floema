@@ -33,8 +33,7 @@
     $st_date_str = date_format($start_date, "Y-m-d");
     $end_date = date_sub($start_date, date_interval_create_from_date_string("90 days"));
     $ed_date_str = date_format($end_date, "Y-m-d");
-    //$sql_6 = "SELECT * FROM $tabela_6 WHERE payment_date_created > CAST($ed_date_str as DATE)";
-    $sql_6 = "SELECT * FROM $tabela_6 as t6 JOIN $tabela_5 as t5 ON t6.customer_id = t5.asaas_id WHERE payment_date_created > CAST($ed_date_str as DATE) AND roles != 1";
+    $sql_6 = "SELECT * FROM $tabela_6 as t6 JOIN $tabela_5 as t5 ON t6.customer_id = t5.asaas_id WHERE payment_date_created > $ed_date_str AND roles != 1";
 
     // Preparar a consulta
     $stmt = $conn->prepare($sql);
@@ -311,7 +310,7 @@
                     </div>
                     <div class="scrollbar-sidebar">
                         <div class="app-sidebar__inner">
-                            <ul class="vertical-nav-menu">
+                            <ul class="vertical-nav-menu pure-menu-list">
                                 <li class="app-sidebar__heading">Configurações</li>
                                 <li>
                                     <a href="<?php echo INCLUDE_PATH_ADMIN; ?>">
@@ -341,6 +340,12 @@
                                     <a href="<?php echo INCLUDE_PATH_ADMIN; ?>mensagens">
                                         <i class="metismenu-icon pe-7s-paper-plane"></i>
                                         Mensagens
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="<?php echo INCLUDE_PATH_ADMIN; ?>novidades">
+                                        <i class="metismenu-icon pe-7s-paper-plane"></i>
+                                        Novidades
                                     </a>
                                 </li>
                                 <li>
@@ -380,7 +385,8 @@
                 <div class="app-main__outer">
                     <?php
                         //Url Amigavel
-                        $url = isset($_GET['url']) ? $_GET['url'] : 'sobre';
+                        //$url = isset($_GET['url']) ? $_GET['url'] : 'sobre';
+                        $url = isset($_GET['url']) ? $_GET['url'] : str_replace('/', '', $_SERVER['PATH_INFO']);
                         if(file_exists('pages/'.$url.'.php')){
                             include('pages/'.$url.'.php');
                         }else{
