@@ -310,7 +310,7 @@
                     </div>
                     <div class="scrollbar-sidebar">
                         <div class="app-sidebar__inner">
-                            <ul class="vertical-nav-menu pure-menu-list">
+                            <ul class="vertical-nav-menu">
                                 <li class="app-sidebar__heading">Configurações</li>
                                 <li>
                                     <a href="<?php echo INCLUDE_PATH_ADMIN; ?>">
@@ -340,12 +340,6 @@
                                     <a href="<?php echo INCLUDE_PATH_ADMIN; ?>mensagens">
                                         <i class="metismenu-icon pe-7s-paper-plane"></i>
                                         Mensagens
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="<?php echo INCLUDE_PATH_ADMIN; ?>novidades">
-                                        <i class="metismenu-icon pe-7s-paper-plane"></i>
-                                        Novidades
                                     </a>
                                 </li>
                                 <li>
@@ -385,8 +379,7 @@
                 <div class="app-main__outer">
                     <?php
                         //Url Amigavel
-                        //$url = isset($_GET['url']) ? $_GET['url'] : 'sobre';
-                        $url = isset($_GET['url']) ? $_GET['url'] : str_replace('/', '', $_SERVER['PATH_INFO']);
+                        $url = isset($_GET['url']) ? $_GET['url'] : 'sobre';
                         if(file_exists('pages/'.$url.'.php')){
                             include('pages/'.$url.'.php');
                         }else{
