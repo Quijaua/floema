@@ -48,31 +48,40 @@
                     <i class="pe-7s-graph text-success"></i>
                 </div>
                 <div>
-                    Mensagens
-                    <div class="page-title-subheading">Área para personalizar as mensagens do sistema</div>
+                    Novidades
+                    <div class="page-title-subheading">Listagem dos emails em massa enviados pelo sistema</div>
                 </div>
             </div>
             <div class="page-title-actions">
-                <!-- <a href="<?php echo INCLUDE_PATH_ADMIN; ?>back-end/logout.php" class="btn btn-info btn-shadow">
-                    Sair
-                </a> -->
+                <a href="<?php echo INCLUDE_PATH_ADMIN; ?>email_em_massa" class="btn btn-info btn-shadow">
+                    Novo email em massa
+                </a>
             </div>
         </div>
     </div>
+
     <div class="tab-content">
         <div class="tab-pane tabs-animation fade show active" id="tab-content-1" role="tabpanel">
 
-            <form id="messages_form" action="<?php echo INCLUDE_PATH_ADMIN; ?>back-end/update.php" method="post">
-                <div class="main-card mb-3 card">
-                    <div class="card-body">
-                        <div class="form-floating mb-4">
-                            <label for="floatingTextarea">Mensagem do email de boas vindas</label>
-                            <textarea class="form-control" placeholder="Insira a mensagem de boas vindas que será enviada no email aqui" id="welcome_email" name="welcome_email" style="min-height: 300px"><?php echo $welcome_email ?></textarea>
-                        </div>
-                    </div>
+            <?php
+                session_start();
+                ob_start();
+                include('../config.php');
+
+                $tabela = 'tb_bulk_emails';
+                $sql = "SELECT * FROM $tabela";
+                $stmt = $conn->prepare($sql);
+                $stmt->execute();
+                $resultados = $stmt->fetchAll(PDO::FETCH_ASSOC);
+            ?>
+
+            <?php foreach( $resultados as $res ): ?>
+            <div class="card">
+                <div class="card-body">
+                    <p class="card-text"><b>Título do email</b>: <?php echo $res['title']; ?> - <b>Data de envio</b>: <?php echo date('d/m/Y', strtotime($res['date'])); ?></p>
                 </div>
-                <button type="submit" name="btnMessages" class="btn btn-primary mb-5" form="messages_form">Salvar</button>
-            </form>
+            </div>
+            <?php endforeach; ?>
 
         </div>
 
@@ -82,7 +91,7 @@
 <script src="https://cdn.ckeditor.com/ckeditor5/39.0.2/classic/ckeditor.js"></script>
 <script>
     ClassicEditor
-    .create( document.querySelector( '#welcome_email' ), {})
+    .create( document.querySelector( '#bulk_email_body' ), {})
     .catch( error => {
         console.error( error );
     })
