@@ -49,7 +49,7 @@
                 </div>
                 <div>
                     Mensagens
-                    <div class="page-title-subheading">Área para personalizar as mensagens do sistema</div>
+                    <div class="page-title-subheading">Área personalizar as mensagens do sistema</div>
                 </div>
             </div>
             <div class="page-title-actions">
@@ -77,7 +77,6 @@
         </div>
 
     </div>
-
 </div>
 <script src="https://cdn.ckeditor.com/ckeditor5/39.0.2/classic/ckeditor.js"></script>
 <script>
