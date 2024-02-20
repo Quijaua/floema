@@ -64,10 +64,6 @@
         <div class="tab-pane tabs-animation fade show active" id="tab-content-1" role="tabpanel">
 
             <?php
-                session_start();
-                ob_start();
-                include('../config.php');
-
                 $tabela = 'tb_bulk_emails';
                 $sql = "SELECT * FROM $tabela";
                 $stmt = $conn->prepare($sql);
