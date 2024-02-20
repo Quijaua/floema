@@ -314,7 +314,7 @@
                             <ul class="vertical-nav-menu pure-menu-list">
                                 <li class="app-sidebar__heading">Configurações</li>
                                 <li>
-                                    <a href="<?php echo INCLUDE_PATH_ADMIN; ?>">
+                                    <a href="<?php echo INCLUDE_PATH_ADMIN; ?>sobre">
                                         <i class="metismenu-icon pe-7s-browser"></i>
                                         Checkout
                                     </a>
