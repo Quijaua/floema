@@ -597,10 +597,10 @@
 		<div class="col-md-6 ms-auto">
             <?php
                 // Nome da tabela para a busca
-                $tabela = 'tb_doacoes';
+                $tabela = 'tb_transacoes';
                 // Preparando as consultas SQL
-                $stmt_geral = $conn->prepare("SELECT COUNT(*) AS doadores_geral, SUM(valor) AS valor_geral FROM $tabela WHERE status = 'CONFIRMED' OR status = 'ACTIVE'");
-                $stmt_recorrencia = $conn->prepare("SELECT COUNT(*) AS doadores_recorrencia, SUM(valor) AS valor_recorrencia FROM $tabela td WHERE status = 'ACTIVE' AND cycle IS NOT NULL");
+                $stmt_geral = $conn->prepare("SELECT COUNT(*) AS doadores_geral, SUM(value) AS valor_geral FROM $tabela WHERE status = 'CONFIRMED' OR status = 'RECEIVED'");
+                $stmt_recorrencia = $conn->prepare("SELECT COUNT(*) AS doadores_recorrencia, SUM(value) AS valor_recorrencia FROM $tabela WHERE status = 'CONFIRMED' OR status = 'RECEIVED' AND description = 'Plano de assinatura'");
                 // Executando as consultas SQL
                 $stmt_geral->execute();
                 $stmt_recorrencia->execute();
