@@ -72,11 +72,16 @@
             ?>
 
             <?php foreach( $resultados as $res ): ?>
-            <div class="card">
-                <div class="card-body">
-                    <p class="card-text"><b>Título do email</b>: <?php echo $res['title']; ?> - <b>Data de envio</b>: <?php echo date('d/m/Y', strtotime($res['date'])); ?></p>
+            <a href="#" onclick='modalToggle(<?php echo json_encode($res["body"]); ?>)' style="text-decoration: none;">
+                <div class="card">
+                    <div class="card-body">
+                        <p class="card-text">
+                            <b>Título do email</b>: <?php echo $res['title']; ?> - <b>Data de envio</b>: <?php echo date('d/m/Y', strtotime($res['date'])); ?>
+                        </p>
+                    </div>
                 </div>
-            </div>
+            </a>
+
             <?php endforeach; ?>
 
         </div>
@@ -84,3 +89,27 @@
     </div>
 
 </div>
+
+<!-- Modal -->
+<div class="modal fade mt-5" data-backdrop="false" id="emailBodyModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+        <div class="modal-header">
+            <h4 class="modal-title fs-5" id="emailBodyModalLabel">Conteúdo do email</h4>
+        </div>
+        <div class="modal-body" id="emailBodyModalBody">
+            
+        </div>
+        <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" onclick="$('#emailBodyModal').modal('toggle')">Fechar</button>
+        </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    const modalToggle = (content) => {
+        $('#emailBodyModalBody').html(content);
+        $('#emailBodyModal').modal('toggle');
+    }
+</script>
