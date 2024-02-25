@@ -535,7 +535,7 @@
 								<div class="col-md-4 mb-2">
 									<div class="form-floating">
 										<input type="text" class="form-control text-center" name="card-ccv" id="field-card-cvc"
-											placeholder="CVC">
+											placeholder="CVC" autocomplete="off" />
 										<label for="field-card-cvc">CVC</label>
 									</div>
 								</div>
@@ -595,6 +595,42 @@
 			</div>
 		</div>
 		<div class="col-md-6 ms-auto">
+            <?php
+                // Nome da tabela para a busca
+                $tabela = 'tb_transacoes';
+                // Preparando as consultas SQL
+                $stmt_geral = $conn->prepare("SELECT COUNT(*) AS doadores_geral, SUM(value) AS valor_geral FROM $tabela WHERE status = 'CONFIRMED' OR status = 'RECEIVED'");
+                $stmt_recorrencia = $conn->prepare("SELECT COUNT(*) AS doadores_recorrencia, SUM(value) AS valor_recorrencia FROM $tabela WHERE status = 'CONFIRMED' OR status = 'RECEIVED' AND description = 'Plano de assinatura'");
+                // Executando as consultas SQL
+                $stmt_geral->execute();
+                $stmt_recorrencia->execute();
+                // Obtendo os resultados das consultas
+                $geral = $stmt_geral->fetch();
+                $recorrencia = $stmt_recorrencia->fetch();
+
+                $doadores_geral = $geral['doadores_geral'];
+                $valor_geral = $geral['valor_geral'];
+                $doadores_recorrencia = $recorrencia['doadores_recorrencia'];
+                $valor_recorrencia = $recorrencia['valor_recorrencia'];
+            ?>
+            <div class="row mb-5">
+                <div class="col">
+                    <div class="card">
+                        <div class="card-body">
+                            <div class="card-text mb-2"><span class="h3">R$ <?php echo number_format($valor_geral, 2, ',', '.'); ?></span> <span class="text-muted">é o que arrecadamos até agora</span></div>
+                            <!--<div class="progress mb-2" role="progressbar" aria-label="Basic example" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100">
+                                <div class="progress-bar" style="width: 15%"></div>
+                            </div>-->
+                            <!--<div class="card-text mb-2 text-muted">Meta: R$ 30.000,00 por mês (71.2% alcançada)</div>-->
+                            <div class="card-text mb-2"><span class="h3">R$ <?php echo number_format($valor_recorrencia, 2, ',', '.'); ?></span> <span class="text-muted">em doações recorrentes</span></div>
+                            <!--<div class="progress" role="progressbar" aria-label="Basic example" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100">
+                                <div class="progress-bar" style="width: 15%"></div>
+                            </div>-->
+                            <div class="card-text mb-2"><i class="bi bi-people"></i> <span class="h3"><?php echo $doadores_geral; ?></span> <span class="text-muted">pessoas apoiando</span></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
 			<?php
 				// Nome da tabela para a busca
 				$tabela = 'tb_imagens';

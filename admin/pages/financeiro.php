@@ -77,13 +77,7 @@
                         <th scope="col">Valor Líquido</th>
                         <th scope="col">Descrição</th>
                         <th scope="col">Método</th>
-                        <th scope="col">Data Pagamento</th>
-                        <!--<th scope="col">Nº Cartão</th>-->
-                        <!--<th scope="col">Bandeira</th>-->
-                        <!--<th scope="col">Token Cartão</th>-->
-                        <!--<th scope="col">Status</th>-->
                         <th scope="col">Data Crédito</th>
-                        <th scope="col">Data Estimada Crédito</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -135,13 +129,7 @@
                             <td><?php echo $transacao["net_value"]; ?></td>
                             <td><?php echo $transacao["description"] ? $transacao["description"] : "Doação única"; ?></td>
                             <td><?php echo $transacao["billing_type"]; ?></td>
-                            <td><?php echo date_format($payment_date, "d/m/Y"); ?></td>
-                            <!--<td><?php echo $transacao["credit_card_number"]; ?></td>-->
-                            <!--<td><?php echo $transacao["credit_card_brand"]; ?></td>-->
-                            <!--<td><?php echo $transacao["credit_card_token"]; ?></td>-->
-                            <!--<td><?php echo $transacao["status"]; ?></td>-->
                             <td><?php echo date_format($credit_date, "d/m/Y"); ?></td>
-                            <td><?php echo date_format($estimated_date, "d/m/Y"); ?></td>
                         </tr>
                         <?php endforeach; ?>
                     </tbody>

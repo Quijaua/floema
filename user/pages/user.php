@@ -305,7 +305,6 @@
                                     </div>
                                     <input type="hidden" name="payment_ids[]" value="' . $usuario['payment_id'] . '">
                                     <div class="d-flex justify-content-between">
-                                        <button type="button" name="btnUpdCobranca" class="mt-2 btn btn-secondary">Editar Assinatura</button>
                                         <a href="' . INCLUDE_PATH . 'back-end/cancelar_assinatura.php?payment_id=' . $usuario['payment_id'] . '" class="mt-2 btn btn-outline-danger">Cancelar Assinatura</a>
                                     </div>
                                     <div class="divider"></div>

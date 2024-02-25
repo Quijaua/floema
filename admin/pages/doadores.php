@@ -73,7 +73,6 @@
                         <th scope="col">Telefone</th>
                         <th scope="col">CPF</th>
                         <th scope="col">Endereço</th>
-                        <th scope="col">Asaas ID</th>
                         <th scope="col">Newsletter</th>
                         <th scope="col">Doador Anônimo</th>
                         </tr>
@@ -90,7 +89,6 @@
                                     echo $cliente["endereco"] . ", " . $cliente["numero"] . " - " . $cliente["municipio"] . " - " .$cliente["cidade"] . " / " . $cliente["uf"] . " - CEP " . $cliente["cep"]
                                 ?>
                             </td>
-                            <td><?php echo $cliente["asaas_id"] ?></td>
                             <td><?php echo $cliente["newsletter"] ? "Sim" : "Não"; ?></td>
                             <td><?php echo $cliente["private"] ? "Sim" : "Não"; ?></td>
                         </tr>

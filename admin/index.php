@@ -23,7 +23,7 @@
     // Consulta SQL
     $sql = "SELECT nome, logo, title, descricao, privacidade, faq, use_faq,facebook, instagram, linkedin, twitter, youtube, website, tiktok, linktree, cep, rua, numero, bairro, cidade, estado, telefone, email, nav_color, nav_background, background, color, hover, text_color, load_btn, monthly_1, monthly_2, monthly_3, monthly_4, monthly_5, yearly_1, yearly_2, yearly_3, yearly_4, yearly_5, once_1, once_2, once_3, once_4, once_5 FROM $tabela WHERE id = :id";
     $sql_2 = "SELECT fb_pixel, gtm, g_analytics FROM $tabela_2 WHERE id = :id";
-    $sql_3 = "SELECT welcome_email, privacy_policy, use_privacy FROM $tabela_3 WHERE id = :id";
+    $sql_3 = "SELECT welcome_email, privacy_policy, use_privacy, unregister_message FROM $tabela_3 WHERE id = :id";
     $sql_4 = "SELECT * FROM $tabela_4";
     $sql_5 = "SELECT * FROM $tabela_5 WHERE roles != 1";
     /*$sql_6 = "SELECT * FROM $tabela_6";*/
@@ -134,6 +134,7 @@
         $welcome_email = $resultado_3['welcome_email'];
         $privacy_policy = $resultado_3['privacy_policy'];
         $use_privacy = $resultado_3['use_privacy'];
+        $unregister_message = $resultado_3['unregister_message'];
     } else {
         // ID não encontrado ou não existente
         echo "ID não encontrado.";
@@ -310,10 +311,10 @@
                     </div>
                     <div class="scrollbar-sidebar">
                         <div class="app-sidebar__inner">
-                            <ul class="vertical-nav-menu">
+                            <ul class="vertical-nav-menu pure-menu-list">
                                 <li class="app-sidebar__heading">Configurações</li>
                                 <li>
-                                    <a href="<?php echo INCLUDE_PATH_ADMIN; ?>">
+                                    <a href="<?php echo INCLUDE_PATH_ADMIN; ?>sobre">
                                         <i class="metismenu-icon pe-7s-browser"></i>
                                         Checkout
                                     </a>
@@ -340,6 +341,12 @@
                                     <a href="<?php echo INCLUDE_PATH_ADMIN; ?>mensagens">
                                         <i class="metismenu-icon pe-7s-paper-plane"></i>
                                         Mensagens
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="<?php echo INCLUDE_PATH_ADMIN; ?>novidades">
+                                        <i class="metismenu-icon pe-7s-paper-plane"></i>
+                                        Novidades
                                     </a>
                                 </li>
                                 <li>
@@ -379,7 +386,8 @@
                 <div class="app-main__outer">
                     <?php
                         //Url Amigavel
-                        $url = isset($_GET['url']) ? $_GET['url'] : 'sobre';
+                        //$url = isset($_GET['url']) ? $_GET['url'] : 'sobre';
+                        $url = isset($_GET['url']) ? $_GET['url'] : str_replace('/', '', $_SERVER['PATH_INFO']);
                         if(file_exists('pages/'.$url.'.php')){
                             include('pages/'.$url.'.php');
                         }else{
