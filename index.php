@@ -535,7 +535,7 @@
 								<div class="col-md-4 mb-2">
 									<div class="form-floating">
 										<input type="text" class="form-control text-center" name="card-ccv" id="field-card-cvc"
-											placeholder="CVC">
+											placeholder="CVC" autocomplete="off" />
 										<label for="field-card-cvc">CVC</label>
 									</div>
 								</div>
