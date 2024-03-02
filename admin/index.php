@@ -154,6 +154,11 @@
         <title>Floema Doar</title>
         <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, shrink-to-fit=no">
         <meta name="description" content="Solução para recebimentos de doações">
+
+        <link rel="icon" href="<?php echo INCLUDE_PATH; ?>assets/img/favicon.png" sizes="32x32" />
+        <link rel="apple-touch-icon" href="<?php echo INCLUDE_PATH; ?>assets/img/favicon.png" />
+        <meta name="msapplication-TileImage" content="<?php echo INCLUDE_PATH; ?>assets/img/favicon.png" />
+
         <!-- Disable tap highlight on IE -->
         <meta name="msapplication-tap-highlight" content="no">
         <link rel="stylesheet" href="<?php echo INCLUDE_PATH; ?>vendors/@fortawesome/fontawesome-free/css/all.min.css">
@@ -163,9 +168,18 @@
         <link href="<?php echo INCLUDE_PATH_ADMIN; ?>styles/css/base.css" rel="stylesheet">
         <link href="<?php echo INCLUDE_PATH_ADMIN; ?>styles/css/custom.css" rel="stylesheet">
         <link href="<?php echo INCLUDE_PATH; ?>assets/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet" type="text/css">
+
+
+
         <script src="<?php echo INCLUDE_PATH; ?>assets/google/jquery/jquery.min.js"></script>
         <script src="<?php echo INCLUDE_PATH; ?>assets/ajax/1.16.0/popper.min.js"></script>
         <script src="<?php echo INCLUDE_PATH; ?>assets/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+        <script type="text/javascript" src="<?php echo INCLUDE_PATH; ?>vendors/moment/moment.js"></script>
+        <script type="text/javascript" src="<?php echo INCLUDE_PATH_ADMIN; ?>js/demo.js"></script>
+        <script type="text/javascript" src="<?php echo INCLUDE_PATH_ADMIN; ?>js/scrollbar.js"></script>
+        <script type="text/javascript" src="<?php echo INCLUDE_PATH_ADMIN; ?>js/app.js"></script>
+        <script src="https://cdn.ckeditor.com/ckeditor5/39.0.2/classic/ckeditor.js"></script>
+
     </head>
     <body>
         <!-- Modal -->
@@ -237,13 +251,19 @@
                     </div>
                 </div>
                 <div class="app-header__menu">
-                    <span>
-                        <button type="button" class="btn-icon btn-icon-only btn btn-primary btn-sm mobile-toggle-header-nav">
-                            <span class="btn-icon-wrapper">
-                                <i class="fa fa-ellipsis-v fa-w-6"></i>
-                            </span>
-                        </button>
-                    </span>
+                    <div class="p-1">
+                        Floema Doar
+                    </div>
+
+                    <div class="p-2">
+                        <a href="<?php echo INCLUDE_PATH; ?>" target="_blank">Website</a>
+                    </div>
+
+                    <div class="btn-group p-2">
+	                    <a href="<?php echo INCLUDE_PATH_ADMIN; ?>back-end/logout.php" class="btn btn-info btn-shadow">
+                            Sair
+                        </a>
+                    </div>
                 </div>
                 <div class="app-header__content">
                     <div class="app-header-left">
@@ -264,9 +284,9 @@
                                 <div class="widget-content-wrapper">
                                     <div class="widget-content-left">
                                         <div class="btn-group">
-	                                  <a href="<?php echo INCLUDE_PATH_ADMIN; ?>back-end/logout.php" class="btn btn-info btn-shadow">
-                                        Sair
-                                        </a>
+	                                        <a href="<?php echo INCLUDE_PATH_ADMIN; ?>back-end/logout.php" class="btn btn-info btn-shadow">
+                                                Sair
+                                            </a>
                                         </div>
                                     </div>
 
@@ -300,7 +320,7 @@
                             </button>
                         </div>
                     </div>
-                    <div class="app-header__menu">
+                    <!-- <div class="app-header__menu">
                         <span>
                             <button type="button" class="btn-icon btn-icon-only btn btn-primary btn-sm mobile-toggle-header-nav">
                                 <span class="btn-icon-wrapper">
@@ -308,7 +328,7 @@
                                 </span>
                             </button>
                         </span>
-                    </div>
+                    </div> -->
                     <div class="scrollbar-sidebar">
                         <div class="app-sidebar__inner">
                             <ul class="vertical-nav-menu pure-menu-list">
@@ -399,13 +419,6 @@
             </div>
         </div>
         <div class="app-drawer-overlay d-none animated fadeIn"></div>
-        <!-- plugin dependencies -->
-        <script type="text/javascript" src="<?php echo INCLUDE_PATH; ?>vendors/jquery/dist/jquery.min.js"></script>
-        <script type="text/javascript" src="<?php echo INCLUDE_PATH; ?>vendors/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
-        <script type="text/javascript" src="<?php echo INCLUDE_PATH; ?>vendors/moment/moment.js"></script>
-        <script type="text/javascript" src="<?php echo INCLUDE_PATH_ADMIN; ?>js/demo.js"></script>
-        <script type="text/javascript" src="<?php echo INCLUDE_PATH_ADMIN; ?>js/scrollbar.js"></script>
-        <script type="text/javascript" src="<?php echo INCLUDE_PATH_ADMIN; ?>js/app.js"></script>
 
     </body>
 </html>
