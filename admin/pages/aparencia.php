@@ -259,19 +259,19 @@ function getCepData()
     const loadBtnCodeInput = document.getElementById('loadBtnCode');
 
     loadBtnPicker.addEventListener('input', updateLoadBtnPreview);
-    loadbtnCodeInput.addEventListener('input', updateLoadBtnFromCode);
+    //loadbtnCodeInput.addEventListener('input', updateLoadBtnFromCode);
 
     function updateLoadBtnPreview(event) {
         const selectedLoadBtn = event.target.value;
         loadBtnCodeInput.value = selectedLoadBtn;
     }
 
-    function updateLoadBtnFromCode() {
+    /*function updateLoadBtnFromCode() {
         const loadBtnCode = loadBtnCodeInput.value;
         if (isValidHexHoverCode(loadBtnCode)) {
             loadBtnPicker.value = loadBtnCode;
         }
-    }
+    }*/
 
     function isValidHexHoverCode(code) {
         return /^#([0-9A-F]{3}){1,2}$/i.test(code);
@@ -283,28 +283,28 @@ function getCepData()
     const greenInput = document.getElementById('green');
     const blueInput = document.getElementById('blue');
 
-    colorPickerRGB.addEventListener('input', updateColorFromPicker);
-    redInput.addEventListener('input', updateColorFromRGBInputs);
+    //colorPickerRGB.addEventListener('input', updateColorFromPicker);
+    /*redInput.addEventListener('input', updateColorFromRGBInputs);
     greenInput.addEventListener('input', updateColorFromRGBInputs);
-    blueInput.addEventListener('input', updateColorFromRGBInputs);
+    blueInput.addEventListener('input', updateColorFromRGBInputs);*/
 
-    function updateColorFromPicker(event) {
+    /*function updateColorFromPicker(event) {
       const selectedColor = event.target.value;
       const rgbValues = hexToRGB(selectedColor);
       redInput.value = rgbValues.r;
       greenInput.value = rgbValues.g;
       blueInput.value = rgbValues.b;
       updateColorPreview();
-    }
+    }*/
 
-    function updateColorFromRGBInputs() {
+    /*function updateColorFromRGBInputs() {
       const redValue = parseInt(redInput.value);
       const greenValue = parseInt(greenInput.value);
       const blueValue = parseInt(blueInput.value);
       const hexColor = RGBToHex(redValue, greenValue, blueValue);
       colorPickerRGB.value = hexColor;
       updateColorPreview();
-    }
+    }*/
 
     function updateColorPreview() {
       const hexColor = RGBToHex(parseInt(redInput.value), parseInt(greenInput.value), parseInt(blueInput.value));
