@@ -159,7 +159,8 @@
 		"minOnceDonation" => $minOnceDonation,
 	);
 ?>
-<html lang="pt">
+<!DOCTYPE html><html lang="pt-BR">
+
 <head>
 	<meta charset="utf-8">
 	<title><?php echo ($title !== '') ? $title : 'Colabore com o Projeto '.$nome; ?></title>
@@ -170,6 +171,8 @@
 	<link href="<?php echo INCLUDE_PATH; ?>assets/google/fonts/open-sans" rel="stylesheet" type="text/css">
 	<link href="<?php echo INCLUDE_PATH; ?>assets/bootstrap/5.3.0/css/bootstrap.min.css" rel="stylesheet"
 		  type="text/css">
+
+
 	<link href="<?php echo INCLUDE_PATH; ?>assets/google/fonts/newsreader" rel="stylesheet">
 
 <link rel="icon" href="<?php echo INCLUDE_PATH; ?>assets/img/favicon.png" sizes="32x32" />
@@ -535,7 +538,7 @@
 								<div class="col-md-4 mb-2">
 									<div class="form-floating">
 										<input type="text" class="form-control text-center" name="card-ccv" id="field-card-cvc"
-											placeholder="CVC">
+											placeholder="CVC" autocomplete="off" />
 										<label for="field-card-cvc">CVC</label>
 									</div>
 								</div>
@@ -746,8 +749,10 @@
 
 <link rel="stylesheet" href="<?php echo INCLUDE_PATH; ?>assets/bootstrap/1.10.5/font/bootstrap-icons.css">
 
+
+
 <script src="<?php echo INCLUDE_PATH; ?>assets/bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
-<script src="<?php echo INCLUDE_PATH; ?>assets/ajax/3.6.3/jquery.min.js"></script>
+<script src="<?php echo INCLUDE_PATH; ?>assets/google/jquery/jquery.min.js"></script>
 <script src="<?php echo INCLUDE_PATH; ?>assets/google/jquery/jquery-ui.js"></script>
 <script src="<?php echo INCLUDE_PATH; ?>assets/ajax/1.14.16/jquery.mask.min.js"></script>
 <script src="<?php echo INCLUDE_PATH; ?>assets/js/main.js" defer></script>

@@ -3,10 +3,6 @@
 $(document).ready(() => {
   // Sidebar Menu
 
-  /*setTimeout(function () {
-    $(".vertical-nav-menu").metisMenu();
-  }, 100);*/
-
   // Search wrapper trigger
 
   $(".search-icon").click(function () {
