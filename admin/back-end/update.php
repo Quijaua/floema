@@ -61,7 +61,7 @@ if (isset($_POST['btnUpdAbout'])) {
                 $_SESSION['msg'] = 'As informações sobre sua instituição foram atualizadas com sucesso!';
     
                 //Voltar para a pagina do formulario
-                header('Location: ' . INCLUDE_PATH_ADMIN);
+                header('Location: ' . INCLUDE_PATH_ADMIN . 'sobre');
             } catch (PDOException $e) {
                 echo "Erro na atualização: " . $e->getMessage();
             }

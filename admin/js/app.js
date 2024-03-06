@@ -3,9 +3,9 @@
 $(document).ready(() => {
   // Sidebar Menu
 
-  setTimeout(function () {
+  /*setTimeout(function () {
     $(".vertical-nav-menu").metisMenu();
-  }, 100);
+  }, 100);*/
 
   // Search wrapper trigger
 
