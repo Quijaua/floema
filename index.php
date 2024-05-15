@@ -10,6 +10,9 @@
 	$dotenv = Dotenv\Dotenv::createImmutable(__DIR__);
 	$dotenv->load();
 
+	// Acessa as variáveis de ambiente
+	$hcaptcha = $_ENV['HCAPTCHA_CHAVE_DE_SITE'];
+
     session_start();
     ob_start();
     include('./config.php');
@@ -179,6 +182,8 @@
 <link rel="apple-touch-icon" href="<?php echo INCLUDE_PATH; ?>assets/img/favicon.png" />
 <meta name="msapplication-TileImage" content="<?php echo INCLUDE_PATH; ?>assets/img/favicon.png" />
 
+<!-- hCaptcha -->
+<script src="https://hcaptcha.com/1/api.js" async defer></script>
 
 
 <link rel="canonical" href="<?php echo INCLUDE_PATH; ?>" />
@@ -576,6 +581,8 @@
 							</div>
 						</div>
 					</div>
+
+					<div class="h-captcha" data-sitekey="<?php echo $hcaptcha; ?>"></div>
 
 					<input type="hidden" name="value" id="value">
 
@@ -979,6 +986,13 @@ $(document).ready(function () {
 				.done(function(data) {
 					console.log(data.msg);
 				})
+			} else if (response.status == 400) {
+				$("#div-errors-price").html(response.message).slideDown('fast').effect("shake");
+        		$('html, body').animate({scrollTop : 0});
+
+				//Remove botão carregando
+				$(".progress-subscription").addClass('d-none').removeClass('d-flex');
+				$(".button-confirm-payment").addClass('d-block').removeClass('d-none');
 			}
 		})
     }
