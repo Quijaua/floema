@@ -144,7 +144,7 @@ CREATE TABLE `tb_doacoes` (
   `status` varchar(100) NOT NULL,
   `data_vencimento` date DEFAULT NULL,
   `data_criacao` date DEFAULT NULL,
-  `data_pagamento` date DEFAULT NULL,
+  `data_pagamento` datetime DEFAULT NULL,
   `pix_encodedImage` longtext DEFAULT NULL,
   `pix_payload` longtext DEFAULT NULL,
   `pix_expirationDate` datetime DEFAULT NULL,
