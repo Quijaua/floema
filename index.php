@@ -301,21 +301,21 @@
 					</div>
 					<div id="donation-monthly-group" class="d-block">
 						<div class="d-flex">
-							<button type="button" id="button-monthly1" onclick="donationOption(this,'monthly',<?php echo $monthly_1; ?>,true); donationFee('monthly',<?php echo $monthly_1; ?>);"
+							<button type="button" id="button-monthly1" onclick="donationOption(this,'monthly',<?php echo $monthly_1; ?>,true)"
 									class="btn btn-outline-dark button-options" data-amount-for-selection="<?php echo $monthly_1; ?>">R$ <?php echo $monthly_1; ?>
 							</button>
-							<button type="button" id="button-monthly2" onclick="donationOption(this,'monthly',<?php echo $monthly_2; ?>,true); donationFee('monthly',<?php echo $monthly_2; ?>);"
+							<button type="button" id="button-monthly2" onclick="donationOption(this,'monthly',<?php echo $monthly_2; ?>,true)"
 									class="btn btn-outline-dark button-options option-default-monthly" data-amount-for-selection="<?php echo $monthly_2; ?>">R$ <?php echo $monthly_2; ?>
 							</button>
-							<button type="button" id="button-monthly3" onclick="donationOption(this,'monthly',<?php echo $monthly_3; ?>,true); donationFee('monthly',<?php echo $monthly_3; ?>);"
+							<button type="button" id="button-monthly3" onclick="donationOption(this,'monthly',<?php echo $monthly_3; ?>,true)"
 									class="btn btn-outline-dark button-options" data-amount-for-selection="<?php echo $monthly_3; ?>">R$ <?php echo $monthly_3; ?>
 							</button>
 						</div>
 						<div class="d-flex">
-							<button type="button" id="button-monthly4" onclick="donationOption(this,'monthly',<?php echo $monthly_4; ?>,true); donationFee('monthly',<?php echo $monthly_4; ?>);"
+							<button type="button" id="button-monthly4" onclick="donationOption(this,'monthly',<?php echo $monthly_4; ?>,true)"
 									class="btn btn-outline-dark button-options" data-amount-for-selection="<?php echo $monthly_4; ?>">R$ <?php echo $monthly_4; ?>
 							</button>
-							<button type="button" id="button-monthly5" onclick="donationOption(this,'monthly',<?php echo $monthly_5; ?>,true); donationFee('monthly',<?php echo $monthly_5; ?>);"
+							<button type="button" id="button-monthly5" onclick="donationOption(this,'monthly',<?php echo $monthly_5; ?>,true)"
 									class="btn btn-outline-dark button-options" data-amount-for-selection="<?php echo $monthly_5; ?>">R$ <?php echo $monthly_5; ?>
 							</button>
 							<div class="form-floating button-options">
@@ -335,21 +335,21 @@
 					</script>
 					<div id="donation-yearly-group" class="d-none">
 						<div class="d-flex">
-							<button type="button" id="button-yearly1" onclick="donationOption(this,'yearly',<?php echo $yearly_1; ?>,true); donationFee('yearly',<?php echo $yearly_1; ?>);"
+							<button type="button" id="button-yearly1" onclick="donationOption(this,'yearly',<?php echo $yearly_1; ?>,true)"
 									class="btn btn-outline-dark button-options" data-amount-for-selection="<?php echo $yearly_1; ?>">R$ <?php echo $yearly_1; ?>
 							</button>
-							<button type="button" id="button-yearly2" onclick="donationOption(this,'yearly',<?php echo $yearly_2; ?>,true); donationFee('yearly',<?php echo $yearly_2; ?>);"
+							<button type="button" id="button-yearly2" onclick="donationOption(this,'yearly',<?php echo $yearly_2; ?>,true)"
 									class="btn btn-outline-dark button-options option-default-yearly" data-amount-for-selection="<?php echo $yearly_2; ?>">R$ <?php echo $yearly_2; ?>
 							</button>
-							<button type="button" id="button-yearly3" onclick="donationOption(this,'yearly',<?php echo $yearly_3; ?>,true); donationFee('yearly',<?php echo $yearly_3; ?>);"
+							<button type="button" id="button-yearly3" onclick="donationOption(this,'yearly',<?php echo $yearly_3; ?>,true)"
 									class="btn btn-outline-dark button-options" data-amount-for-selection="<?php echo $yearly_3; ?>">R$ <?php echo $yearly_3; ?>
 							</button>
 						</div>
 						<div class="d-flex">
-							<button type="button" id="button-yearly4" onclick="donationOption(this,'yearly',<?php echo $yearly_4; ?>,true); donationFee('yearly',<?php echo $yearly_4; ?>);"
+							<button type="button" id="button-yearly4" onclick="donationOption(this,'yearly',<?php echo $yearly_4; ?>,true)"
 									class="btn btn-outline-dark button-options" data-amount-for-selection="<?php echo $yearly_4; ?>">R$ <?php echo $yearly_4; ?>
 							</button>
-							<button type="button" id="button-yearly5" onclick="donationOption(this,'yearly',<?php echo $yearly_5; ?>,true); donationFee('yearly',<?php echo $yearly_5; ?>);"
+							<button type="button" id="button-yearly5" onclick="donationOption(this,'yearly',<?php echo $yearly_5; ?>,true)"
 									class="btn btn-outline-dark button-options" data-amount-for-selection="<?php echo $yearly_5; ?>">R$ <?php echo $yearly_5; ?>
 							</button>
 							<div class="form-floating button-options">
@@ -364,21 +364,21 @@
 					</div>
 					<div id="donation-once-group" class="d-none">
 						<div class="d-flex">
-							<button type="button" id="button-once1" onclick="donationOption(this,'once',<?php echo $once_1; ?>,true); donationFee('once',<?php echo $once_1; ?>);"
+							<button type="button" id="button-once1" onclick="donationOption(this,'once',<?php echo $once_1; ?>,true)"
 									class="btn btn-outline-dark button-options" data-amount-for-selection="<?php echo $once_1; ?>">R$ <?php echo $once_1; ?>
 							</button>
-							<button type="button" id="button-once2" onclick="donationOption(this,'once',<?php echo $once_2; ?>,true); donationFee('once',<?php echo $once_2; ?>);"
+							<button type="button" id="button-once2" onclick="donationOption(this,'once',<?php echo $once_2; ?>,true)"
 									class="btn btn-outline-dark button-options option-default-once" data-amount-for-selection="<?php echo $once_2; ?>">R$ <?php echo $once_2; ?>
 							</button>
-							<button type="button" id="button-once3" onclick="donationOption(this,'once',<?php echo $once_3; ?>,true); donationFee('once',<?php echo $once_3; ?>);"
+							<button type="button" id="button-once3" onclick="donationOption(this,'once',<?php echo $once_3; ?>,true)"
 									class="btn btn-outline-dark button-options" data-amount-for-selection="<?php echo $once_3; ?>">R$ <?php echo $once_3; ?>
 							</button>
 						</div>
 						<div class="d-flex">
-							<button type="button" id="button-once4" onclick="donationOption(this,'once',<?php echo $once_4; ?>,true); donationFee('once',<?php echo $once_4; ?>);"
+							<button type="button" id="button-once4" onclick="donationOption(this,'once',<?php echo $once_4; ?>,true)"
 									class="btn btn-outline-dark button-options" data-amount-for-selection="<?php echo $once_4; ?>">R$ <?php echo $once_4; ?>
 							</button>
-							<button type="button" id="button-once5" onclick="donationOption(this,'once',<?php echo $once_5; ?>,true); donationFee('once',<?php echo $once_5; ?>);"
+							<button type="button" id="button-once5" onclick="donationOption(this,'once',<?php echo $once_5; ?>,true)"
 									class="btn btn-outline-dark button-options" data-amount-for-selection="<?php echo $once_5; ?>">R$ <?php echo $once_5; ?>
 							</button>
 							<div class="form-floating button-options">
@@ -866,45 +866,6 @@ $(document).ready(function () {
 	// Aguarde o carregamento do documento e, em seguida, chame a função
     $(document).ready(function () {
         donationOption('#button-monthly2', 'monthly', <?php echo $monthly_2; ?>, true);
-    });
-</script>
-
-<script>
-	function donationFee(billingType, value) {
-        var typePayment = $('input[name="payment"]:checked').val();
-        localStorage.setItem("method", typePayment);
-        method = localStorage.getItem("method");
-
-		// Cria um objeto para enviar os dados
-        var dadosDoacao = {
-            billingType: billingType,
-            method: method,
-            value: value
-        };
-
-		console.log(dadosDoacao);
-
-        // Envia os dados para o servidor via AJAX
-        $.ajax({
-            type: "POST",
-            url: "<?php echo INCLUDE_PATH; ?>back-end/taxa_pagamento.php",
-            data: dadosDoacao,
-            dataType: 'JSON',
-            success: function (response) {
-				if (response.status == 200) {
-					$("#div-add-on-fee label").html("Adicione + <strong>R$ " + response.feeAmount + "</strong> para cobrir as tarifas bancárias");
-				}
-            },
-            error: function (xhr, status, error) {
-                console.error(error); // Exibe qualquer erro no console do navegador
-                // Aqui você pode adicionar lógica para lidar com erros de requisição
-            }
-        });
-	}
-
-	// Aguarde o carregamento do documento e, em seguida, chame a função
-    $(document).ready(function () {
-        donationFee('monthly', <?php echo $monthly_2; ?>);
     });
 </script>
 

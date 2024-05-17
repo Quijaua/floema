@@ -165,7 +165,28 @@ function setPeriodOption(periodicity) {
     }
 }
 
-function donationOption(el, type, amount, showAddOnFee) {
+function fetchFeeAmount(dadosDoacao) {
+    return new Promise((resolve, reject) => {
+        $.ajax({
+            type: "POST",
+            url: "./back-end/taxa_pagamento.php",
+            data: dadosDoacao,
+            dataType: 'JSON',
+            success: function (response) {
+                if (response.status == 200) {
+                    resolve(response.feeAmount);
+                } else {
+                    reject('Erro na resposta do servidor');
+                }
+            },
+            error: function (xhr, status, error) {
+                reject(error);
+            }
+        });
+    });
+}
+
+async function donationOption(el, type, amount, showAddOnFee) {
     lastDonationButtonClicked = el;
     $('#donation-' + type + '-group button').addClass('btn-outline-dark').removeClass('active');
     $(el).addClass('active').removeClass('btn-outline-dark');
@@ -174,32 +195,27 @@ function donationOption(el, type, amount, showAddOnFee) {
     if (config && showAddOnFee) {
         $("#div-add-on-fee").slideDown();
 
-        let feeAmount = 0;
+        var dadosDoacao = {
+            method: selectedPayment,
+            value: amount
+        };
 
-        switch (selectedPayment) {
-            case "credit_card":
-                feeAmount = config.addOnFeeValues.creditCard.fix;
-                feeAmount += amount * (config.addOnFeeValues.creditCard.percent / 100);
-                break;
-            case "bank_slip":
-                feeAmount = config.addOnFeeValues.bankSlip.fix;
-                feeAmount += amount * (config.addOnFeeValues.bankSlip.percent / 100);
-                break;
-            case "Pix":
-                feeAmount = config.addOnFeeValues.pix.fix;
-                feeAmount += amount * (config.addOnFeeValues.pix.percent / 100);
-                break;
+        console.log(dadosDoacao);
+
+        try {
+            var feeAmount = await fetchFeeAmount(dadosDoacao);
+            console.log("Taxa " + feeAmount);
+
+            $("#div-add-on-fee label").html("Adicione + <strong>R$ " + feeAmount.toFixed(2) + "</strong> para cobrir as tarifas bancárias");
+
+            if ($('#field-add-on-fee').is(':checked')) {
+                amount += feeAmount;
+            }
+
+        } catch (error) {
+            console.error(error);
         }
-
-        $("#div-add-on-fee label").html("Adicione + <strong>R$ " + feeAmount.toFixed(2) + "</strong> para cobrir as tarifas bancárias");
-
-
-        if ($('#field-add-on-fee').is(':checked')) {
-            amount += feeAmount;
-        }
-
-    }
-    else {
+    } else {
         $("#div-add-on-fee").slideUp();
     }
 

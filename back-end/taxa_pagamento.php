@@ -53,11 +53,11 @@
     $retorno = json_decode($response, true);
 
 	if($retorno) {
-        if ($method == "100") {
+        if ($method == "credit_card") {
             $netValue = $retorno['creditCard']['netValue'];
-        } elseif ($method == "101") {
+        } elseif ($method == "bank_slip") {
             $netValue = $retorno['bankSlip']['netValue'];
-        } elseif ($method == "102") {
+        } elseif ($method == "Pix") {
             $netValue = $retorno['pix']['netValue'];
         }
 
