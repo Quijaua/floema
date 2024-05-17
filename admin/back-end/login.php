@@ -1,9 +1,9 @@
 <?php
     // Carrega as variáveis de ambiente do arquivo .env
-    require dirname(__DIR__).'/vendor/autoload.php';
-    require_once dirname(__DIR__).'/back-end/functions.php';
+    require dirname(dirname(__DIR__)).'/vendor/autoload.php';
+    require_once dirname(dirname(__DIR__)).'/back-end/functions.php';
 
-    $dotenv = Dotenv\Dotenv::createImmutable(dirname(__DIR__));
+    $dotenv = Dotenv\Dotenv::createImmutable(dirname(dirname(__DIR__)));
     $dotenv->load();
     $client = new GuzzleHttp\Client();
 
@@ -14,7 +14,7 @@
     ob_start();
     include('../../config.php');
 
-    $responseKey = $dataForm['h-captcha-response']; // Chave de resposta do hCaptcha
+    $responseKey = $_POST['h-captcha-response']; // Chave de resposta do hCaptcha
 
     // Verifique se a chave de resposta está presente
     if (isset($responseKey) && !empty($responseKey)) {
@@ -94,8 +94,10 @@
 
             
         } else {
-            echo json_encode(["status"=>400, "message" => "Falha na validação do hCaptcha"]);
+            $_SESSION['msg'] = "Falha na validação do hCaptcha.";
+            header("Location: " . INCLUDE_PATH . "login/");
         }
         } else {
-        echo json_encode(["status"=>400, "message" => "Por favor preencha o hCaptcha para continuar"]);
+            $_SESSION['msg'] = "Por favor preencha o hCaptcha para continuar.";
+            header("Location: " . INCLUDE_PATH . "login/");
         }
