@@ -8,6 +8,14 @@
         header("Location: " . INCLUDE_PATH . "login/");
         exit();
     }
+
+    $tabela = 'tb_checkout';
+    $sql = "SELECT nome FROM $tabela";
+    $stmt = $conn->prepare($sql);
+    $stmt->execute();
+    $resultado = $stmt->fetch(PDO::FETCH_ASSOC);
+    $project_name = $resultado['nome'];
+    $_SESSION['project_name'] = $project_name;
 ?>
 <!doctype html>
 <html lang="pt-BR">
