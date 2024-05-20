@@ -369,7 +369,7 @@ if (isset($_POST['btnUpdDonations'])) {
             $_SESSION['msg'] = 'As informações dos valores foram atualizadas com sucesso!';
 
             //Voltar para a pagina do formulario
-            header('Location: ' . INCLUDE_PATH_ADMIN);
+            header('Location: ' . INCLUDE_PATH_ADMIN . 'sobre');
         } catch (PDOException $e) {
             echo "Erro na atualização: " . $e->getMessage();
         }   

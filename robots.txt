@@ -1,0 +1,4 @@
+User-agent: *
+Disallow: /login/
+Disallow: /login/recuperar-senha.php
+Disallow: /admin/
