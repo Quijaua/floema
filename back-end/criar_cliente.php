@@ -72,8 +72,8 @@
 
 				$tabela = 'tb_clientes';
 
-				$stmt = $conn->prepare("INSERT INTO $tabela (roles, nome, email, phone, cpf, cep, endereco, numero, complemento, municipio, cidade, uf, asaas_id, newsletter, private) VALUES (
-					:roles, :name, :email, :phone, :cpfCnpj, :postalCode, :address, :addressNumber, :complement, :province, :city, :state, :id, :newsletter, :private)");
+				$stmt = $conn->prepare("INSERT INTO $tabela (roles, nome, email, phone, cpf, cep, endereco, numero, complemento, municipio, cidade, uf, asaas_id, group_name, newsletter, private) VALUES (
+					:roles, :name, :email, :phone, :cpfCnpj, :postalCode, :address, :addressNumber, :complement, :province, :city, :state, :id, :group_name, :newsletter, :private)");
 
 				$roles = 0;
 
@@ -91,6 +91,7 @@
 				$stmt->bindParam(':city', $dataForm['city'], PDO::PARAM_STR);
 				$stmt->bindParam(':state', $retorno['state'], PDO::PARAM_STR);
 				$stmt->bindParam(':id', $retorno['id'], PDO::PARAM_STR);
+				$stmt->bindParam(':group_name', $dataForm['groupName'], PDO::PARAM_STR);
 				$stmt->bindParam(':newsletter', $newsletter, PDO::PARAM_INT);
 				$stmt->bindParam(':private', $private, PDO::PARAM_INT);
 
