@@ -81,19 +81,6 @@ function makeDonation($dataForm, $config){
         // Iniciando variavel "$subscription_id"
         $subscription_id = null;
 
-        // Aqui você pode definir o groupName baseado no método e no tipo
-		switch ($_POST['method']) {
-			case '100':
-				$dataForm['groupName'] = ($dataForm['inlineRadioOptions'] == 'ONLY') ? 'doacoes_cartao_credito' : 'assinaturas_cartao_credito';
-				break;
-			case '101':
-				$dataForm['groupName'] = ($dataForm['inlineRadioOptions'] == 'ONLY') ? 'doacoes_boleto' : 'assinaturas_boleto';
-				break;
-			case '102':
-				$dataForm['groupName'] = ($dataForm['inlineRadioOptions'] == 'ONLY') ? 'doacoes_pix' : 'assinaturas_pix';
-				break;
-		}
-
         include('config.php');
         include_once('criar_cliente.php');
         include_once('assinatura_cartao.php');
