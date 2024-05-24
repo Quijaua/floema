@@ -78,6 +78,9 @@ function makeDonation($dataForm, $config){
         // Passando valor do email
         $dataForm['email'] = $dataForm['eee'];
 
+        // Passa o group se ouver
+        $dataForm['groupName'] = $_ENV['GROUPNAME'];
+
         // Iniciando variavel "$subscription_id"
         $subscription_id = null;
 
