@@ -158,6 +158,7 @@
         <link rel="icon" href="<?php echo INCLUDE_PATH; ?>assets/img/favicon.png" sizes="32x32" />
         <link rel="apple-touch-icon" href="<?php echo INCLUDE_PATH; ?>assets/img/favicon.png" />
         <meta name="msapplication-TileImage" content="<?php echo INCLUDE_PATH; ?>assets/img/favicon.png" />
+	<meta name='robots' content='noindex, nofollow' />
 
         <!-- Disable tap highlight on IE -->
         <meta name="msapplication-tap-highlight" content="no">

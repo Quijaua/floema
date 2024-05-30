@@ -165,7 +165,28 @@ function setPeriodOption(periodicity) {
     }
 }
 
-function donationOption(el, type, amount, showAddOnFee) {
+function fetchFeeAmount(dadosDoacao) {
+    return new Promise((resolve, reject) => {
+        $.ajax({
+            type: "POST",
+            url: "./back-end/taxa_pagamento.php",
+            data: dadosDoacao,
+            dataType: 'JSON',
+            success: function (response) {
+                if (response.status == 200) {
+                    resolve(response.feeAmount);
+                } else {
+                    reject('Erro na resposta do servidor');
+                }
+            },
+            error: function (xhr, status, error) {
+                reject(error);
+            }
+        });
+    });
+}
+
+async function donationOption(el, type, amount, showAddOnFee) {
     lastDonationButtonClicked = el;
     $('#donation-' + type + '-group button').addClass('btn-outline-dark').removeClass('active');
     $(el).addClass('active').removeClass('btn-outline-dark');
@@ -174,32 +195,24 @@ function donationOption(el, type, amount, showAddOnFee) {
     if (config && showAddOnFee) {
         $("#div-add-on-fee").slideDown();
 
-        let feeAmount = 0;
+        var dadosDoacao = {
+            method: selectedPayment,
+            value: amount
+        };
 
-        switch (selectedPayment) {
-            case "credit_card":
-                feeAmount = config.addOnFeeValues.creditCard.fix;
-                feeAmount += amount * (config.addOnFeeValues.creditCard.percent / 100);
-                break;
-            case "bank_slip":
-                feeAmount = config.addOnFeeValues.bankSlip.fix;
-                feeAmount += amount * (config.addOnFeeValues.bankSlip.percent / 100);
-                break;
-            case "Pix":
-                feeAmount = config.addOnFeeValues.pix.fix;
-                feeAmount += amount * (config.addOnFeeValues.pix.percent / 100);
-                break;
+        try {
+            var feeAmount = await fetchFeeAmount(dadosDoacao);
+
+            $("#div-add-on-fee label").html("Adicione + <strong>R$ " + feeAmount.toFixed(2) + "</strong> para cobrir as tarifas bancárias");
+
+            if ($('#field-add-on-fee').is(':checked')) {
+                amount += feeAmount;
+            }
+
+        } catch (error) {
+            console.error(error);
         }
-
-        $("#div-add-on-fee label").html("Adicione + <strong>R$ " + feeAmount.toFixed(2) + "</strong> para cobrir as tarifas bancárias");
-
-
-        if ($('#field-add-on-fee').is(':checked')) {
-            amount += feeAmount;
-        }
-
-    }
-    else {
+    } else {
         $("#div-add-on-fee").slideUp();
     }
 
@@ -218,7 +231,7 @@ function donationOption(el, type, amount, showAddOnFee) {
     donationPeriodicity = type;
     donationAmount = amount;
 }
-function donationOtherOption(el, type, showAddOnFee) {
+async function donationOtherOption(el, type, showAddOnFee) {
     lastDonationButtonClicked = el;
     amount = parseFloat($(el).cleanVal());
 
@@ -229,7 +242,7 @@ function donationOtherOption(el, type, showAddOnFee) {
                     $("#div-errors-price").html("Valor mínimo para contribuição em cartão de crédito é de R$ " + minOnceDonationCreditCard).slideDown('fast').effect("shake");
                     $('.option-default-' + type).trigger('click');
                     $(el).focus();
-                    return
+                    return;
                 }
                 break;
             case "bank_slip":
@@ -237,7 +250,7 @@ function donationOtherOption(el, type, showAddOnFee) {
                     $("#div-errors-price").html("Valor mínimo para contribuição em boleto bancário é de R$ " + minOnceDonationBankSlip).slideDown('fast').effect("shake");
                     $('.option-default-' + type).trigger('click');
                     $(el).focus();
-                    return
+                    return;
                 }
                 break;
             case "Pix":
@@ -245,7 +258,7 @@ function donationOtherOption(el, type, showAddOnFee) {
                     $("#div-errors-price").html("Valor mínimo para contribuição em PIX é de R$ " + minOnceDonationPix).slideDown('fast').effect("shake");
                     $('.option-default-' + type).trigger('click');
                     $(el).focus();
-                    return
+                    return;
                 }
                 break;
         }
@@ -257,33 +270,37 @@ function donationOtherOption(el, type, showAddOnFee) {
         if (showAddOnFee) {
             $("#div-add-on-fee").slideDown();
 
-            let feeAmount = 0;
+            var feeAmount = 0;
 
-            switch (selectedPayment) {
-                case "credit_card":
-                    feeAmount = config.addOnFeeValues.creditCard.fix;
-                    feeAmount += amount * (config.addOnFeeValues.creditCard.percent / 100);
-                    break;
-                case "bank_slip":
-                    feeAmount = config.addOnFeeValues.bankSlip.fix;
-                    feeAmount += amount * (config.addOnFeeValues.bankSlip.percent / 100);
-                    break;
-                case "Pix":
-                    feeAmount = config.addOnFeeValues.pix.fix;
-                    feeAmount += amount * (config.addOnFeeValues.pix.percent / 100);
-                    break;
+            var dadosDoacao = {
+                method: selectedPayment,
+                value: amount
+            };
+
+            try {
+                feeAmount = await fetchFeeAmount(dadosDoacao);
+
+                $("#div-add-on-fee label").html("Adicione + <strong>R$ " + feeAmount.toFixed(2) + "</strong> para cobrir as tarifas bancárias");
+
+                // Check if the add-on fee is checked
+                var addOnFeeChecked = $('#field-add-on-fee').is(':checked');
+                var feeAdded = $('#field-add-on-fee').data('fee-added');
+
+                if (addOnFeeChecked && !feeAdded) {
+                    amount += feeAmount;
+                    $('#field-add-on-fee').data('fee-added', true);
+                } else if (!addOnFeeChecked && feeAdded) {
+                    $('#field-add-on-fee').data('fee-added', false);
+                }
+
+            } catch (error) {
+                console.error(error);
+                return;
             }
 
-            $("#div-add-on-fee label").html("Adicione + <strong>R$ " + feeAmount.toFixed(2) + "</strong> para cobrir as tarifas bancárias");
-
-
-            if ($('#field-add-on-fee').is(':checked')) {
-                amount += feeAmount;
-            }
-
-        }
-        else {
+        } else {
             $("#div-add-on-fee").slideUp();
+            $('#field-add-on-fee').data('fee-added', false); // Reset the fee-added flag
         }
 
         switch (type) {
@@ -299,8 +316,7 @@ function donationOtherOption(el, type, showAddOnFee) {
         }
         donationPeriodicity = type;
         donationAmount = amount;
-    }
-    else {
+    } else {
         $(el).next().html("OUTRO<br/>VALOR");
         $('.option-default-' + type).trigger('click');
     }

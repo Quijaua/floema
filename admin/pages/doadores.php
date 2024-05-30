@@ -123,7 +123,7 @@
     $(document).ready(function(){
         $("#clientes").DataTable( {
             responsive: true,
-            dom: "Bfrtip",
+            dom: "Bflrtip",
             buttons: [
                 "csv" ,"excel", "pdf", "print"
             ],
@@ -133,3 +133,8 @@
         } )
     })
 </script>
+<style>
+div.dataTables_wrapper div.dataTables_paginate ul.pagination {
+        justify-content: revert;
+}
+</style>

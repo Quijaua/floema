@@ -1,4 +1,14 @@
 <?php
+    // Carrega as variáveis de ambiente do arquivo .env
+    require dirname(__DIR__).'/vendor/autoload.php';
+    require_once dirname(__DIR__).'/back-end/functions.php';
+
+    $dotenv = Dotenv\Dotenv::createImmutable(dirname(__DIR__));
+	$dotenv->load();
+
+	// Acessa as variáveis de ambiente
+	$hcaptcha = $_ENV['HCAPTCHA_CHAVE_DE_SITE'];
+
     session_start();
     ob_start();
     include('../config.php');
@@ -25,7 +35,10 @@
         <meta name="msapplication-tap-highlight" content="no">
         <link rel="stylesheet" href="<?php echo INCLUDE_PATH; ?>vendors/pixeden-stroke-7-icon-master/pe-icon-7-stroke/dist/pe-icon-7-stroke.css">
         <link href="<?php echo INCLUDE_PATH_ADMIN; ?>styles/css/base.css" rel="stylesheet">
-	<link href="<?php echo INCLUDE_PATH_ADMIN; ?>styles/css/custom.css" rel="stylesheet">
+	    <link href="<?php echo INCLUDE_PATH_ADMIN; ?>styles/css/custom.css" rel="stylesheet">
+
+        <!-- hCaptcha -->
+        <script src="https://hcaptcha.com/1/api.js" async defer></script>
     </head>
     <body>
         <div class="app-container app-theme-white body-tabs-shadow">
@@ -92,6 +105,9 @@
                                                 </div>
                                             </div>
                                         </div>
+                                        
+                                        <div class="h-captcha" data-sitekey="<?php echo $hcaptcha; ?>"></div>
+                                        
                                         <div class="divider row"></div>
                                         <div class="d-flex align-items-center">
                                             <div class="mr-auto">

@@ -164,7 +164,7 @@
     $(document).ready(function(){
         $("#doacoes").DataTable( {
             responsive: true,
-            dom: "Bfrtip",
+            dom: "Blfrtip",
             buttons: [
                 "csv" ,"excel", "pdf", "print"
             ],
@@ -174,3 +174,8 @@
         } )
     })
 </script>
+<style>
+div.dataTables_wrapper div.dataTables_paginate ul.pagination {
+        justify-content: revert;
+}
+</style>

@@ -144,7 +144,7 @@ CREATE TABLE `tb_doacoes` (
   `status` varchar(100) NOT NULL,
   `data_vencimento` date DEFAULT NULL,
   `data_criacao` date DEFAULT NULL,
-  `data_pagamento` date DEFAULT NULL,
+  `data_pagamento` datetime DEFAULT NULL,
   `pix_encodedImage` longtext DEFAULT NULL,
   `pix_payload` longtext DEFAULT NULL,
   `pix_expirationDate` datetime DEFAULT NULL,
@@ -316,6 +316,22 @@ ALTER TABLE `tb_mensagens`
 --
 ALTER TABLE `tb_transacoes`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
+
+CREATE TABLE tb_bulk_emails (
+	title varchar(100) NULL,
+	body varchar(100) NULL,
+	`date` DATETIME DEFAULT now() NULL
+)
+ENGINE=InnoDB
+DEFAULT CHARSET=utf8mb4
+COLLATE=utf8mb4_general_ci;
+
+ALTER TABLE tb_mensagens ADD unregister_message LONGTEXT NULL;
+ALTER TABLE tb_checkout
+ADD COLUMN tiktok VARCHAR(255) DEFAULT NULL AFTER website,
+ADD COLUMN linktree VARCHAR(255) DEFAULT NULL AFTER tiktok;
+
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;

@@ -11,6 +11,8 @@ $client = new GuzzleHttp\Client();
 $config['asaas_api_url'] = $_ENV['ASAAS_API_URL'];
 $config['asaas_api_key'] = $_ENV['ASAAS_API_KEY'];
 
+$hcaptcha = $_ENV['HCAPTCHA_CHAVE_SECRETA'];
+
 //Decodificando base64 e passando para $dataForm
 $dataForm = [];
 parse_str(base64_decode($_POST['params']), $dataForm);
@@ -27,7 +29,39 @@ if (!empty($dataForm['email'])) {
     exit; // Encerra o script aqui para evitar processamento adicional
 }
 
-makeDonation($dataForm, $config);
+$responseKey = $dataForm['h-captcha-response']; // Chave de resposta do hCaptcha
+
+// Verifique se a chave de resposta está presente
+if (isset($responseKey) && !empty($responseKey)) {
+    // Faça uma solicitação para validar a resposta do hCaptcha
+    $url = 'https://hcaptcha.com/siteverify';
+    $data = [
+        'secret' => $hcaptcha,
+        'response' => $responseKey
+    ];
+
+    $options = [
+        'http' => [
+            'header' => "Content-type: application/x-www-form-urlencoded\r\n",
+            'method' => 'POST',
+            'content' => http_build_query($data)
+        ]
+    ];
+
+    $context = stream_context_create($options);
+    $result = file_get_contents($url, false, $context);
+    $response = json_decode($result, true);
+
+    // Verifique a resposta
+    if ($response && isset($response['success']) && $response['success'] === true) {
+        // Tudo certo cria a cobrança
+        makeDonation($dataForm, $config);
+    } else {
+        echo json_encode(["status"=>400, "message" => "Falha na validação do hCaptcha"]);
+    }
+} else {
+    echo json_encode(["status"=>400, "message" => "Por favor preencha o hCaptcha para continuar"]);
+}
 
 $response = array(
     'status' => 200,
@@ -43,6 +77,9 @@ function makeDonation($dataForm, $config){
 
         // Passando valor do email
         $dataForm['email'] = $dataForm['eee'];
+
+        // Passa o group se ouver
+        $dataForm['groupName'] = $_ENV['GROUPNAME'];
 
         // Iniciando variavel "$subscription_id"
         $subscription_id = null;

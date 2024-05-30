@@ -10,6 +10,9 @@
 	$dotenv = Dotenv\Dotenv::createImmutable(__DIR__);
 	$dotenv->load();
 
+	// Acessa as variáveis de ambiente
+	$hcaptcha = $_ENV['HCAPTCHA_CHAVE_DE_SITE'];
+
     session_start();
     ob_start();
     include('./config.php');
@@ -179,6 +182,8 @@
 <link rel="apple-touch-icon" href="<?php echo INCLUDE_PATH; ?>assets/img/favicon.png" />
 <meta name="msapplication-TileImage" content="<?php echo INCLUDE_PATH; ?>assets/img/favicon.png" />
 
+<!-- hCaptcha -->
+<script src="https://hcaptcha.com/1/api.js" async defer></script>
 
 
 <link rel="canonical" href="<?php echo INCLUDE_PATH; ?>" />
@@ -577,6 +582,8 @@
 						</div>
 					</div>
 
+					<div class="h-captcha" data-sitekey="<?php echo $hcaptcha; ?>"></div>
+
 					<input type="hidden" name="value" id="value">
 
 					<div class="row">
@@ -603,7 +610,7 @@
                 $tabela = 'tb_transacoes';
                 // Preparando as consultas SQL
                 $stmt_geral = $conn->prepare("SELECT COUNT(*) AS doadores_geral, SUM(value) AS valor_geral FROM $tabela WHERE status = 'CONFIRMED' OR status = 'RECEIVED'");
-                $stmt_recorrencia = $conn->prepare("SELECT COUNT(*) AS doadores_recorrencia, SUM(value) AS valor_recorrencia FROM $tabela WHERE status = 'CONFIRMED' OR status = 'RECEIVED' AND description = 'Plano de assinatura'");
+                $stmt_recorrencia = $conn->prepare("SELECT COUNT(*) AS doadores_recorrencia, SUM(value) AS valor_recorrencia FROM $tabela WHERE status = 'CONFIRMED' OR status = 'RECEIVED' AND description = 'Plano de assinatura' AND subscription_id LIKE 'sub_%'");
                 // Executando as consultas SQL
                 $stmt_geral->execute();
                 $stmt_recorrencia->execute();
@@ -940,6 +947,13 @@ $(document).ready(function () {
 				.done(function(data) {
 					console.log(data.msg);
 				})
+			} else if (response.status == 400) {
+				$("#div-errors-price").html(response.message).slideDown('fast').effect("shake");
+        		$('html, body').animate({scrollTop : 0});
+
+				//Remove botão carregando
+				$(".progress-subscription").addClass('d-none').removeClass('d-flex');
+				$(".button-confirm-payment").addClass('d-block').removeClass('d-none');
 			}
 		})
     }

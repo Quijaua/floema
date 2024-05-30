@@ -1,1 +1,0 @@
-ALTER TABLE tb_mensagens ADD unregister_message LONGTEXT NULL;
