@@ -47,7 +47,9 @@
         $asaas_id = $resultado['asaas_id'];
     } else {
         // ID não encontrado ou não existente
-        echo "ID não encontrado.";
+        $_SESSION['msg'] = "ID não encontrado.";
+        header("Location: " . INCLUDE_PATH . "login/");
+        exit;
     }
 ?>
 <!doctype html>
