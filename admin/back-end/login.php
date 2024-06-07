@@ -72,8 +72,8 @@
                     if ($email === $resultado['email'] && password_verify($password, $resultado['password'])) {
                         if ($roles == 0) {
                             $_SESSION['user_id'] = $resultado['id']; // Você pode definir informações do usuário aqui
-                            //header("Location: " . INCLUDE_PATH_USER);
-                            header('Location: ' . INCLUDE_PATH_ADMIN . 'sobre');
+                            header("Location: " . INCLUDE_PATH_USER);
+                            // header('Location: ' . INCLUDE_PATH_ADMIN . 'sobre');
                             exit();
                         } else {
                             $_SESSION['user_id'] = $resultado['id']; // Você pode definir informações do usuário aqui

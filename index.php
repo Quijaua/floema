@@ -676,7 +676,7 @@
 					echo '
 						<div class="row mb-3">
 							<div class="col-md-10 mt-3">
-								<img src="'. INCLUDE_PATH .'assets/img/' . $usuario['imagem'] . '" alt="Card ' . $usuario['id'] . '" style="width: 500px; height: 159px" />
+								<img src="'. INCLUDE_PATH .'assets/img/' . $usuario['imagem'] . '" alt="Card ' . $usuario['id'] . '" style="width: 500px" />
 							</div>
 						</div>
 					';

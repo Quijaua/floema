@@ -18,7 +18,7 @@
     $tabela_6 = "tb_transacoes";
 
     // ID que você deseja pesquisar
-    $id = 1;
+    $id = $_SESSION['user_id'];
 
     // Consulta SQL
     $sql = "SELECT nome, logo, title, descricao, privacidade, faq, use_faq,facebook, instagram, linkedin, twitter, youtube, website, tiktok, linktree, cep, rua, numero, bairro, cidade, estado, telefone, email, nav_color, nav_background, background, color, hover, text_color, load_btn, monthly_1, monthly_2, monthly_3, monthly_4, monthly_5, yearly_1, yearly_2, yearly_3, yearly_4, yearly_5, once_1, once_2, once_3, once_4, once_5 FROM $tabela WHERE id = :id";
@@ -114,7 +114,9 @@
         $once_5 = $resultado['once_5'];
     } else {
         // ID não encontrado ou não existente
-        echo "ID não encontrado.";
+        $_SESSION['msg'] = "ID não encontrado.";
+        header("Location: " . INCLUDE_PATH . "login/");
+        exit;
     }
 
     // Verificar se o resultado_2 foi encontrado
@@ -125,7 +127,9 @@
         $g_analytics = $resultado_2['g_analytics'];
     } else {
         // ID não encontrado ou não existente
-        echo "ID não encontrado.";
+        $_SESSION['msg'] = "ID não encontrado.";
+        header("Location: " . INCLUDE_PATH . "login/");
+        exit;
     }
 
     // Verificar se o resultado_3 foi encontrado
@@ -137,7 +141,9 @@
         $unregister_message = $resultado_3['unregister_message'];
     } else {
         // ID não encontrado ou não existente
-        echo "ID não encontrado.";
+        $_SESSION['msg'] = "ID não encontrado.";
+        header("Location: " . INCLUDE_PATH . "login/");
+        exit;
     }
 
     $doacoes = $resultado_4;
