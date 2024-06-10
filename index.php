@@ -604,7 +604,7 @@
 				</form>
 			</div>
 		</div>
-		<div class="col-md-6 ms-auto">
+		<div class="col-md-6 ms-auto info-site">
             <?php
                 // Nome da tabela para a busca
                 $tabela = 'tb_transacoes';
