@@ -627,12 +627,12 @@
                 <div class="col">
                     <div class="card">
                         <div class="card-body">
-                            <div class="card-text mb-2"><span class="h3">R$ <?php echo number_format($valor_geral, 2, ',', '.'); ?></span> <span class="text-muted">é o que arrecadamos até agora</span></div>
+                            <div class="card-text mb-2"><span class="h3">R$ <?php echo number_format((int)$valor_geral, 2, ',', '.'); ?></span> <span class="text-muted">é o que arrecadamos até agora</span></div>
                             <!--<div class="progress mb-2" role="progressbar" aria-label="Basic example" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100">
                                 <div class="progress-bar" style="width: 15%"></div>
                             </div>-->
                             <!--<div class="card-text mb-2 text-muted">Meta: R$ 30.000,00 por mês (71.2% alcançada)</div>-->
-                            <div class="card-text mb-2"><span class="h3">R$ <?php echo number_format($valor_recorrencia, 2, ',', '.'); ?></span> <span class="text-muted">em doações recorrentes</span></div>
+                            <div class="card-text mb-2"><span class="h3">R$ <?php echo number_format((int)$valor_recorrencia, 2, ',', '.'); ?></span> <span class="text-muted">em doações recorrentes</span></div>
                             <!--<div class="progress" role="progressbar" aria-label="Basic example" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100">
                                 <div class="progress-bar" style="width: 15%"></div>
                             </div>-->
