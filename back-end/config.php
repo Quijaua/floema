@@ -22,7 +22,7 @@
         $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
         // Consulta para obter o nome da aplicação
-        $stmt = $pdo->query("SELECT nome FROM tb_checkout LIMIT 1");
+        $stmt = $conn->query("SELECT nome FROM tb_checkout LIMIT 1");
         $result = $stmt->fetch(PDO::FETCH_ASSOC);
 
         if ($result) {
