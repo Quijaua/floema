@@ -3,7 +3,7 @@
     $tabela = "tb_webhook";
 
     // Query SQL para selecionar todos os usuários
-    $sql = "SELECT * FROM $tabela";
+    $sql = "SELECT * FROM $tabela LIMIT 1";
 
     // Prepara a query
     $stmt = $conn->prepare($sql);
@@ -75,7 +75,7 @@
                             <label for="webhookName" class="col-sm-2 col-form-label">Nome do Webhook</label>
                             <div class="col-sm-10">
                                 <input name="webhook_name" id="webhookName"
-                                    type="text" class="form-control" value="<?php echo @$webhook_name; ?>" required>
+                                    type="text" class="form-control" value="<?php echo (isset($webhook_name)) ? $webhook_name : "Floema Doar"; ?>" required>
                                 <small>No máximo 50 caracteres.</small>
                             </div>
                         </div>
