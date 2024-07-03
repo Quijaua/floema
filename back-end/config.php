@@ -21,6 +21,16 @@
         $conn = new PDO("mysql:host=$dbHost;port=$port;dbname=" . $dbName, $dbUsername, $dbPassword);
         $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
+        // Consulta para obter o nome da aplicação
+        $stmt = $pdo->query("SELECT nome FROM tb_checkout LIMIT 1");
+        $result = $stmt->fetch(PDO::FETCH_ASSOC);
+
+        if ($result) {
+            $application_name = $result['nome'];
+        } else {
+            throw new Exception('Nome da aplicação não encontrado na tabela tb_checkout');
+        }
+
         //Conexão sem a porta
         //$conn = new PDO("mysql:host=$host;dbname=" . $dbname, $user, $pass);
         //echo "Conexão com banco de dados realizado com sucesso!";
