@@ -130,3 +130,7 @@ font-size: 12px;
 #email {
     display: none;
 }
+
+.form-check-input[type="radio"] {
+	border: 1px #000 solid;
+}
