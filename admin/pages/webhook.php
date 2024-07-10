@@ -40,6 +40,7 @@
     $resultados = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
     $addButton = true;
+    $institution_email = $email;
 
     // Exibe os resultados
     if ($resultados) {
@@ -94,6 +95,22 @@
                 $stmt->bindParam(':webhook_id', $webhook['webhook_id']);
                 $stmt->execute();
             }
+        } else {
+            // Deleta o webhook do banco de dados se não existir na API da Asaas
+            $sql = "DELETE FROM $tabela WHERE webhook_id = :webhook_id";
+            $stmt = $conn->prepare($sql);
+            $stmt->bindParam(':webhook_id', $webhook_id);
+            $stmt->execute();
+
+            // Esvazia as variáveis
+            $webhook_id = null;
+            $enabled = null;
+            $webhook_name = null;
+            $email = $institution_email;
+            $interrupted = null;
+            $send_type = null;
+
+            $addButton = true;
         }
     }
 ?>
