@@ -1,4 +1,29 @@
 <?php
+    require '../vendor/autoload.php';
+    $dotenv = Dotenv\Dotenv::createImmutable('../');
+    $dotenv->load();
+
+    // Acessa as variáveis de ambiente
+    $config['asaas_api_url'] = $_ENV['ASAAS_API_URL'];
+    $config['asaas_api_key'] = $_ENV['ASAAS_API_KEY'];
+    $config['groupname'] = $_ENV['GROUPNAME'];
+
+    function getWebhookDataFromAsaas($webhook_id, $config) {
+        $url = $config['asaas_api_url']."webhooks/$webhook_id";
+
+        $ch = curl_init($url);
+        curl_setopt($ch, CURLOPT_HTTPHEADER, array(
+            "Content-Type: application/json",
+            "access_token: ".$config['asaas_api_key']
+        ));
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+
+        $response = curl_exec($ch);
+        curl_close($ch);
+
+        return json_decode($response, true);
+    }
+
     // Tabela que sera feita a consulta
     $tabela = "tb_webhook";
 
@@ -29,6 +54,48 @@
             $addButton = false;
         }
     }
+
+    // Verifica os dados do webhook na API da Asaas e atualiza o banco de dados se necessário
+    if (isset($webhook_id)) {
+        $asaasWebhookData = getWebhookDataFromAsaas($webhook_id, $config);
+
+        if ($asaasWebhookData) {
+            $differences = false;
+
+            if ($asaasWebhookData['enabled'] != $webhook['enabled']) {
+                $enabled = $asaasWebhookData['enabled'];
+                $differences = true;
+            }
+            if ($asaasWebhookData['name'] != $webhook['name']) {
+                $webhook_name = $asaasWebhookData['name'];
+                $differences = true;
+            }
+            if ($asaasWebhookData['email'] != $webhook['email']) {
+                $email = $asaasWebhookData['email'];
+                $differences = true;
+            }
+            if ($asaasWebhookData['interrupted'] != $webhook['interrupted']) {
+                $interrupted = $asaasWebhookData['interrupted'];
+                $differences = true;
+            }
+            if ($asaasWebhookData['sendType'] != $webhook['send_type']) {
+                $send_type = $asaasWebhookData['sendType'];
+                $differences = true;
+            }
+
+            if ($differences) {
+                $sql = "UPDATE $tabela SET enabled = :enabled, name = :name, email = :email, interrupted = :interrupted, send_type = :send_type WHERE webhook_id = :webhook_id";
+                $stmt = $conn->prepare($sql);
+                $stmt->bindParam(':enabled', $enabled);
+                $stmt->bindParam(':name', $webhook_name);
+                $stmt->bindParam(':email', $email);
+                $stmt->bindParam(':interrupted', $interrupted);
+                $stmt->bindParam(':send_type', $send_type);
+                $stmt->bindParam(':webhook_id', $webhook['webhook_id']);
+                $stmt->execute();
+            }
+        }
+    }
 ?>
 
 <div class="app-main__inner">
@@ -43,23 +110,17 @@
                     <div class="page-title-subheading">Aqui você pode criar um evento webhook para seu projeto.</div>
                 </div>
             </div>
+            <?php if (isset($webhook_id)) { ?>
             <div class="page-title-actions">
-                <!-- <a href="<?php echo INCLUDE_PATH_ADMIN; ?>back-end/logout.php" class="btn btn-info btn-shadow">
-                    Sair
-                </a> -->
+                <button id="reloadWebhook" class="btn btn-info btn-shadow">Recarregar</button>
             </div>
+            <?php } ?>
         </div>
     </div>
     <div class="tab-content">
         <div class="tab-pane tabs-animation fade show active" id="tab-content-1" role="tabpanel">
-
-            
-            
-            
-            
             <div class="main-card mb-3 card">
                 <div class="card-body">
-                    
                     <form action="<?php echo INCLUDE_PATH_ADMIN; ?>back-end/webhook.php" method="post">
                         <p class="card-title">Dados do Webhook</p>
                         <div class="position-relative row form-group">
@@ -100,12 +161,14 @@
                             <label for="sendType" class="col-sm-2 col-form-label">Tipo de envio</label>
                             <div class="col-sm-10">
                                 <select name="send_type" id="sendType" class="form-control">
-                                    <option value="SEQUENTIALLY" <?= (isset($enabled) && $enabled == "SEQUENTIALLY") ? "selected" : ""; ?>>Sequencial</option>
-                                    <option value="NON_SEQUENTIALLY"  <?= (isset($enabled) && $enabled == "NON_SEQUENTIALLY") ? "selected" : ""; ?>>Não sequencial</option>
+                                    <option value="SEQUENTIALLY" <?= (isset($send_type) && $send_type == "SEQUENTIALLY") ? "selected" : ""; ?>>Sequencial</option>
+                                    <option value="NON_SEQUENTIALLY"  <?= (isset($send_type) && $send_type == "NON_SEQUENTIALLY") ? "selected" : ""; ?>>Não sequencial</option>
                                 </select>
                             </div>
                         </div>
-                        <input type="hidden" name="webhook_id" value="<?= $webhook_id; ?>">
+                        <?php if (isset($webhook_id)) { ?>
+                            <input type="hidden" name="webhook_id" value="<?= $webhook_id; ?>">
+                        <?php } ?>
                         <?php if ($addButton == true) { ?>
                             <button type="submit" name="btnAddWebhook" class="btn btn-primary">Salvar</button>
                         <?php } else { ?>
@@ -120,3 +183,13 @@
         </div>
     </div>
 </div>
+
+<?php if (isset($webhook_id)) { ?>
+<script>
+    $(document).ready(function () {
+        $('#reloadWebhook').click(function() {
+            location.reload();
+        });
+    });
+</script>
+<?php } ?>

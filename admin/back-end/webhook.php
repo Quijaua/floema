@@ -23,7 +23,7 @@ date_default_timezone_set('America/Sao_Paulo');
 
 if (isset($_POST['btnAddWebhook'])) {
     // $url = INCLUDE_PATH . 'services/webhook/index.php';
-    $url = 'https://192.168.0.123/services/webhook/index.php';
+    $url = INCLUDE_PATH.'services/webhook/index.php';
 
     // Dados do webhook a ser criado
     $data = array(
@@ -33,7 +33,33 @@ if (isset($_POST['btnAddWebhook'])) {
         'enabled' => ($_POST['enabled'] == 1) ? true : false,
         'interrupted' => ($_POST['interrupted'] == 1) ? true : false,
         'sendType' => $_POST['send_type'],
-        'events' => array('PAYMENT_RECEIVED', 'PAYMENT_CONFIRMED'), // Tipos de eventos que deseja monitorar
+        'events' => array(
+            'PAYMENT_CREATED',
+            'PAYMENT_AWAITING_RISK_ANALYSIS',
+            'PAYMENT_APPROVED_BY_RISK_ANALYSIS',
+            'PAYMENT_REPROVED_BY_RISK_ANALYSIS',
+            'PAYMENT_AUTHORIZED',
+            'PAYMENT_UPDATED',
+            'PAYMENT_CONFIRMED',
+            'PAYMENT_RECEIVED',
+            'PAYMENT_CREDIT_CARD_CAPTURE_REFUSED',
+            'PAYMENT_ANTICIPATED',
+            'PAYMENT_OVERDUE',
+            'PAYMENT_DELETED',
+            'PAYMENT_RESTORED',
+            'PAYMENT_REFUNDED',
+            'PAYMENT_PARTIALLY_REFUNDED',
+            'PAYMENT_REFUND_IN_PROGRESS',
+            'PAYMENT_REFUND_DENIED',
+            'PAYMENT_RECEIVED_IN_CASH_UNDONE',
+            'PAYMENT_CHARGEBACK_REQUESTED',
+            'PAYMENT_CHARGEBACK_DISPUTE',
+            'PAYMENT_AWAITING_CHARGEBACK_REVERSAL',
+            'PAYMENT_DUNNING_RECEIVED',
+            'PAYMENT_DUNNING_REQUESTED',
+            'PAYMENT_BANK_SLIP_VIEWED',
+            'PAYMENT_CHECKOUT_VIEWED'
+        ),
     );
 
     // Inicializa a sessão curl
