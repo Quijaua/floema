@@ -222,8 +222,26 @@ CREATE TABLE `tb_transacoes` (
   `credit_card_token` varchar(255) DEFAULT NULL,
   `status` varchar(255) DEFAULT NULL,
   `credit_date` varchar(255) DEFAULT NULL,
-  `estimated_credit_date` varchar(255) DEFAULT NULL
+  `estimated_credit_date` varchar(255) DEFAULT NULL,
+  `webhook_date_created` varchar(255) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- --------------------------------------------------------
+
+--
+-- Estrutura para tabela `tb_webhook`
+--
+
+CREATE TABLE `tb_webhook` (
+  `id` int(11) NOT NULL,
+  `webhook_id` varchar(255) NOT NULL,
+  `enabled` tinyint(1) NOT NULL,
+  `name` varchar(50) NOT NULL,
+  `email` varchar(255) NOT NULL,
+  `interrupted` tinyint(1) NOT NULL,
+  `send_type` varchar(100) NOT NULL,
+  `date_create` timestamp NOT NULL DEFAULT current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Índices para tabelas despejadas
@@ -272,6 +290,12 @@ ALTER TABLE `tb_transacoes`
   ADD PRIMARY KEY (`id`);
 
 --
+-- Índices para tabela `tb_webhook`
+--
+ALTER TABLE `tb_webhook`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- AUTO_INCREMENT de tabelas despejadas
 --
 
@@ -317,6 +341,11 @@ ALTER TABLE `tb_mensagens`
 ALTER TABLE `tb_transacoes`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
+--
+-- AUTO_INCREMENT para tabela `tb_webhook`
+--
+ALTER TABLE `tb_webhook`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 CREATE TABLE tb_bulk_emails (
 	title varchar(100) NULL,

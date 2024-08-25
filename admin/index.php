@@ -401,6 +401,12 @@
                                     </a>
                                 </li>
                                 <li>
+                                    <a href="<?php echo INCLUDE_PATH_ADMIN; ?>webhook">
+                                        <i class="metismenu-icon pe-7s-settings"></i>
+                                        Webhook
+                                    </a>
+                                </li>
+                                <li>
                                     <a href="<?php echo INCLUDE_PATH_ADMIN; ?>editar-perfil">
                                         <i class="metismenu-icon pe-7s-id"></i>
                                         Senha

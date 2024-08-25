@@ -42,7 +42,8 @@
         CURLOPT_POSTFIELDS => json_encode($fields),
         CURLOPT_HTTPHEADER => array(
             'Content-Type: application/json',
-            'access_token: '.$config['asaas_api_key']
+            'access_token: '.$config['asaas_api_key'],
+            'User-Agent: '.$application_name
         )
         ));
 

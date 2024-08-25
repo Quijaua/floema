@@ -16,7 +16,8 @@ function asaas_ObterLinhaDigitavelBoleto($subscription_id, $payment_id, $config)
         CURLOPT_CUSTOMREQUEST => 'GET',
         CURLOPT_HTTPHEADER => array(
             'Content-Type: application/json',
-            'access_token: '.$config["asaas_api_key"]
+            'access_token: '.$config["asaas_api_key"],
+            'User-Agent: '.$application_name
         )
     ));
 
