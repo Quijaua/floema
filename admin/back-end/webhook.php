@@ -23,7 +23,7 @@ date_default_timezone_set('America/Sao_Paulo');
 
 if (isset($_POST['btnAddWebhook'])) {
     // $url = INCLUDE_PATH . 'services/webhook/index.php';
-    $url = INCLUDE_PATH.'services/webhook/index.php';
+    $url = INCLUDE_PATH.'services/webhook/';
 
     // Dados do webhook a ser criado
     $data = array(
