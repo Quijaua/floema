@@ -1,15 +1,16 @@
 {
-  "name": "styles",
+  "name": "admin-styles",
   "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
+  "description": "Admin panel styles built on Tabler framework",
+  "main": "css/base.css",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "scss": "node-sass scss/base.scss -o css"
+    "scss": "sass scss/base.scss css/base.css",
+    "scss:watch": "sass --watch scss:css",
+    "build": "npm run scss"
   },
   "author": "",
-  "license": "ISC",
-  "dependencies": {
-    "node-sass": "^4.14.1"
+  "license": "MIT",
+  "devDependencies": {
+    "sass": "^1.69.5"
   }
 }

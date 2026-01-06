@@ -14,8 +14,8 @@
 // Tabs Animation
 
 .TabsAnimation-appear {
-  @extend .animated;
-  @extend .fadeInUp;
+  @extend .animated !optional;
+  @extend .fadeInUp !optional;
 }
 
 // Header Animation

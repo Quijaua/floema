@@ -1,11 +1,24 @@
 
+// TABLER FRAMEWORK (@tabler/core - Modern dashboard framework)
+// This is imported from node_modules via npm package
+// Uncomment the line below to gradually migrate to Tabler components
+// @import "../../node_modules/@tabler/core/scss/tabler";
+
+// NOTE: We keep the custom Bootstrap 4 + ArchitectUI implementation below for backward compatibility
+// As we migrate components, we can gradually replace them with Tabler equivalents
+// Timeline for migration:
+// 1. Keep all current styles working (Phase 1 - Current)
+// 2. Add Tabler utilities and variables (Phase 2)
+// 3. Replace components one-by-one (Phase 3)
+// 4. Full migration to Tabler components (Phase 4)
+
 // BOOTSTRAP 4 VARIABLES
 
 @import "components/bootstrap4/functions";
 @import "components/bootstrap4/variables";
 @import "components/bootstrap4/mixins";
 
-// ArchitectUI Themes Variables
+// ArchitectUI Themes Variables (Custom Tabler-based theme)
 
 @import "themes/layout-variables";
 
@@ -54,7 +67,7 @@
 
 @import "utils/helpers";
 @import "utils/backgrounds";
-@import "utils/animate";
+// @import "utils/animate";  // Note: Requires animate-sass library - to be added later
 @import "utils/comps-animations";
 
 // ELEMENTS
@@ -88,53 +101,53 @@
 @import "applications/applications-base";
 // COMPONENTS
 // Perfect Scrollbar
-@import "components/perfect-scrollbar/perfect-scrollbar";
+// @import "components/perfect-scrollbar/perfect-scrollbar";  // To be added via npm
 
 // FontAwesome
-@import "components/icons/fontawesome/fontawesome";
+// @import "components/icons/fontawesome/fontawesome";  // To be added via npm
 // Ionicons
-@import "components/icons/ionicons/ionicons";
+// @import "components/icons/ionicons/ionicons";  // To be added via npm
 // FlagKit
-@import "components/icons/flagkit/flagkit";
+// @import "components/icons/flagkit/flagkit";  // To be added via npm
 // Image Crop
-@import "components/image-crop/image-crop";
+// @import "components/image-crop/image-crop";  // To be added via npm
 // Guided Tours
-@import "components/guided-tours/guided-tours";
+// @import "components/guided-tours/guided-tours";  // To be added via npm
 // Loading buttons
-@import "components/loading-buttons/loading-buttons";
+// @import "components/loading-buttons/loading-buttons";  // To be added via npm
 // Drawer
-@import "components/drawer/drawer";
+// @import "components/drawer/drawer";  // To be added via npm
 // Hamburger button
-@import "components/hamburgers/hamburgers";
+// @import "components/hamburgers/hamburgers";  // To be added via npm
 // Notifications
-@import "components/notifications/sweetalerts";
-@import "components/notifications/toastr";
+// @import "components/notifications/sweetalerts";  // To be added via npm
+// @import "components/notifications/toastr";  // To be added via npm
 // Slick Carousel
-@import "components/slick-carousel/slick/slick";
+// @import "components/slick-carousel/slick/slick";  // To be added via npm
 // Popovers & Tooltips
-@import "components/popovers-tooltips/popovers-tooltips";
+// @import "components/popovers-tooltips/popovers-tooltips";  // To be added via npm
 // Calendar
-@import "components/calendar/calendar";
+// @import "components/calendar/calendar";  // To be added via npm
 // Maps
-@import "components/maps/vector-maps";
+// @import "components/maps/vector-maps";  // To be added via npm
 // Tree View
-@import "components/tree-view/tree-view";
+// @import "components/tree-view/tree-view";  // To be added via npm
 // Tables
-@import "components/tables/datatables";
-@import "components/tables/tables";
+// @import "components/tables/datatables";  // To be added via npm
+// @import "components/tables/tables";  // To be added via npm
 // Icons
-@import "components/icons/linearicons";
-@import "components/icons/p7icons";
+// @import "components/icons/linearicons";  // To be added via npm
+// @import "components/icons/p7icons";  // To be added via npm
 
 // FORMS
 
-@import "components/forms/datepicker/datepicker";
-@import "components/forms/datepicker/daterangepicker";
-@import "components/forms/rangeslider/rangeslider";
-@import "components/forms/multiselect/multiselect";
-@import "components/forms/dropdown-select/dropdown-select";
-@import "components/forms/wysiwyg/wysiwyg";
-@import "components/forms/toggle-switch/switch";
+// @import "components/forms/datepicker/datepicker";  // To be added via npm
+// @import "components/forms/datepicker/daterangepicker";  // To be added via npm
+// @import "components/forms/rangeslider/rangeslider";  // To be added via npm
+// @import "components/forms/multiselect/multiselect";  // To be added via npm
+// @import "components/forms/dropdown-select/dropdown-select";  // To be added via npm
+// @import "components/forms/wysiwyg/wysiwyg";  // To be added via npm
+// @import "components/forms/toggle-switch/switch";  // To be added via npm
 // Responsive
 @import "layout/responsive/responsive-base";
 // DEMO

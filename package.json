@@ -1,0 +1,22 @@
+{
+  "name": "floema-doar",
+  "version": "1.0.0",
+  "description": "Solução para recebimentos de doações",
+  "main": "index.php",
+  "scripts": {
+    "scss": "cd admin/styles && sass scss/base.scss css/base.css",
+    "scss:watch": "cd admin/styles && sass --watch scss:css",
+    "build": "npm run scss"
+  },
+  "keywords": [
+    "donation",
+    "charity",
+    "fundraising"
+  ],
+  "author": "",
+  "license": "MIT",
+  "devDependencies": {
+    "sass": "^1.69.5",
+    "@tabler/core": "^1.4.0"
+  }
+}
